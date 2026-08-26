@@ -1,0 +1,8 @@
+# Egolint configuration contract.
+config-version = 1
+
+profile = "fast"
+runtime = "auto"
+image = "ghcr.io/egohygiene/egolint-full:edge"
+pull-policy = "missing"
+network = "none"

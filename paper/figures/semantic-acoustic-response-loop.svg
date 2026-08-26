@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description">
+  <title id="title">Candidate semantic, acoustic, and response loop</title>
+  <desc id="description">Semantic intent flows to generated acoustic structure, then to measured individual response. A feedback arrow returns to the next decision. Every link is a hypothesis to test.</desc>
+  <defs>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b2c83"/>
+    </marker>
+    <style>
+      .box { fill: #f7f3fb; stroke: #5b2c83; stroke-width: 3; rx: 18; }
+      .heading { font: 700 25px sans-serif; fill: #241334; text-anchor: middle; }
+      .detail { font: 18px sans-serif; fill: #4f4458; text-anchor: middle; }
+      .arrow { fill: none; stroke: #5b2c83; stroke-width: 4; marker-end: url(#arrow); }
+      .label { font: 16px sans-serif; fill: #6d557d; text-anchor: middle; }
+    </style>
+  </defs>
+  <rect class="box" x="50" y="80" width="300" height="150"/>
+  <text class="heading" x="200" y="135">Semantic intent</text>
+  <text class="detail" x="200" y="177">interpretable, personal,</text>
+  <text class="detail" x="200" y="204">versioned controls</text>
+
+  <rect class="box" x="450" y="80" width="300" height="150"/>
+  <text class="heading" x="600" y="135">Acoustic structure</text>
+  <text class="detail" x="600" y="177">generated output and</text>
+  <text class="detail" x="600" y="204">measured realization</text>
+
+  <rect class="box" x="850" y="80" width="300" height="150"/>
+  <text class="heading" x="1000" y="135">Individual response</text>
+  <text class="detail" x="1000" y="177">subjective, behavioral,</text>
+  <text class="detail" x="1000" y="204">physiological optional</text>
+
+  <path class="arrow" d="M 350 155 L 438 155"/>
+  <path class="arrow" d="M 750 155 L 838 155"/>
+  <text class="label" x="394" y="136">test</text>
+  <text class="label" x="794" y="136">test</text>
+
+  <path class="arrow" d="M 1000 245 C 1000 370, 200 370, 200 245"/>
+  <text class="label" x="600" y="345">longitudinal update: hypothesis to test</text>
+</svg>

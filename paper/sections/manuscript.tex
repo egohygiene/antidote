@@ -1,0 +1,153 @@
+% Copyright 2026 Alan Szmyt. All rights reserved pending publication license.
+\section{Introduction}
+
+Generative audio systems increasingly allow people to express musical intent
+through natural language and other high-level controls. At the same time,
+research in music psychology, affective computing, adaptive music, and adjacent
+clinical contexts suggests that musical experiences can interact meaningfully
+with subjective state. What remains unclear is whether a person's own
+interpretable semantic vocabulary for desired internal transitions can be
+mapped through generative audio into measurable acoustic realizations and then
+refined longitudinally from observed response.
+
+This manuscript treats that question as a research direction rather than an
+established finding. The originating N-of-1 catharsis experience is classified
+as an \textbf{observation} and a \textbf{hypothesis generator}; it is not a
+result of the proposed study and does not establish efficacy, mechanism, or
+generalizability.
+
+\subsection{Central research question}
+
+Can an adaptive system learn an individual mapping from interpretable sonic
+language to generated acoustic structure to affective response, and use that
+mapping to better target future state transitions?
+
+\subsection{Background and novelty boundary}
+
+The literature scan remains incomplete. Music and affect regulation,
+personalized music systems, controllable generative audio, adaptive or
+closed-loop systems, psychedelic and ketamine music research, and semantic
+interpretability are the current review streams.
+
+MindMelody is an important adjacent preprint because it describes a closed-loop
+system that mediates EEG-derived affect through a semantic planning layer and
+controllable music generation \citep{zhang2026mindmelody}. Its existence is
+evidence that this design neighborhood is active prior art. Its reported pilot
+results are not evidence that Antidote is effective, and the Antidote novelty
+boundary must be tested against the full paper and additional primary sources.
+
+\subsection{Candidate contribution}
+
+\textbf{Hypothesis.} A useful contribution may be an interpretable,
+user-extensible semantic control layer that records intended semantic controls,
+the acoustic realization actually generated, subjective and optionally
+physiological response, longitudinal relationships among those variables, and
+uncertainty and provenance. This is a candidate contribution to be refined or
+rejected after the novelty scan.
+
+\BeaconFigure{semantic-acoustic-response-loop}{Candidate longitudinal mapping among semantic intent, realized audio, and individual response.}{Three boxes form a loop. Semantic intent points to generated acoustic structure, which points to measured individual response. A feedback arrow returns from response to the next semantic and generation decision. Each connection is labeled as a hypothesis to be tested.}
+
+\section{Methods}
+
+The candidate first study is a methods, system, and N-of-1 feasibility study,
+not a clinical efficacy study. The protocol, variables, measures, controlled
+mutations, analysis plan, and safety boundaries will be frozen only after the
+primary-source literature and novelty scan.
+
+\subsection{Conceptual conditional model}
+
+Let $A$ denote generated audio, $S$ the current state, $T$ the desired state or
+trajectory, $H$ the individual's prior response history, and $C$ the semantic
+and creative control context. The working model considers
+\begin{equation}
+  P(A \mid S, T, H, C).
+  \label{eq:conditional-audio}
+\end{equation}
+After exposure at trial $t$, audio $A_t$ is associated with measured response
+$R_t$. The history may then be updated with the tuple
+$(S_t, T_t, C_t, A_t, R_t)$. Equation~\ref{eq:conditional-audio} is a conceptual
+model, not an identified statistical model or demonstrated mechanism.
+
+\subsection{Planned measurement layers}
+
+The minimum record should preserve semantic controls, model identity and
+version, generation settings, output identity and checksum, acoustic features,
+baseline and target states, subjective response measures, timestamps, protocol
+version, and mutations between trials. Behavioral and physiological measures
+are optional extensions; they must not become the sole definition of a person's
+experienced state.
+
+\subsection{Evidence classification}
+
+Research records use five non-interchangeable classes: \textbf{source} for what
+external evidence establishes, \textbf{hypothesis} for what the project proposes,
+\textbf{observation} for what occurred, \textbf{interpretation} for a bounded
+explanation of an observation, and \textbf{claim} for a statement supported in
+the manuscript. The working claim ledger is maintained outside publication
+artifacts under \texttt{research/notes/}.
+
+\section{Results}
+
+No formal study has been run and no formal results have been collected. The
+originating catharsis experience is retained in the research bootstrap as an
+observation, not reported here as a study result. This section will remain
+explicitly empty until evidence is collected under a frozen protocol.
+
+\section{Discussion}
+
+The proposed framing emphasizes the longitudinal relationship between semantic
+intent, measured acoustic realization, and an individual's response. That focus
+may distinguish the work from systems centered primarily on population-level
+affect labels, direct physiological conditioning, or one-time generation. This
+is currently an interpretation of the design space, not a verified novelty
+claim.
+
+The term \emph{probability-space sculpting} is used as a computational metaphor:
+semantic prompting and other controls constrain a conditional distribution over
+possible generations rather than deterministically selecting one sound. The
+metaphor becomes scientifically useful only if the intended controls and their
+realized acoustic consequences can be operationalized and tested.
+
+\section{Limitations}
+
+The present concept does not establish treatment efficacy, universal mappings
+between audio and mental states, or specific neurological mechanisms. Complex
+mental-health conditions must not be reduced to a single brain region or audio
+parameter. Binaural beats and related phenomena should be treated as testable
+stimulus primitives with uncertain effects. Traditional or contemplative
+ontologies may be studied as human meaning systems; they must not be presented
+as established neuroanatomy.
+
+The proposed N-of-1 design will have limited generalizability and substantial
+risk of expectancy, demand, novelty, and measurement effects. Personalization
+may overfit a short response history. Generative systems and acoustic feature
+extractors may change over time. These risks require explicit versioning,
+negative and null result retention, and conservative interpretation.
+
+\section{Ethics statement}
+
+No formal participant study or human-subject data collection is reported in
+this draft. Any future protocol must resolve informed consent, privacy, data
+retention, adverse-event handling, researcher-participant role conflicts, and
+the applicable independent ethics-review requirements before collection.
+Antidote is not a substitute for professional care and must not present
+generated audio as treatment.
+
+\section{Data and code availability}
+
+No formal study data or prototype code accompanies this draft. The manuscript,
+bibliography, migration inventory, and non-sensitive research records are
+versioned in the Antidote repository. Generated publication artifacts are
+reproducible through the Beacon dependency pinned in
+\texttt{dependencies/beacon.lock.toml}. Human-subject or sensitive personal data
+must not be committed to the public repository.
+
+\section{Acknowledgements}
+
+No external funding or institutional support is claimed in this draft.
+
+\section{Contributor statement}
+
+Contributor roles are generated from the project metadata using the CRediT
+taxonomy. The current draft assigns conceptualization, methodology, original
+draft writing, and review and editing to Alan Szmyt.
