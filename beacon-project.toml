@@ -1,0 +1,54 @@
+schema_version = 1
+
+[beacon]
+profile = "research-paper"
+template_version = "0.1.0"
+theme = "egohygiene"
+
+[paper]
+id = "antidote"
+title = "An Interpretable Semantic Framework for Personalized Adaptive Generative Audio"
+subtitle = "Design and N-of-1 Feasibility"
+version = "0.1.0"
+date = "2026-08-26"
+language = "en-US"
+stage = "draft"
+entrypoint = "paper/paper.tex"
+bibliography = "paper/references.bib"
+keywords = [
+  "adaptive music",
+  "affect",
+  "generative audio",
+  "human-computer interaction",
+  "interpretability",
+  "personalization",
+]
+abstract = "This draft frames an interpretable, person-specific loop from semantic sonic intent through generated acoustic realization to measured affective response. It proposes a methods and N-of-1 feasibility study; no formal study results or clinical efficacy claims are reported."
+
+[[paper.authors]]
+name = "Alan Szmyt"
+affiliation = "Ego Hygiene"
+credit_roles = [
+  "Conceptualization",
+  "Methodology",
+  "Writing - original draft",
+  "Writing - review and editing",
+]
+
+[provenance]
+source_repository = "https://github.com/egohygiene/antidote"
+source_path = "."
+source_revision = "ad699e9e5405bbc344cacac4347881e0af77ad56"
+license = "Draft manuscript: all rights reserved; repository tooling: MIT"
+source_date_epoch = 1787724808
+
+[provenance.migration]
+repository = "https://github.com/egohygiene/empathy"
+path = "research/antidote"
+revision = "ad699e9e5405bbc344cacac4347881e0af77ad56"
+tree = "5432bdd881afd191e6bba03eab93ccfc192ee25f"
+origin_revision = "1bc0513d0c87b3702003228e89977ce751b67e11"
+
+[publication]
+arxiv_category = ""
+doi = ""

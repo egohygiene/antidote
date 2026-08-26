@@ -1,0 +1,62 @@
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+
+name: Quality
+
+on:
+  pull_request:
+  push:
+    branches:
+      - main
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "quality-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  egolint:
+    name: Egolint native validation
+    runs-on: ubuntu-24.04
+    timeout-minutes: 20
+    env:
+      EGOLINT_REVISION: d4aea9d1335ccd293936790f97911f3d3ed9e2af
+    steps:
+      - name: Harden runner
+        # step-security/harden-runner v2.21.0
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Check out complete source history
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Resolve immutable Egolint source
+        shell: bash
+        run: |
+          set -euo pipefail
+          git init "${RUNNER_TEMP}/egolint"
+          git -C "${RUNNER_TEMP}/egolint" remote add origin \
+            "https://github.com/egohygiene/egolint.git"
+          git -C "${RUNNER_TEMP}/egolint" fetch --depth=1 origin \
+            "${EGOLINT_REVISION}"
+          git -C "${RUNNER_TEMP}/egolint" checkout --detach \
+            "${EGOLINT_REVISION}"
+
+      - name: Validate repository portability and policy
+        shell: bash
+        run: |
+          set -euo pipefail
+          cargo run \
+            --locked \
+            --manifest-path "${RUNNER_TEMP}/egolint/Cargo.toml" \
+            -- \
+            --workspace "${GITHUB_WORKSPACE}" \
+            validate
