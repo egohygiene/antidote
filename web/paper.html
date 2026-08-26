@@ -5,6 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="$abstract$">
   <meta name="generator" content="Beacon research-paper 0.1.0">
+  <meta property="og:type" content="article">
+  <meta property="og:title" content="$title$">
+  <meta property="og:description" content="$abstract$">
+  <meta property="og:url" content="$canonical_url$">
+  <link rel="canonical" href="$canonical_url$">
   <title>$title$</title>
   <style>
     :root {
@@ -29,6 +34,7 @@
     .masthead-inner { padding: clamp(2.7rem, 7vw, 5.7rem) 0 clamp(2.3rem, 6vw, 4.2rem); }
     .eyebrow, h1, h2, h3, .subtitle, .authors, .metadata, nav, footer { font-family: ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif; }
     .eyebrow { margin: 0 0 0.95rem; font-size: 0.78rem; font-weight: 760; letter-spacing: 0.12em; text-transform: uppercase; }
+    .eyebrow a { color: inherit; }
     .masthead h1 { max-width: 900px; margin: 0; font-size: clamp(2.45rem, 7vw, 5.15rem); line-height: 1; letter-spacing: -0.045em; }
     .subtitle { max-width: 780px; margin: 1.15rem 0 0; color: #f0f4f6; font-size: clamp(1.1rem, 2.4vw, 1.48rem); line-height: 1.42; }
     .authors { margin: 1.8rem 0 0; font-weight: 680; }
@@ -43,10 +49,10 @@
     nav li { margin: 0.27rem 0; font-size: 0.86rem; line-height: 1.35; }
     nav ul ul { display: none; }
     main { min-width: 0; }
-    article section > h1, article section > h2, article section > h3 { color: var(--primary); line-height: 1.18; letter-spacing: -0.025em; }
-    article section > h1 { margin: 2.7rem 0 0.75rem; font-size: clamp(1.75rem, 4vw, 2.3rem); }
-    article section:first-child > h1 { margin-top: 0; }
-    article section > h2 { margin: 2rem 0 0.55rem; color: var(--accent); font-size: 1.35rem; }
+    article section > h2, article section > h3, article section > h4 { color: var(--primary); line-height: 1.18; letter-spacing: -0.025em; }
+    article section > h2 { margin: 2.7rem 0 0.75rem; font-size: clamp(1.75rem, 4vw, 2.3rem); }
+    article section:first-child > h2 { margin-top: 0; }
+    article section > h3 { margin: 2rem 0 0.55rem; color: var(--accent); font-size: 1.35rem; }
     article p { margin: 0.82rem 0; }
     figure { margin: 2rem 0; padding: 1rem; background: white; border: 1px solid var(--line); border-radius: 0.65rem; }
     figure img { display: block; max-width: 100%; height: auto; margin-inline: auto; }
@@ -57,6 +63,7 @@
     .math { overflow-x: auto; }
     footer { padding: 1.5rem 0 3rem; color: var(--muted); border-top: 1px solid var(--line); font-size: 0.84rem; }
     @media (max-width: 820px) { .layout { grid-template-columns: 1fr; } aside { position: static; } }
+    @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
     @media print { body { background: white; } .skip-link, aside { display: none; } .layout { display: block; width: auto; } a { color: inherit; } }
   </style>
 </head>
@@ -64,7 +71,7 @@
   <a class="skip-link" href="#content">Skip to main content</a>
   <header class="masthead">
     <div class="masthead-inner">
-      <p class="eyebrow">Research paper / $theme_label$</p>
+      <p class="eyebrow"><a href="$site_url$">Antidote publication hub</a> / Research paper / $theme_label$</p>
       <h1>$title$</h1>
       $if(subtitle)$<p class="subtitle">$subtitle$</p>$endif$
       <p class="authors">$for(author)$$author$$sep$ · $endfor$</p>
@@ -89,6 +96,6 @@
       <article>$body$</article>
     </main>
   </div>
-  <footer>$title$ - version $version$ - rendered with Beacon research-paper 0.1.0</footer>
+  <footer>$title$ - version $version$ - <a href="$site_url$">publication hub</a> - <a href="$source_repository$">source</a></footer>
 </body>
 </html>

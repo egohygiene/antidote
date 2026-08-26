@@ -147,18 +147,47 @@ def run_tests(python: str) -> None:
     )
 
 
-def stage_site(project: Path, output: Path, theme: str, python: str) -> None:
-    """Build and stage the Antidote-owned GitHub Pages projection."""
-    build(project, output, theme, python)
-    validate(project, output, theme, python)
+def invoke_site_staging(build: Path, destination: Path, python: str) -> None:
+    """Stage one complete site tree from an already validated paper build."""
     run(
         [
             python,
             str(ROOT / "scripts" / "stage_pages.py"),
-            f"--build-dir={output}",
-            f"--output-dir={ROOT / '_site'}",
+            f"--build-dir={build}",
+            f"--output-dir={destination}",
         ]
     )
+
+
+def verify_site_reproducibility(build: Path, python: str) -> None:
+    """Stage twice and require byte-identical route and integrity trees."""
+    with tempfile.TemporaryDirectory(
+        prefix=".antidote-pages-", dir=ROOT
+    ) as temporary:
+        temporary_root = Path(temporary)
+        first = temporary_root / "first"
+        second = temporary_root / "second"
+        invoke_site_staging(build, first, python)
+        invoke_site_staging(build, second, python)
+        first_files = {
+            path.relative_to(first) for path in first.rglob("*") if path.is_file()
+        }
+        second_files = {
+            path.relative_to(second) for path in second.rglob("*") if path.is_file()
+        }
+        if first_files != second_files:
+            raise RuntimeError("site reproducibility file inventory mismatch")
+        for relative in sorted(first_files):
+            compare_file(first / relative, second / relative)
+    print("PASS reproducible Pages routes, manifests, and checksum inventory.")
+
+
+def stage_site(project: Path, output: Path, theme: str, python: str) -> None:
+    """Build and stage the Antidote-owned GitHub Pages projection."""
+    build(project, output, theme, python)
+    validate(project, output, theme, python)
+    verify_site_reproducibility(output, python)
+    invoke_site_staging(output, ROOT / "_site", python)
 
 
 def check_all(project: Path, output: Path, python: str) -> None:

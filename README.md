@@ -39,8 +39,9 @@ without Beacon. Outputs are written to `build/<theme>/`:
 
 Build the complete local publication site with either `make check-site` or
 `task check-site`. The staged result appears under `_site/` and includes the
-landing page, accessible paper, PDF, provenance, publication manifest, source
-bundle, and SHA-256 inventory.
+publication hub, accessible paper, stable PDF, planned magazine route,
+downloads index, provenance, publication and site manifests, source bundle,
+and complete SHA-256 inventory.
 
 Beacon remains an optional control plane for profile inspection, planning,
 transactional builds, and checksummed packaging:
@@ -81,18 +82,32 @@ MIT-licensed profile, not a copy of those provisional templates.
 
 The workflow always builds a reviewable Pages artifact but deploys only when
 the repository variable `PAGES_ENABLED` is exactly `true`. This keeps merges
-green until the repository's Pages source and optional DNS are configured.
+green until the repository's Pages source, DNS, and TLS are configured.
 
-Activation steps are in [`docs/pages-activation.md`](./docs/pages-activation.md).
-The default route is intended to be <https://egohygiene.github.io/antidote/>;
-an optional custom domain remains a maintainer-controlled setting.
+The canonical route is <https://antidote.egohygiene.io/>. GitHub's
+<https://egohygiene.github.io/antidote/> route remains a technical fallback,
+not a second canonical publication URL. Activation and rollback steps are in
+[`docs/pages-activation.md`](./docs/pages-activation.md).
+
+The stable public route contract is:
+
+- `/` — publication catalog;
+- `/paper/` and `/antidote.pdf` — available paper editions;
+- `/magazine/` — an explicitly planned slot with no fabricated download;
+- `/downloads/` — available paper artifacts and integrity evidence;
+- `/publication.json`, `/site.json`, and `/SHA256SUMS` — machine-readable
+  publication state.
+
+Actual magazine authoring is tracked separately in
+[issue #5](https://github.com/egohygiene/antidote/issues/5).
 
 ## Status and boundaries
 
 - Project codename: provisional.
 - Manuscript stage: draft.
 - Formal study results: none collected.
-- Public site: GitHub Pages selected; deployment activation pending.
+- Public site: custom-domain GitHub Pages hub implemented; deployment
+  activation and TLS verification remain maintainer-controlled.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
 

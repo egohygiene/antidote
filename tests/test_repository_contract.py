@@ -30,7 +30,15 @@ class RepositoryContractTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("vars.PAGES_ENABLED == 'true'", workflow)
+        self.assertIn("github.ref == 'refs/heads/main'", workflow)
         self.assertIn("PAGES_CUSTOM_DOMAIN", workflow)
+
+    def test_pages_ci_proves_publication_reproducibility(self) -> None:
+        """Pages review must compare independently built governed artifacts."""
+        workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("task reproducibility", workflow)
 
     def test_lorem_ipsum_is_wrapped_as_non_evidence(self) -> None:
         """Layout filler may appear only through the explicit draft macro."""

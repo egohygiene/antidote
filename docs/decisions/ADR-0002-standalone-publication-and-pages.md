@@ -5,6 +5,7 @@
 - Decision owners: Ego Hygiene / Antidote
 - Related issue: `egohygiene/antidote#2`
 - Supersedes: ADR-0001's Beacon runtime dependency
+- Amended by: ADR-0003's selected custom domain and site catalog
 
 ## Context
 

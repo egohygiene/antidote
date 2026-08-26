@@ -1,0 +1,100 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Download and verify the available Antidote research paper artifacts.">
+  <meta name="theme-color" content="#08130f">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Downloads — Antidote">
+  <meta property="og:description" content="Paper, source, manifests, provenance, and checksums for the Antidote research publication.">
+  <meta property="og:url" content="{{SITE_BASE_URL}}downloads/">
+  <link rel="canonical" href="{{SITE_BASE_URL}}downloads/">
+  <link rel="manifest" href="../site.webmanifest">
+  <link rel="stylesheet" href="../assets/site.css">
+  <title>Downloads — Antidote</title>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "CollectionPage",
+    "name": "Antidote publication downloads",
+    "description": "Available paper artifacts and integrity evidence for Antidote.",
+    "url": "{{SITE_BASE_URL}}downloads/",
+    "isPartOf": {
+      "@type": "WebSite",
+      "name": "Antidote",
+      "url": "{{SITE_BASE_URL}}"
+    }
+  }
+  </script>
+</head>
+<body data-catalog-url="../site.json">
+  <a class="skip-link" href="#content">Skip to main content</a>
+
+  <header class="site-header">
+    <nav class="shell navigation" aria-label="Primary navigation">
+      <a class="wordmark" href="../">
+        <span class="wordmark-owner">ego hygiene</span>
+        <span class="wordmark-project">antidote</span>
+      </a>
+      <div class="nav-links">
+        <a href="../paper/">Paper</a>
+        <a href="../magazine/">Magazine</a>
+        <a href="./" aria-current="page">Downloads</a>
+        <a href="https://github.com/egohygiene/antidote">Source</a>
+      </div>
+    </nav>
+  </header>
+
+  <main id="content" tabindex="-1">
+    <section class="subpage-hero shell" aria-labelledby="page-title">
+      <div>
+        <p class="eyebrow">Governed artifacts</p>
+        <h1 id="page-title">Downloads</h1>
+        <p class="subpage-lede">The readable publication, reproducible source, and evidence needed to verify both.</p>
+      </div>
+      <div class="download-stamp" aria-label="SHA-256 verified">SHA<br>256</div>
+    </section>
+
+    <section class="section shell" aria-labelledby="available-title">
+      <div class="section-heading">
+        <p class="eyebrow">Paper / available</p>
+        <h2 id="available-title">Choose the projection that fits the work.</h2>
+        <p>Version <span data-site-field="paper-version">{{PAPER_VERSION}}</span>, source revision <span class="mono" data-site-field="source-revision">{{SOURCE_REVISION}}</span>.</p>
+      </div>
+      <div class="download-grid">
+        <a href="../antidote.pdf"><span class="file-type">PDF</span><strong>Research paper</strong><small>Typeset publication for reading, review, and citation.</small></a>
+        <a href="../paper/"><span class="file-type">HTML</span><strong>Accessible paper</strong><small>Semantic web edition with navigable structure and described figures.</small></a>
+        <a href="./{{SOURCE_ARCHIVE_NAME}}"><span class="file-type">TGZ</span><strong>Source archive</strong><small>Self-contained, arXiv-oriented LaTeX source for independent compilation.</small></a>
+        <a href="../publication.json"><span class="file-type">JSON</span><strong>Publication manifest</strong><small>Paper identity, canonical URL, source revision, and artifact hashes.</small></a>
+        <a href="../site.json"><span class="file-type">JSON</span><strong>Site catalog</strong><small>Stable routes, publication slots, availability states, and URLs.</small></a>
+        <a href="../provenance.json"><span class="file-type">JSON</span><strong>Build provenance</strong><small>Profile, theme, source epoch, revision, and governed build outputs.</small></a>
+        <a href="../SHA256SUMS"><span class="file-type">TXT</span><strong>Checksum inventory</strong><small>SHA-256 digests covering every file in this published site.</small></a>
+        <a href="https://github.com/egohygiene/antidote"><span class="file-type">GIT</span><strong>Repository</strong><small>Canonical manuscript source, research notes, decisions, and build kit.</small></a>
+      </div>
+    </section>
+
+    <section class="section shell" aria-labelledby="integrity-title">
+      <div class="integrity-panel">
+        <div>
+          <p class="eyebrow">Integrity model</p>
+          <h2 id="integrity-title">Verify the file, then trace the source.</h2>
+        </div>
+        <div>
+          <p><code>SHA256SUMS</code> covers the complete staged site. <code>publication.json</code> binds paper artifacts to the canonical source revision. <code>provenance.json</code> records the native build contract.</p>
+          <p>These records support reproducibility; they do not certify scientific validity or clinical efficacy.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-layout">
+      <p>Antidote is an Ego Hygiene research publication.</p>
+      <p><a href="../">Publication hub</a> · <a href="../magazine/">Magazine status</a></p>
+    </div>
+  </footer>
+
+  <script src="../assets/site.js" defer></script>
+</body>
+</html>

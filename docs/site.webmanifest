@@ -1,9 +1,9 @@
 {
-  "name": "Antidote research publication",
+  "name": "Antidote research publication hub",
   "short_name": "Antidote",
   "description": "An interpretable semantic framework for personalized adaptive generative audio.",
   "start_url": "./",
   "display": "standalone",
-  "background_color": "#06100d",
-  "theme_color": "#071410"
+  "background_color": "#050b09",
+  "theme_color": "#08130f"
 }

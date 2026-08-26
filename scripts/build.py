@@ -18,6 +18,7 @@ import shutil
 import subprocess
 import tarfile
 from pathlib import Path
+from urllib.parse import urljoin
 
 import tomllib
 
@@ -239,6 +240,9 @@ def web_source(work: Path, entrypoint: str) -> str:
 
 def build_web(work: Path, output: Path, config: dict, theme: dict) -> None:
     paper = config["paper"]
+    publication = config["publication"]
+    site_url = publication["pages_url"].rstrip("/") + "/"
+    canonical_url = urljoin(site_url, "paper/")
     web_dir = output / "web"
     web_dir.mkdir(parents=True, exist_ok=True)
     figure_dir = work / "paper" / "figures"
@@ -265,6 +269,9 @@ def build_web(work: Path, output: Path, config: dict, theme: dict) -> None:
         "lang": paper["language"],
         "project_id": paper["id"],
         "theme_label": theme["label"],
+        "site_url": site_url,
+        "canonical_url": canonical_url,
+        "source_repository": config["provenance"]["source_repository"],
         **{
             f"theme_{key}": theme[key]
             for key in ("primary", "accent", "surface", "ink", "muted")
@@ -288,12 +295,53 @@ def build_web(work: Path, output: Path, config: dict, theme: dict) -> None:
             f"--template={ROOT / 'web' / 'paper.html'}",
             "--mathml",
             "--section-divs",
+            "--shift-heading-level-by=1",
             "--table-of-contents",
             f"--output={html_path}",
         ],
         cwd=web_dir,
     )
     rendered = html_path.read_text(encoding="utf-8")
+    structured_data = {
+        "@context": "https://schema.org",
+        "@type": "ScholarlyArticle",
+        "headline": paper["title"],
+        "alternativeHeadline": paper.get("subtitle", ""),
+        "author": [
+            {"@type": "Person", "name": author["name"]}
+            for author in paper["authors"]
+        ],
+        "publisher": {"@type": "Organization", "name": "Ego Hygiene"},
+        "url": canonical_url,
+        "isAccessibleForFree": True,
+        "creativeWorkStatus": paper["stage"],
+        "version": paper["version"],
+    }
+    structured_json = json.dumps(structured_data, indent=2, sort_keys=True).replace(
+        "</", "<\\/"
+    )
+    rendered = rendered.replace(
+        "</head>",
+        "  <script type=\"application/ld+json\">\n"
+        + structured_json
+        + "\n  </script>\n</head>",
+        1,
+    )
+    equation_pattern = re.compile(
+        r'<math display="block"([^>]*)>(.*?)\s*\\label\{([^{}]+)\}(.*?)</math>',
+        flags=re.DOTALL,
+    )
+
+    def anchor_equation(match: re.Match[str]) -> str:
+        attributes, before, label, after = match.groups()
+        if not re.fullmatch(r"[A-Za-z][A-Za-z0-9:._-]*", label):
+            raise RuntimeError(f"unsafe equation label: {label}")
+        return (
+            f'<math display="block" id="{label}"{attributes}>'
+            f"{before}{after}</math>"
+        )
+
+    rendered = equation_pattern.sub(anchor_equation, rendered)
     for slug, caption, _ in figure_records:
         if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", slug):
             raise RuntimeError(f"unsafe figure slug: {slug}")

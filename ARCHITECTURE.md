@@ -19,7 +19,10 @@ Antidote-owned publication build kit
   +--> accessible HTML
   +--> arXiv source archive
   +--> provenance record
-  +--> GitHub Pages artifact
+  +--> GitHub Pages publication hub
+         |--> paper (available)
+         |--> magazine (planned)
+         +--> downloads and integrity evidence
 
 Beacon pin --> inspect / upgrade / validate / package (optional)
 
@@ -63,3 +66,31 @@ Generated artifacts are disposable projections of committed source. No build
 output is canonical, and no automated workflow publishes a claim or submits a
 paper. Pages deployment publishes only a draft projection and remains disabled
 until a maintainer explicitly activates it.
+
+## Publication hub contract
+
+The custom-domain site is a catalog over product-owned projections, not a
+second source of truth. `site.json` is the machine-readable catalog and
+`publication.json` remains the current paper manifest.
+
+| Route | Owner | State in issue #4 |
+| --- | --- | --- |
+| `/` | Antidote site projection | Available |
+| `/paper/` | Antidote paper build | Available |
+| `/antidote.pdf` | Antidote paper build | Available |
+| `/magazine/` | Antidote site projection | Planned |
+| `/downloads/` | Antidote site projection | Available |
+| `/publication.json` | Antidote paper staging | Available |
+| `/site.json` | Antidote hub staging | Available |
+| `/SHA256SUMS` | Antidote hub staging | Available |
+
+A planned slot has no stage, manifest, or artifacts. It becomes available only
+in the same deterministic build that supplies real, verified outputs. The
+first edition is therefore separate work in
+[issue #5](https://github.com/egohygiene/antidote/issues/5); reserving its route
+does not publish a magazine or imply evidence.
+
+The canonical base is `https://antidote.egohygiene.io/`. GitHub's project URL
+is retained only as a technical fallback. Pull requests build and validate the
+entire hub without deployment; `main` can deploy only through the explicit
+Pages gate.
