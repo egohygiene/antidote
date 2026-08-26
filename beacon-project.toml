@@ -1,8 +1,7 @@
-schema_version = 1
-
 [beacon]
+schema_version = 1
 profile = "research-paper"
-template_version = "0.1.0"
+profile_version = "0.1.0"
 theme = "egohygiene"
 
 [paper]
@@ -52,3 +51,5 @@ origin_revision = "1bc0513d0c87b3702003228e89977ce751b67e11"
 [publication]
 arxiv_category = ""
 doi = ""
+pages_url = "https://egohygiene.github.io/antidote/"
+pages_custom_domain = ""

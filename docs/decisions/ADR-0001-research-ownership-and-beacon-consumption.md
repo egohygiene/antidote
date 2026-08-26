@@ -1,6 +1,6 @@
 # ADR-0001: Own research source here and consume Beacon by immutable revision
 
-- Status: Accepted
+- Status: Superseded by ADR-0002
 - Date: 2026-08-26
 - Decision owners: Ego Hygiene / Antidote
 - Related issue: `egohygiene/empathy#71`
@@ -18,7 +18,9 @@ generic publication contract.
 Antidote becomes the sole writable owner of its manuscript, bibliography,
 figures, data, research notes, and source records. It consumes Beacon
 `research-paper` `0.1.0` from the full commit recorded in
-`dependencies/beacon.lock.toml`. It does not vendor or fork Beacon templates.
+`dependencies/beacon.lock.toml`. At extraction time it did not vendor Beacon's
+build implementation. ADR-0002 supersedes that runtime arrangement after
+Beacon formalized a generated, project-owned standalone build contract.
 
 The repository is classified as a Holon `publication` with a `baseline`
 security floor. Relay CI and Egolint quality validation are selected. A public

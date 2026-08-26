@@ -1,0 +1,154 @@
+# Copyright 2026 Ego Hygiene
+# SPDX-License-Identifier: MIT
+
+name: GitHub Pages
+
+on:
+  pull_request:
+    paths:
+      - ".github/workflows/pages.yml"
+      - "beacon-project.toml"
+      - "docs/**"
+      - "latex/**"
+      - "paper/**"
+      - "scripts/**"
+      - "themes/**"
+      - "web/**"
+      - "Makefile"
+      - "Taskfile.yml"
+  push:
+    branches:
+      - main
+    paths:
+      - ".github/workflows/pages.yml"
+      - "beacon-project.toml"
+      - "docs/**"
+      - "latex/**"
+      - "paper/**"
+      - "scripts/**"
+      - "themes/**"
+      - "web/**"
+      - "Makefile"
+      - "Taskfile.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "pages-${{ github.workflow }}-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  build:
+    name: Build Pages artifact
+    runs-on: ubuntu-24.04
+    timeout-minutes: 25
+    steps:
+      - name: Harden runner
+        # step-security/harden-runner v2.21.0
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Check out complete source history
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install the pinned Task runner
+        # go-task/setup-task v1
+        uses: go-task/setup-task@70f2430ad412f838533de8c0515c749ffb2b8bd3
+        with:
+          version: "3.53.1"
+
+      - name: Install publication dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes \
+            latexmk \
+            librsvg2-bin \
+            lmodern \
+            pandoc \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-pictures
+
+      - name: Build and validate publication site
+        env:
+          PAGES_CUSTOM_DOMAIN: "${{ vars.PAGES_CUSTOM_DOMAIN }}"
+        run: task check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+
+      - name: Upload reviewable Pages artifact
+        # actions/upload-artifact v7.0.1
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: "antidote-pages-${{ github.sha }}"
+          path: "_site"
+          include-hidden-files: true
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
+
+  deploy:
+    name: Deploy Pages
+    if: github.event_name != 'pull_request' && vars.PAGES_ENABLED == 'true'
+    needs: build
+    runs-on: ubuntu-24.04
+    timeout-minutes: 15
+    permissions:
+      actions: read
+      contents: read
+      id-token: write
+      pages: write
+    environment:
+      name: github-pages
+      url: "${{ steps.deployment.outputs.page_url }}"
+    steps:
+      - name: Harden runner
+        # step-security/harden-runner v2.21.0
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Download reviewed Pages artifact
+        # actions/download-artifact v8.0.1
+        uses: actions/download-artifact@3e5f45b2cfb9172054b4087a40e8e0b5a5461e7c
+        with:
+          name: "antidote-pages-${{ github.sha }}"
+          path: "_site"
+
+      - name: Configure GitHub Pages
+        # actions/configure-pages v6
+        uses: actions/configure-pages@45bfe0192ca1faeb007ade9deae92b16b8254a0d
+
+      - name: Upload deployable Pages artifact
+        # actions/upload-pages-artifact v5
+        uses: actions/upload-pages-artifact@fc324d3547104276b827a68afc52ff2a11cc49c9
+        with:
+          path: "_site"
+
+      - name: Deploy GitHub Pages
+        id: deployment
+        # actions/deploy-pages v5
+        uses: actions/deploy-pages@cd2ce8fcbc39b97be8ca5fce6e763baed58fa128
+
+      - name: Verify published routes
+        shell: bash
+        env:
+          DEPLOYED_URL: "${{ steps.deployment.outputs.page_url }}"
+        run: |
+          set -euo pipefail
+          base_url="${DEPLOYED_URL%/}/"
+          for route in "" "paper/" "antidote.pdf" "publication.json" "SHA256SUMS"; do
+            url="${base_url}${route}"
+            printf "Checking <%s>\n" "${url}"
+            curl --fail --head --location --retry 5 --retry-all-errors --silent --show-error "${url}" >/dev/null
+          done

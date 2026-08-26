@@ -54,7 +54,9 @@ def main() -> int:
         for error in errors:
             print(f"ERROR {error}")
         return 1
-    print(f"PASS {len(rows)} Empathy source dispositions are recorded and preserved blobs match.")
+    print(
+        f"PASS {len(rows)} Empathy source dispositions are recorded and preserved blobs match."
+    )
     return 0
 
 

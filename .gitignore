@@ -1,6 +1,9 @@
 /.cache/
 /.reports/
+/.beacon-build-*/
 /build/
+/dist/
+/_site/
 __pycache__/
 *.py[cod]
 

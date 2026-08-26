@@ -1,5 +1,6 @@
 schema_version = 1
 repository = "https://github.com/egohygiene/beacon.git"
-revision = "60dc0e903af54bc0db8b580012ffdc4de0da6727"
+revision = "337f2dd7432b432d41483b2655c11a14cf39dfec"
 profile = "templates/research-paper"
 template_version = "0.1.0"
+rust_toolchain = "1.97.1"
