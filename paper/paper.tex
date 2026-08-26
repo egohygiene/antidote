@@ -3,6 +3,17 @@
 \usepackage{beacon-research-paper}
 \input{beacon-generated-metadata.tex}
 
+% Layout-only filler used while the manuscript remains a draft. The build
+% checker rejects these blocks if the project advances to submission-ready or
+% published status.
+\newcommand{\AntidotePlaceholder}[2]{%
+  \par\medskip
+  \noindent\colorbox{BeaconSurface}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
+    \sffamily\small\textbf{Draft placeholder -- not evidence (#1).}\par
+    \color{BeaconMuted}#2}}
+  \par\medskip
+}
+
 \begin{document}
 \BeaconMakeTitle
 

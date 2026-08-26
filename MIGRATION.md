@@ -28,6 +28,9 @@ The source commit and tree retain the complete original bytes and Git history.
 - Empty directory sentinels became scoped README files or a real figure.
 - The provisional `template.tex` and `template.html` were not copied. Beacon
   `research-paper` `0.1.0` supersedes them.
-- The standalone repository is canonical once its bootstrap pull request
-  merges. Empathy must then retain only a historical pointer, never a second
-  writable manuscript.
+- The standalone repository became canonical when bootstrap pull request #1
+  merged. Empathy retains migration history, never a second writable
+  manuscript.
+- Beacon pull request #18 established a standalone project contract. Antidote
+  issue #2 adopts that contract as a product-owned build kit while preserving
+  the immutable upstream revision for explicit upgrades.

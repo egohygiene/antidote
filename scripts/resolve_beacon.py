@@ -9,8 +9,9 @@ from __future__ import annotations
 import argparse
 import subprocess
 import tempfile
-import tomllib
 from pathlib import Path
+
+import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 LOCK = ROOT / "dependencies" / "beacon.lock.toml"

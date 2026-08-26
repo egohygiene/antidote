@@ -42,6 +42,12 @@ jobs:
           fetch-depth: 0
           persist-credentials: false
 
+      - name: Install the pinned Task runner
+        # go-task/setup-task v1
+        uses: go-task/setup-task@70f2430ad412f838533de8c0515c749ffb2b8bd3
+        with:
+          version: "3.53.1"
+
       - name: Install publication dependencies
         shell: bash
         run: |
@@ -59,13 +65,18 @@ jobs:
             texlive-latex-recommended \
             texlive-pictures
 
-      - name: Build and validate through pinned Beacon
+      - name: Prove standalone Make and Task parity
         shell: bash
         env:
           THEME: "${{ matrix.theme }}"
         run: |
           set -euo pipefail
-          make check THEME="${THEME}"
+          make check-content THEME="${THEME}"
+          make clean THEME="${THEME}"
+          task check-content THEME="${THEME}"
+
+      - name: Verify preserved source inventory
+        run: python3 scripts/check_source_inventory.py
 
       - name: Upload review artifacts
         # actions/upload-artifact v7.0.1
@@ -73,6 +84,66 @@ jobs:
         with:
           name: "antidote-paper-${{ matrix.theme }}-${{ github.sha }}"
           path: "build/${{ matrix.theme }}"
+          if-no-files-found: error
+          retention-days: 30
+          compression-level: 9
+
+  beacon-contract:
+    name: Optional Beacon control plane
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+    steps:
+      - name: Harden runner
+        # step-security/harden-runner v2.21.0
+        uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
+        with:
+          egress-policy: audit
+
+      - name: Check out complete source history
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          fetch-depth: 0
+          persist-credentials: false
+
+      - name: Install publication dependencies
+        shell: bash
+        run: |
+          set -euo pipefail
+          sudo apt-get update
+          sudo apt-get install --no-install-recommends --yes \
+            latexmk \
+            librsvg2-bin \
+            lmodern \
+            pandoc \
+            poppler-utils \
+            texlive-fonts-recommended \
+            texlive-latex-base \
+            texlive-latex-extra \
+            texlive-latex-recommended \
+            texlive-pictures
+
+      - name: Install pinned Rust toolchain
+        shell: bash
+        run: rustup toolchain install "1.97.1" --profile minimal
+
+      - name: Validate, inspect, plan, and package through pinned Beacon
+        shell: bash
+        run: |
+          set -euo pipefail
+          python3 scripts/beacon.py validate
+          python3 scripts/beacon.py inspect
+          python3 scripts/beacon.py doctor
+          python3 scripts/beacon.py plan
+          python3 scripts/beacon.py package
+          test -f "dist/research-paper-0.1.0/beacon-package.json"
+
+      - name: Upload checksummed Beacon package
+        # actions/upload-artifact v7.0.1
+        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a
+        with:
+          name: "antidote-beacon-package-${{ github.sha }}"
+          path: "dist/research-paper-0.1.0"
           if-no-files-found: error
           retention-days: 30
           compression-level: 9

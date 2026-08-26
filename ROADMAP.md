@@ -31,7 +31,7 @@ updated: 2026-08-26
 -->
 ## 2026-08-26 execution snapshot
 
-**Lifecycle:** research bootstrap
+**Lifecycle:** manuscript development
 
 **Current gate:** Establish a verified novelty map before freezing the first
 study design.
@@ -44,9 +44,9 @@ individual's measured response.
 
 <!-- roadmap-step
 id: ANT-Q01
-status: in-progress
+status: completed
 depends_on: []
-issues: ["egohygiene/empathy#71"]
+issues: ["egohygiene/empathy#71", "egohygiene/antidote#2"]
 -->
 #### ANT-Q01 — Graduate the research workspace
 
@@ -55,14 +55,16 @@ provenance, and a reproducible Beacon build.
 
 **Exit criteria:**
 
-- [ ] Standalone bootstrap pull request is merged.
+- [x] Standalone bootstrap pull request is merged.
 - [x] Every Empathy source file has a recorded disposition.
-- [x] The manuscript builds and validates in both Beacon themes.
-- [ ] Empathy retains only a history pointer after the standalone source lands.
+- [x] The manuscript builds and validates natively in both Beacon themes.
+- [x] Make and Task share one project-owned build contract without Beacon.
+- [x] Pages, PDF, web, source, and provenance projections are reviewable.
+- [x] Empathy retains only migration history after the standalone source lands.
 
 <!-- roadmap-step
 id: ANT-Q02
-status: planned
+status: in-progress
 depends_on: [ANT-Q01]
 issues: []
 -->

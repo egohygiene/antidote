@@ -13,12 +13,18 @@ hypothesis-generating only. Do not introduce efficacy, treatment, diagnostic,
 or neurological-mechanism claims without evidence and appropriate review.
 
 The canonical manuscript is `paper/paper.tex` and its `paper/sections/`
-inputs. Do not add a second Markdown manuscript or copy Beacon templates into
-this repository. Build through the pinned Beacon research-paper profile:
+inputs. Do not add a second Markdown manuscript. The repository owns the
+standalone build kit generated from Beacon's pinned research-paper profile;
+do not make native builds reach back into a Beacon checkout.
 
 ```sh
-make check-all BEACON_ROOT="../beacon"
+make check-all
+task check-all
 ```
 
+Both interfaces delegate to `scripts/tasks.py`. Keep their commands and
+overrides equivalent. Beacon remains an optional validation and packaging
+control plane through `scripts/beacon.py`.
+
 Run `make inventory` after changing preserved migration artifacts. Generated
-files belong in `build/` and must not be committed.
+files belong in `build/`, `dist/`, and `_site/` and must not be committed.

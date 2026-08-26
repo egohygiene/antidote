@@ -1,32 +1,60 @@
 PYTHON ?= python3
-BEACON_ROOT ?= .cache/beacon
-BEACON_PROFILE := $(BEACON_ROOT)/templates/research-paper
-BUILD_ROOT ?= build
+PROJECT ?= auto
 THEME ?= egohygiene
+BUILD_DIR ?= build/$(THEME)
+TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)"
 
-.PHONY: all beacon build check check-all inventory
+.PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory reproducibility site test
 
-all: check
+all: build
 
-beacon:
-	$(PYTHON) "scripts/resolve_beacon.py" --destination "$(BEACON_ROOT)"
+build:
+	$(TASK) build
 
-build: beacon
-	$(PYTHON) "$(BEACON_PROFILE)/scripts/build.py" \
-		--project "$(CURDIR)" \
-		--output "$(CURDIR)/$(BUILD_ROOT)/$(THEME)" \
-		--theme "$(THEME)"
-
-check: build inventory
-	$(PYTHON) "$(BEACON_PROFILE)/scripts/check.py" \
-		--project "$(CURDIR)" \
-		--build-dir "$(CURDIR)/$(BUILD_ROOT)/$(THEME)" \
-		--theme "$(THEME)" \
-		--compile-arxiv
+check:
+	$(TASK) check
 
 check-all:
-	$(MAKE) check THEME="neutral"
-	$(MAKE) check THEME="egohygiene"
+	$(TASK) check-all
+
+check-content:
+	$(TASK) check-content
+
+check-links:
+	$(TASK) check-links
+
+reproducibility:
+	$(TASK) reproducibility
+
+bootstrap-check:
+	$(TASK) bootstrap-check
+
+clean:
+	$(TASK) clean
 
 inventory:
-	$(PYTHON) "scripts/check_source_inventory.py"
+	$(TASK) inventory
+
+site:
+	$(TASK) site
+
+check-site:
+	$(TASK) check-site
+
+test:
+	$(TASK) test
+
+beacon-validate:
+	$(PYTHON) scripts/beacon.py validate
+
+beacon-doctor:
+	$(PYTHON) scripts/beacon.py doctor
+
+beacon-plan:
+	$(PYTHON) scripts/beacon.py plan
+
+beacon-build:
+	$(PYTHON) scripts/beacon.py build
+
+beacon-package:
+	$(PYTHON) scripts/beacon.py package

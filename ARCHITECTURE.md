@@ -1,8 +1,8 @@
 # Architecture
 
 Antidote is the durable owner of one research program and its publication
-evidence. It consumes organization capabilities through versioned contracts;
-it does not copy their implementation or depend on Empathy at runtime.
+evidence. It consumes organization capabilities through versioned contracts
+without depending on Empathy or Beacon at runtime.
 
 ```text
 Empathy migration history
@@ -13,12 +13,15 @@ Antidote-owned research source
 paper   sources   notes    data
   |
   v
-Beacon research-paper profile (immutable revision)
+Antidote-owned publication build kit
   |
   +--> PDF
   +--> accessible HTML
   +--> arXiv source archive
   +--> provenance record
+  +--> GitHub Pages artifact
+
+Beacon pin --> inspect / upgrade / validate / package (optional)
 
 Relay --> reviewable repository-intelligence artifact
 Egolint --> repository portability and policy validation
@@ -34,7 +37,7 @@ Egolint --> repository portability and policy validation
 | Identity projection | Beacon `egohygiene` theme |
 | CI orchestration | Repository paper gate plus pinned Relay workflow |
 | Quality | Egolint native validation from a pinned source revision |
-| Site | Deferred; no Pages deployment selected |
+| Site | Antidote-owned GitHub Pages workflow with explicit activation gate |
 | Agent package | Deferred; no Aether package selected |
 
 Holon's current draft `publication` manifest makes agent and documentation-site
@@ -46,8 +49,11 @@ Holon manifest until that contract can express the narrower selection.
 
 - Antidote owns manuscript text, bibliography records, figures, data schemas,
   research notes, and source assessments.
-- Beacon owns publication templates, rendering conventions, validation, and
-  source packaging.
+- Antidote owns the local renderer, checks, themes, web template, Pages staging,
+  and Make/Task interfaces required for independent builds.
+- Beacon owns the upstream research-paper profile and optional control-plane
+  behavior for initialization, upgrade coordination, planning, validation, and
+  checksummed packaging.
 - Relay owns reusable workflow implementation. Antidote owns caller policy and
   final publication approval.
 - Egolint owns lint semantics and normalized quality evidence.
@@ -55,4 +61,5 @@ Holon manifest until that contract can express the narrower selection.
 
 Generated artifacts are disposable projections of committed source. No build
 output is canonical, and no automated workflow publishes a claim or submits a
-paper.
+paper. Pages deployment publishes only a draft projection and remains disabled
+until a maintainer explicitly activates it.
