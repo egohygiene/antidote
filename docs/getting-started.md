@@ -3,8 +3,9 @@
 ## Current status
 
 Antidote's research and publication system is executable. Its desktop MVP is an
-architecture and contract scaffold; no Tauri, React, Rust, Python model worker,
-or model dependency is present yet.
+executable workspace and contract foundation: Tauri/React, Rust, and Python are
+pinned and share generated v1 types plus synthetic validation fixtures. No
+session behavior, database, worker process, audio model, or playback exists yet.
 
 ## Prerequisites for current checks
 
@@ -13,6 +14,16 @@ or model dependency is present yet.
 - Make or Task for the project-owned command interface;
 - the LaTeX and Pandoc dependencies described by the publication diagnostics
   when building all output formats.
+
+The MVP workspace additionally requires:
+
+- Rust `1.97.1` with Clippy and rustfmt;
+- Node `24.19.x` and pnpm `11.19.x`;
+- Python `3.12.13` and uv `0.11.33`;
+- the operating-system prerequisites documented by Tauri 2 for desktop builds.
+
+See [`docs/mvp-toolchains.md`](mvp-toolchains.md) for the exact pin ownership,
+developer platform matrix, Tauri capability baseline, and recovery boundary.
 
 ## Validate the repository
 
@@ -32,6 +43,29 @@ task --list
 
 Outputs belong in `build/`, `dist/`, and `_site/` and are not canonical source.
 
+## Bootstrap and validate the MVP foundation
+
+Restore the exact lockfile-backed dependencies:
+
+```sh
+make mvp-bootstrap
+task mvp:bootstrap
+```
+
+Run the complete Rust, TypeScript, Python, Tauri, and shared-contract gate with
+either equivalent interface:
+
+```sh
+make mvp-check
+task mvp:check
+```
+
+Regenerate disposable language projections from canonical schemas with
+`make mvp-contracts` or `task mvp:contracts`. CI uses
+`make mvp-contracts-check` to fail when committed outputs drift. The common
+fixture suite is `contracts/fixtures/cases.json` and contains synthetic,
+non-clinical data only.
+
 ## Navigate the research
 
 1. Read [`README.md`](../README.md) and [`PURPOSE.md`](../PURPOSE.md).
@@ -50,13 +84,17 @@ Read these in order:
 4. [`DECISIONS.md`](../DECISIONS.md), especially ADR-0004 through ADR-0007;
 5. [`contracts/README.md`](../contracts/README.md) and the model-worker protocol;
 6. [`docs/architecture-overview.md`](architecture-overview.md);
-7. [`ROADMAP.md`](../ROADMAP.md), beginning with `ANT-Q03` after the corpus is
-   accepted.
+7. [`ROADMAP.md`](../ROADMAP.md), beginning with the active `ANT-Q03` sequence.
 
 Do not install a real audio model during workspace bootstrap. The first
 executable slice uses a mock worker and synthetic fixtures so consent, state,
 cancellation, provenance, and failure behavior can be tested independently of
 GPU availability or a model license.
+
+If bootstrap is interrupted, remove only generated dependency/build directories
+(`target/`, `node_modules/`, `apps/desktop/dist/`, and
+`workers/generation/.venv/`) and rerun `make mvp-bootstrap`. Canonical source,
+schemas, fixtures, and lockfiles must remain intact.
 
 ## Sensitive information
 

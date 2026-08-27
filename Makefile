@@ -4,7 +4,7 @@ THEME ?= egohygiene
 BUILD_DIR ?= build/$(THEME)
 TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)"
 
-.PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory reproducibility site test
+.PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory mvp-bootstrap mvp-check mvp-contracts mvp-contracts-check mvp-format mvp-lint mvp-test reproducibility site test
 
 all: build
 
@@ -34,6 +34,27 @@ clean:
 
 inventory:
 	$(TASK) inventory
+
+mvp-bootstrap:
+	$(TASK) mvp-bootstrap
+
+mvp-check:
+	$(TASK) mvp-check
+
+mvp-contracts:
+	$(TASK) mvp-contracts
+
+mvp-contracts-check:
+	$(TASK) mvp-contracts-check
+
+mvp-format:
+	$(TASK) mvp-format
+
+mvp-lint:
+	$(TASK) mvp-lint
+
+mvp-test:
+	$(TASK) mvp-test
 
 site:
 	$(TASK) site

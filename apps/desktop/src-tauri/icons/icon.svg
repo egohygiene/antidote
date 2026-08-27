@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512" role="img" aria-labelledby="title description">
+  <title id="title">Antidote prototype icon</title>
+  <desc id="description">A teal acoustic wave crossing a gold circle on a midnight-blue field.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#071530" />
+      <stop offset="1" stop-color="#102653" />
+    </linearGradient>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#54d7d0" />
+      <stop offset="1" stop-color="#aee8e3" />
+    </linearGradient>
+  </defs>
+  <rect width="512" height="512" rx="108" fill="url(#background)" />
+  <circle cx="256" cy="256" r="154" fill="none" stroke="#c8a154" stroke-width="18" />
+  <path
+    d="M92 256h53l19-55 33 118 36-177 45 226 38-171 31 118 22-59h51"
+    fill="none"
+    stroke="url(#wave)"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    stroke-width="22"
+  />
+  <circle cx="256" cy="256" r="15" fill="#f3d796" />
+</svg>

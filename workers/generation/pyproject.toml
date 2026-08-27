@@ -1,0 +1,42 @@
+[project]
+name = "antidote-generation"
+version = "0.1.0"
+description = "Capability-scoped local generation-worker foundation for Antidote"
+readme = "README.md"
+requires-python = ">=3.12.13,<3.13"
+dependencies = [
+  "jsonschema[format]>=4.26.0,<4.27.0",
+]
+
+[dependency-groups]
+dev = [
+  "pytest>=9.1.1,<9.2.0",
+  "ruff>=0.16.5,<0.17.0",
+]
+
+[tool.pytest.ini_options]
+addopts = "--strict-config --strict-markers"
+pythonpath = ["src"]
+testpaths = ["tests"]
+
+[tool.ruff]
+line-length = 88
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["ALL"]
+ignore = [
+  "COM812",
+  "D203",
+  "D213",
+]
+
+[tool.ruff.lint.per-file-ignores]
+"src/antidote_generation/generated/contracts.py" = ["ALL"]
+"tests/**" = ["S101"]
+
+[tool.ruff.format]
+quote-style = "double"
+
+[tool.uv]
+package = false

@@ -122,14 +122,14 @@ precedents, and candidate contribution claims across the research streams.
 
 <!-- roadmap-step
 id: ANT-Q02A
-status: active
+status: complete
 depends_on: [ANT-Q01]
-issues: []
+issues: ["egohygiene/antidote#7"]
 -->
 
 #### ANT-Q02A — Establish the architecture corpus and MVP contracts
 
-**State:** `active`
+**State:** `complete`
 
 **Outcome:** Antidote has one coherent human-readable architecture graph,
 accepted MVP boundaries, and a machine-readable interoperability starting
@@ -137,23 +137,23 @@ point.
 
 **Exit criteria:**
 
-- [ ] All 18 Aether-shaped architecture documents exist, cross-link, and match
+- [x] All 18 Aether-shaped architecture documents exist, cross-link, and match
   Antidote's bounded context.
-- [ ] Existing publication ADRs and MVP ADRs resolve through one decision index.
-- [ ] Consent, moment context, journey, generation, and response schemas validate.
-- [ ] Repository and worker boundaries have honest README contracts.
-- [ ] The full repository validation suite passes on the review branch.
+- [x] Existing publication ADRs and MVP ADRs resolve through one decision index.
+- [x] Consent, moment context, journey, generation, and response schemas validate.
+- [x] Repository and worker boundaries have honest README contracts.
+- [x] The full repository validation suite passes on the review branch.
 
 <!-- roadmap-step
 id: ANT-Q03
-status: ready
+status: active
 depends_on: [ANT-Q02A]
-issues: []
+issues: ["egohygiene/antidote#9", "egohygiene/antidote#10", "egohygiene/antidote#11", "egohygiene/antidote#12", "egohygiene/antidote#13", "egohygiene/antidote#14", "egohygiene/antidote#15", "egohygiene/antidote#16", "egohygiene/antidote#17", "egohygiene/antidote#18"]
 -->
 
 #### ANT-Q03 — Bootstrap the local application foundation
 
-**State:** `ready`
+**State:** `active`
 
 **Outcome:** A minimal Tauri/React shell, framework-independent Rust core,
 SQLite adapter, and mock model worker execute one contract-tested session
@@ -161,12 +161,12 @@ without real generation.
 
 **Exit criteria:**
 
-- [ ] Workspaces are reproducibly bootstrapped with pinned dependencies.
-- [ ] Generated Rust, TypeScript, and Python types agree with canonical schemas.
+- [x] Workspaces are reproducibly bootstrapped with pinned dependencies.
+- [x] Generated Rust, TypeScript, and Python types agree with canonical schemas.
 - [ ] Consent, event, projection, journey, generation-job, cancellation, and
   response transitions pass unit and contract tests.
-- [ ] Synthetic fixtures contain no private or clinical data.
-- [ ] Local development and recovery are documented.
+- [x] Synthetic fixtures contain no private or clinical data.
+- [x] Local development and recovery are documented.
 
 <!-- roadmap-step
 id: ANT-Q04

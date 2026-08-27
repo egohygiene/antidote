@@ -2,7 +2,10 @@
 
 ## Status
 
-Target scaffold. No model implementation or weight dependency is selected.
+Executable Python workspace scaffold pinned to Python `3.12.13` and uv
+`0.11.33`. Canonical-schema validation and generated type projections exist.
+No worker process, model package, model implementation, or weight dependency is
+selected.
 
 ## Responsibility
 
@@ -33,3 +36,17 @@ hardware behavior, and known failures are audited.
 ## Protocol
 
 See [`../../contracts/protocol/model-worker.v1.md`](../../contracts/protocol/model-worker.v1.md).
+
+## Commands
+
+The repository-owned path is `make mvp-check` or `task mvp:check`. For a focused
+Python loop after bootstrap:
+
+```sh
+uv run --project workers/generation --locked pytest
+uv run --project workers/generation --locked ruff check workers/generation
+```
+
+The generated module under `src/antidote_generation/generated/` is a disposable,
+committed projection. Change `contracts/schemas/` and run
+`make mvp-contracts`; do not edit generated types directly.

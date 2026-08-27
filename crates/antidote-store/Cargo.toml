@@ -1,0 +1,15 @@
+[package]
+name = "antidote-store"
+description = "Antidote event and projection persistence adapters"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+antidote-core = { path = "../antidote-core" }
+
+[lints]
+workspace = true

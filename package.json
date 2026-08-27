@@ -1,0 +1,18 @@
+{
+  "name": "@egohygiene/antidote-workspace",
+  "version": "0.1.0",
+  "private": true,
+  "packageManager": "pnpm@11.19.0",
+  "engines": {
+    "node": "24.19.x",
+    "pnpm": "11.19.x"
+  },
+  "scripts": {
+    "build": "pnpm --filter @egohygiene/antidote-desktop build",
+    "format": "pnpm --filter @egohygiene/antidote-desktop format",
+    "format:check": "pnpm --filter @egohygiene/antidote-desktop format:check",
+    "lint": "pnpm --filter @egohygiene/antidote-desktop lint",
+    "test": "pnpm --filter @egohygiene/antidote-desktop test",
+    "typecheck": "pnpm --filter @egohygiene/antidote-desktop typecheck"
+  }
+}

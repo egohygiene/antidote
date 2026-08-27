@@ -7,6 +7,8 @@ from __future__ import annotations
 
 import json
 import re
+import subprocess
+import sys
 import unittest
 from pathlib import Path
 
@@ -116,6 +118,80 @@ class RepositoryContractTests(unittest.TestCase):
             identifiers.add(identifier)
             self.assertFalse(schema.get("additionalProperties", True), path.name)
 
+    def test_contract_manifest_and_generated_projections_are_current(self) -> None:
+        """Canonical schemas must deterministically own all language projections."""
+        manifest = json.loads(
+            (ROOT / "contracts" / "manifest.json").read_text(encoding="utf-8")
+        )
+        self.assertEqual(manifest.get("schema_version"), "1.0.0")
+        self.assertEqual(len(manifest.get("contracts", [])), 7)
+        names = [item["name"] for item in manifest["contracts"]]
+        self.assertEqual(names, sorted(names))
+        self.assertEqual(len(names), len(set(names)))
+        for item in manifest["contracts"]:
+            self.assertTrue((ROOT / "contracts" / item["schema"]).is_file())
+        for relative in manifest["outputs"].values():
+            self.assertTrue((ROOT / relative).is_file(), relative)
+        subprocess.run(
+            [sys.executable, str(ROOT / "scripts" / "generate_contracts.py"), "--check"],
+            cwd=ROOT,
+            check=True,
+        )
+
+    def test_shared_contract_fixtures_are_synthetic_and_complete(self) -> None:
+        """Every contract must expose shared positive and negative test evidence."""
+        manifest = json.loads(
+            (ROOT / "contracts" / "manifest.json").read_text(encoding="utf-8")
+        )
+        suite = json.loads(
+            (ROOT / "contracts" / "fixtures" / "cases.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        cases = suite["cases"]
+        names = [case["name"] for case in cases]
+        self.assertEqual(len(names), len(set(names)))
+        categories = {case["category"] for case in cases}
+        self.assertTrue(
+            {"valid", "version", "enum", "format", "limit", "pattern", "unknown_field"}
+            <= categories
+        )
+        for item in manifest["contracts"]:
+            matching = [case for case in cases if case["contract"] == item["name"]]
+            self.assertTrue(any(case["valid"] for case in matching), item["name"])
+            self.assertTrue(any(not case["valid"] for case in matching), item["name"])
+        serialized = json.dumps(cases).lower()
+        self.assertNotIn("@", serialized)
+        self.assertNotIn("http://", serialized)
+        self.assertNotIn("https://", serialized)
+        self.assertGreaterEqual(serialized.count("synthetic"), 7)
+
+    def test_mvp_scaffold_preserves_authority_boundaries(self) -> None:
+        """Workspace bootstrap must not couple the core or overgrant Tauri."""
+        core_manifest = (ROOT / "crates" / "antidote-core" / "Cargo.toml").read_text(
+            encoding="utf-8"
+        )
+        for forbidden in ("tauri", "rusqlite", "pyo3", "torch"):
+            self.assertNotIn(forbidden, core_manifest)
+        capability = json.loads(
+            (
+                ROOT
+                / "apps"
+                / "desktop"
+                / "src-tauri"
+                / "capabilities"
+                / "default.json"
+            ).read_text(encoding="utf-8")
+        )
+        self.assertEqual(capability["permissions"], ["core:default"])
+        workflow = (ROOT / ".github" / "workflows" / "mvp.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("make mvp-bootstrap", workflow)
+        self.assertIn("make mvp-check", workflow)
+        self.assertNotIn("ACE-Step", workflow)
+        self.assertNotIn("MusicGen", workflow)
+
     def test_local_markdown_links_resolve(self) -> None:
         """New architecture and support navigation must not contain dead local links."""
         selected = [ROOT / relative for relative in ARCHITECTURE_DOCUMENTS]
@@ -126,9 +202,13 @@ class RepositoryContractTests(unittest.TestCase):
                 "CONTRIBUTING.md",
                 "SECURITY.md",
                 "SUPPORT.md",
+                "apps/desktop/README.md",
                 "contracts/README.md",
+                "crates/README.md",
+                "crates/antidote-contracts/README.md",
                 "docs/architecture-overview.md",
                 "docs/getting-started.md",
+                "docs/mvp-toolchains.md",
                 "workers/generation/README.md",
             )
         )

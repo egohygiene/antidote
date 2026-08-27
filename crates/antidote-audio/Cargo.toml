@@ -1,0 +1,15 @@
+[package]
+name = "antidote-audio"
+description = "Antidote audio playback and export ports"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[dependencies]
+antidote-core = { path = "../antidote-core" }
+
+[lints]
+workspace = true

@@ -1,0 +1,24 @@
+[package]
+name = "antidote-desktop"
+description = "Tauri host for the Antidote local research instrument"
+authors.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+rust-version.workspace = true
+version.workspace = true
+
+[lib]
+name = "antidote_desktop_lib"
+crate-type = ["lib", "cdylib", "staticlib"]
+
+[build-dependencies]
+tauri-build.workspace = true
+
+[dependencies]
+antidote-core = { path = "../../../crates/antidote-core" }
+serde.workspace = true
+tauri.workspace = true
+
+[lints]
+workspace = true

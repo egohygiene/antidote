@@ -147,6 +147,18 @@ def run_tests(python: str) -> None:
     )
 
 
+def run_mvp(command: str, python: str) -> None:
+    """Run one application-foundation command through the MVP task driver."""
+    run(
+        [
+            python,
+            str(ROOT / "scripts" / "mvp.py"),
+            command,
+            f"--python={python}",
+        ]
+    )
+
+
 def invoke_site_staging(build: Path, destination: Path, python: str) -> None:
     """Stage one complete site tree from an already validated paper build."""
     run(
@@ -223,6 +235,13 @@ def parse_arguments() -> argparse.Namespace:
             "check-site",
             "clean",
             "inventory",
+            "mvp-bootstrap",
+            "mvp-check",
+            "mvp-contracts",
+            "mvp-contracts-check",
+            "mvp-format",
+            "mvp-lint",
+            "mvp-test",
             "reproducibility",
             "site",
             "test",
@@ -263,6 +282,8 @@ def main() -> int:
         bootstrap_check(arguments.theme, arguments.python)
     elif arguments.command == "inventory":
         verify_inventory(arguments.python)
+    elif arguments.command.startswith("mvp-"):
+        run_mvp(arguments.command.removeprefix("mvp-"), arguments.python)
     elif arguments.command in {"site", "check-site"}:
         stage_site(project, output, arguments.theme, arguments.python)
         if arguments.command == "check-site":

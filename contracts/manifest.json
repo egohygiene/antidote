@@ -1,0 +1,46 @@
+{
+  "schema_version": "1.0.0",
+  "generator_version": 1,
+  "contracts": [
+    {
+      "name": "consent-grant",
+      "schema": "schemas/consent-grant.v1.schema.json",
+      "type_name": "ConsentGrant"
+    },
+    {
+      "name": "generation-result",
+      "schema": "schemas/generation-result.v1.schema.json",
+      "type_name": "GenerationResult"
+    },
+    {
+      "name": "generation-spec",
+      "schema": "schemas/generation-spec.v1.schema.json",
+      "type_name": "GenerationSpec"
+    },
+    {
+      "name": "journey-plan",
+      "schema": "schemas/journey-plan.v1.schema.json",
+      "type_name": "JourneyPlan"
+    },
+    {
+      "name": "moment-context",
+      "schema": "schemas/moment-context.v1.schema.json",
+      "type_name": "MomentContext"
+    },
+    {
+      "name": "response-observation",
+      "schema": "schemas/response-observation.v1.schema.json",
+      "type_name": "ResponseObservation"
+    },
+    {
+      "name": "working-context-projection",
+      "schema": "schemas/working-context-projection.v1.schema.json",
+      "type_name": "WorkingContextProjection"
+    }
+  ],
+  "outputs": {
+    "python": "workers/generation/src/antidote_generation/generated/contracts.py",
+    "rust": "crates/antidote-contracts/src/generated.rs",
+    "typescript": "apps/desktop/src/generated/contracts.ts"
+  }
+}

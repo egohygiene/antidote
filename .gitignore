@@ -5,8 +5,14 @@
 /dist/
 /_site/
 /.antidote-pages-*/
+/target/
+apps/desktop/dist/
+apps/desktop/src-tauri/gen/
+node_modules/
+workers/generation/.venv/
 __pycache__/
 *.py[cod]
+*.tsbuildinfo
 
 *.aux
 *.bbl
