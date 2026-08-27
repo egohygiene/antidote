@@ -3,18 +3,23 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.1.0
+version: 0.2.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-26
+updated: 2026-08-27
 governed_by:
   - architecture-roadmap
 depends_on:
+  - antidote-vision
+  - antidote-pillars
   - antidote-architecture
+  - antidote-decisions
 related:
-  - antidote-research-ownership
+  - antidote-purpose
+  - antidote-principles
+  - antidote-epistemology
 supersedes: []
 ---
 
@@ -27,136 +32,267 @@ repository: egohygiene/antidote
 visibility: public
 publication: central
 route: /roadmap/antidote/
-updated: 2026-08-26
+updated: 2026-08-27
 -->
-## 2026-08-26 execution snapshot
 
-**Lifecycle:** manuscript development
+## 2026-08-27 execution snapshot
 
-**Current gate:** Establish a verified novelty map before freezing the first
-study design.
+> This evidence-reconciled snapshot is the issue-generation and visual-roadmap
+> handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
+> remain projections of this source.
 
-**North-star outcome:** A careful, interpretable, longitudinal account of the
-relationship among semantic intent, realized acoustic structure, and an
-individual's measured response.
+**Lifecycle:** research draft with prototype architecture bootstrap
+
+**Current gate:** Review the specialized architecture corpus and MVP contracts,
+then open implementation issues for the first local vertical slice.
+
+**North-star outcome:** An interpretable local research instrument that turns a
+person's explicitly consented moment and sonic language into a reproducible
+audio journey, records the response, and learns cautiously without making
+clinical claims.
 
 ### Quest line
 
 <!-- roadmap-step
 id: ANT-Q01
-status: completed
+status: complete
 depends_on: []
 issues: ["egohygiene/empathy#71", "egohygiene/antidote#2"]
 -->
+
 #### ANT-Q01 — Graduate the research workspace
 
+**State:** `complete`
+
 **Outcome:** Antidote has one standalone canonical home, immutable migration
-provenance, and a reproducible Beacon build.
+provenance, and a reproducible native build derived from Beacon's profile.
 
 **Exit criteria:**
 
 - [x] Standalone bootstrap pull request is merged.
 - [x] Every Empathy source file has a recorded disposition.
 - [x] The manuscript builds and validates natively in both Beacon themes.
-- [x] Make and Task share one project-owned build contract without Beacon.
-- [x] Pages, PDF, web, source, and provenance projections are reviewable.
-- [x] Empathy retains only migration history after the standalone source lands.
+- [x] Make and Task share one project-owned build contract.
+- [x] Empathy is migration history, not a runtime dependency.
 
 <!-- roadmap-step
 id: ANT-Q01A
-status: in-progress
+status: active
 depends_on: [ANT-Q01]
 issues: ["egohygiene/antidote#4"]
 -->
-#### ANT-Q01A — Activate the publication hub
 
-**Outcome:** The custom Antidote domain provides stable paper, planned
-magazine, download, manifest, and integrity routes through a gated,
-product-owned Pages workflow.
+#### ANT-Q01A — Activate and verify the publication hub
+
+**State:** `active`
+
+**Outcome:** The custom Antidote domain provides stable paper, planned magazine,
+download, manifest, and integrity routes through a gated product-owned workflow.
 
 **Exit criteria:**
 
-- [x] The review artifact contains the complete route contract.
-- [x] `site.json` distinguishes available paper and planned magazine slots.
+- [x] The repository contains the route and availability contract.
+- [x] Pull requests validate the complete hub without deploying it.
 - [x] Canonical metadata targets `https://antidote.egohygiene.io/`.
-- [x] Pull requests validate the hub without deploying it.
-- [ ] Repository Pages settings, DNS, TLS, and the deployment gate are verified
-  against the live custom domain.
+- [ ] Repository Pages settings, DNS, TLS, deployment gate, and live routes are
+  verified together and recorded.
 
 <!-- roadmap-step
 id: ANT-Q02
-status: in-progress
+status: active
 depends_on: [ANT-Q01]
 issues: []
 -->
-#### ANT-Q02 — Verify the literature and novelty boundary
 
-**Outcome:** A primary-source literature matrix separates overlap, open gaps,
-and candidate contribution claims across the five research streams.
+#### ANT-Q02 — Verify literature and novelty boundaries
+
+**State:** `active`
+
+**Outcome:** A primary-source atlas separates overlap, open gaps, architecture
+precedents, and candidate contribution claims across the research streams.
 
 **Exit criteria:**
 
-- [ ] Each bibliography entry has a source assessment.
-- [ ] MindMelody and other closed-loop comparators have a structured overlap
+- [ ] Each promoted bibliography entry has a primary-source assessment.
+- [ ] MindMelody and other adaptive-audio comparators have a structured overlap
   analysis.
+- [ ] Architecture references are separated from implementation documentation.
 - [ ] The contribution statement is rewritten from verified evidence.
-- [ ] Unsupported efficacy and mechanism language is absent.
+- [ ] Unsupported efficacy and deterministic mechanism language is absent.
+
+<!-- roadmap-step
+id: ANT-Q02A
+status: active
+depends_on: [ANT-Q01]
+issues: []
+-->
+
+#### ANT-Q02A — Establish the architecture corpus and MVP contracts
+
+**State:** `active`
+
+**Outcome:** Antidote has one coherent human-readable architecture graph,
+accepted MVP boundaries, and a machine-readable interoperability starting
+point.
+
+**Exit criteria:**
+
+- [ ] All 18 Aether-shaped architecture documents exist, cross-link, and match
+  Antidote's bounded context.
+- [ ] Existing publication ADRs and MVP ADRs resolve through one decision index.
+- [ ] Consent, moment context, journey, generation, and response schemas validate.
+- [ ] Repository and worker boundaries have honest README contracts.
+- [ ] The full repository validation suite passes on the review branch.
 
 <!-- roadmap-step
 id: ANT-Q03
-status: planned
-depends_on: [ANT-Q02]
+status: ready
+depends_on: [ANT-Q02A]
 issues: []
 -->
-#### ANT-Q03 — Freeze the N-of-1 feasibility protocol
 
-**Outcome:** Variables, measures, mutations, analysis, safety, consent, and
-provenance rules are explicit before formal data collection.
+#### ANT-Q03 — Bootstrap the local application foundation
+
+**State:** `ready`
+
+**Outcome:** A minimal Tauri/React shell, framework-independent Rust core,
+SQLite adapter, and mock model worker execute one contract-tested session
+without real generation.
 
 **Exit criteria:**
 
-- [ ] Protocol and analysis plan are versioned.
-- [ ] Data schema separates subjective, acoustic, behavioral, and optional
-  physiological measures.
-- [ ] Ethics and privacy review requirements are resolved.
-- [ ] A pilot stop/go decision is recorded.
+- [ ] Workspaces are reproducibly bootstrapped with pinned dependencies.
+- [ ] Generated Rust, TypeScript, and Python types agree with canonical schemas.
+- [ ] Consent, event, projection, journey, generation-job, cancellation, and
+  response transitions pass unit and contract tests.
+- [ ] Synthetic fixtures contain no private or clinical data.
+- [ ] Local development and recovery are documented.
 
 <!-- roadmap-step
 id: ANT-Q04
 status: planned
-depends_on: [ANT-Q03]
+depends_on: [ANT-Q03, ANT-Q02]
 issues: []
 -->
-#### ANT-Q04 — Run and report the feasibility study
+
+#### ANT-Q04 — Complete the transparent audio vertical slice
+
+**State:** `planned`
+
+**Outcome:** One reviewed local model adapter turns an accepted journey into a
+hashed audio artifact, supports deliberate playback and cancellation, captures
+response, and exports provenance.
+
+**Exit criteria:**
+
+- [ ] Adapter license, model revision, integrity, remote-code, hardware, and
+  output-rights assessment is recorded.
+- [ ] Unsupported controls downgrade visibly or fail before generation.
+- [ ] Stop, cancel, partial-output, model failure, and adverse-response paths
+  pass end-to-end tests.
+- [ ] Every run records its plan, parameters, artifact hashes, feature report,
+  warnings, exposure, and response.
+- [ ] No autonomous personalization is enabled.
+
+<!-- roadmap-step
+id: ANT-Q05
+status: planned
+depends_on: [ANT-Q02, ANT-Q04]
+issues: []
+-->
+
+#### ANT-Q05 — Freeze the N-of-1 feasibility protocol
+
+**State:** `planned`
+
+**Outcome:** Variables, conditions, measures, assignments, analysis, safety,
+consent, retention, and provenance are explicit before formal collection.
+
+**Exit criteria:**
+
+- [ ] Protocol and analysis plan are versioned.
+- [ ] Conditions compare generic prompting, structured non-personalized
+  journeys, and personal semantic journeys where feasible.
+- [ ] Data schemas separate subjective, acoustic, behavioral, and optional
+  physiological measures.
+- [ ] Ethics, privacy, exclusion, and stop requirements are resolved.
+- [ ] A pilot stop/go decision is recorded.
+
+<!-- roadmap-step
+id: ANT-Q06
+status: planned
+depends_on: [ANT-Q05]
+issues: []
+-->
+
+#### ANT-Q06 — Run and report the feasibility study
+
+**State:** `planned`
 
 **Outcome:** The manuscript reports auditable observations and appropriately
 bounded interpretations from the frozen protocol.
 
 **Exit criteria:**
 
-- [ ] Collection and analysis follow the frozen versions or disclose changes.
+- [ ] Collection and analysis follow frozen versions or disclose mutations.
 - [ ] Results are reproducible from approved, non-sensitive inputs.
+- [ ] Felt response remains distinct from expressed emotion and acoustic
+  adherence.
+- [ ] Negative and null observations remain visible.
 - [ ] Claims trace to evidence in the claim ledger.
-- [ ] Beacon submission-ready validation passes.
 
 <!-- roadmap-step
-id: ANT-Q05
+id: ANT-Q07
 status: planned
 depends_on: [ANT-Q01A, ANT-Q02]
 issues: ["egohygiene/antidote#5"]
 -->
-#### ANT-Q05 — Author the first magazine edition
 
-**Outcome:** A real, evidence-bounded visual edition replaces the planned slot
-without destabilizing the paper routes or inventing publication metadata.
+#### ANT-Q07 — Author the first magazine edition
+
+**State:** `planned`
+
+**Outcome:** A real, evidence-bounded visual edition converts the paper's key
+sections into understandable single-page insights without replacing the paper
+as scientific source of truth.
 
 **Exit criteria:**
 
 - [ ] The edition has governed structured source and an editorial thesis.
-- [ ] Native Make and Task builds produce verified web, digital, and print
-  projections without Beacon.
+- [ ] Every scientific statement remains traceable to the paper or source
+  record.
+- [ ] Native builds produce verified web, digital, and print projections.
 - [ ] Accessibility, print, provenance, and checksum checks pass.
-- [ ] The magazine catalog slot becomes available atomically with real
-  artifacts.
+- [ ] The planned hub slot becomes available atomically with real artifacts.
+
+### Roadmap-to-issue handoff
+
+- A step is complete only when its exit criteria and required evidence are
+  satisfied; commit count never determines progress.
+- `ready` steps may become implementation issues after duplicate review.
+- `planned` steps remain preview-only unless a reviewer deliberately activates
+  them.
+- Pull requests and commits should reference the relevant `Roadmap-Step`.
+- Public projections use allowlisted build-time evidence and never expose
+  private research plans, participant data, tokens, or consent records.
 
 <!-- END ROADMAP EXECUTION SNAPSHOT -->
+
+## Sequencing rationale
+
+Architecture and contracts can progress while literature verification continues,
+but a real generative adapter must not harden scientific claims or experimental
+conditions prematurely. The mock vertical slice tests authority and provenance
+first; the real model slice tests technical feasibility; only then is the study
+protocol frozen and run.
+
+## Evidence and uncertainty
+
+- **Observed:** Research and publication foundations are present; no runtime
+  prototype or formal study data exists.
+- **Decided for this roadmap:** The next executable milestone is a mock local
+  contract slice, not a clinical or adaptive system.
+- **Proposed:** Architecture work may generate issues after this corpus is
+  reviewed.
+- **Open question:** Whether model evaluation should be its own quest between
+  the mock slice and full audio vertical slice.

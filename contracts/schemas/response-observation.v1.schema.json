@@ -1,0 +1,51 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:response-observation:v1",
+  "title": "Antidote Response Observation v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "session_id",
+    "exposure_id",
+    "observed_at",
+    "window",
+    "felt_state",
+    "wanted_intensity",
+    "helpfulness",
+    "resonance",
+    "mismatch",
+    "harm"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "exposure_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "window": {
+      "type": "string",
+      "enum": ["during", "immediate", "later"]
+    },
+    "felt_state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "valence": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "arousal": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "intensity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    },
+    "wanted_intensity": { "type": ["boolean", "null"] },
+    "helpfulness": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "resonance": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "mismatch": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "harm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "stopped_early": { "type": "boolean", "default": false },
+    "notes": { "type": "string", "maxLength": 8000 },
+    "allow_personal_model_update": { "type": "boolean", "default": false }
+  }
+}

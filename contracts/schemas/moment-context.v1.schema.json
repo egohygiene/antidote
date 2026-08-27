@@ -1,0 +1,63 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:moment-context:v1",
+  "title": "Antidote Moment Context v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "session_id",
+    "observed_at",
+    "current_state",
+    "desired_transition",
+    "time_horizon_seconds",
+    "inclusions",
+    "exclusions"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "working_projection_id": { "type": ["string", "null"] },
+    "current_state": { "$ref": "#/$defs/state" },
+    "desired_transition": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["direction", "description"],
+      "properties": {
+        "direction": {
+          "type": "string",
+          "enum": ["stay_with", "soften", "regulate", "uplift", "focus", "release", "explore", "other"]
+        },
+        "description": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "target_state": { "$ref": "#/$defs/state" }
+      }
+    },
+    "time_horizon_seconds": { "type": "integer", "minimum": 10, "maximum": 3600 },
+    "inclusions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+    },
+    "exclusions": {
+      "type": "array",
+      "items": { "type": "string", "minLength": 1, "maxLength": 500 }
+    },
+    "notes": { "type": "string", "maxLength": 4000 }
+  },
+  "$defs": {
+    "state": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1, "maxLength": 2000 },
+        "valence": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "arousal": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "intensity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+        "confidence": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    }
+  }
+}

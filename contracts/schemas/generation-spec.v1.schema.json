@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:generation-spec:v1",
+  "title": "Antidote Generation Specification v1",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "session_id",
+    "journey_plan_id",
+    "journey_plan_hash",
+    "adapter",
+    "model",
+    "duration_seconds",
+    "output",
+    "created_at"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "journey_plan_id": { "type": "string", "minLength": 1 },
+    "journey_plan_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "adapter": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "version": { "type": "string", "minLength": 1 }
+      }
+    },
+    "model": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "revision"],
+      "properties": {
+        "id": { "type": "string", "minLength": 1 },
+        "revision": { "type": "string", "minLength": 1 },
+        "artifact_hash": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "duration_seconds": { "type": "integer", "minimum": 10, "maximum": 3600 },
+    "seed": { "type": ["integer", "null"], "minimum": 0 },
+    "prompt": { "type": "string", "minLength": 1, "maxLength": 20000 },
+    "negative_prompt": { "type": "string", "maxLength": 10000 },
+    "parameters": { "type": "object" },
+    "required_capabilities": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "minLength": 1 }
+    },
+    "output": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["format", "sample_rate_hz", "channels"],
+      "properties": {
+        "format": { "type": "string", "enum": ["wav", "flac"] },
+        "sample_rate_hz": { "type": "integer", "minimum": 8000, "maximum": 192000 },
+        "channels": { "type": "integer", "minimum": 1, "maximum": 8 }
+      }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  }
+}
