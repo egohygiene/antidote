@@ -1,6 +1,7 @@
 # antidote-core
 
-Planned framework-independent Rust domain and application core.
+Framework-independent Rust domain and application crate. Its Cargo boundary and
+contract dependency compile; issue #11 owns the first domain behavior.
 
 It will own validated state transitions and policies for consent grants,
 working projections, moments, journey plans, generation jobs, exposures,

@@ -24,10 +24,10 @@ immutably pinned contracts, not copied source trees.
 
 ## Current development state
 
-The research and publication system is implemented. The runtime prototype has
-architecture, ADR, directory, protocol, and JSON Schema scaffolds but no Tauri,
-React, Rust, Python worker, model, or study implementation yet. Contributions
-must not present a target directory or contract as shipped behavior.
+The research and publication system is implemented. The runtime prototype now
+has pinned Rust, Tauri/React, and Python workspaces plus generated contract types
+and shared validation fixtures. It still has no session state machine, store,
+worker process, model, playback, adaptation, or study implementation.
 
 ## Build and validate
 
@@ -39,12 +39,13 @@ task check-all
 ```
 
 Both delegate to `scripts/tasks.py`. Beacon remains optional through
-`scripts/beacon.py`. Generated files belong in `build/`, `dist/`, and `_site/`
-and must not be committed.
+`scripts/beacon.py`. Generated publication/build files belong in `build/`,
+`dist/`, and `_site/` and must not be committed.
 
-When the prototype workspaces land, their language-specific checks must be
-composed behind these existing project-owned interfaces rather than introduce a
-second top-level truth.
+Application work uses `make mvp-bootstrap` and `make mvp-check`, or the
+equivalent `task mvp:bootstrap` and `task mvp:check`. Generated contract
+projections are committed review artifacts, but JSON Schema remains canonical;
+regenerate them rather than editing them directly.
 
 ## Research contributions
 

@@ -1,0 +1,644 @@
+{
+  "schema_version": "1.0.0",
+  "description": "Synthetic, non-clinical fixtures shared by Rust, TypeScript, and Python validators.",
+  "cases": [
+    {
+      "name": "consent-grant-valid",
+      "contract": "consent-grant",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "consent-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "status": "active",
+        "created_at": "2026-08-27T12:00:00Z",
+        "expires_at": null,
+        "purposes": ["journey_planning", "generation"],
+        "actions": ["inspect", "project", "generate"],
+        "sources": [
+          {
+            "source_id": "manual-synthetic-1",
+            "source_type": "manual_entry",
+            "content_hash": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
+          }
+        ],
+        "retention": {
+          "mode": "session_only",
+          "allow_derived_projection": true,
+          "allow_personal_model_update": false
+        }
+      }
+    },
+    {
+      "name": "consent-grant-enum-invalid",
+      "contract": "consent-grant",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "consent-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "status": "active",
+        "created_at": "2026-08-27T12:00:00Z",
+        "purposes": ["treatment"],
+        "actions": ["inspect"],
+        "sources": [],
+        "retention": {"mode": "session_only"}
+      }
+    },
+    {
+      "name": "consent-grant-format-invalid",
+      "contract": "consent-grant",
+      "valid": false,
+      "category": "format",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "consent-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "status": "active",
+        "created_at": "not-a-date",
+        "purposes": ["journey_planning"],
+        "actions": ["inspect"],
+        "sources": [],
+        "retention": {"mode": "session_only"}
+      }
+    },
+    {
+      "name": "consent-grant-unknown-field-invalid",
+      "contract": "consent-grant",
+      "valid": false,
+      "category": "unknown_field",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "consent-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "status": "active",
+        "created_at": "2026-08-27T12:00:00Z",
+        "purposes": ["journey_planning"],
+        "actions": ["inspect"],
+        "sources": [],
+        "retention": {"mode": "session_only"},
+        "implicit_consent": true
+      }
+    },
+    {
+      "name": "consent-grant-version-invalid",
+      "contract": "consent-grant",
+      "valid": false,
+      "category": "version",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "consent-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "status": "active",
+        "created_at": "2026-08-27T12:00:00Z",
+        "purposes": ["journey_planning"],
+        "actions": ["inspect"],
+        "sources": [],
+        "retention": {"mode": "session_only"}
+      }
+    },
+    {
+      "name": "working-context-projection-valid",
+      "contract": "working-context-projection",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "projection-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "consent_grant_ids": ["consent-synthetic-1"],
+        "created_at": "2026-08-27T12:01:00Z",
+        "expires_at": null,
+        "derivation_version": "rules-v1",
+        "source_event_ids": ["event-synthetic-1"],
+        "semantic_items": [
+          {
+            "id": "semantic-synthetic-1",
+            "kind": "meaning",
+            "text": "synthetic image of moving from stillness toward clarity",
+            "source_event_ids": ["event-synthetic-1"],
+            "user_review": "approved"
+          }
+        ],
+        "projection_hash": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+      }
+    },
+    {
+      "name": "working-context-projection-enum-invalid",
+      "contract": "working-context-projection",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "projection-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "consent_grant_ids": ["consent-synthetic-1"],
+        "created_at": "2026-08-27T12:01:00Z",
+        "derivation_version": "rules-v1",
+        "source_event_ids": [],
+        "semantic_items": [
+          {
+            "id": "semantic-synthetic-invalid",
+            "kind": "meaning",
+            "text": "synthetic semantic item",
+            "source_event_ids": [],
+            "user_review": "accepted"
+          }
+        ]
+      }
+    },
+    {
+      "name": "working-context-projection-pattern-invalid",
+      "contract": "working-context-projection",
+      "valid": false,
+      "category": "pattern",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "projection-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "consent_grant_ids": ["consent-synthetic-1"],
+        "created_at": "2026-08-27T12:01:00Z",
+        "derivation_version": "rules-v1",
+        "source_event_ids": [],
+        "semantic_items": [],
+        "projection_hash": "not-a-sha256"
+      }
+    },
+    {
+      "name": "moment-context-valid",
+      "contract": "moment-context",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "moment-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "observed_at": "2026-08-27T12:02:00Z",
+        "working_projection_id": "projection-synthetic-1",
+        "current_state": {
+          "description": "synthetic neutral baseline",
+          "valence": 0.0,
+          "arousal": 0.2,
+          "intensity": 0.3,
+          "confidence": 0.8
+        },
+        "desired_transition": {
+          "direction": "focus",
+          "description": "explore a gentle shift toward sustained attention",
+          "target_state": {"description": "synthetic focused state"}
+        },
+        "time_horizon_seconds": 60,
+        "inclusions": ["soft texture"],
+        "exclusions": ["sudden loud changes"],
+        "notes": "synthetic fixture only"
+      }
+    },
+    {
+      "name": "moment-context-limit-invalid",
+      "contract": "moment-context",
+      "valid": false,
+      "category": "limit",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "moment-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "observed_at": "2026-08-27T12:02:00Z",
+        "current_state": {"description": "synthetic baseline"},
+        "desired_transition": {"direction": "focus", "description": "focus"},
+        "time_horizon_seconds": 5,
+        "inclusions": [],
+        "exclusions": []
+      }
+    },
+    {
+      "name": "moment-context-enum-invalid",
+      "contract": "moment-context",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "moment-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "observed_at": "2026-08-27T12:02:00Z",
+        "current_state": {"description": "synthetic baseline"},
+        "desired_transition": {"direction": "heal", "description": "invalid claim"},
+        "time_horizon_seconds": 60,
+        "inclusions": [],
+        "exclusions": []
+      }
+    },
+    {
+      "name": "moment-context-format-invalid",
+      "contract": "moment-context",
+      "valid": false,
+      "category": "format",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "moment-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "observed_at": "yesterday",
+        "current_state": {"description": "synthetic baseline"},
+        "desired_transition": {"direction": "focus", "description": "focus"},
+        "time_horizon_seconds": 60,
+        "inclusions": [],
+        "exclusions": []
+      }
+    },
+    {
+      "name": "journey-plan-valid",
+      "contract": "journey-plan",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "journey-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "moment_context_id": "moment-synthetic-1",
+        "working_projection_id": "projection-synthetic-1",
+        "status": "approved",
+        "strategy": "begin with sparse continuity, then add gentle rhythmic definition",
+        "total_duration_seconds": 60,
+        "stages": [
+          {
+            "id": "stage-synthetic-1",
+            "order": 0,
+            "role": "meet",
+            "duration_seconds": 30,
+            "semantic_intent": ["meet the synthetic baseline without forcing change"],
+            "acoustic_controls": {
+              "tempo_bpm": 72,
+              "key": null,
+              "time_signature": "4/4",
+              "timbre": ["soft pad"],
+              "harmony": ["open"],
+              "density": 0.2,
+              "spatiality": 0.4,
+              "dynamics": ["steady"]
+            }
+          },
+          {
+            "id": "stage-synthetic-2",
+            "order": 1,
+            "role": "transition",
+            "duration_seconds": 30,
+            "semantic_intent": ["introduce a synthetic sense of clarity"],
+            "acoustic_controls": {"tempo_bpm": 80, "density": 0.4},
+            "transition_rationale": "synthetic rule demonstration"
+          }
+        ],
+        "safety_constraints": ["avoid sudden level changes"],
+        "approved_at": "2026-08-27T12:03:00Z",
+        "plan_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
+      }
+    },
+    {
+      "name": "journey-plan-enum-invalid",
+      "contract": "journey-plan",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "journey-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "moment_context_id": "moment-synthetic-1",
+        "status": "approved",
+        "strategy": "synthetic",
+        "total_duration_seconds": 60,
+        "stages": [
+          {
+            "id": "stage-synthetic-invalid",
+            "order": 0,
+            "role": "heal",
+            "duration_seconds": 60,
+            "semantic_intent": ["synthetic"],
+            "acoustic_controls": {}
+          }
+        ],
+        "safety_constraints": []
+      }
+    },
+    {
+      "name": "journey-plan-limit-invalid",
+      "contract": "journey-plan",
+      "valid": false,
+      "category": "limit",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "journey-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "moment_context_id": "moment-synthetic-1",
+        "status": "draft",
+        "strategy": "synthetic",
+        "total_duration_seconds": 5,
+        "stages": [
+          {
+            "id": "stage-synthetic-invalid",
+            "order": 0,
+            "role": "meet",
+            "duration_seconds": 5,
+            "semantic_intent": ["synthetic"],
+            "acoustic_controls": {}
+          }
+        ],
+        "safety_constraints": []
+      }
+    },
+    {
+      "name": "journey-plan-unknown-field-invalid",
+      "contract": "journey-plan",
+      "valid": false,
+      "category": "unknown_field",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "journey-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "moment_context_id": "moment-synthetic-1",
+        "status": "draft",
+        "strategy": "synthetic",
+        "total_duration_seconds": 60,
+        "stages": [
+          {
+            "id": "stage-synthetic-invalid",
+            "order": 0,
+            "role": "meet",
+            "duration_seconds": 60,
+            "semantic_intent": ["synthetic"],
+            "acoustic_controls": {},
+            "clinical_target": "not allowed"
+          }
+        ],
+        "safety_constraints": []
+      }
+    },
+    {
+      "name": "generation-spec-valid",
+      "contract": "generation-spec",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-spec-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "journey_plan_id": "journey-synthetic-1",
+        "journey_plan_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "duration_seconds": 60,
+        "seed": 42,
+        "prompt": "synthetic contract fixture",
+        "negative_prompt": "no sudden level changes",
+        "parameters": {"fixture": true},
+        "required_capabilities": ["deterministic_fixture"],
+        "output": {"format": "wav", "sample_rate_hz": 48000, "channels": 2},
+        "created_at": "2026-08-27T12:04:00Z"
+      }
+    },
+    {
+      "name": "generation-spec-pattern-invalid",
+      "contract": "generation-spec",
+      "valid": false,
+      "category": "pattern",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-spec-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "journey_plan_id": "journey-synthetic-1",
+        "journey_plan_hash": "not-a-sha256",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "duration_seconds": 60,
+        "output": {"format": "wav", "sample_rate_hz": 48000, "channels": 2},
+        "created_at": "2026-08-27T12:04:00Z"
+      }
+    },
+    {
+      "name": "generation-spec-enum-invalid",
+      "contract": "generation-spec",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-spec-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "journey_plan_id": "journey-synthetic-1",
+        "journey_plan_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "duration_seconds": 60,
+        "output": {"format": "mp3", "sample_rate_hz": 48000, "channels": 2},
+        "created_at": "2026-08-27T12:04:00Z"
+      }
+    },
+    {
+      "name": "generation-spec-format-invalid",
+      "contract": "generation-spec",
+      "valid": false,
+      "category": "format",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-spec-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "journey_plan_id": "journey-synthetic-1",
+        "journey_plan_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "duration_seconds": 60,
+        "output": {"format": "wav", "sample_rate_hz": 48000, "channels": 2},
+        "created_at": "soon"
+      }
+    },
+    {
+      "name": "generation-result-valid",
+      "contract": "generation-result",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-result-synthetic-1",
+        "generation_spec_id": "generation-spec-synthetic-1",
+        "status": "generated",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "code_revision": "synthetic-revision",
+        "device_class": "fixture",
+        "elapsed_ms": 12,
+        "effective_parameters": {"fixture": true},
+        "artifacts": [
+          {
+            "kind": "audio",
+            "path": "artifacts/synthetic.wav",
+            "sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd",
+            "media_type": "audio/wav",
+            "size_bytes": 128
+          }
+        ],
+        "feature_report": {
+          "duration_seconds": 60,
+          "tempo_bpm": 76,
+          "key": null,
+          "loudness_lufs": -18,
+          "control_adherence": {"tempo": 0.9},
+          "analyzer_versions": {"synthetic": "1.0.0"}
+        },
+        "warnings": [],
+        "failure": null
+      }
+    },
+    {
+      "name": "generation-result-enum-invalid",
+      "contract": "generation-result",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-result-synthetic-invalid",
+        "generation_spec_id": "generation-spec-synthetic-1",
+        "status": "complete",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "code_revision": "synthetic-revision",
+        "device_class": "fixture",
+        "elapsed_ms": 12,
+        "artifacts": [],
+        "warnings": []
+      }
+    },
+    {
+      "name": "generation-result-pattern-invalid",
+      "contract": "generation-result",
+      "valid": false,
+      "category": "pattern",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-result-synthetic-invalid",
+        "generation_spec_id": "generation-spec-synthetic-1",
+        "status": "generated",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "code_revision": "synthetic-revision",
+        "device_class": "fixture",
+        "elapsed_ms": 12,
+        "artifacts": [
+          {
+            "kind": "audio",
+            "path": "artifacts/synthetic.wav",
+            "sha256": "invalid",
+            "media_type": "audio/wav",
+            "size_bytes": 128
+          }
+        ],
+        "warnings": []
+      }
+    },
+    {
+      "name": "generation-result-unknown-field-invalid",
+      "contract": "generation-result",
+      "valid": false,
+      "category": "unknown_field",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "generation-result-synthetic-invalid",
+        "generation_spec_id": "generation-spec-synthetic-1",
+        "status": "generated",
+        "adapter": {"id": "synthetic-mock", "version": "1.0.0"},
+        "model": {"id": "synthetic-fixture", "revision": "fixture-v1"},
+        "code_revision": "synthetic-revision",
+        "device_class": "fixture",
+        "elapsed_ms": 12,
+        "artifacts": [],
+        "warnings": [],
+        "felt_response": "must remain a separate record"
+      }
+    },
+    {
+      "name": "response-observation-valid",
+      "contract": "response-observation",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "response-synthetic-1",
+        "session_id": "session-synthetic-1",
+        "exposure_id": "exposure-synthetic-1",
+        "observed_at": "2026-08-27T12:06:00Z",
+        "window": "immediate",
+        "felt_state": {
+          "description": "synthetic neutral response",
+          "valence": 0.1,
+          "arousal": 0.2,
+          "intensity": 0.3
+        },
+        "wanted_intensity": true,
+        "helpfulness": 0.5,
+        "resonance": 0.4,
+        "mismatch": 0.1,
+        "harm": 0.0,
+        "stopped_early": false,
+        "notes": "synthetic fixture only",
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-limit-invalid",
+      "contract": "response-observation",
+      "valid": false,
+      "category": "limit",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "response-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "exposure_id": "exposure-synthetic-1",
+        "observed_at": "2026-08-27T12:06:00Z",
+        "window": "immediate",
+        "felt_state": {"description": "synthetic response"},
+        "wanted_intensity": null,
+        "helpfulness": null,
+        "resonance": null,
+        "mismatch": null,
+        "harm": 1.5
+      }
+    },
+    {
+      "name": "response-observation-enum-invalid",
+      "contract": "response-observation",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "response-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "exposure_id": "exposure-synthetic-1",
+        "observed_at": "2026-08-27T12:06:00Z",
+        "window": "after",
+        "felt_state": {"description": "synthetic response"},
+        "wanted_intensity": null,
+        "helpfulness": null,
+        "resonance": null,
+        "mismatch": null,
+        "harm": null
+      }
+    },
+    {
+      "name": "response-observation-format-invalid",
+      "contract": "response-observation",
+      "valid": false,
+      "category": "format",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "response-synthetic-invalid",
+        "session_id": "session-synthetic-1",
+        "exposure_id": "exposure-synthetic-1",
+        "observed_at": "later",
+        "window": "later",
+        "felt_state": {"description": "synthetic response"},
+        "wanted_intensity": null,
+        "helpfulness": null,
+        "resonance": null,
+        "mismatch": null,
+        "harm": null
+      }
+    }
+  ]
+}

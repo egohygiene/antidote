@@ -2,6 +2,7 @@
 
 [![Research paper](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/research-paper.yml?branch=main&style=for-the-badge&label=Research%20paper)](https://github.com/egohygiene/antidote/actions/workflows/research-paper.yml)
 [![GitHub Pages](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/pages.yml?branch=main&style=for-the-badge&label=GitHub%20Pages)](https://github.com/egohygiene/antidote/actions/workflows/pages.yml)
+[![MVP foundation](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/mvp.yml?branch=main&style=for-the-badge&label=MVP%20foundation)](https://github.com/egohygiene/antidote/actions/workflows/mvp.yml)
 [![Status](https://img.shields.io/badge/status-writing%20draft-FFD48A?style=for-the-badge)](./ROADMAP.md)
 
 Antidote is a provisional research program about personalized, adaptive
@@ -23,9 +24,10 @@ Tauri 2 desktop host with a React interface, a framework-independent Rust domain
 and control plane, SQLite plus local content-addressed artifacts, and an
 isolated Python/PyTorch model worker.
 
-The prototype is **not implemented yet**. `apps/`, `crates/`, `workers/`,
-`contracts/`, and `experiments/` establish ownership and contract boundaries so
-the first code-bearing slice can begin without silently redesigning the system.
+The pinned Rust, Tauri/React, and Python workspaces now compile and validate the
+same synthetic contract fixtures. This is an executable foundation, not a
+session implementation: no state machine, SQLite adapter, model worker, audio
+generation, playback, or adaptation behavior exists yet.
 
 Start with:
 
@@ -79,6 +81,18 @@ The immutable upstream revision is recorded in
 Run `make inventory` to verify that migration evidence preserved byte-for-byte
 still matches its recorded Empathy Git blobs.
 
+Bootstrap and validate the MVP foundation through the same interface:
+
+```sh
+make mvp-bootstrap
+make mvp-check
+```
+
+The Task equivalents are `task mvp:bootstrap` and `task mvp:check`. Contract
+types are regenerated with `make mvp-contracts`; CI uses
+`make mvp-contracts-check` to reject drift. None of these commands downloads a
+model or accepts personal data.
+
 ## Research layout
 
 ```text
@@ -89,10 +103,10 @@ research/bootstrap/     preserved hypothesis-generating research snapshot
 research/notes/         working evidence and claim ledgers
 research/sources/       primary-source verification records
 data/                   schemas and explicitly approved research data only
-apps/desktop/           target Tauri and React desktop interface
-crates/                 target Rust domain, store, provenance, and audio boundaries
-workers/generation/     target local Python/PyTorch model worker
-contracts/              versioned JSON Schemas and process protocols
+apps/desktop/           pinned Tauri and React workspace; session UI remains target
+crates/                 Rust contract, domain, store, provenance, and audio boundaries
+workers/generation/     Python contract-validation workspace; model worker remains target
+contracts/              canonical schemas, manifest, fixtures, and process protocol
 experiments/protocols/  future frozen study and analysis definitions
 docs/decisions/         detailed architectural decision records
 dependencies/           immutable upstream dependency locks
@@ -136,7 +150,8 @@ Actual magazine authoring is tracked separately in
   activation and TLS verification remain maintainer-controlled.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
-- Local prototype: architecture and contract scaffold only; no executable app or model adapter.
+- Local prototype: executable workspace and contract foundation; no session,
+  persistence, model-worker, audio, or adaptation implementation.
 - Formal study data: none collected.
 
 Repository automation and non-manuscript documentation are MIT-licensed. The

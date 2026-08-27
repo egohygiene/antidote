@@ -62,6 +62,41 @@ tasks:
     cmds:
       - '{{.RUNNER}} inventory'
 
+  mvp:bootstrap:
+    desc: Restore pinned Rust, Node, and Python MVP workspaces
+    cmds:
+      - '{{.RUNNER}} mvp-bootstrap'
+
+  mvp:check:
+    desc: Run the complete application-foundation quality gate
+    cmds:
+      - '{{.RUNNER}} mvp-check'
+
+  mvp:contracts:
+    desc: Regenerate Rust, TypeScript, and Python contract projections
+    cmds:
+      - '{{.RUNNER}} mvp-contracts'
+
+  mvp:contracts-check:
+    desc: Verify contract drift and shared fixtures across all languages
+    cmds:
+      - '{{.RUNNER}} mvp-contracts-check'
+
+  mvp:format:
+    desc: Check Rust, TypeScript, and Python formatting
+    cmds:
+      - '{{.RUNNER}} mvp-format'
+
+  mvp:lint:
+    desc: Lint the Rust, TypeScript, and Python workspaces
+    cmds:
+      - '{{.RUNNER}} mvp-lint'
+
+  mvp:test:
+    desc: Build and test all MVP workspace scaffolds
+    cmds:
+      - '{{.RUNNER}} mvp-test'
+
   site:
     desc: Build and stage the Pages publication locally
     cmds:

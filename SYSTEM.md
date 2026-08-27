@@ -36,19 +36,20 @@ structural organization, process boundaries, and dependency direction.
 | --- | --- | --- |
 | Research workspace | Implemented | Owns manuscript, bibliography, source records, claim ledger, figures, protocols, and approved study evidence |
 | Publication system | Implemented | Builds and validates PDF, accessible HTML, source archive, provenance, and the gated publication hub |
-| Desktop experience | Target | Guides check-in, context approval, semantic editing, journey review, generation, playback, and response capture |
-| Consent and context system | Contract scaffold | Records scoped grants and derives inspectable working projections from approved sources |
-| State and intent system | Contract scaffold | Represents the moment, current state, desired transition, time horizon, inclusions, exclusions, and uncertainty |
-| Journey planning system | Contract scaffold | Produces editable strategies, stages, semantic intent, acoustic controls, and safety constraints |
-| Generation orchestration | Contract scaffold | Validates immutable generation specs, schedules work, reports progress, handles cancellation, and records outcomes |
-| Model worker | Target | Loads pinned adapters, generates audio, analyzes artifacts, reports capabilities, and returns warnings through a narrow protocol |
+| Desktop experience | Workspace scaffold | Pinned host and honest status view exist; session interaction remains target |
+| Consent and context system | Executable contract foundation | Generated types and validators represent grants and projections; policies remain target |
+| State and intent system | Executable contract foundation | Generated types and validators represent the moment; behavior remains target |
+| Journey planning system | Executable contract foundation | Generated types and validators represent plans; planning remains target |
+| Generation orchestration | Executable contract foundation | Generated types and validators represent specs/results; orchestration remains target |
+| Model worker | Workspace scaffold | Python validation package exists; worker operations and models remain target |
 | Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
-| Response system | Contract scaffold | Separates intended, expressed, felt, immediate, adverse, and later response observations |
+| Response system | Executable contract foundation | Generated types and validators represent response observations; capture remains target |
 | Personal learning system | Target | Builds versioned within-person summaries and advisory mappings from approved evidence |
 | Provenance and export system | Contract scaffold | Hashes artifacts, records entity/activity/agent lineage, and creates privacy-reviewed research exports |
 
-“Contract scaffold” means a documented boundary and initial JSON Schema exist;
-it does not claim an executable implementation.
+“Executable contract foundation” means checked-in schemas generate types and
+validate shared fixtures in Rust, TypeScript, and Python. It does not claim the
+domain behavior, worker, or user journey is implemented.
 
 ## Primary interaction
 

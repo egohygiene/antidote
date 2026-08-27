@@ -46,10 +46,10 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Research source and claim discipline | Implemented | `paper/`, `research/`, `data/`, and repository checks |
 | Native publication build and hub | Implemented; deployment remains gated | Make/Task scripts, CI workflows, deterministic Pages staging |
 | Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
-| MVP interoperability contracts | Scaffolded | Versioned JSON Schemas under `contracts/schemas/` |
-| Desktop application | Target | Planned Tauri/React host under `apps/desktop/` |
-| Rust domain and control plane | Target | Planned crates under `crates/` |
-| Local generation worker | Target | Planned Python/PyTorch process under `workers/generation/` |
+| MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
+| Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
+| Rust domain and control plane | Workspace scaffold | Contract crate plus boundary crates under `crates/`; domain behavior remains target |
+| Local generation worker | Workspace scaffold | Pinned Python package and contract validator; no worker process or model exists |
 | Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
 
 “Target” and “scaffolded” are not claims of executable functionality.
@@ -186,6 +186,7 @@ are required design work before non-developer personal use.
 apps/
   desktop/                 Tauri host and React interface
 crates/
+  antidote-contracts/      generated types and canonical-schema validation
   antidote-core/           pure domain and application behavior
   antidote-store/          event, projection, and payload adapters
   antidote-provenance/     hashes, manifests, model cards, and research export
@@ -194,6 +195,7 @@ workers/
   generation/              Python model-worker protocol and adapters
 contracts/
   schemas/                 versioned cross-language JSON Schemas
+  fixtures/                shared synthetic positive and negative cases
 experiments/
   protocols/               N-of-1 definitions, assignments, measures, and analysis
 paper/, research/, data/   canonical scientific source and approved evidence

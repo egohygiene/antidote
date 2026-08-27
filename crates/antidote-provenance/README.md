@@ -1,6 +1,7 @@
 # antidote-provenance
 
-Planned Rust provenance and research-export boundary.
+Workspace scaffold for the planned Rust provenance and research-export
+boundary. Issue #17 owns implementation.
 
 It will connect approved context, journey plans, model and adapter revisions,
 generation parameters, artifacts, feature reports, exposures, responses, code
