@@ -51,5 +51,6 @@ origin_revision = "1bc0513d0c87b3702003228e89977ce751b67e11"
 [publication]
 arxiv_category = ""
 doi = ""
-pages_url = "https://egohygiene.github.io/antidote/"
-pages_custom_domain = ""
+pages_url = "https://antidote.egohygiene.io/"
+pages_fallback_url = "https://egohygiene.github.io/antidote/"
+pages_custom_domain = "antidote.egohygiene.io"

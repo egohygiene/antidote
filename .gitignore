@@ -4,6 +4,7 @@
 /build/
 /dist/
 /_site/
+/.antidote-pages-*/
 __pycache__/
 *.py[cod]
 

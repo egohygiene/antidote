@@ -63,6 +63,27 @@ provenance, and a reproducible Beacon build.
 - [x] Empathy retains only migration history after the standalone source lands.
 
 <!-- roadmap-step
+id: ANT-Q01A
+status: in-progress
+depends_on: [ANT-Q01]
+issues: ["egohygiene/antidote#4"]
+-->
+#### ANT-Q01A — Activate the publication hub
+
+**Outcome:** The custom Antidote domain provides stable paper, planned
+magazine, download, manifest, and integrity routes through a gated,
+product-owned Pages workflow.
+
+**Exit criteria:**
+
+- [x] The review artifact contains the complete route contract.
+- [x] `site.json` distinguishes available paper and planned magazine slots.
+- [x] Canonical metadata targets `https://antidote.egohygiene.io/`.
+- [x] Pull requests validate the hub without deploying it.
+- [ ] Repository Pages settings, DNS, TLS, and the deployment gate are verified
+  against the live custom domain.
+
+<!-- roadmap-step
 id: ANT-Q02
 status: in-progress
 depends_on: [ANT-Q01]
@@ -117,5 +138,25 @@ bounded interpretations from the frozen protocol.
 - [ ] Results are reproducible from approved, non-sensitive inputs.
 - [ ] Claims trace to evidence in the claim ledger.
 - [ ] Beacon submission-ready validation passes.
+
+<!-- roadmap-step
+id: ANT-Q05
+status: planned
+depends_on: [ANT-Q01A, ANT-Q02]
+issues: ["egohygiene/antidote#5"]
+-->
+#### ANT-Q05 — Author the first magazine edition
+
+**Outcome:** A real, evidence-bounded visual edition replaces the planned slot
+without destabilizing the paper routes or inventing publication metadata.
+
+**Exit criteria:**
+
+- [ ] The edition has governed structured source and an editorial thesis.
+- [ ] Native Make and Task builds produce verified web, digital, and print
+  projections without Beacon.
+- [ ] Accessibility, print, provenance, and checksum checks pass.
+- [ ] The magazine catalog slot becomes available atomically with real
+  artifacts.
 
 <!-- END ROADMAP EXECUTION SNAPSHOT -->
