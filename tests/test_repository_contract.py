@@ -5,11 +5,32 @@
 
 from __future__ import annotations
 
+import json
 import re
 import unittest
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
+ARCHITECTURE_DOCUMENTS = (
+    "PURPOSE.md",
+    "VISION.md",
+    "PRINCIPLES.md",
+    "PILLARS.md",
+    "MANIFESTO.md",
+    "EPISTEMOLOGY.md",
+    "AI_CONSTITUTION.md",
+    "ONTOLOGY.md",
+    "PERSONAL_MODEL.md",
+    "FOUNDATIONS.md",
+    "SYSTEM.md",
+    "ARCHITECTURE.md",
+    "METHODOLOGY.md",
+    "DESIGN.md",
+    "DESIGN_SYSTEM.md",
+    "DECISIONS.md",
+    "ROADMAP.md",
+    "META.md",
+)
 
 
 class RepositoryContractTests(unittest.TestCase):
@@ -54,6 +75,71 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertGreater(len(placeholders), 0)
         self.assertEqual(section_text.count("Lorem ipsum"), len(placeholders))
         self.assertTrue(all("Lorem ipsum" in body for body in placeholders))
+
+    def test_architecture_corpus_has_unique_antidote_documents(self) -> None:
+        """Every governed architecture node must exist with a stable unique ID."""
+        document_ids: set[str] = set()
+        for relative in ARCHITECTURE_DOCUMENTS:
+            text = (ROOT / relative).read_text(encoding="utf-8")
+            self.assertTrue(text.startswith("---\n"), relative)
+            self.assertIn("schema: aether.architecture-document/v1", text, relative)
+            match = re.search(r"^id: (antidote-[a-z-]+)$", text, re.MULTILINE)
+            self.assertIsNotNone(match, relative)
+            assert match is not None
+            self.assertNotIn(match.group(1), document_ids, relative)
+            document_ids.add(match.group(1))
+            self.assertRegex(text, r"(?m)^status: provisional$", relative)
+        self.assertEqual(len(document_ids), 18)
+
+    def test_meta_indexes_every_architecture_document(self) -> None:
+        """The human meta index must link every canonical architecture file."""
+        meta = (ROOT / "META.md").read_text(encoding="utf-8")
+        for relative in ARCHITECTURE_DOCUMENTS:
+            self.assertIn(f"({relative})", meta, relative)
+
+    def test_contract_schemas_are_valid_json_with_unique_ids(self) -> None:
+        """Cross-language schemas must be parseable and independently identified."""
+        paths = sorted((ROOT / "contracts" / "schemas").glob("*.schema.json"))
+        self.assertEqual(len(paths), 7)
+        identifiers: set[str] = set()
+        for path in paths:
+            schema = json.loads(path.read_text(encoding="utf-8"))
+            self.assertEqual(
+                schema.get("$schema"),
+                "https://json-schema.org/draft/2020-12/schema",
+                path.name,
+            )
+            identifier = schema.get("$id")
+            self.assertIsInstance(identifier, str, path.name)
+            self.assertTrue(identifier.startswith("urn:egohygiene:antidote:"), path.name)
+            self.assertNotIn(identifier, identifiers, path.name)
+            identifiers.add(identifier)
+            self.assertFalse(schema.get("additionalProperties", True), path.name)
+
+    def test_local_markdown_links_resolve(self) -> None:
+        """New architecture and support navigation must not contain dead local links."""
+        selected = [ROOT / relative for relative in ARCHITECTURE_DOCUMENTS]
+        selected.extend(
+            ROOT / relative
+            for relative in (
+                "AGENTS.md",
+                "CONTRIBUTING.md",
+                "SECURITY.md",
+                "SUPPORT.md",
+                "contracts/README.md",
+                "docs/architecture-overview.md",
+                "docs/getting-started.md",
+                "workers/generation/README.md",
+            )
+        )
+        link_pattern = re.compile(r"\[[^\]]+\]\(([^)]+)\)")
+        for document in selected:
+            for target in link_pattern.findall(document.read_text(encoding="utf-8")):
+                if target.startswith(("http://", "https://", "#")):
+                    continue
+                path_text = target.split("#", maxsplit=1)[0]
+                resolved = (document.parent / path_text).resolve()
+                self.assertTrue(resolved.exists(), f"{document}: {target}")
 
 
 if __name__ == "__main__":

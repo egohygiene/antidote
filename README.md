@@ -15,6 +15,27 @@ The first paper is intentionally scoped as a methods, system, and N-of-1
 feasibility study. The originating experience is a hypothesis generator, not
 evidence of clinical efficacy or a neurological mechanism.
 
+## Architecture and prototype status
+
+Antidote now has a provisional Ego Hygiene architecture corpus and the first
+implementation-neutral contracts for a local demo MVP. The runtime target is a
+Tauri 2 desktop host with a React interface, a framework-independent Rust domain
+and control plane, SQLite plus local content-addressed artifacts, and an
+isolated Python/PyTorch model worker.
+
+The prototype is **not implemented yet**. `apps/`, `crates/`, `workers/`,
+`contracts/`, and `experiments/` establish ownership and contract boundaries so
+the first code-bearing slice can begin without silently redesigning the system.
+
+Start with:
+
+- [`META.md`](./META.md) for the 18-document architecture graph;
+- [`ARCHITECTURE.md`](./ARCHITECTURE.md) for runtime and publication structure;
+- [`ONTOLOGY.md`](./ONTOLOGY.md) for the moment–journey–audio–response language;
+- [`DECISIONS.md`](./DECISIONS.md) for accepted MVP boundaries;
+- [`docs/getting-started.md`](./docs/getting-started.md) for the current developer path;
+- [`contracts/README.md`](./contracts/README.md) for cross-language payloads.
+
 ## Write and build
 
 The manuscript, bibliography, figures, research notes, source records, and
@@ -68,9 +89,14 @@ research/bootstrap/     preserved hypothesis-generating research snapshot
 research/notes/         working evidence and claim ledgers
 research/sources/       primary-source verification records
 data/                   schemas and explicitly approved research data only
-docs/decisions/         architectural decisions
+apps/desktop/           target Tauri and React desktop interface
+crates/                 target Rust domain, store, provenance, and audio boundaries
+workers/generation/     target local Python/PyTorch model worker
+contracts/              versioned JSON Schemas and process protocols
+experiments/protocols/  future frozen study and analysis definitions
+docs/decisions/         detailed architectural decision records
 dependencies/           immutable upstream dependency locks
-docs/                   Pages landing source, activation guide, and decisions
+docs/                   architecture guides, Pages source, activation, and decisions
 ```
 
 See `MIGRATION.md` for the exact Empathy source commit, tree, and file-level
@@ -110,6 +136,8 @@ Actual magazine authoring is tracked separately in
   activation and TLS verification remain maintainer-controlled.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
+- Local prototype: architecture and contract scaffold only; no executable app or model adapter.
+- Formal study data: none collected.
 
 Repository automation and non-manuscript documentation are MIT-licensed. The
 draft manuscript remains all rights reserved until a publication license is

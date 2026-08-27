@@ -38,3 +38,29 @@ using the tree IDs above.
 Publisher-specific material under `.staging/latex/Academic Journals/` remains
 staged. It represents future publisher adapters and is not replaced by this
 neutral research-paper profile.
+
+## Architecture-corpus and repository-support provenance
+
+The 2026-08-27 Antidote architecture corpus uses the 18-document shape defined
+by the Ego Hygiene/Aether architecture-document convention. The canonical
+organization corpus in `egohygiene/hygiene` supplied the dependency graph,
+frontmatter vocabulary, evidence labels, and bounded-document responsibilities.
+Reflector supplied a repository-local reference for adapting that graph to a
+research and publication project.
+
+Antidote owns the resulting purpose, terminology, human assumptions, scientific
+boundaries, runtime structure, design language, decisions, and roadmap. No
+Reflector manuscript prose, recursive-development ontology, CLI implementation,
+DOI, publication identity, version history, or runtime source was copied.
+Same-named architecture files remain separate bounded contexts.
+
+The contribution, security, support, code-of-conduct, getting-started, and
+architecture-overview files reuse Reflector's repository-support patterns after
+specialization for Antidote's personal-context, model-worker, and scientific
+safety boundaries. Reusable publication implementation remains owned upstream
+by Beacon as described above.
+
+The MVP directory tree and JSON Schemas are new Antidote-owned contract
+scaffolds derived from the research architecture review. They do not claim that
+the desktop application, Rust crates, model worker, model adapter, or study
+exists.

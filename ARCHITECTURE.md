@@ -1,96 +1,272 @@
-# Architecture
+---
+schema: aether.architecture-document/v1
+id: antidote-architecture
+title: Antidote Architecture
+kind: architecture-document
+version: 0.2.0
+status: provisional
+owners:
+  - egohygiene
+created: 2026-08-26
+updated: 2026-08-27
+governed_by:
+  - architecture-architecture
+depends_on:
+  - antidote-foundations
+  - antidote-system
+related:
+  - antidote-purpose
+  - antidote-vision
+  - antidote-principles
+  - antidote-pillars
+  - antidote-decisions
+supersedes: []
+---
 
-Antidote is the durable owner of one research program and its publication
-evidence. It consumes organization capabilities through versioned contracts
-without depending on Empathy or Beacon at runtime.
+# Antidote Architecture
 
-```text
-Empathy migration history
-          |
-          v
-Antidote-owned research source
-  |       |        |        |
-paper   sources   notes    data
-  |
-  v
-Antidote-owned publication build kit
-  |
-  +--> PDF
-  +--> accessible HTML
-  +--> arXiv source archive
-  +--> provenance record
-  +--> GitHub Pages publication hub
-         |--> paper (available)
-         |--> magazine (planned)
-         +--> downloads and integrity evidence
+## Purpose and scope
 
-Beacon pin --> inspect / upgrade / validate / package (optional)
+Antidote uses a layered, contract-driven architecture for two related products
+owned by one research program:
 
-Relay --> reviewable repository-intelligence artifact
-Egolint --> repository portability and policy validation
+1. a reproducible research and publication workspace that already exists; and
+2. a transparent local prototype that will generate, present, and evaluate
+   moment-specific personalized audio journeys.
+
+This document owns structural boundaries, dependency direction, trust zones,
+integration rules, and current-to-target evolution. [SYSTEM.md](SYSTEM.md) owns
+logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
+[DECISIONS.md](DECISIONS.md) indexes durable choices.
+
+## Current and target state
+
+| Surface | State | Evidence boundary |
+| --- | --- | --- |
+| Research source and claim discipline | Implemented | `paper/`, `research/`, `data/`, and repository checks |
+| Native publication build and hub | Implemented; deployment remains gated | Make/Task scripts, CI workflows, deterministic Pages staging |
+| Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
+| MVP interoperability contracts | Scaffolded | Versioned JSON Schemas under `contracts/schemas/` |
+| Desktop application | Target | Planned Tauri/React host under `apps/desktop/` |
+| Rust domain and control plane | Target | Planned crates under `crates/` |
+| Local generation worker | Target | Planned Python/PyTorch process under `workers/generation/` |
+| Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
+
+“Target” and “scaffolded” are not claims of executable functionality.
+
+## Layer model
+
+1. **Intent and contracts** — architecture, accepted decisions, protocols,
+   consent rules, schemas, model cards, and version compatibility.
+2. **Domain** — moment, state, transition, semantic meaning, journey, generation,
+   exposure, response, safety, personal mapping, and provenance behavior.
+3. **Application** — session planning, context projection, generation
+   orchestration, response capture, adaptation proposals, and export use cases.
+4. **Adapters** — SQLite, filesystem, Tauri, audio playback, model workers,
+   analyzers, optional sensors, and future Ego Hygiene integrations.
+5. **Interfaces** — React desktop experience, developer commands, protocol
+   tools, research exports, paper, magazine, and publication hub.
+6. **Evidence** — tests, diagnostics, immutable events, hashes, feature reports,
+   participant reports, claim ledger, provenance, and CI artifacts.
+
+Dependencies point inward toward contracts and domain behavior. Framework,
+storage, provider, and model conventions do not become canonical domain truth.
+
+## Structural view
+
+```mermaid
+flowchart TD
+  Person[Person and present moment] --> UI[React interface in Tauri]
+  UI --> Gate[Consent and working-context projection]
+  Gate --> Core[Rust domain and application core]
+  Core --> Store[SQLite event log and artifact index]
+  Core --> Plan[Inspectable semantic journey plan]
+  Plan --> Worker[Capability-scoped local model worker]
+  Worker --> Artifact[Audio artifact and feature report]
+  Artifact --> UI
+  UI --> Response[Response and aftereffect capture]
+  Response --> Core
+  Core --> Export[Privacy-reviewed provenance export]
+  Export --> Research[Research and publication workspace]
 ```
 
-## Foundation selection
+## Runtime sequence
 
-| Concern | Selection |
-| --- | --- |
-| Holon repository class | `publication` |
-| Security floor | `baseline` |
-| Publication profile | Beacon `research-paper` `0.1.0` |
-| Identity projection | Beacon `egohygiene` theme |
-| CI orchestration | Repository paper gate plus pinned Relay workflow |
-| Quality | Egolint native validation from a pinned source revision |
-| Site | Antidote-owned GitHub Pages workflow with explicit activation gate |
-| Agent package | Deferred; no Aether package selected |
+```mermaid
+sequenceDiagram
+  participant P as Person
+  participant U as Desktop UI
+  participant C as Rust core
+  participant W as Model worker
+  participant S as Local store
+  P->>U: Check in and choose context
+  U->>C: Submit consent-scoped session intent
+  C->>S: Append source and consent events
+  C-->>U: Return working projection and journey plan
+  P->>U: Edit and approve plan
+  U->>C: Approve immutable generation spec
+  C->>W: Generate with supported capabilities
+  W-->>C: Artifact, features, warnings, provenance
+  C->>S: Append run and artifact records
+  C-->>U: Offer deliberate playback
+  P->>U: Respond, stop, or record aftereffect
+  U->>C: Submit response observation
+  C->>S: Append response and proposed mapping update
+```
 
-Holon's current draft `publication` manifest makes agent and documentation-site
-capabilities mandatory. Issue 71 requires both to remain opt-in, so this
-repository records the class selection but deliberately does not materialize a
-Holon manifest until that contract can express the narrower selection.
+## Process and authority boundaries
 
-## Ownership boundaries
-
-- Antidote owns manuscript text, bibliography records, figures, data schemas,
-  research notes, and source assessments.
-- Antidote owns the local renderer, checks, themes, web template, Pages staging,
-  and Make/Task interfaces required for independent builds.
-- Beacon owns the upstream research-paper profile and optional control-plane
-  behavior for initialization, upgrade coordination, planning, validation, and
-  checksummed packaging.
-- Relay owns reusable workflow implementation. Antidote owns caller policy and
-  final publication approval.
-- Egolint owns lint semantics and normalized quality evidence.
-- Empathy retains only migration history and a pointer after extraction.
-
-Generated artifacts are disposable projections of committed source. No build
-output is canonical, and no automated workflow publishes a claim or submits a
-paper. Pages deployment publishes only a draft projection and remains disabled
-until a maintainer explicitly activates it.
-
-## Publication hub contract
-
-The custom-domain site is a catalog over product-owned projections, not a
-second source of truth. `site.json` is the machine-readable catalog and
-`publication.json` remains the current paper manifest.
-
-| Route | Owner | State in issue #4 |
+| Boundary | Owns | Must not own |
 | --- | --- | --- |
-| `/` | Antidote site projection | Available |
-| `/paper/` | Antidote paper build | Available |
-| `/antidote.pdf` | Antidote paper build | Available |
-| `/magazine/` | Antidote site projection | Planned |
-| `/downloads/` | Antidote site projection | Available |
-| `/publication.json` | Antidote paper staging | Available |
-| `/site.json` | Antidote hub staging | Available |
-| `/SHA256SUMS` | Antidote hub staging | Available |
+| React interface | Interaction state, accessible presentation, local form validation, waveform visualization | Canonical session state, consent authority, model secrets, scientific conclusions |
+| Tauri host | Desktop lifecycle, command permissions, sidecar launch, operating-system capabilities | Domain rules tied to one window or webview |
+| Rust core | Consent policy, state machine, journey validation, orchestration, event semantics, provenance, adaptation authority | Model-native preprocessing or UI-only representation |
+| SQLite/filesystem adapters | Transactional events, indexes, classified payloads, content-addressed artifacts | Meaning not supplied by domain contracts |
+| Python model worker | Model capability reporting, pinned loading, generation, analysis, cancellation, runtime warnings | Database access, unrestricted personal history, adaptation decisions, publication authority |
+| Audio adapter | Preview, playback, stop, export, and optional transparent processing | Claims about felt response or therapeutic effect |
+| Research workspace | Protocol, evidence review, claim ledger, manuscript, public-safe export, publication | Private runtime state not explicitly approved for research use |
 
-A planned slot has no stage, manifest, or artifacts. It becomes available only
-in the same deterministic build that supplies real, verified outputs. The
-first edition is therefore separate work in
-[issue #5](https://github.com/egohygiene/antidote/issues/5); reserving its route
-does not publish a magazine or imply evidence.
+## Context and memory boundary
 
-The canonical base is `https://antidote.egohygiene.io/`. GitHub's project URL
-is retained only as a technical fallback. Pull requests build and validate the
-entire hub without deployment; `main` can deploy only through the explicit
-Pages gate.
+Antidote distinguishes a consented source record, replaceable derived
+projections, and the current authorized working view. Raw records remain outside
+the model boundary. The worker receives only the approved semantic projection,
+accepted journey plan, and generation specification.
+
+Retrieval combines deterministic filters and lexical search before any optional
+semantic ranking. Every retrieved element retains source, purpose, derivation,
+and expiry metadata. A summary can be regenerated without overwriting its
+sources.
+
+## Model-worker protocol
+
+The initial sidecar contract exposes a small versioned operation set:
+
+| Operation | Responsibility |
+| --- | --- |
+| `hello` | Negotiate protocol version and worker identity |
+| `capabilities` | Report adapters, licenses, controls, hardware, durations, and known restrictions |
+| `load_model` | Load a pinned model ID and revision after integrity checks |
+| `generate` | Accept an immutable generation spec, stream progress, and return artifacts plus warnings |
+| `analyze` | Measure declared acoustic features and control adherence |
+| `cancel` | Cooperatively stop work and classify partial outputs |
+| `health` | Report readiness and resource state without personal content |
+
+Every result records model ID, model and code revision, adapter version, seed
+when supported, generation parameters, elapsed time, device class, input-plan
+hash, output hashes, downgrades, warnings, and failure classification.
+
+ACE-Step 1.5 is the leading candidate for the first adapter; MusicGen remains a
+comparison baseline. Neither becomes a dependency until license, remote-code,
+hardware, control-adherence, and output-rights review is recorded.
+
+## Local persistence
+
+| Record | Function |
+| --- | --- |
+| `events` | Immutable ordered facts about person and system actions |
+| `payloads` | Classified references to sensitive or large local content |
+| `consent_grants` | Source-, purpose-, action-, and session-scoped authority |
+| `projections` | Versioned derived context with source-event lineage |
+| `journey_plans` | Human-readable trajectories, stages, constraints, and controls |
+| `generation_runs` | Immutable invocation specs and runtime results |
+| `artifacts` | Audio, format, waveform, analysis, hash, and provenance metadata |
+| `exposures` | What was actually played, when, for how long, and whether it stopped |
+| `responses` | Felt response, helpfulness, intensity, mismatch, harm, and later aftereffect |
+| `model_snapshots` | Versioned personal mapping estimates and change evidence |
+
+SQLite is sufficient for the first local implementation. Large audio and
+sensitive payloads remain content-addressed files rather than database blobs.
+Encryption, key recovery, backup, secure deletion, and projection invalidation
+are required design work before non-developer personal use.
+
+## Repository boundaries
+
+```text
+apps/
+  desktop/                 Tauri host and React interface
+crates/
+  antidote-core/           pure domain and application behavior
+  antidote-store/          event, projection, and payload adapters
+  antidote-provenance/     hashes, manifests, model cards, and research export
+  antidote-audio/          playback and export ports/adapters
+workers/
+  generation/              Python model-worker protocol and adapters
+contracts/
+  schemas/                 versioned cross-language JSON Schemas
+experiments/
+  protocols/               N-of-1 definitions, assignments, measures, and analysis
+paper/, research/, data/   canonical scientific source and approved evidence
+scripts/, latex/, web/     project-owned publication implementation
+docs/                      architecture guides, ADRs, and public hub source
+```
+
+The directory READMEs and schemas establish ownership; they do not fabricate an
+application. Language workspaces and framework manifests land with the first
+tested vertical slice.
+
+## Dependency rules
+
+- Sibling capabilities integrate through versioned public contracts, releases,
+  or immutable revisions—not source copies or mutable default branches.
+- Contracts live with their capability owner. Rust, TypeScript, and Python may
+  generate local types but do not fork schema meaning.
+- The domain core does not depend on Tauri, React, SQLite, Python, a model
+  provider, or a publication framework.
+- Generated artifacts never become canonical source unless an accepted decision
+  explicitly changes ownership.
+- Read, project, approve, generate, expose, learn, export, and publish remain
+  separate authority boundaries.
+- Cross-process inputs are validated, size-bounded, versioned, and treated as
+  untrusted even on localhost.
+- Secrets, private participant records, unreviewed model weights, and personal
+  exports never enter images, templates, public fixtures, or the repository.
+
+## Ego Hygiene integration
+
+Antidote is both a standalone research program and a candidate future product
+capability. Ego Hygiene may eventually provide journal or therapy-chat context,
+identity preferences, and shared design tokens. It must do so through explicit
+versioned projections and present consent.
+
+Antidote does not depend on the Ego Hygiene application to function. The future
+application may host or call Antidote ports, but it does not absorb the
+scientific ontology, model-worker protocol, provenance record, or research
+source. Antidote similarly does not reach into sibling repository internals.
+
+## Publication architecture
+
+Antidote owns manuscript text, bibliography, figures, research notes, source
+assessments, local renderer, checks, themes, site staging, and Make/Task
+interfaces. Beacon owns the upstream reusable research-paper profile and
+optional control-plane behavior. Relay owns reusable workflow implementation;
+Egolint owns lint semantics.
+
+The custom-domain publication hub is a disposable projection over committed
+source. `publication.json` describes the paper and generated `site.json`
+catalogs available or planned formats. No workflow submits a manuscript,
+creates a scientific claim, or activates a planned artifact automatically.
+
+## Deployment and portability
+
+The MVP is a local desktop research instrument. Optional cloud synchronization,
+remote inference, collaborative studies, or managed services remain outside the
+first deployment boundary. Any later service must preserve export, local
+ownership, explicit cost, authentication, privacy, availability, and a
+replaceable adapter.
+
+The publication hub remains independently deployable through its existing
+gated GitHub Pages workflow. Runtime and publication deployments are separate
+surfaces even though their evidence may later connect.
+
+## Evidence and uncertainty
+
+- **Observed:** The publication architecture is implemented; the runtime
+  architecture is documented and scaffolded but not yet executable.
+- **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
+  capability-scoped Python/PyTorch worker; context is explicit and local-first.
+- **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment
+  exports; optional LSL adapters may support later synchronized sensors.
+- **Open questions:** Storage encryption, exact model adapter, supported
+  hardware, process sandboxing, and the external-review threshold for personal
+  use remain unresolved.
