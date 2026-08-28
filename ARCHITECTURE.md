@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.3.0
+version: 0.4.0
 status: provisional
 owners:
   - egohygiene
@@ -49,6 +49,7 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
 | Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
 | Rust domain and control plane | Authoritative session core implemented | Pure commands, immutable events, replay, consent gates, safety halts, and ports under `crates/antidote-core/`; concrete adapters remain target |
+| Local persistence | Adapter implemented; integration remains target | Versioned SQLite migrations, immutable event repository, rebuildable lineage views, and atomic content-addressed objects under `crates/antidote-store/` |
 | Local generation worker | Workspace scaffold | Pinned Python package and contract validator; no worker process or model exists |
 | Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
 
@@ -180,6 +181,13 @@ sensitive payloads remain content-addressed files rather than database blobs.
 Encryption, key recovery, backup, secure deletion, and projection invalidation
 are required design work before non-developer personal use.
 
+The implemented adapter verifies each serialized event against its content
+digest and the domain replay rules, uses optimistic expected-version appends,
+and treats an exact retry as idempotent. Named projection tables are disposable
+event-classified views with source-event lineage, not a second authority. Object
+writes use synchronized temporary files followed by an atomic no-clobber link. The
+desktop host has not yet selected or opened production database/object paths.
+
 ## Repository boundaries
 
 ```text
@@ -263,9 +271,9 @@ surfaces even though their evidence may later connect.
 
 ## Evidence and uncertainty
 
-- **Observed:** The publication architecture and framework-independent session
-  core are implemented; runtime adapters and the end-to-end desktop journey
-  remain scaffolded or planned.
+- **Observed:** The publication architecture, framework-independent session
+  core, SQLite event adapter, named lineage projections, and content-addressed
+  object store are implemented. Desktop and worker integration remain planned.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment

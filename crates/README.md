@@ -2,9 +2,10 @@
 
 ## Status
 
-Executable Cargo workspace scaffold pinned to Rust `1.97.1`. Contract types and
-runtime JSON Schema validation are implemented; the domain and adapter crates
-remain honest boundaries for later issues.
+Executable Cargo workspace pinned to Rust `1.97.1`. Contract types, runtime
+JSON Schema validation, the framework-independent session core, and local
+SQLite/content-addressed storage adapters are implemented. Worker, provenance,
+audio, and desktop-session integration remain later boundaries.
 
 Rust will own Antidote's domain and application authority. Frameworks and
 providers remain outside the core. The initial intended boundaries are:
@@ -21,6 +22,7 @@ Crates integrate through explicit public types and ports. They do not import
 React state, Python model objects, Tauri window types, or sibling repository
 source.
 
-`antidote-core` currently depends only on `antidote-contracts`. The store,
-provenance, and audio crates contain status-only scaffolds until their owning
-issues land.
+`antidote-core` depends only on `antidote-contracts`. `antidote-store` depends
+inward on that core to implement its persistence ports; the domain never
+depends on SQLite. Provenance and audio crates remain status-only scaffolds
+until their owning issues land.
