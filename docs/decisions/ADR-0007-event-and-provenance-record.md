@@ -51,3 +51,17 @@ history.
 - an alternative local record preserves equivalent lineage, correction, and
   deletion semantics;
 - privacy review requires a different payload or tombstone model.
+
+## Implementation evidence
+
+Issue #12 implements the first adapter under `crates/antidote-store/`:
+versioned SQLite migrations, immutable and digest-verified event envelopes,
+optimistic/idempotent appends, transactional projection rebuilding with
+source-event lineage, a classified payload-reference registry, and atomic
+content-addressed files. Focused tests cover interruption, rollback, stale
+writes, exact retries, projection recovery, abandoned temporary files, and hash
+corruption.
+
+This evidence activates only the integrity and local-recovery portion of the
+decision. Encryption, keys, backup, retention enforcement, tombstones, secure
+deletion, and non-developer privacy review remain unresolved.

@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-system
 title: Antidote System
 kind: architecture-document
-version: 0.2.0
+version: 0.3.0
 status: provisional
 owners:
   - egohygiene
@@ -37,7 +37,7 @@ structural organization, process boundaries, and dependency direction.
 | Research workspace | Implemented | Owns manuscript, bibliography, source records, claim ledger, figures, protocols, and approved study evidence |
 | Publication system | Implemented | Builds and validates PDF, accessible HTML, source archive, provenance, and the gated publication hub |
 | Desktop experience | Workspace scaffold | Pinned host and honest status view exist; session interaction remains target |
-| Consent and context system | Authoritative domain core | Grants and reviewed projections have fail-closed command, event, and replay policies; storage and UI remain target |
+| Consent and context system | Domain core + local persistence | Grants and reviewed projections have fail-closed policies plus rebuildable SQLite views; UI remains target |
 | State and intent system | Authoritative domain core | Moment lineage and one-session transition rules execute independently of frameworks |
 | Journey planning system | Authoritative domain core | Draft plans and exact human approval are distinct executable states; a planner remains target |
 | Generation orchestration | Authoritative domain core | Request, human approval, consent recheck, running, result, and cancellation states execute; worker invocation remains an adapter |
@@ -45,11 +45,12 @@ structural organization, process boundaries, and dependency direction.
 | Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
 | Response system | Authoritative domain core | Actual exposure and felt response remain distinct, with response consent and safety-event transitions |
 | Personal learning system | Authoritative proposal core | Evidence-scoped updates require separate proposal and acceptance; failed or rejected proposals preserve the prior snapshot |
-| Provenance and export system | Contract scaffold | Hashes artifacts, records entity/activity/agent lineage, and creates privacy-reviewed research exports |
+| Provenance and export system | Storage lineage foundation | Immutable event hashes, content addresses, and projection source-event lineage exist; research-export packaging remains target |
 
-“Authoritative domain core” means pure Rust commands, immutable events, replay,
-and policies execute under injected ports. It does not claim a database,
-worker, audio adapter, desktop journey, or therapeutic effect is implemented.
+“Domain core + local persistence” means pure Rust commands append through a
+tested SQLite adapter and derive inspectable views. It does not claim desktop
+integration, encryption/privacy readiness, a worker, audio adapter, complete
+journey, or therapeutic effect.
 
 ## Primary interaction
 
@@ -94,9 +95,10 @@ licensing, and replacement boundaries appropriate to its risk.
 
 ## Evidence and uncertainty
 
-- **Observed:** Research and publication systems are implemented, and the pure
-  Rust session authority boundary now has deterministic transition and replay
-  tests; concrete runtime adapters remain separate work.
+- **Observed:** Research and publication systems, the pure Rust session core,
+  and local event/artifact persistence adapters have deterministic integrity,
+  recovery, transition, replay, and lineage tests. Runtime integration remains
+  separate work.
 - **Decided for the prototype:** The first executable vertical slice stops at
   rule-guided generation, playback, response capture, and inspectable history.
 - **Proposed:** Advisory personalization and optional sensors follow only after

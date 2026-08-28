@@ -2,10 +2,11 @@
 
 ## Current status
 
-Antidote's research and publication system is executable. Its desktop MVP is an
-executable workspace and contract foundation: Tauri/React, Rust, and Python are
-pinned and share generated v1 types plus synthetic validation fixtures. No
-session behavior, database, worker process, audio model, or playback exists yet.
+Antidote's research and publication system is executable. Its desktop MVP has
+an executable workspace, shared v1 contracts, a framework-independent Rust
+session core, and tested SQLite/content-addressed persistence adapters. The
+desktop does not invoke these layers yet, and no worker process, audio model,
+playback experience, or end-to-end session exists.
 
 ## Prerequisites for current checks
 
@@ -65,6 +66,18 @@ Regenerate disposable language projections from canonical schemas with
 `make mvp-contracts-check` to fail when committed outputs drift. The common
 fixture suite is `contracts/fixtures/cases.json` and contains synthetic,
 non-clinical data only.
+
+The focused persistence loop is:
+
+```sh
+cargo test --locked --package antidote-store
+cargo clippy --locked --package antidote-store --all-targets --all-features -- --deny warnings
+```
+
+Storage recovery and current privacy limitations are documented in
+[`crates/antidote-store/README.md`](../crates/antidote-store/README.md). The
+adapter is developer-only and must receive synthetic content until encryption,
+key recovery, retention, deletion, and privacy-review requirements are complete.
 
 ## Navigate the research
 
