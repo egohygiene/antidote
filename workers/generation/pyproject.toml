@@ -1,3 +1,7 @@
+[build-system]
+requires = ["hatchling>=1.28.0,<2.0.0"]
+build-backend = "hatchling.build"
+
 [project]
 name = "antidote-generation"
 version = "0.1.0"
@@ -7,6 +11,9 @@ requires-python = ">=3.12.13,<3.13"
 dependencies = [
   "jsonschema[format]>=4.26.0,<4.27.0",
 ]
+
+[project.scripts]
+antidote-generation-worker = "antidote_generation.server:main"
 
 [dependency-groups]
 dev = [
@@ -39,4 +46,4 @@ ignore = [
 quote-style = "double"
 
 [tool.uv]
-package = false
+package = true

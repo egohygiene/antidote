@@ -5,8 +5,9 @@
 Antidote's research and publication system is executable. Its desktop MVP has
 an executable workspace, shared v1 contracts, a framework-independent Rust
 session core, and tested SQLite/content-addressed persistence adapters. The
-desktop does not invoke these layers yet, and no worker process, audio model,
-playback experience, or end-to-end session exists.
+deterministic mock worker is also executable as a standalone NDJSON process.
+The desktop does not invoke these layers yet, and no real audio model, playback
+experience, or end-to-end session exists.
 
 ## Prerequisites for current checks
 
@@ -78,6 +79,19 @@ Storage recovery and current privacy limitations are documented in
 [`crates/antidote-store/README.md`](../crates/antidote-store/README.md). The
 adapter is developer-only and must receive synthetic content until encryption,
 key recovery, retention, deletion, and privacy-review requirements are complete.
+
+The focused mock-worker loop is:
+
+```sh
+uv run --project workers/generation --locked pytest
+uv run --project workers/generation --locked ruff check workers/generation
+printf '%s\n' '{"protocol_version":"1.0.0","request_id":"health-local","operation":"health","payload":{}}' \
+  | uv run --project workers/generation --locked antidote-generation-worker
+```
+
+The worker accepts synthetic inputs only at this stage. Its exact envelopes,
+operation payloads, message bound, and failure taxonomy are documented in
+[`contracts/protocol/model-worker.v1.md`](../contracts/protocol/model-worker.v1.md).
 
 ## Navigate the research
 

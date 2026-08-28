@@ -26,9 +26,11 @@ isolated Python/PyTorch model worker.
 
 The pinned Rust, Tauri/React, and Python workspaces compile and validate the
 same synthetic contract fixtures. The framework-independent Rust session core
-and SQLite/content-addressed persistence adapters are implemented and tested.
-They are not wired into the desktop yet; no model worker, audio generation,
-playback experience, or autonomous adaptation behavior exists.
+and SQLite/content-addressed persistence adapters are implemented and tested. A
+packaged deterministic Python mock worker now exercises the complete v1 NDJSON
+protocol and creates synthetic WAV artifacts without an AI model. These layers
+are not wired into the desktop yet; no real model generation, playback
+experience, or autonomous adaptation behavior exists.
 
 Start with:
 
@@ -106,7 +108,7 @@ research/sources/       primary-source verification records
 data/                   schemas and explicitly approved research data only
 apps/desktop/           pinned Tauri and React workspace; session UI remains target
 crates/                 Rust contract, domain, store, provenance, and audio boundaries
-workers/generation/     Python contract-validation workspace; model worker remains target
+workers/generation/     executable deterministic mock worker; real adapters remain target
 contracts/              canonical schemas, manifest, fixtures, and process protocol
 experiments/protocols/  future frozen study and analysis definitions
 docs/decisions/         detailed architectural decision records
@@ -151,9 +153,9 @@ Actual magazine authoring is tracked separately in
   activation and TLS verification remain maintainer-controlled.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
-- Local prototype: authoritative session core and local persistence adapters
-  implemented; desktop integration, model worker, audio, and end-to-end session
-  remain incomplete.
+- Local prototype: authoritative session core, local persistence adapters, and
+  deterministic mock worker implemented; desktop supervision, playback, real
+  model audio, and the end-to-end session remain incomplete.
 - Formal study data: none collected.
 
 Repository automation and non-manuscript documentation are MIT-licensed. The

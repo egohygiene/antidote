@@ -11,10 +11,10 @@ structural rules, [SYSTEM.md](../SYSTEM.md) owns logical responsibilities, and
 | --- | --- | --- |
 | Root architecture corpus | Purpose, epistemology, ontology, system, design, decisions, and roadmap | Provisional |
 | `docs/decisions/` | Detailed architectural decision records | Implemented and expanding |
-| `contracts/` | Cross-language schemas and model-worker protocol | Scaffolded |
-| `apps/desktop/` | Tauri desktop host and React interface | Target |
-| `crates/` | Framework-independent Rust core and adapters | Target |
-| `workers/generation/` | Replaceable local Python/PyTorch model process | Target |
+| `contracts/` | Cross-language schemas and executable model-worker protocol | Implemented foundation |
+| `apps/desktop/` | Tauri desktop host and React interface | Workspace scaffold |
+| `crates/` | Framework-independent Rust core and adapters | Session core and persistence implemented; other adapters target |
+| `workers/generation/` | Replaceable local Python model process | Deterministic mock implemented; real adapters target |
 | `experiments/protocols/` | Frozen study definitions and analysis plans | Target |
 | `research/` | Source verification, claim ledger, and working research records | Implemented |
 | `data/` | Public schemas, synthetic fixtures, and approved derived study data only | Boundary implemented; no study data |
@@ -84,13 +84,14 @@ creating a runtime dependency on Reflector.
 
 ## First implementation slice
 
-The first code-bearing change should:
+The active foundation sequence is implementing these layers incrementally:
 
 1. choose and pin supported Rust, Node, Python, Tauri, and package-manager
    baselines;
 2. create language workspaces without adding a real model;
 3. generate or validate shared types from the canonical schemas;
-4. implement a mock worker and synthetic end-to-end session;
+4. implement a mock worker, then supervise it from Rust and compose the
+   synthetic end-to-end session;
 5. test consent rejection, invalid transitions, cancellation, partial output,
    negative response, and projection lineage;
 6. compose checks behind the existing Make and Task interfaces.

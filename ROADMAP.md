@@ -159,6 +159,12 @@ issues: ["egohygiene/antidote#9", "egohygiene/antidote#10", "egohygiene/antidote
 SQLite adapter, and mock model worker execute one contract-tested session
 without real generation.
 
+**Current evidence:** Workspaces, shared contracts, the authoritative session
+core, append-only local persistence, and the standalone deterministic mock
+worker are implemented through issue #13. Rust supervision, desktop/session
+composition, playback, response UI, provenance export, and packaging remain in
+the active sequence; the outcome above is not yet complete.
+
 **Exit criteria:**
 
 - [x] Workspaces are reproducibly bootstrapped with pinned dependencies.

@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.4.0
+version: 0.5.0
 status: provisional
 owners:
   - egohygiene
@@ -50,7 +50,7 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
 | Rust domain and control plane | Authoritative session core implemented | Pure commands, immutable events, replay, consent gates, safety halts, and ports under `crates/antidote-core/`; concrete adapters remain target |
 | Local persistence | Adapter implemented; integration remains target | Versioned SQLite migrations, immutable event repository, rebuildable lineage views, and atomic content-addressed objects under `crates/antidote-store/` |
-| Local generation worker | Workspace scaffold | Pinned Python package and contract validator; no worker process or model exists |
+| Local generation worker | Deterministic mock implemented; supervision remains target | Packaged NDJSON process, protocol validation, synthetic WAV/analysis, cancellation, failures, and golden-hash tests under `workers/generation/`; no AI model exists |
 | Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
 
 “Target” and “scaffolded” are not claims of executable functionality.
@@ -160,6 +160,15 @@ hash, output hashes, downgrades, warnings, and failure classification.
 ACE-Step 1.5 is the leading candidate for the first adapter; MusicGen remains a
 comparison baseline. Neither becomes a dependency until license, remote-code,
 hardware, control-adherence, and output-rights review is recorded.
+
+The executable mock worker implements the complete v1 operation set with a
+65,536-byte NDJSON limit, strict envelopes, a built-in immutable model identity,
+atomic synthetic WAV realization, declared WAV analysis, cooperative
+cancellation, and explicit simulated timeout, partial-output, and crash
+classes. It has no database, network, model package, or weight dependency. Its
+golden artifact hash proves deterministic bytes for the canonical fixture. The
+Rust supervisor, Tauri sidecar permissions, production paths, and real model
+adapter remain separate work.
 
 ## Local persistence
 
@@ -272,8 +281,9 @@ surfaces even though their evidence may later connect.
 ## Evidence and uncertainty
 
 - **Observed:** The publication architecture, framework-independent session
-  core, SQLite event adapter, named lineage projections, and content-addressed
-  object store are implemented. Desktop and worker integration remain planned.
+  core, SQLite event adapter, named lineage projections, content-addressed
+  object store, and deterministic protocol-conformant mock worker are
+  implemented. Desktop supervision and worker integration remain planned.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment

@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-system
 title: Antidote System
 kind: architecture-document
-version: 0.3.0
+version: 0.4.0
 status: provisional
 owners:
   - egohygiene
@@ -41,7 +41,7 @@ structural organization, process boundaries, and dependency direction.
 | State and intent system | Authoritative domain core | Moment lineage and one-session transition rules execute independently of frameworks |
 | Journey planning system | Authoritative domain core | Draft plans and exact human approval are distinct executable states; a planner remains target |
 | Generation orchestration | Authoritative domain core | Request, human approval, consent recheck, running, result, and cancellation states execute; worker invocation remains an adapter |
-| Model worker | Workspace scaffold | Python validation package exists; worker operations and models remain target |
+| Model worker | Deterministic mock implemented | Packaged Python process exercises all v1 operations, synthetic WAV generation/analysis, cancellation, integrity, and failures; real model adapters remain target |
 | Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
 | Response system | Authoritative domain core | Actual exposure and felt response remain distinct, with response consent and safety-event transitions |
 | Personal learning system | Authoritative proposal core | Evidence-scoped updates require separate proposal and acceptance; failed or rejected proposals preserve the prior snapshot |
@@ -49,8 +49,8 @@ structural organization, process boundaries, and dependency direction.
 
 “Domain core + local persistence” means pure Rust commands append through a
 tested SQLite adapter and derive inspectable views. It does not claim desktop
-integration, encryption/privacy readiness, a worker, audio adapter, complete
-journey, or therapeutic effect.
+integration, encryption/privacy readiness, worker supervision, a real audio
+model, playback adapter, complete journey, or therapeutic effect.
 
 ## Primary interaction
 
@@ -96,9 +96,10 @@ licensing, and replacement boundaries appropriate to its risk.
 ## Evidence and uncertainty
 
 - **Observed:** Research and publication systems, the pure Rust session core,
-  and local event/artifact persistence adapters have deterministic integrity,
-  recovery, transition, replay, and lineage tests. Runtime integration remains
-  separate work.
+  local event/artifact persistence adapters, and deterministic mock model
+  worker have integrity, recovery, transition, replay, lineage, cancellation,
+  redaction, and failure-class tests. Runtime integration remains separate
+  work.
 - **Decided for the prototype:** The first executable vertical slice stops at
   rule-guided generation, playback, response capture, and inspectable history.
 - **Proposed:** Advisory personalization and optional sensors follow only after
