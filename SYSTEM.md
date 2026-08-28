@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-system
 title: Antidote System
 kind: architecture-document
-version: 0.1.0
+version: 0.2.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-08-28
 governed_by:
   - architecture-system
 depends_on:
@@ -37,19 +37,19 @@ structural organization, process boundaries, and dependency direction.
 | Research workspace | Implemented | Owns manuscript, bibliography, source records, claim ledger, figures, protocols, and approved study evidence |
 | Publication system | Implemented | Builds and validates PDF, accessible HTML, source archive, provenance, and the gated publication hub |
 | Desktop experience | Workspace scaffold | Pinned host and honest status view exist; session interaction remains target |
-| Consent and context system | Executable contract foundation | Generated types and validators represent grants and projections; policies remain target |
-| State and intent system | Executable contract foundation | Generated types and validators represent the moment; behavior remains target |
-| Journey planning system | Executable contract foundation | Generated types and validators represent plans; planning remains target |
-| Generation orchestration | Executable contract foundation | Generated types and validators represent specs/results; orchestration remains target |
+| Consent and context system | Authoritative domain core | Grants and reviewed projections have fail-closed command, event, and replay policies; storage and UI remain target |
+| State and intent system | Authoritative domain core | Moment lineage and one-session transition rules execute independently of frameworks |
+| Journey planning system | Authoritative domain core | Draft plans and exact human approval are distinct executable states; a planner remains target |
+| Generation orchestration | Authoritative domain core | Request, human approval, consent recheck, running, result, and cancellation states execute; worker invocation remains an adapter |
 | Model worker | Workspace scaffold | Python validation package exists; worker operations and models remain target |
 | Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
-| Response system | Executable contract foundation | Generated types and validators represent response observations; capture remains target |
-| Personal learning system | Target | Builds versioned within-person summaries and advisory mappings from approved evidence |
+| Response system | Authoritative domain core | Actual exposure and felt response remain distinct, with response consent and safety-event transitions |
+| Personal learning system | Authoritative proposal core | Evidence-scoped updates require separate proposal and acceptance; failed or rejected proposals preserve the prior snapshot |
 | Provenance and export system | Contract scaffold | Hashes artifacts, records entity/activity/agent lineage, and creates privacy-reviewed research exports |
 
-“Executable contract foundation” means checked-in schemas generate types and
-validate shared fixtures in Rust, TypeScript, and Python. It does not claim the
-domain behavior, worker, or user journey is implemented.
+“Authoritative domain core” means pure Rust commands, immutable events, replay,
+and policies execute under injected ports. It does not claim a database,
+worker, audio adapter, desktop journey, or therapeutic effect is implemented.
 
 ## Primary interaction
 
@@ -94,8 +94,9 @@ licensing, and replacement boundaries appropriate to its risk.
 
 ## Evidence and uncertainty
 
-- **Observed:** Research and publication systems are implemented and validated
-  in CI.
+- **Observed:** Research and publication systems are implemented, and the pure
+  Rust session authority boundary now has deterministic transition and replay
+  tests; concrete runtime adapters remain separate work.
 - **Decided for the prototype:** The first executable vertical slice stops at
   rule-guided generation, playback, response capture, and inspectable history.
 - **Proposed:** Advisory personalization and optional sensors follow only after

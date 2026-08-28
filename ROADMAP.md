@@ -163,7 +163,7 @@ without real generation.
 
 - [x] Workspaces are reproducibly bootstrapped with pinned dependencies.
 - [x] Generated Rust, TypeScript, and Python types agree with canonical schemas.
-- [ ] Consent, event, projection, journey, generation-job, cancellation, and
+- [x] Consent, event, projection, journey, generation-job, cancellation, and
   response transitions pass unit and contract tests.
 - [x] Synthetic fixtures contain no private or clinical data.
 - [x] Local development and recovery are documented.

@@ -10,6 +10,9 @@ version.workspace = true
 
 [dependencies]
 antidote-contracts = { path = "../antidote-contracts" }
+serde.workspace = true
+serde_json.workspace = true
+time.workspace = true
 
 [lints]
 workspace = true
