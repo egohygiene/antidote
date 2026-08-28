@@ -82,6 +82,9 @@ name = "antidote-core"
 version = "0.1.0"
 dependencies = [
  "antidote-contracts",
+ "serde",
+ "serde_json",
+ "time",
 ]
 
 [[package]]

@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.2.0
+version: 0.3.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-27
+updated: 2026-08-28
 governed_by:
   - architecture-architecture
 depends_on:
@@ -48,7 +48,7 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
 | MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
 | Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
-| Rust domain and control plane | Workspace scaffold | Contract crate plus boundary crates under `crates/`; domain behavior remains target |
+| Rust domain and control plane | Authoritative session core implemented | Pure commands, immutable events, replay, consent gates, safety halts, and ports under `crates/antidote-core/`; concrete adapters remain target |
 | Local generation worker | Workspace scaffold | Pinned Python package and contract validator; no worker process or model exists |
 | Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
 
@@ -263,8 +263,9 @@ surfaces even though their evidence may later connect.
 
 ## Evidence and uncertainty
 
-- **Observed:** The publication architecture is implemented; the runtime
-  architecture is documented and scaffolded but not yet executable.
+- **Observed:** The publication architecture and framework-independent session
+  core are implemented; runtime adapters and the end-to-end desktop journey
+  remain scaffolded or planned.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment
