@@ -39,6 +39,16 @@ local record into a required web service.
 The sidecar receives an immutable generation specification and approved semantic
 projection—not database credentials or unrestricted personal-history access.
 
+## Implementation evidence
+
+The deterministic mock worker under `workers/generation/` now implements the
+complete v1 NDJSON operation set without PyTorch, weights, network access, or
+database authority. It validates before filesystem mutation, writes synthetic
+WAV artifacts atomically, reports stable identity and hashes, redacts progress,
+and classifies cancellation and simulated failure paths. Rust process
+supervision and Tauri capability grants remain unimplemented and are not implied
+by this evidence.
+
 ## Consequences
 
 - Rust remains the unambiguous authority boundary while Python remains a

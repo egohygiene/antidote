@@ -1,4 +1,4 @@
 # Copyright 2026 Ego Hygiene
 # SPDX-License-Identifier: MIT
 
-"""Tests for the Antidote generation-worker foundation."""
+"""Contract and process tests for the deterministic Antidote mock worker."""

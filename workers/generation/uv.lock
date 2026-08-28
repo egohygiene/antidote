@@ -5,7 +5,7 @@ requires-python = ">=3.12.13, <3.13"
 [[package]]
 name = "antidote-generation"
 version = "0.1.0"
-source = { virtual = "." }
+source = { editable = "." }
 dependencies = [
     { name = "jsonschema", extra = ["format"] },
 ]

@@ -47,8 +47,9 @@
 
 ## Current integration truth
 
-The research build, checks, publication staging, and repository-intelligence
-integration are implemented. The architecture corpus and JSON Schemas are
-provisional source. The desktop host, Rust crates, generation worker, model
-adapter, formal protocol, study, and Ego Hygiene product integration are not
-implemented.
+The research build, checks, publication staging, repository-intelligence
+integration, framework-independent Rust session core, local persistence, and
+deterministic mock generation worker are implemented. The architecture corpus
+and JSON Schemas remain provisional source. Desktop supervision, a real model
+adapter, end-to-end runtime, formal study, and Ego Hygiene product integration
+are not implemented.

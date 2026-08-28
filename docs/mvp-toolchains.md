@@ -2,9 +2,9 @@
 
 ## Status
 
-This document records the reproducible developer baseline for issues #9 and
-#10. It does not resolve the open decision about end-user operating-system or
-GPU support and does not claim a distributable application.
+This document records the reproducible developer baseline established through
+issues #9–#13. It does not resolve the open decision about end-user
+operating-system or GPU support and does not claim a distributable application.
 
 ## Pinned toolchains
 
@@ -65,5 +65,6 @@ documents, research source, or lockfiles as a recovery shortcut.
 - no model weights, network inference, or telemetry;
 - no private journal, therapy, participant, health, credential, or generated
   audio data;
-- no database, personal history, worker process, playback, or adaptation; and
+- no database access from the worker, personal history, supervised sidecar,
+  playback, or adaptation; and
 - no clinical, efficacy, mechanism, CPU-only, or GPU support claim.

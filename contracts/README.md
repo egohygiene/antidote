@@ -27,8 +27,10 @@ tools.
 | `response-observation.v1.schema.json` | Felt response, mismatch, harm, and optional aftereffect |
 
 The model-worker transport is defined in
-[`protocol/model-worker.v1.md`](protocol/model-worker.v1.md). These files are a
-contract foundation, not evidence that the session runtime or worker exists.
+[`protocol/model-worker.v1.md`](protocol/model-worker.v1.md). The deterministic
+mock under `workers/generation/` executes this transport. That is evidence of a
+protocol implementation, not evidence of Rust/Tauri supervision, a real audio
+model, or an end-to-end session.
 
 ## Generation and validation
 
