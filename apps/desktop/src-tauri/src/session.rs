@@ -12,10 +12,10 @@ use antidote_core::contracts::{
     ConsentGrantRetentionMode, ConsentGrantSource, ConsentGrantSourceSourceType,
     ConsentGrantStatus, GenerationResult, GenerationResultAdapter, GenerationResultFailure,
     GenerationResultModel, GenerationResultStatus, GenerationSpec, GenerationSpecAdapter,
-    GenerationSpecModel, GenerationSpecOutput, GenerationSpecOutputFormat,
-    MomentContext, MomentContextDesiredTransition, MomentContextDesiredTransitionDirection,
-    MomentContextState, ResponseObservation, ResponseObservationFeltState,
-    ResponseObservationWindow, WorkingContextProjection, WorkingContextProjectionSemanticItem,
+    GenerationSpecModel, GenerationSpecOutput, GenerationSpecOutputFormat, MomentContext,
+    MomentContextDesiredTransition, MomentContextDesiredTransitionDirection, MomentContextState,
+    ResponseObservation, ResponseObservationFeltState, ResponseObservationWindow,
+    WorkingContextProjection, WorkingContextProjectionSemanticItem,
     WorkingContextProjectionSemanticItemKind, WorkingContextProjectionSemanticItemUserReview,
 };
 use antidote_core::{
@@ -34,8 +34,7 @@ use time::{OffsetDateTime, format_description::well_known::Rfc3339};
 
 const DATABASE_FILENAME: &str = "antidote-session.sqlite3";
 const ACTIVE_SESSION_FILENAME: &str = "active-session";
-const MOCK_MODEL_HASH: &str =
-    "9d994d01452850f4f539b420486247d262b8a4a5afffefa85f333e334daa1c2e";
+const MOCK_MODEL_HASH: &str = "9d994d01452850f4f539b420486247d262b8a4a5afffefa85f333e334daa1c2e";
 const MOCK_MAX_DURATION_SECONDS: i64 = 30;
 static IDENTIFIER_SEQUENCE: AtomicU64 = AtomicU64::new(0);
 
@@ -305,7 +304,9 @@ impl DesktopRuntime {
 
     fn active_session_id(&self) -> InternalResult<Option<String>> {
         match std::fs::read_to_string(self.active_session_path()) {
-            Ok(identifier) if !identifier.trim().is_empty() => Ok(Some(identifier.trim().to_owned())),
+            Ok(identifier) if !identifier.trim().is_empty() => {
+                Ok(Some(identifier.trim().to_owned()))
+            }
             Ok(_) => Ok(None),
             Err(error) if error.kind() == std::io::ErrorKind::NotFound => Ok(None),
             Err(_) => Err(DesktopError::Storage),
@@ -315,8 +316,7 @@ impl DesktopRuntime {
     fn set_active_session_id(&self, session_id: &str) -> InternalResult<()> {
         let temporary = self.inner.data_root.join("active-session.next");
         std::fs::write(&temporary, session_id).map_err(|_| DesktopError::Storage)?;
-        std::fs::rename(temporary, self.active_session_path())
-            .map_err(|_| DesktopError::Storage)
+        std::fs::rename(temporary, self.active_session_path()).map_err(|_| DesktopError::Storage)
     }
 
     fn load_session(&self) -> InternalResult<Session> {
@@ -333,10 +333,7 @@ impl DesktopRuntime {
             .map(|identifier| self.service()?.load_session(identifier))
             .transpose()?;
         let generation_active = self.inner.generation_active.load(Ordering::Acquire);
-        let cancellation_requested = self
-            .inner
-            .cancellation_requested
-            .load(Ordering::Acquire);
+        let cancellation_requested = self.inner.cancellation_requested.load(Ordering::Acquire);
         let recovery_required = session.as_ref().is_some_and(|current| {
             current
                 .generation()
@@ -454,8 +451,7 @@ impl DesktopRuntime {
                             kind: WorkingContextProjectionSemanticItemKind::Meaning,
                             text: context,
                             source_event_ids: Vec::new(),
-                            user_review:
-                                WorkingContextProjectionSemanticItemUserReview::Approved,
+                            user_review: WorkingContextProjectionSemanticItemUserReview::Approved,
                         }],
                         projection_hash: None,
                     },
@@ -507,20 +503,15 @@ impl DesktopRuntime {
     fn propose_journey_internal(&self) -> InternalResult<()> {
         let session = self.load_session()?;
         let moment = session.moment().ok_or(DesktopError::InvalidInput)?;
-        let plan = RuleGuidedPlanner::default()
-            .propose(&next_local_identifier("journey"), moment)?;
-        self.service()?.execute(
-            session.id(),
-            SessionCommand::ProposeJourney { plan },
-        )?;
+        let plan =
+            RuleGuidedPlanner::default().propose(&next_local_identifier("journey"), moment)?;
+        self.service()?
+            .execute(session.id(), SessionCommand::ProposeJourney { plan })?;
         Ok(())
     }
 
     /// Create an immutable replacement plan from person-edited storyboard values.
-    pub fn revise_journey(
-        &self,
-        input: JourneyRevisionInput,
-    ) -> DesktopResult<DesktopSnapshot> {
+    pub fn revise_journey(&self, input: JourneyRevisionInput) -> DesktopResult<DesktopSnapshot> {
         self.revise_journey_internal(input)
             .and_then(|()| self.snapshot_internal())
             .map_err(DesktopCommandError::from)
@@ -537,12 +528,8 @@ impl DesktopRuntime {
             return Err(DesktopError::InvalidInput);
         }
         let mut edits = vec![JourneyEdit::Strategy(input.strategy.trim().to_owned())];
-        for (stage_index, (stage, replacement)) in current
-            .plan
-            .stages
-            .iter()
-            .zip(input.stages)
-            .enumerate()
+        for (stage_index, (stage, replacement)) in
+            current.plan.stages.iter().zip(input.stages).enumerate()
         {
             let semantic_intent = clean_list(replacement.semantic_intent);
             if semantic_intent.is_empty() {
@@ -676,11 +663,7 @@ impl DesktopRuntime {
     }
 
     fn run_generation_internal(&self, simulation: GenerationSimulation) -> InternalResult<()> {
-        if self
-            .inner
-            .generation_active
-            .swap(true, Ordering::AcqRel)
-        {
+        if self.inner.generation_active.swap(true, Ordering::AcqRel) {
             return Err(DesktopError::GenerationStillActive);
         }
         let _active_guard = GenerationActiveGuard(&self.inner);
@@ -732,11 +715,7 @@ impl DesktopRuntime {
                 elapsed_ms: progress.elapsed_ms,
             };
         }
-        if self
-            .inner
-            .cancellation_requested
-            .load(Ordering::Acquire)
-        {
+        if self.inner.cancellation_requested.load(Ordering::Acquire) {
             ProgressDecision::Cancel
         } else {
             ProgressDecision::Continue
@@ -791,8 +770,10 @@ impl DesktopRuntime {
                 self.inner
                     .cancellation_requested
                     .store(true, Ordering::Release);
-            } else if matches!(state, GenerationJobState::Requested | GenerationJobState::Approved)
-            {
+            } else if matches!(
+                state,
+                GenerationJobState::Requested | GenerationJobState::Approved
+            ) {
                 self.service()?
                     .execute(session.id(), SessionCommand::CancelGeneration)?;
             } else {
@@ -859,10 +840,7 @@ impl DesktopRuntime {
                     _ => None,
                 })
                 .ok_or(DesktopError::InvalidInput)?;
-            service.execute(
-                session.id(),
-                SessionCommand::StartExposure { approval_id },
-            )?;
+            service.execute(session.id(), SessionCommand::StartExposure { approval_id })?;
             Ok(())
         })();
         result
@@ -921,9 +899,7 @@ impl DesktopRuntime {
                         harm: bounded_score(input.harm)?,
                         stopped_early: Some(input.stopped_early),
                         notes: optional_trimmed(input.notes),
-                        later_aftereffect_requested: Some(
-                            input.later_aftereffect_requested,
-                        ),
+                        later_aftereffect_requested: Some(input.later_aftereffect_requested),
                         allow_personal_model_update: Some(false),
                     },
                     consent: ConsentSelection::explicit(consent_id(session.id())),
@@ -963,8 +939,7 @@ impl DesktopRuntime {
             let session = self.load_session()?;
             self.service()?
                 .execute(session.id(), SessionCommand::CloseSession)?;
-            std::fs::remove_file(self.active_session_path())
-                .map_err(|_| DesktopError::Storage)?;
+            std::fs::remove_file(self.active_session_path()).map_err(|_| DesktopError::Storage)?;
             Ok(())
         })();
         result
@@ -1120,12 +1095,7 @@ fn worker_card() -> WorkerCard {
         network_access: false,
         duration_seconds_min: 10,
         duration_seconds_max: MOCK_MAX_DURATION_SECONDS,
-        controls: vec![
-            "deterministic_seed",
-            "duration",
-            "sample_rate",
-            "channels",
-        ],
+        controls: vec!["deterministic_seed", "duration", "sample_rate", "channels"],
         restrictions: vec![
             "synthetic-test-output-only",
             "no-model-weights",
@@ -1208,8 +1178,8 @@ mod tests {
     #[test]
     fn consent_is_required_before_any_session_event_is_written() {
         let temporary = TempDir::new().expect("temporary root must exist");
-        let runtime = DesktopRuntime::open(temporary.path().to_path_buf())
-            .expect("runtime must open");
+        let runtime =
+            DesktopRuntime::open(temporary.path().to_path_buf()).expect("runtime must open");
         let error = runtime
             .record_check_in(check_in(false))
             .expect_err("missing consent must fail closed");
@@ -1224,8 +1194,8 @@ mod tests {
     #[test]
     fn canonical_state_recovers_after_runtime_reconstruction() {
         let temporary = TempDir::new().expect("temporary root must exist");
-        let runtime = DesktopRuntime::open(temporary.path().to_path_buf())
-            .expect("runtime must open");
+        let runtime =
+            DesktopRuntime::open(temporary.path().to_path_buf()).expect("runtime must open");
         let reviewed = runtime
             .record_check_in(check_in(true))
             .expect("check-in must append");
@@ -1250,8 +1220,8 @@ mod tests {
     #[test]
     fn generation_cannot_be_approved_before_journey_approval() {
         let temporary = TempDir::new().expect("temporary root must exist");
-        let runtime = DesktopRuntime::open(temporary.path().to_path_buf())
-            .expect("runtime must open");
+        let runtime =
+            DesktopRuntime::open(temporary.path().to_path_buf()).expect("runtime must open");
         runtime
             .record_check_in(check_in(true))
             .expect("check-in must append");

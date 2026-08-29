@@ -14,7 +14,9 @@ fn prototype_status() -> &'static str {
 }
 
 #[tauri::command]
-fn session_snapshot(state: State<'_, DesktopRuntime>) -> Result<DesktopSnapshot, DesktopCommandError> {
+fn session_snapshot(
+    state: State<'_, DesktopRuntime>,
+) -> Result<DesktopSnapshot, DesktopCommandError> {
     state.snapshot()
 }
 
@@ -115,9 +117,7 @@ fn acknowledge_safety_event(
 }
 
 #[tauri::command]
-fn close_session(
-    state: State<'_, DesktopRuntime>,
-) -> Result<DesktopSnapshot, DesktopCommandError> {
+fn close_session(state: State<'_, DesktopRuntime>) -> Result<DesktopSnapshot, DesktopCommandError> {
     state.close_session()
 }
 
