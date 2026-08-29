@@ -260,7 +260,7 @@ struct DesktopRuntimeInner {
     cancellation_requested: AtomicBool,
 }
 
-/// Cloneable Tauri state whose durable authority remains the SQLite event log.
+/// Cloneable Tauri state whose durable authority remains the `SQLite` event log.
 #[derive(Debug, Clone)]
 pub struct DesktopRuntime {
     inner: Arc<DesktopRuntimeInner>,
@@ -370,6 +370,7 @@ impl DesktopRuntime {
             .map_err(DesktopCommandError::from)
     }
 
+    #[allow(clippy::too_many_lines)]
     fn record_check_in_internal(&self, input: CheckInInput) -> InternalResult<()> {
         validate_check_in(&input)?;
         if !input.consent_confirmed {
