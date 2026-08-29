@@ -16,6 +16,9 @@ ROOT = Path(__file__).resolve().parents[1]
 CATALOG_PATH = ROOT / "research" / "sources" / "catalog.json"
 ATLAS_PATH = ROOT / "research" / "atlas" / "literature-voyage-v0.1.md"
 BIBLIOGRAPHY_PATH = ROOT / "paper" / "references.bib"
+ARCHITECTURE_MAP_PATH = (
+    ROOT / "research" / "sources" / "architecture-evidence-map.json"
+)
 
 SOURCE_STATES = {
     "discovered",
@@ -39,6 +42,15 @@ SOURCE_CLASSES = {
     "system",
 }
 CLAIM_BEARING_STATES = {"promoted", "cited"}
+ARCHITECTURE_EVIDENCE_ROLES = {
+    "scientific-precedent",
+    "normative-standard",
+    "engineering-pattern",
+    "emerging-system",
+    "speculative-transfer",
+    "qualifying-evidence",
+}
+SUPPORT_DIRECTIONS = {"supporting", "qualifying", "conflicting", "mixed"}
 
 ENTRY_START = re.compile(r"@\w+\s*\{\s*([^,\s]+)", re.IGNORECASE)
 CITATION = re.compile(r"\\cite\w*\*?(?:\[[^\]]*\]){0,2}\{([^}]+)\}")
@@ -83,6 +95,9 @@ def validate() -> list[str]:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     atlas = ATLAS_PATH.read_text(encoding="utf-8")
     bibliography = BIBLIOGRAPHY_PATH.read_text(encoding="utf-8")
+    architecture_map = json.loads(
+        ARCHITECTURE_MAP_PATH.read_text(encoding="utf-8")
+    )
     sources = catalog.get("sources")
 
     if catalog.get("schema") != "antidote.source-catalog/v1":
@@ -209,6 +224,56 @@ def validate() -> list[str]:
     for key in sorted(cited_catalog_keys - citations):
         errors.append(f"catalog source marked cited but absent from manuscript: {key}")
 
+    if architecture_map.get("schema") != "antidote.architecture-evidence-map/v1":
+        errors.append(
+            "architecture evidence map schema must be "
+            "antidote.architecture-evidence-map/v1"
+        )
+    required_clusters = architecture_map.get("required_clusters")
+    if not isinstance(required_clusters, list) or not required_clusters:
+        errors.append("architecture evidence map must define required clusters")
+        required_clusters = []
+    map_entries = architecture_map.get("entries")
+    if not isinstance(map_entries, list) or not map_entries:
+        errors.append("architecture evidence map must contain entries")
+        map_entries = []
+
+    map_source_ids: list[str] = []
+    covered_clusters: set[str] = set()
+    catalog_id_set = set(ids)
+    for entry in map_entries:
+        source_id = entry.get("source_id")
+        if not isinstance(source_id, str):
+            errors.append("architecture map entry lacks source_id")
+            continue
+        map_source_ids.append(source_id)
+        if source_id not in catalog_id_set:
+            errors.append(f"architecture map references unknown source: {source_id}")
+        cluster = entry.get("cluster")
+        if cluster not in required_clusters:
+            errors.append(f"{source_id}: architecture map has invalid cluster {cluster!r}")
+        else:
+            covered_clusters.add(cluster)
+        if entry.get("evidence_role") not in ARCHITECTURE_EVIDENCE_ROLES:
+            errors.append(
+                f"{source_id}: invalid architecture evidence role "
+                f"{entry.get('evidence_role')!r}"
+            )
+        if entry.get("support_direction") not in SUPPORT_DIRECTIONS:
+            errors.append(
+                f"{source_id}: invalid support direction "
+                f"{entry.get('support_direction')!r}"
+            )
+        for field in ("subsystem", "bounded_claim", "does_not_establish"):
+            if not entry.get(field):
+                errors.append(f"{source_id}: architecture map missing {field}")
+
+    for source_id, count in Counter(map_source_ids).items():
+        if count > 1:
+            errors.append(f"duplicate architecture map source: {source_id}")
+    for cluster in sorted(set(required_clusters) - covered_clusters):
+        errors.append(f"architecture map lacks required cluster: {cluster}")
+
     return errors
 
 
@@ -222,11 +287,15 @@ def main() -> int:
     catalog = json.loads(CATALOG_PATH.read_text(encoding="utf-8"))
     entries = bibliography_entries(BIBLIOGRAPHY_PATH.read_text(encoding="utf-8"))
     citations = manuscript_citations()
+    architecture_map = json.loads(
+        ARCHITECTURE_MAP_PATH.read_text(encoding="utf-8")
+    )
     print(
         "PASS source governance: "
         f"{len(catalog['sources'])} catalog sources, "
         f"{len(entries)} verified bibliography entries, "
-        f"{len(citations)} manuscript citation."
+        f"{len(citations)} manuscript citation, "
+        f"{len(architecture_map['entries'])} architecture mappings."
     )
     return 0
 

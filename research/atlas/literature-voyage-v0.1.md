@@ -148,7 +148,7 @@ First-person experience can legitimately motivate the design question, identify 
 | Evans et al., **“Stable Audio Open”** (2024), [arXiv:2407.14358](https://arxiv.org/abs/2407.14358) — **C** | Open-weight text-to-audio model trained on Creative Commons data, optimized for short stereo audio. | Candidate local engine for textures, ambience, stems, and short structures. “Open weights” is not automatically OSI-open-source; inspect the community license. |
 | Chen et al., **“MusicLDM”** (2023), [arXiv:2308.01546](https://arxiv.org/abs/2308.01546) — **D/C** | Text-to-music diffusion with beat-synchronous augmentation aimed at novelty and correspondence. | Useful design reference for diversity and training-data concerns. |
 | Agostinelli et al., **“MusicLM”** (2023), [arXiv:2301.11325](https://arxiv.org/abs/2301.11325) — **D/C** | Hierarchical text-to-music generation and MusicCaps dataset. | Important technical history and dataset reference, but not an open local model baseline. |
-| Défossez et al., **“JASCO”** (2024), [arXiv:2406.10970](https://arxiv.org/abs/2406.10970) — **D/C** | Joint audio and symbolic conditioning for temporal control. | Highly relevant to storyboard-to-timeline realization. |
+| Tal et al., **“JASCO”** (2024), [arXiv:2406.10970](https://arxiv.org/abs/2406.10970) — **D/C** | Joint audio and symbolic conditioning for temporal control. | Highly relevant to storyboard-to-timeline realization. |
 | Barnett, **“The Ethical Implications of Generative Audio Models”** (2023), [doi:10.1145/3600211.3604686](https://doi.org/10.1145/3600211.3604686) — **A** | Review of 884 papers finds negative impacts rarely discussed and identifies fraud, deepfakes, copyright, and other risks. | Requires provenance, license reporting, generated-audio disclosure, and careful training-data/model selection. |
 
 ### “Open source” acceptance criteria
@@ -527,3 +527,62 @@ A candidate moves from this source atlas into the canonical `.bib` only after:
 Antidote is strongest when described not as a machine that knows which sound will heal someone, but as an interpretable research system for learning how a particular person experiences mappings among meaning, acoustic structure, affective trajectory, and response.
 
 That shift preserves the ambition while making the research question testable, the prototype buildable, and the claims scientifically honest.
+
+## Architecture-evidence addendum — adaptive control and real-time audio
+
+Issue #33 extends the atlas with a governed architecture dossier and a
+machine-readable source-to-subsystem map:
+
+- [Adaptive-control and real-time generative-audio architecture](../notes/ADAPTIVE_AUDIO_ARCHITECTURE.md)
+- [Architecture evidence map](../sources/architecture-evidence-map.json)
+
+The central result is a **proposed two-rate, generate-ahead architecture**. A
+slow control loop maintains an uncertain, person-correctable state belief,
+mixes explicit high-level intent controls, and revises a short future journey.
+A deterministic audio loop schedules verified material and owns waveform-level
+continuity. This is an evidence-grounded design synthesis, not an implemented
+MVP capability or a therapeutic claim.
+
+### Architecture source cluster
+
+| Source | Class | Antidote mapping and boundary |
+| --- | --- | --- |
+| Nahum-Shani et al. (2018), [doi:10.1007/s12160-016-9830-8](https://doi.org/10.1007/s12160-016-9830-8) | Scientific precedent | Decision points, tailoring variables, intervention options, proximal outcomes, and explicit decision rules; not proof of an effective audio intervention. |
+| García, Prett, and Morari (1989), [doi:10.1016/0005-1098(89)90002-2](https://doi.org/10.1016/0005-1098(89)90002-2) | Speculative transfer | Receding-horizon prediction and constrained replanning; affect is not assumed to be a known plant. |
+| Kaelbling, Littman, and Cassandra (1998), [doi:10.1016/S0004-3702(98)00023-X](https://doi.org/10.1016/S0004-3702(98)00023-X) | Speculative transfer | Belief-state planning under partial observation; v0 does not implement an autonomous POMDP policy. |
+| Jain and Argall (2019), [doi:10.1145/3359614](https://doi.org/10.1145/3359614) | Speculative transfer | Recursive Bayesian fusion of multiple observations while retaining uncertainty; robot intent is not affect. |
+| Amershi et al. (2014), [doi:10.1609/aimag.v35i4.2513](https://doi.org/10.1609/aimag.v35i4.2513) | Scientific precedent | Involve people in interactive-learning design and correction; feedback remains fallible and burdensome. |
+| Honeycutt, Nourani, and Ragan (2020), [doi:10.1609/hcomp.v8i1.7464](https://doi.org/10.1609/hcomp.v8i1.7464) | Conflicting evidence | In one controlled study, soliciting feedback reduced trust and perceived accuracy; more controls are not automatically better. |
+| De Angel et al. (2022), [doi:10.1038/s41746-021-00548-8](https://doi.org/10.1038/s41746-021-00548-8) | Qualifying evidence | Passive monitoring literature has missingness, reproducibility, sample, and generalization problems; sensors remain optional observations. |
+| D'Amelio et al. (2025), [doi:10.1016/j.neucom.2025.130831](https://doi.org/10.1016/j.neucom.2025.130831) | Mixed evidence | EDA models are stronger for arousal than valence and often mismatch continuous theory with discrete classifiers; no objective emotion decoder. |
+| Melechovsky et al. (2024), [doi:10.18653/v1/2024.naacl-long.459](https://doi.org/10.18653/v1/2024.naacl-long.459) | Scientific precedent | Explicit chord, beat, tempo, and key conditioning supports typed mixins and adherence tests; not continuous live steering. |
+| Tal et al. (2024), [arXiv:2406.10970](https://arxiv.org/abs/2406.10970) | Emerging system | Global text plus time-local symbolic/audio conditions support the storyboard-to-timeline concept; not verified real-time generation. |
+| Wang, Bao, and Han (2026), [arXiv:2606.24307](https://arxiv.org/abs/2606.24307) | Emerging system | Proposes chunk-wise interactive streaming and temporal-consistency losses; new preprint with no Antidote replication or production audit. |
+| Hutchings and McCormack (2020), [doi:10.1109/TG.2019.2921979](https://doi.org/10.1109/TG.2019.2921979) | Scientific precedent | Context-responsive, real-time adaptive composition exists in games; gameplay immersion does not establish affective benefit. |
+| W3C, [Web Audio API 1.1](https://www.w3.org/TR/webaudio-1.1/) | Normative standard | Scheduled parameter automation and render-thread concepts anchor waveform continuity; citation does not claim Antidote conformance. |
+| EBU, [R 128](https://tech.ebu.ch/publications/r128) | Normative standard | Loudness measurement and normalization anchor one continuity feature; not a universal listening or safety level. |
+| AWS, [Event Sourcing Pattern](https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/event-sourcing-pattern.html) | Implementation guidance | Append-only events and replayable state are established engineering patterns; not scientific or privacy evidence. |
+
+Existing sources complete the neighboring architecture shelf: Lab Streaming
+Layer ([doi:10.1162/IMAG.a.136](https://doi.org/10.1162/IMAG.a.136)) for
+synchronized optional streams; local-first software
+([doi:10.1145/3359591.3359737](https://doi.org/10.1145/3359591.3359737)) for
+local data ownership; Scroll ([arXiv:2608.21690](https://arxiv.org/abs/2608.21690))
+for bounded working projections; [W3C PROV-DM](https://www.w3.org/TR/prov-dm/)
+for interoperable lineage; and Workflow Run RO-Crate
+([doi:10.1371/journal.pone.0309210](https://doi.org/10.1371/journal.pone.0309210))
+for reproducible workflow packaging.
+
+### Architecture boundary preserved
+
+- Physiological and behavioral inputs are consented observations with
+  uncertainty, alternatives, missingness, and person correction.
+- High-level knobs become typed, versioned semantic mixins; they do not bypass
+  exclusions, consent, or the reviewed journey plan.
+- The controller predicts only far enough ahead to preserve a verified buffer
+  and smooth journey evolution.
+- Semantic continuity and waveform continuity are measured separately.
+- When latency or uncertainty increases, stability, confirmation, fallback, or
+  stop take precedence over novelty.
+- No source in this cluster proves efficacy, diagnosis, neurological mechanism,
+  real-time MVP behavior, or autonomous personalization.

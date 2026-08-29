@@ -380,6 +380,7 @@
       "priority": 20,
       "persistent_id": "arXiv:2306.05284",
       "canonical_url": "https://arxiv.org/abs/2306.05284",
+      "bibliography_key": "copet2023musicgen",
       "resources": ["https://github.com/facebookresearch/audiocraft"]
     },
     {
@@ -387,11 +388,13 @@
       "working_title": "Mustango: toward controllable text-to-music generation",
       "domains": ["generative-audio"],
       "source_class": "system",
-      "status": "discovered",
+      "status": "promoted",
       "owner": "architecture",
-      "priority": 20,
+      "priority": 8,
       "persistent_id": "doi:10.18653/v1/2024.naacl-long.459",
-      "canonical_url": "https://doi.org/10.18653/v1/2024.naacl-long.459"
+      "canonical_url": "https://doi.org/10.18653/v1/2024.naacl-long.459",
+      "bibliography_key": "melechovsky2024mustango",
+      "source_record": "research/sources/mustango-naacl-459.md"
     },
     {
       "id": "audioldm-pmlr-202",
@@ -442,11 +445,13 @@
       "working_title": "JASCO: joint audio and symbolic conditioning for temporally controlled text-to-music generation",
       "domains": ["generative-audio", "adaptive-control"],
       "source_class": "preprint",
-      "status": "discovered",
+      "status": "promoted",
       "owner": "architecture",
-      "priority": 12,
-      "persistent_id": "arXiv:2406.10970",
-      "canonical_url": "https://arxiv.org/abs/2406.10970"
+      "priority": 8,
+      "persistent_id": "arXiv:2406.10970v1",
+      "canonical_url": "https://arxiv.org/abs/2406.10970",
+      "bibliography_key": "tal2024jasco",
+      "source_record": "research/sources/jasco-2406.10970.md"
     },
     {
       "id": "barnett-generative-audio-ethics-3604686",
@@ -501,7 +506,8 @@
       "owner": "architecture",
       "priority": 12,
       "persistent_id": "arXiv:2608.21690",
-      "canonical_url": "https://arxiv.org/abs/2608.21690"
+      "canonical_url": "https://arxiv.org/abs/2608.21690",
+      "bibliography_key": "lin2026scroll"
     },
     {
       "id": "who-ai-health-2021",
@@ -587,7 +593,8 @@
       "owner": "architecture",
       "priority": 20,
       "persistent_id": "doi:10.1145/3359591.3359737",
-      "canonical_url": "https://doi.org/10.1145/3359591.3359737"
+      "canonical_url": "https://doi.org/10.1145/3359591.3359737",
+      "bibliography_key": "kleppmann2019localfirst"
     },
     {
       "id": "tauri-2",
@@ -626,11 +633,13 @@
       "working_title": "Just-in-time adaptive interventions in mobile health",
       "domains": ["adaptive-control", "architecture"],
       "source_class": "synthesis",
-      "status": "metadata-verified",
+      "status": "promoted",
       "owner": "architecture",
-      "priority": 11,
+      "priority": 8,
       "persistent_id": "doi:10.1007/s12160-016-9830-8",
-      "canonical_url": "https://doi.org/10.1007/s12160-016-9830-8"
+      "canonical_url": "https://doi.org/10.1007/s12160-016-9830-8",
+      "bibliography_key": "nahumshani2018jitai",
+      "source_record": "research/sources/jitai-9830-8.md"
     },
     {
       "id": "micro-randomized-trial-2107.03544",
@@ -675,6 +684,7 @@
       "priority": 11,
       "persistent_id": "arXiv:2602.00744",
       "canonical_url": "https://arxiv.org/abs/2602.00744",
+      "bibliography_key": "gong2026acestep",
       "resources": ["https://huggingface.co/ACE-Step/Ace-Step1.5"]
     },
     {
@@ -704,10 +714,12 @@
       "working_title": "Web Audio API 1.1",
       "domains": ["architecture", "generative-audio"],
       "source_class": "standard",
-      "status": "background-only",
+      "status": "promoted",
       "owner": "architecture",
-      "priority": 20,
-      "canonical_url": "https://www.w3.org/TR/webaudio-1.1/"
+      "priority": 9,
+      "canonical_url": "https://www.w3.org/TR/webaudio-1.1/",
+      "bibliography_key": "w3c2024webaudio",
+      "source_record": "research/sources/w3c-web-audio-1.1.md"
     },
     {
       "id": "rustaudio-cpal-rodio",
@@ -729,7 +741,8 @@
       "owner": "architecture",
       "priority": 20,
       "persistent_id": "doi:10.1162/IMAG.a.136",
-      "canonical_url": "https://doi.org/10.1162/IMAG.a.136"
+      "canonical_url": "https://doi.org/10.1162/IMAG.a.136",
+      "bibliography_key": "kothe2025lsl"
     },
     {
       "id": "open-mhealth-jmir.2152",
@@ -751,7 +764,8 @@
       "status": "background-only",
       "owner": "architecture",
       "priority": 20,
-      "canonical_url": "https://www.w3.org/TR/prov-dm/"
+      "canonical_url": "https://www.w3.org/TR/prov-dm/",
+      "bibliography_key": "moreau2013prov"
     },
     {
       "id": "workflow-run-ro-crate-0309210",
@@ -762,7 +776,8 @@
       "owner": "architecture",
       "priority": 20,
       "persistent_id": "doi:10.1371/journal.pone.0309210",
-      "canonical_url": "https://doi.org/10.1371/journal.pone.0309210"
+      "canonical_url": "https://doi.org/10.1371/journal.pone.0309210",
+      "bibliography_key": "leo2024rocrate"
     },
     {
       "id": "model-cards-3287596",
@@ -805,6 +820,141 @@
       "owner": "architecture",
       "priority": 30,
       "canonical_url": "https://huggingface.co/docs/safetensors/index"
+    },
+    {
+      "id": "deangel-passive-monitoring-00548-8",
+      "working_title": "Digital health tools for the passive monitoring of depression: a systematic review of methods",
+      "domains": ["psychophysiology", "measurement", "adaptive-control"],
+      "source_class": "synthesis",
+      "status": "promoted",
+      "owner": "evidence",
+      "priority": 7,
+      "persistent_id": "doi:10.1038/s41746-021-00548-8",
+      "canonical_url": "https://doi.org/10.1038/s41746-021-00548-8",
+      "bibliography_key": "deangel2022passive",
+      "source_record": "research/sources/deangel-passive-monitoring-00548-8.md"
+    },
+    {
+      "id": "damelio-eda-130831",
+      "working_title": "Emotion recognition systems with electrodermal activity: from affective science to affective computing",
+      "domains": ["psychophysiology", "measurement", "adaptive-control"],
+      "source_class": "synthesis",
+      "status": "metadata-verified",
+      "owner": "evidence",
+      "priority": 8,
+      "persistent_id": "doi:10.1016/j.neucom.2025.130831",
+      "canonical_url": "https://doi.org/10.1016/j.neucom.2025.130831",
+      "bibliography_key": "damelio2025eda"
+    },
+    {
+      "id": "jain-intent-3359614",
+      "working_title": "Probabilistic human intent recognition for shared autonomy in assistive robotics",
+      "domains": ["adaptive-control", "measurement", "human-authority"],
+      "source_class": "system",
+      "status": "metadata-verified",
+      "owner": "architecture",
+      "priority": 12,
+      "persistent_id": "doi:10.1145/3359614",
+      "canonical_url": "https://doi.org/10.1145/3359614",
+      "bibliography_key": "jain2019intent"
+    },
+    {
+      "id": "garcia-mpc-90002-2",
+      "working_title": "Model predictive control: theory and practice—a survey",
+      "domains": ["adaptive-control", "architecture"],
+      "source_class": "synthesis",
+      "status": "promoted",
+      "owner": "architecture",
+      "priority": 7,
+      "persistent_id": "doi:10.1016/0005-1098(89)90002-2",
+      "canonical_url": "https://doi.org/10.1016/0005-1098(89)90002-2",
+      "bibliography_key": "garcia1989mpc",
+      "source_record": "research/sources/garcia-mpc-90002-2.md"
+    },
+    {
+      "id": "kaelbling-pomdp-00023-x",
+      "working_title": "Planning and acting in partially observable stochastic domains",
+      "domains": ["adaptive-control", "architecture"],
+      "source_class": "method",
+      "status": "promoted",
+      "owner": "architecture",
+      "priority": 8,
+      "persistent_id": "doi:10.1016/S0004-3702(98)00023-X",
+      "canonical_url": "https://doi.org/10.1016/S0004-3702(98)00023-X",
+      "bibliography_key": "kaelbling1998pomdp",
+      "source_record": "research/sources/kaelbling-pomdp-00023-x.md"
+    },
+    {
+      "id": "amershi-interactive-2513",
+      "working_title": "Power to the people: the role of humans in interactive machine learning",
+      "domains": ["human-authority", "adaptive-control", "architecture"],
+      "source_class": "synthesis",
+      "status": "promoted",
+      "owner": "architecture",
+      "priority": 8,
+      "persistent_id": "doi:10.1609/aimag.v35i4.2513",
+      "canonical_url": "https://doi.org/10.1609/aimag.v35i4.2513",
+      "bibliography_key": "amershi2014interactive",
+      "source_record": "research/sources/amershi-interactive-2513.md"
+    },
+    {
+      "id": "honeycutt-feedback-7464",
+      "working_title": "Soliciting human-in-the-loop user feedback for interactive machine learning reduces user trust and impressions of model accuracy",
+      "domains": ["human-authority", "adaptive-control"],
+      "source_class": "primary",
+      "status": "metadata-verified",
+      "owner": "evidence",
+      "priority": 12,
+      "persistent_id": "doi:10.1609/hcomp.v8i1.7464",
+      "canonical_url": "https://doi.org/10.1609/hcomp.v8i1.7464",
+      "bibliography_key": "honeycutt2020feedback"
+    },
+    {
+      "id": "wang-streaming-2606.24307",
+      "working_title": "Real-time interactive music generation via data-free streaming consistency distillation",
+      "domains": ["generative-audio", "adaptive-control", "architecture"],
+      "source_class": "preprint",
+      "status": "metadata-verified",
+      "owner": "architecture",
+      "priority": 9,
+      "persistent_id": "arXiv:2606.24307v1",
+      "canonical_url": "https://arxiv.org/abs/2606.24307",
+      "bibliography_key": "wang2026streaming"
+    },
+    {
+      "id": "hutchings-adaptive-music-2921979",
+      "working_title": "Adaptive music composition for games",
+      "domains": ["generative-audio", "adaptive-control", "acoustic-continuity"],
+      "source_class": "system",
+      "status": "promoted",
+      "owner": "architecture",
+      "priority": 8,
+      "persistent_id": "doi:10.1109/TG.2019.2921979",
+      "canonical_url": "https://doi.org/10.1109/TG.2019.2921979",
+      "bibliography_key": "hutchings2020adaptive",
+      "source_record": "research/sources/hutchings-adaptive-music-2921979.md"
+    },
+    {
+      "id": "ebu-r128-2023",
+      "working_title": "EBU R 128: loudness normalisation and permitted maximum level of audio signals",
+      "domains": ["generative-audio", "measurement", "acoustic-continuity"],
+      "source_class": "standard",
+      "status": "background-only",
+      "owner": "architecture",
+      "priority": 15,
+      "canonical_url": "https://tech.ebu.ch/publications/r128",
+      "bibliography_key": "ebu2023r128"
+    },
+    {
+      "id": "aws-event-sourcing",
+      "working_title": "Event sourcing pattern",
+      "domains": ["architecture", "provenance"],
+      "source_class": "implementation",
+      "status": "background-only",
+      "owner": "architecture",
+      "priority": 20,
+      "canonical_url": "https://docs.aws.amazon.com/prescriptive-guidance/latest/cloud-design-patterns/event-sourcing-pattern.html",
+      "bibliography_key": "aws2026eventsourcing"
     }
   ]
 }

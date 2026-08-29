@@ -3,6 +3,10 @@
 The source corpus separates discovery, bibliographic identity, full-text
 assessment, promotion, and actual manuscript use. The machine-readable status
 view is [`catalog.json`](catalog.json); narrative assessments live beside it.
+The issue #33 architecture scout also maintains a machine-readable
+[`architecture-evidence-map.json`](architecture-evidence-map.json), which maps
+accepted sources to one subsystem, an evidence role, a bounded claim, and an
+explicit non-claim.
 
 ## Source states
 
@@ -37,6 +41,15 @@ one primary-source record. The record must identify:
 A source record is not an endorsement and does not turn reported findings into
 independently established facts. Secondary summaries may help discovery, but
 they never substitute for an available primary record.
+
+## Architecture evidence contract
+
+The architecture map distinguishes scientific precedent, normative standards,
+engineering patterns, emerging systems, speculative transfers, and qualifying
+evidence. Every mapped source must exist in the catalog, use one required
+research cluster, identify its Antidote subsystem, and state both what it may
+support and what it does not establish. Architecture precedent never becomes
+clinical evidence by proximity.
 
 ## Bibliography shelf versus citations
 
