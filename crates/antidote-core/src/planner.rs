@@ -212,7 +212,7 @@ impl RuleGuidedPlanner {
         ];
         let mut stages = Vec::with_capacity(roles.len());
         for (index, role) in roles.into_iter().enumerate() {
-            let stage = self.build_stage(plan_id, moment, index, role, durations[index]);
+            let stage = self.build_stage(plan_id, moment, index, &role, durations[index]);
             add_stage_derivations(&mut derivations, index, &stage);
             stages.push(stage);
         }
@@ -306,7 +306,7 @@ impl RuleGuidedPlanner {
         plan_id: &str,
         moment: &MomentContext,
         index: usize,
-        role: JourneyPlanStageRole,
+        role: &JourneyPlanStageRole,
         duration_seconds: i64,
     ) -> JourneyPlanStage {
         let controls = controls_for_stage(
@@ -319,7 +319,7 @@ impl RuleGuidedPlanner {
             order: i64::try_from(index).unwrap_or_default(),
             role: role.clone(),
             duration_seconds,
-            semantic_intent: vec![semantic_intent(&role, moment)],
+            semantic_intent: vec![semantic_intent(role, moment)],
             acoustic_controls: controls,
             transition_rationale: Some(
                 "The stage order is a reviewable narrative scaffold; it does not predict response."
@@ -515,42 +515,42 @@ fn validate_controls(
         let controls = &stage.acoustic_controls;
         require_supported(
             controls.tempo_bpm.is_some(),
-            JourneyPlanControlPolicySupportedControl::TempoBpm,
+            &JourneyPlanControlPolicySupportedControl::TempoBpm,
             policy,
         )?;
         require_supported(
             controls.key.is_some(),
-            JourneyPlanControlPolicySupportedControl::Key,
+            &JourneyPlanControlPolicySupportedControl::Key,
             policy,
         )?;
         require_supported(
             controls.time_signature.is_some(),
-            JourneyPlanControlPolicySupportedControl::TimeSignature,
+            &JourneyPlanControlPolicySupportedControl::TimeSignature,
             policy,
         )?;
         require_supported(
             controls.timbre.is_some(),
-            JourneyPlanControlPolicySupportedControl::Timbre,
+            &JourneyPlanControlPolicySupportedControl::Timbre,
             policy,
         )?;
         require_supported(
             controls.harmony.is_some(),
-            JourneyPlanControlPolicySupportedControl::Harmony,
+            &JourneyPlanControlPolicySupportedControl::Harmony,
             policy,
         )?;
         require_supported(
             controls.density.is_some(),
-            JourneyPlanControlPolicySupportedControl::Density,
+            &JourneyPlanControlPolicySupportedControl::Density,
             policy,
         )?;
         require_supported(
             controls.spatiality.is_some(),
-            JourneyPlanControlPolicySupportedControl::Spatiality,
+            &JourneyPlanControlPolicySupportedControl::Spatiality,
             policy,
         )?;
         require_supported(
             controls.dynamics.is_some(),
-            JourneyPlanControlPolicySupportedControl::Dynamics,
+            &JourneyPlanControlPolicySupportedControl::Dynamics,
             policy,
         )?;
         if controls
@@ -582,10 +582,10 @@ fn validate_controls(
 
 fn require_supported(
     populated: bool,
-    control: JourneyPlanControlPolicySupportedControl,
+    control: &JourneyPlanControlPolicySupportedControl,
     policy: &JourneyPlanControlPolicy,
 ) -> Result<(), PlanningError> {
-    if populated && !policy.supported_controls.contains(&control) {
+    if populated && !policy.supported_controls.contains(control) {
         Err(PlanningError::UnsupportedControl)
     } else {
         Ok(())
@@ -658,9 +658,12 @@ fn add_control_targets(
         ("spatiality", controls.spatiality.is_some()),
         ("dynamics", controls.dynamics.is_some()),
     ];
-    targets.extend(fields.into_iter().filter_map(|(field, populated)| {
-        populated.then(|| format!("{base}/acoustic_controls/{field}"))
-    }));
+    targets.extend(
+        fields
+            .into_iter()
+            .filter(|(_, populated)| *populated)
+            .map(|(field, _)| format!("{base}/acoustic_controls/{field}")),
+    );
 }
 
 fn split_duration(total: i64) -> Result<[i64; 3], PlanningError> {
@@ -758,12 +761,12 @@ fn controls_for_stage(
     let base_tempo: f64 = match direction {
         MomentContextDesiredTransitionDirection::StayWith => 64.0,
         MomentContextDesiredTransitionDirection::Soften => 60.0,
-        MomentContextDesiredTransitionDirection::Regulate => 68.0,
+        MomentContextDesiredTransitionDirection::Regulate
+        | MomentContextDesiredTransitionDirection::Other => 68.0,
         MomentContextDesiredTransitionDirection::Uplift => 84.0,
         MomentContextDesiredTransitionDirection::Focus => 76.0,
         MomentContextDesiredTransitionDirection::Release => 72.0,
         MomentContextDesiredTransitionDirection::Explore => 70.0,
-        MomentContextDesiredTransitionDirection::Other => 68.0,
     };
     let effective_index = if policy.stagewise_controls { index } else { 0 };
     let tempo_offsets: [f64; 3] = [-4.0, 4.0, -2.0];
@@ -889,15 +892,18 @@ fn add_stage_derivations(
             "control.dynamics-gradual.v1",
         ),
     ];
-    derivations.extend(control_rules.into_iter().filter_map(|(field, present, rule)| {
-        present.then(|| {
-            rule_derivation(
-                &format!("{base}/acoustic_controls/{field}"),
-                rule,
-                "A bounded generator instruction is included so the person can inspect and replace it.",
-            )
-        })
-    }));
+    derivations.extend(
+        control_rules
+            .into_iter()
+            .filter(|(_, present, _)| *present)
+            .map(|(field, _, rule)| {
+                rule_derivation(
+                    &format!("{base}/acoustic_controls/{field}"),
+                    rule,
+                    "A bounded generator instruction is included so the person can inspect and replace it.",
+                )
+            }),
+    );
 }
 
 fn apply_edit(plan: &mut JourneyPlan, edit: &JourneyEdit) -> Result<(), PlanningError> {
