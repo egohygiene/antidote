@@ -116,8 +116,8 @@ precedents, and candidate contribution claims across the research streams.
 **Exit criteria:**
 
 - [ ] Each promoted bibliography entry has a primary-source assessment.
-- [ ] MindMelody and other adaptive-audio comparators have a structured overlap
-  analysis.
+- [x] MindMelody and other adaptive-audio comparators have a structured overlap
+  analysis in the [issue #34 comparator and novelty matrix](research/notes/COMPARATOR_NOVELTY_MATRIX.md).
 - [x] Architecture references are separated from implementation documentation
   in the [issue #33 evidence map](research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md).
 - [ ] The contribution statement is rewritten from verified evidence.

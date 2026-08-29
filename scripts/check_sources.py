@@ -19,6 +19,9 @@ BIBLIOGRAPHY_PATH = ROOT / "paper" / "references.bib"
 ARCHITECTURE_MAP_PATH = (
     ROOT / "research" / "sources" / "architecture-evidence-map.json"
 )
+COMPARATOR_MATRIX_PATH = (
+    ROOT / "research" / "sources" / "comparator-novelty-matrix.json"
+)
 
 SOURCE_STATES = {
     "discovered",
@@ -51,6 +54,35 @@ ARCHITECTURE_EVIDENCE_ROLES = {
     "qualifying-evidence",
 }
 SUPPORT_DIRECTIONS = {"supporting", "qualifying", "conflicting", "mixed"}
+COMPARATOR_RELATIONSHIPS = {"direct", "adjacent", "enabling", "qualifying"}
+COMPARATOR_EVIDENCE_GRADES = {
+    "system-peer-reviewed",
+    "system-preprint",
+    "single-rct",
+}
+COMPARATOR_DIMENSION_STATUSES = {
+    "reported",
+    "partial",
+    "proposed",
+    "not-reported",
+    "not-applicable",
+}
+NOVELTY_DECISIONS = {"rejected", "narrowed", "unresolved"}
+COMPARATOR_DIMENSIONS = {
+    "state_inputs",
+    "semantic_representation",
+    "user_agency",
+    "journey_representation",
+    "audio_strategy",
+    "generator_controls",
+    "within_session_adaptation",
+    "physiological_sensing",
+    "longitudinal_learning",
+    "evaluation",
+    "provenance",
+    "privacy",
+    "clinical_positioning",
+}
 
 ENTRY_START = re.compile(r"@\w+\s*\{\s*([^,\s]+)", re.IGNORECASE)
 CITATION = re.compile(r"\\cite\w*\*?(?:\[[^\]]*\]){0,2}\{([^}]+)\}")
@@ -97,6 +129,9 @@ def validate() -> list[str]:
     bibliography = BIBLIOGRAPHY_PATH.read_text(encoding="utf-8")
     architecture_map = json.loads(
         ARCHITECTURE_MAP_PATH.read_text(encoding="utf-8")
+    )
+    comparator_matrix = json.loads(
+        COMPARATOR_MATRIX_PATH.read_text(encoding="utf-8")
     )
     sources = catalog.get("sources")
 
@@ -274,6 +309,123 @@ def validate() -> list[str]:
     for cluster in sorted(set(required_clusters) - covered_clusters):
         errors.append(f"architecture map lacks required cluster: {cluster}")
 
+    if comparator_matrix.get("schema") != "antidote.comparator-novelty-matrix/v1":
+        errors.append(
+            "comparator matrix schema must be "
+            "antidote.comparator-novelty-matrix/v1"
+        )
+    if set(comparator_matrix.get("dimension_definitions", {})) != COMPARATOR_DIMENSIONS:
+        errors.append("comparator matrix must define the exact governed dimensions")
+    absence_rule = comparator_matrix.get("search_boundary", {}).get("absence_rule", "")
+    if "does not exist" not in absence_rule:
+        errors.append(
+            "comparator matrix must distinguish not-reported from nonexistence"
+        )
+
+    comparators = comparator_matrix.get("comparators")
+    if not isinstance(comparators, list) or len(comparators) < 8:
+        errors.append("comparator matrix must contain at least eight systems")
+        comparators = []
+    comparator_source_ids: list[str] = []
+    direct_comparators = 0
+    for comparator in comparators:
+        source_id = comparator.get("source_id")
+        if not isinstance(source_id, str):
+            errors.append("comparator row lacks source_id")
+            continue
+        comparator_source_ids.append(source_id)
+        if source_id not in catalog_id_set:
+            errors.append(f"comparator matrix references unknown source: {source_id}")
+        if comparator.get("relationship") not in COMPARATOR_RELATIONSHIPS:
+            errors.append(
+                f"{source_id}: invalid comparator relationship "
+                f"{comparator.get('relationship')!r}"
+            )
+        if comparator.get("relationship") == "direct":
+            direct_comparators += 1
+        if comparator.get("evidence_grade") not in COMPARATOR_EVIDENCE_GRADES:
+            errors.append(
+                f"{source_id}: invalid comparator evidence grade "
+                f"{comparator.get('evidence_grade')!r}"
+            )
+        for field in (
+            "system",
+            "version_reviewed",
+            "peer_review_status",
+            "overlap",
+            "limitations",
+        ):
+            if not comparator.get(field):
+                errors.append(f"{source_id}: comparator row missing {field}")
+        dimensions = comparator.get("dimensions")
+        if not isinstance(dimensions, dict) or set(dimensions) != COMPARATOR_DIMENSIONS:
+            errors.append(f"{source_id}: comparator dimensions are incomplete")
+            continue
+        for dimension, cell in dimensions.items():
+            if not isinstance(cell, dict):
+                errors.append(f"{source_id}: {dimension} must be an object")
+                continue
+            if cell.get("status") not in COMPARATOR_DIMENSION_STATUSES:
+                errors.append(
+                    f"{source_id}: {dimension} has invalid status "
+                    f"{cell.get('status')!r}"
+                )
+            if not cell.get("detail"):
+                errors.append(f"{source_id}: {dimension} lacks bounded detail")
+
+    for source_id, count in Counter(comparator_source_ids).items():
+        if count > 1:
+            errors.append(f"duplicate comparator source: {source_id}")
+    if direct_comparators < 5:
+        errors.append("comparator matrix must preserve at least five direct systems")
+    if "mindmelody-2605.01235" not in comparator_source_ids:
+        errors.append("comparator matrix must include the MindMelody dossier")
+
+    synthesis_ids: list[str] = []
+    for synthesis in comparator_matrix.get("evidence_syntheses", []):
+        source_id = synthesis.get("source_id")
+        if not isinstance(source_id, str) or source_id not in catalog_id_set:
+            errors.append(f"invalid comparator synthesis source: {source_id!r}")
+            continue
+        synthesis_ids.append(source_id)
+        for field in ("version_reviewed", "evidence_grade", "bounded_result"):
+            if not synthesis.get(field):
+                errors.append(f"{source_id}: comparator synthesis missing {field}")
+    if len(synthesis_ids) < 2:
+        errors.append("comparator matrix must preserve at least two syntheses")
+
+    novelty_decisions = comparator_matrix.get("novelty_decisions")
+    if not isinstance(novelty_decisions, list) or not novelty_decisions:
+        errors.append("comparator matrix must contain novelty decisions")
+        novelty_decisions = []
+    decision_ids: list[str] = []
+    decision_statuses: set[str] = set()
+    for decision in novelty_decisions:
+        decision_id = decision.get("claim_id")
+        if not isinstance(decision_id, str):
+            errors.append("novelty decision lacks claim_id")
+            continue
+        decision_ids.append(decision_id)
+        status = decision.get("status")
+        if status not in NOVELTY_DECISIONS:
+            errors.append(f"{decision_id}: invalid novelty status {status!r}")
+        else:
+            decision_statuses.add(status)
+        for field in ("claim", "source_ids", "bounded_result"):
+            if not decision.get(field):
+                errors.append(f"{decision_id}: novelty decision missing {field}")
+        for source_id in decision.get("source_ids", []):
+            if source_id not in catalog_id_set:
+                errors.append(
+                    f"{decision_id}: novelty decision references unknown source "
+                    f"{source_id}"
+                )
+    for decision_id, count in Counter(decision_ids).items():
+        if count > 1:
+            errors.append(f"duplicate novelty decision: {decision_id}")
+    for status in sorted(NOVELTY_DECISIONS - decision_statuses):
+        errors.append(f"comparator matrix lacks {status} novelty decision")
+
     return errors
 
 
@@ -290,12 +442,17 @@ def main() -> int:
     architecture_map = json.loads(
         ARCHITECTURE_MAP_PATH.read_text(encoding="utf-8")
     )
+    comparator_matrix = json.loads(
+        COMPARATOR_MATRIX_PATH.read_text(encoding="utf-8")
+    )
     print(
         "PASS source governance: "
         f"{len(catalog['sources'])} catalog sources, "
         f"{len(entries)} verified bibliography entries, "
         f"{len(citations)} manuscript citation, "
-        f"{len(architecture_map['entries'])} architecture mappings."
+        f"{len(architecture_map['entries'])} architecture mappings, "
+        f"{len(comparator_matrix['comparators'])} comparator rows, "
+        f"{len(comparator_matrix['novelty_decisions'])} novelty decisions."
     )
     return 0
 
