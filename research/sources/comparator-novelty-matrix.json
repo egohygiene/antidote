@@ -1,0 +1,357 @@
+{
+  "schema": "antidote.comparator-novelty-matrix/v1",
+  "updated": "2026-08-29",
+  "search_boundary": {
+    "purpose": "Bounded comparator review for paper contribution scoping, not an exhaustive prior-art or patentability search.",
+    "methods": [
+      "Deep review of the current MindMelody version and its architectural claims",
+      "Backward and neighboring-system search across affective brain-computer music interfaces, personalized affective players, music digital therapeutics, and generative affective systems",
+      "Primary DOI, publisher, PubMed, or arXiv identity verification",
+      "Explicit retention of null, mixed, and ambiguous evidence"
+    ],
+    "cutoff": "2026-08-29",
+    "absence_rule": "not-reported means not found in the exact reviewed artifact; it never means the capability does not exist elsewhere or in unreleased work"
+  },
+  "dimension_definitions": {
+    "state_inputs": "Signals or reports used to represent the present moment",
+    "semantic_representation": "Human-readable representation between state or intent and music controls",
+    "user_agency": "Direct user specification, correction, preview, override, or stop authority",
+    "journey_representation": "A target, transition, or time-varying affective path",
+    "audio_strategy": "Selection, sequencing, synthesis, or learned generation strategy",
+    "generator_controls": "Inspectable musical or model controls",
+    "within_session_adaptation": "Feedback-driven change during one listening session",
+    "physiological_sensing": "Use of EEG or peripheral physiology",
+    "longitudinal_learning": "Within-person updating across sessions",
+    "evaluation": "Participants, study structure, outcomes, and evidence status",
+    "provenance": "Versioned lineage connecting intent, parameters, audio, and response",
+    "privacy": "Reported consent, minimization, local processing, or access boundaries",
+    "clinical_positioning": "How therapeutic or clinical relevance is framed"
+  },
+  "status_definitions": {
+    "reported": "Explicitly described or evaluated in the reviewed artifact",
+    "partial": "Some elements are present but not the complete dimension",
+    "proposed": "Future or conceptual capability, not evaluated as implemented",
+    "not-reported": "Not found in the exact reviewed artifact",
+    "not-applicable": "The dimension is outside the artifact's stated design"
+  },
+  "comparators": [
+    {
+      "source_id": "mindmelody-2605.01235",
+      "system": "MindMelody",
+      "version_reviewed": "arXiv:2605.01235v2, revised 2026-05-16",
+      "relationship": "direct",
+      "evidence_grade": "system-preprint",
+      "peer_review_status": "preprint",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "EEG-derived global valence/arousal and local affect trajectory."},
+        "semantic_representation": {"status": "reported", "detail": "Qwen2.5-7B RAG planner produces a structured intervention plan from a music-intervention knowledge base."},
+        "user_agency": {"status": "partial", "detail": "Subjective feedback is collected; user-authored semantic controls, context confirmation, and stop/override contracts were not found."},
+        "journey_representation": {"status": "reported", "detail": "Global target plus local time-varying affect trajectory."},
+        "audio_strategy": {"status": "reported", "detail": "MusicGen-medium-based hierarchical controller generates fixed ten-second music examples."},
+        "generator_controls": {"status": "reported", "detail": "Plan fields include description, musical attributes, tempo, texture density, section dynamics, and target affect trajectory."},
+        "within_session_adaptation": {"status": "reported", "detail": "The paper describes EEG and subjective response closing the system loop."},
+        "physiological_sensing": {"status": "reported", "detail": "EEG is mandatory to the described architecture."},
+        "longitudinal_learning": {"status": "not-reported", "detail": "A durable within-person model updated across sessions was not found in v2."},
+        "evaluation": {"status": "partial", "detail": "DEAP cross-subject training, 2,000 labeled MusicCaps clips, and a randomized within-subject non-clinical pilot; pilot participant count was not found."},
+        "provenance": {"status": "not-reported", "detail": "An end-to-end reproducibility record connecting plan, model revision, artifact, and response was not found."},
+        "privacy": {"status": "not-reported", "detail": "A consent-scoped context projection, local-first data boundary, or detailed privacy model was not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Framed as personalized music intervention but explicitly evaluated as a non-clinical pilot; clinical protocols are future work."}
+      },
+      "overlap": ["semantic bridge", "structured music plan", "target affect trajectory", "controllable generation", "physiological and subjective feedback"],
+      "limitations": ["preprint", "pilot sample count not found", "no independent Antidote replication", "no clinical validation"]
+    },
+    {
+      "source_id": "daly-abcmi-046022",
+      "system": "Affective brain-computer music interface (aBCMI)",
+      "version_reviewed": "Journal of Neural Engineering version of record, 2016, doi:10.1088/1741-2560/13/4/046022",
+      "relationship": "direct",
+      "evidence_grade": "system-peer-reviewed",
+      "peer_review_status": "peer-reviewed",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "EEG plus ECG, galvanic skin response, pulse, respiration, and felt-affect reports."},
+        "semantic_representation": {"status": "partial", "detail": "Valence/arousal states and case-based reasoning bridge target affect to musical generation; no user-extensible semantic language was found."},
+        "user_agency": {"status": "partial", "detail": "Participants identify felt affect and participate in calibration; explicit semantic knobs and context approval were not found."},
+        "journey_representation": {"status": "reported", "detail": "Current affect, desired state, and an affective trajectory are explicit."},
+        "audio_strategy": {"status": "reported", "detail": "Real-time algorithmic composition produces constrained monophonic piano music."},
+        "generator_controls": {"status": "reported", "detail": "Algorithmic musical parameters are conditioned by affective targets."},
+        "within_session_adaptation": {"status": "reported", "detail": "Online state detection and generated musical response close the loop."},
+        "physiological_sensing": {"status": "reported", "detail": "EEG and multiple peripheral signals are core inputs."},
+        "longitudinal_learning": {"status": "reported", "detail": "Person-specific models are trained over repeated sessions across several months."},
+        "evaluation": {"status": "reported", "detail": "Eight participants completed a longitudinal study; reported three-class accuracy reached 65% and modulation was above chance."},
+        "provenance": {"status": "partial", "detail": "Study procedures and datasets support reproducibility, but an Antidote-style per-session lineage object was not found."},
+        "privacy": {"status": "partial", "detail": "Research consent is implicit in the study design; data-minimization and local-first runtime controls were not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Music-therapy applications are discussed; the evaluated sample is healthy and non-clinical."}
+      },
+      "overlap": ["current-state detection", "desired-state trajectory", "algorithmic generation", "closed-loop adaptation", "longitudinal person-specific learning"],
+      "limitations": ["small completed sample", "attrition", "constrained monophonic generator", "classification and artifact limitations"]
+    },
+    {
+      "source_id": "ehrlich-closed-loop-0213516",
+      "system": "Closed-loop music-based BCI",
+      "version_reviewed": "PLOS ONE version of record, published 2019-03-18, doi:10.1371/journal.pone.0213516",
+      "relationship": "direct",
+      "evidence_grade": "system-peer-reviewed",
+      "peer_review_status": "peer-reviewed",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "User-calibrated EEG valence/arousal estimates."},
+        "semantic_representation": {"status": "partial", "detail": "Interpretable valence/arousal-to-music mappings are reported; personal narrative semantics were not found."},
+        "user_agency": {"status": "partial", "detail": "Participants self-induce target emotions and calibrate the model; explicit user-facing mixins and consent projection were not found."},
+        "journey_representation": {"status": "reported", "detail": "Continuous trajectories through affective space can drive the generator."},
+        "audio_strategy": {"status": "reported", "detail": "Continuous synthesized music is generated in real time."},
+        "generator_controls": {"status": "reported", "detail": "Valence/arousal maps to controllable musical parameters with smooth evolution."},
+        "within_session_adaptation": {"status": "reported", "detail": "Online estimates update musical feedback every 0.5 seconds."},
+        "physiological_sensing": {"status": "reported", "detail": "Fourteen-channel EEG is mandatory in the evaluated loop."},
+        "longitudinal_learning": {"status": "partial", "detail": "User calibration and two BCI sessions are reported; durable multi-session learning was not established."},
+        "evaluation": {"status": "reported", "detail": "Music-algorithm listener study n=11 and preliminary BCI pilot n=5 with heterogeneous participant results."},
+        "provenance": {"status": "partial", "detail": "A public dataset is linked; per-generation intent-to-response provenance was not found."},
+        "privacy": {"status": "not-reported", "detail": "Local-first processing, contextual consent, and data minimization were not found in the reviewed article."},
+        "clinical_positioning": {"status": "partial", "detail": "Emotion mediation and self-regulation are discussed; the work is a proof of concept, not a clinical trial."}
+      },
+      "overlap": ["continuous affective trajectory", "smooth real-time synthesis", "person-calibrated EEG feedback", "within-session adaptation"],
+      "limitations": ["BCI pilot n=5", "heterogeneous results", "self-induced emotion is not therapeutic outcome"]
+    },
+    {
+      "source_id": "affectmachine-classical-1158172",
+      "system": "AffectMachine-Classical",
+      "version_reviewed": "Frontiers in Psychology version of record, 2023, doi:10.3389/fpsyg.2023.1158172",
+      "relationship": "direct",
+      "evidence_grade": "system-peer-reviewed",
+      "peer_review_status": "peer-reviewed",
+      "dimensions": {
+        "state_inputs": {"status": "partial", "detail": "Continuous valence/arousal controls are inputs; live sensed state is proposed rather than evaluated."},
+        "semantic_representation": {"status": "reported", "detail": "Expert rules expose interpretable relationships between affect coordinates and musical features."},
+        "user_agency": {"status": "partial", "detail": "A person can supply valence/arousal controls; richer personal semantics and approval boundaries were not found."},
+        "journey_representation": {"status": "reported", "detail": "A trajectory may be predefined and updated over time."},
+        "audio_strategy": {"status": "reported", "detail": "Rule-based probabilistic classical generation runs in real time."},
+        "generator_controls": {"status": "reported", "detail": "Musical parameters are explicitly mapped and may update every bar."},
+        "within_session_adaptation": {"status": "proposed", "detail": "Biofeedback integration is a target use, not part of the reported listener study."},
+        "physiological_sensing": {"status": "proposed", "detail": "Future sensors may provide controls; no physiological loop was evaluated."},
+        "longitudinal_learning": {"status": "not-reported", "detail": "No durable person-specific update across sessions was found."},
+        "evaluation": {"status": "reported", "detail": "Twenty-six listeners rated 39 stimuli for perceived affect; felt emotion and health outcomes were not evaluated."},
+        "provenance": {"status": "not-reported", "detail": "Per-session intent, seed, audio, and response lineage was not found."},
+        "privacy": {"status": "not-applicable", "detail": "The evaluated generator did not ingest personal context or physiological data."},
+        "clinical_positioning": {"status": "partial", "detail": "Designed for future music-based MedTech and self-regulation, without clinical outcome evidence."}
+      },
+      "overlap": ["probability-space sculpting", "interpretable musical controls", "real-time generation", "predefined affective trajectory"],
+      "limitations": ["perceived not felt emotion", "biofeedback future work", "no longitudinal personalization"]
+    },
+    {
+      "source_id": "personalized-affective-music-player-9107",
+      "system": "Personalized affective music player (AMP)",
+      "version_reviewed": "User Modeling and User-Adapted Interaction version of record, 2012, doi:10.1007/s11257-011-9107-7",
+      "relationship": "direct",
+      "evidence_grade": "system-peer-reviewed",
+      "peer_review_status": "peer-reviewed",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "Skin temperature and reported affect are used with a personal music library."},
+        "semantic_representation": {"status": "partial", "detail": "Probabilistic per-song response models retain personal preferences, associations, and memories; no generative semantic plan is used."},
+        "user_agency": {"status": "reported", "detail": "The user supplies personal music and an affective goal."},
+        "journey_representation": {"status": "partial", "detail": "Current and goal affect guide selection; a continuous generated path is not represented."},
+        "audio_strategy": {"status": "reported", "detail": "Selects existing songs from the listener's library."},
+        "generator_controls": {"status": "not-applicable", "detail": "No audio generator is used."},
+        "within_session_adaptation": {"status": "partial", "detail": "Physiological response informs selection, but seamless continuous regeneration is not used."},
+        "physiological_sensing": {"status": "reported", "detail": "Peripheral physiology is central to personalized response modeling."},
+        "longitudinal_learning": {"status": "reported", "detail": "Repeated real-world sessions build individual response models over weeks."},
+        "evaluation": {"status": "reported", "detail": "Three male participants, 27 songs each, nine sessions over roughly one month per person in a noisy workplace."},
+        "provenance": {"status": "not-reported", "detail": "A versioned end-to-end record from goal to response was not found."},
+        "privacy": {"status": "not-reported", "detail": "Modern local-first and consent-scoped context controls were not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Mood enhancement is the stated application; clinical efficacy was not tested."}
+      },
+      "overlap": ["current-to-goal personalization", "personal associations", "noisy physiology", "longitudinal within-person response model"],
+      "limitations": ["three participants", "all male", "selection rather than generation", "no clinical outcome"]
+    },
+    {
+      "source_id": "beamers-2211.14609",
+      "system": "BEAMERS",
+      "version_reviewed": "arXiv:2211.14609v1, submitted 2022-11-26",
+      "relationship": "adjacent",
+      "evidence_grade": "system-preprint",
+      "peer_review_status": "preprint",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "Two-second commercial EEG features plus song features and self-report."},
+        "semantic_representation": {"status": "partial", "detail": "Valence/arousal emotion variation is modeled; richer user-authored music semantics were not found."},
+        "user_agency": {"status": "reported", "detail": "Users designate the desired emotion variation and provide questionnaire feedback."},
+        "journey_representation": {"status": "partial", "detail": "Desired direction of emotional change is explicit; a time-indexed journey is not reported."},
+        "audio_strategy": {"status": "reported", "detail": "Recommends existing songs."},
+        "generator_controls": {"status": "not-applicable", "detail": "No audio generator is used."},
+        "within_session_adaptation": {"status": "not-reported", "detail": "Continuous in-session adaptation was not found in v1."},
+        "physiological_sensing": {"status": "reported", "detail": "Commercial EEG is mandatory in the described system."},
+        "longitudinal_learning": {"status": "partial", "detail": "Person-dependent variation to the same song is modeled; durable repeated-session updating was not established."},
+        "evaluation": {"status": "partial", "detail": "The preprint reports prediction accuracy above 0.85 and questionnaire findings; independent replication was not found."},
+        "provenance": {"status": "not-reported", "detail": "A replayable decision and response lineage was not found."},
+        "privacy": {"status": "not-reported", "detail": "Consent-scoped context and local data architecture were not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Framed for daily emotion regulation, not a clinical trial."}
+      },
+      "overlap": ["desired emotion variation", "person-variable response to the same song", "EEG-informed personalization"],
+      "limitations": ["preprint", "recommendation only", "reported accuracy not independently reproduced"]
+    },
+    {
+      "source_id": "mallik-russo-auditory-beats-0259312",
+      "system": "LUCID personalized music sequence",
+      "version_reviewed": "PLOS ONE version of record, published 2022-03-09, doi:10.1371/journal.pone.0259312",
+      "relationship": "direct",
+      "evidence_grade": "single-rct",
+      "peer_review_status": "peer-reviewed",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "Self-reported current mood, target calm, trait anxiety, and musical preference."},
+        "semantic_representation": {"status": "partial", "detail": "Valence/arousal and preference guide the system; personal semantic mixins were not reported."},
+        "user_agency": {"status": "reported", "detail": "Users report current mood and preferences and retain ordinary study withdrawal authority."},
+        "journey_representation": {"status": "reported", "detail": "Iso-principle sequencing begins near current affect and moves toward calm over 24 minutes."},
+        "audio_strategy": {"status": "reported", "detail": "Reinforcement learning sequences precomposed instrumental tracks and nature sounds; an auditory-beat layer is factorially varied."},
+        "generator_controls": {"status": "not-applicable", "detail": "The evaluated intervention selects and sequences existing audio."},
+        "within_session_adaptation": {"status": "not-reported", "detail": "The single-session sequence is personalized before playback rather than continuously redesigned from live response."},
+        "physiological_sensing": {"status": "not-applicable", "detail": "No live physiological signal drives the evaluated sequence."},
+        "longitudinal_learning": {"status": "not-reported", "detail": "The randomized evaluation is a single session."},
+        "evaluation": {"status": "reported", "detail": "Open-label randomized study n=163 with four audio conditions and subgroup-dependent outcomes."},
+        "provenance": {"status": "partial", "detail": "Trial arms and algorithm are described; a session-level generative lineage object is not applicable."},
+        "privacy": {"status": "not-reported", "detail": "A local-first or context-minimizing runtime was not described."},
+        "clinical_positioning": {"status": "reported", "detail": "An anxiety study in people taking anxiolytics; design and conflict-of-interest limits remain material."}
+      },
+      "overlap": ["current-to-target journey", "explicit user check-in", "preference-informed personalization", "response evaluation"],
+      "limitations": ["open-label", "single session", "subgroup-dependent", "commercial conflict disclosed", "selection not generation"]
+    },
+    {
+      "source_id": "iheartlift-6090277",
+      "system": "iHeartLift",
+      "version_reviewed": "IEEE EMBC version of record, 2011, doi:10.1109/IEMBS.2011.6090277",
+      "relationship": "adjacent",
+      "evidence_grade": "system-peer-reviewed",
+      "peer_review_status": "peer-reviewed conference paper",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "Heart-rate variability is the biofeedback signal."},
+        "semantic_representation": {"status": "not-reported", "detail": "A human-readable affective or narrative representation was not found."},
+        "user_agency": {"status": "not-reported", "detail": "High-level user intent controls were not found."},
+        "journey_representation": {"status": "partial", "detail": "A physiological improvement target guides tempo variation; a semantic affective trajectory is not described."},
+        "audio_strategy": {"status": "reported", "detail": "Existing music playback is varied or selected through tempo control."},
+        "generator_controls": {"status": "partial", "detail": "Tempo is an explicit controllable acoustic feature."},
+        "within_session_adaptation": {"status": "reported", "detail": "Heart-rate variability closes the real-time music-tempo loop."},
+        "physiological_sensing": {"status": "reported", "detail": "Cardiac sensing is mandatory to the described loop."},
+        "longitudinal_learning": {"status": "not-reported", "detail": "Cross-session person-specific learning was not found."},
+        "evaluation": {"status": "partial", "detail": "Short conference report; evidence is insufficient for broad effectiveness or mechanism claims."},
+        "provenance": {"status": "not-reported", "detail": "A replayable session lineage was not found."},
+        "privacy": {"status": "not-reported", "detail": "Data governance details were not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Physiological improvement is in the title and design, but clinical effectiveness is not established."}
+      },
+      "overlap": ["real-time physiological feedback", "adaptive acoustic parameter", "closed loop"],
+      "limitations": ["limited conference report", "tempo-focused", "selection or transformation rather than generative journey"]
+    },
+    {
+      "source_id": "minimalist-bcmi-2606.01473",
+      "system": "Minimalist BCMI",
+      "version_reviewed": "arXiv:2606.01473v1, submitted 2026-05-31",
+      "relationship": "direct",
+      "evidence_grade": "system-preprint",
+      "peer_review_status": "preprint",
+      "dimensions": {
+        "state_inputs": {"status": "reported", "detail": "Two-channel frontal EEG and instructed happy/sad self-induction."},
+        "semantic_representation": {"status": "partial", "detail": "Estimated valence maps to explicit musical features; personal semantic language is absent."},
+        "user_agency": {"status": "partial", "detail": "Participants choose an instructed emotional target through self-induction; user-facing music controls were not reported."},
+        "journey_representation": {"status": "partial", "detail": "Target emotion and time are analyzed, but a rich generated journey plan is not used."},
+        "audio_strategy": {"status": "reported", "detail": "Stochastic music generation is rendered through Ableton Live."},
+        "generator_controls": {"status": "reported", "detail": "Mode, tempo, rhythmic density, and pitch register are controlled."},
+        "within_session_adaptation": {"status": "reported", "detail": "Real-time EEG estimates continuously drive musical controls through Lab Streaming Layer."},
+        "physiological_sensing": {"status": "reported", "detail": "Frontal EEG is mandatory to the prototype."},
+        "longitudinal_learning": {"status": "not-reported", "detail": "Durable individual updating across sessions was not found."},
+        "evaluation": {"status": "reported", "detail": "Preliminary n=22 evaluation found no significant target-emotion or time effect; manipulation explained 0.40% of variance."},
+        "provenance": {"status": "partial", "detail": "Technical components and synchronization are reported; end-to-end response lineage was not found."},
+        "privacy": {"status": "not-reported", "detail": "Local-first consent and data-minimization details were not found."},
+        "clinical_positioning": {"status": "partial", "detail": "Emotion self-regulation is the intended use, but the result is preliminary and negative for the control signal."}
+      },
+      "overlap": ["real-time sensed-state loop", "stochastic generation", "interpretable music controls"],
+      "limitations": ["preprint", "null target effects", "missing no-music and yoked controls", "individual variability dominates"]
+    }
+  ],
+  "evidence_syntheses": [
+    {
+      "source_id": "sayal-music-loop-1515377",
+      "version_reviewed": "Frontiers in Neuroscience version of record, 2025, doi:10.3389/fnins.2025.1515377",
+      "evidence_grade": "systematic-review",
+      "bounded_result": "Music-neurofeedback systems form an established but heterogeneous research area without consensus measures of neurofeedback success."
+    },
+    {
+      "source_id": "venkatesan-mdt-1602004",
+      "version_reviewed": "Frontiers in Human Neuroscience version of record, 2026, doi:10.3389/fnhum.2026.1602004",
+      "evidence_grade": "scoping-review",
+      "bounded_result": "Commercial music-based digital therapeutics exist, but direct comparative and real-world effectiveness evidence remains limited."
+    }
+  ],
+  "antidote_reference_profile": {
+    "status": "proposed-and-partially-scaffolded",
+    "not_a_comparator_source": true,
+    "candidate_combination": [
+      "manual person-correctable moment state with optional fallible sensors",
+      "user-extensible semantic controls and exclusions",
+      "consent-scoped contextual working projection",
+      "time-indexed journey plan with generate-ahead continuity",
+      "separate intended, realized-acoustic, perceived, and felt-response records",
+      "append-only provenance and local-first boundaries",
+      "longitudinal within-person learning that begins as advisory rather than autonomous"
+    ],
+    "evidence_boundary": "The comparator search has not established that this exact combination is novel, effective, safe, implemented, or clinically useful."
+  },
+  "novelty_decisions": [
+    {
+      "claim_id": "NOV-REJ-001",
+      "status": "rejected",
+      "claim": "Antidote is the first closed-loop affective music system.",
+      "source_ids": ["daly-abcmi-046022", "ehrlich-closed-loop-0213516", "iheartlift-6090277"],
+      "bounded_result": "Multiple peer-reviewed systems predate Antidote."
+    },
+    {
+      "claim_id": "NOV-REJ-002",
+      "status": "rejected",
+      "claim": "Antidote is the first system to map current state toward a desired affective target or trajectory.",
+      "source_ids": ["daly-abcmi-046022", "personalized-affective-music-player-9107", "mallik-russo-auditory-beats-0259312"],
+      "bounded_result": "Current-to-target selection, sequencing, and generation are established precedents."
+    },
+    {
+      "claim_id": "NOV-REJ-003",
+      "status": "rejected",
+      "claim": "Antidote is the first real-time generative affective music system with smooth transitions.",
+      "source_ids": ["ehrlich-closed-loop-0213516", "affectmachine-classical-1158172", "minimalist-bcmi-2606.01473"],
+      "bounded_result": "Continuous and bar-level real-time affective generators already exist."
+    },
+    {
+      "claim_id": "NOV-REJ-004",
+      "status": "rejected",
+      "claim": "Antidote is the first personalized or longitudinal affective music learner.",
+      "source_ids": ["daly-abcmi-046022", "personalized-affective-music-player-9107", "beamers-2211.14609"],
+      "bounded_result": "Person-specific response models, personal associations, and repeated-session learning all have prior precedent."
+    },
+    {
+      "claim_id": "NOV-REJ-005",
+      "status": "rejected",
+      "claim": "Antidote is the first to use an interpretable semantic or musical planning layer.",
+      "source_ids": ["mindmelody-2605.01235", "affectmachine-classical-1158172", "daly-abcmi-046022"],
+      "bounded_result": "Structured intervention plans and interpretable affect-to-music mappings already exist."
+    },
+    {
+      "claim_id": "NOV-NAR-001",
+      "status": "narrowed",
+      "claim": "Antidote contributes moment-specific personalization.",
+      "source_ids": ["daly-abcmi-046022", "personalized-affective-music-player-9107", "mallik-russo-auditory-beats-0259312", "beamers-2211.14609"],
+      "bounded_result": "Moment specificity alone is prior art; the remaining candidate concerns explicit semantic/context controls, realization verification, response separation, consent, provenance, and longitudinal use in combination."
+    },
+    {
+      "claim_id": "NOV-NAR-002",
+      "status": "narrowed",
+      "claim": "Antidote contributes interpretability.",
+      "source_ids": ["mindmelody-2605.01235", "affectmachine-classical-1158172", "ehrlich-closed-loop-0213516"],
+      "bounded_result": "Feature mappings and structured plans are prior art; Antidote's remaining candidate is inspectability across context selection, intent, realized acoustics, response, and model update."
+    },
+    {
+      "claim_id": "NOV-OPEN-001",
+      "status": "unresolved",
+      "claim": "The exact governed combination in the Antidote reference profile may constitute a useful research-system contribution.",
+      "source_ids": ["mindmelody-2605.01235", "daly-abcmi-046022", "ehrlich-closed-loop-0213516", "personalized-affective-music-player-9107", "affectmachine-classical-1158172", "minimalist-bcmi-2606.01473"],
+      "bounded_result": "The bounded search did not find the exact combination, but absence from this search is not proof of novelty; issue #35 must freeze narrower contribution language."
+    },
+    {
+      "claim_id": "NOV-OPEN-002",
+      "status": "unresolved",
+      "claim": "A user-extensible semantic-to-realized-acoustic-to-felt-response mapping can be learned within one person across moments.",
+      "source_ids": ["mindmelody-2605.01235", "personalized-affective-music-player-9107", "daly-abcmi-046022"],
+      "bounded_result": "The literature supplies neighboring components but does not validate Antidote's complete mapping hypothesis."
+    }
+  ]
+}

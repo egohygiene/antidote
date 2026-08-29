@@ -8,6 +8,12 @@ The issue #33 architecture scout also maintains a machine-readable
 accepted sources to one subsystem, an evidence role, a bounded claim, and an
 explicit non-claim.
 
+Issue #34 adds a governed
+[`comparator-novelty-matrix.json`](comparator-novelty-matrix.json). It compares
+exact reviewed artifacts across 13 dimensions and records rejected, narrowed,
+and unresolved novelty candidates. Its narrative interpretation lives in
+[`COMPARATOR_NOVELTY_MATRIX.md`](../notes/COMPARATOR_NOVELTY_MATRIX.md).
+
 ## Source states
 
 | State | Meaning | Bibliography | Source record | Manuscript claim use |
@@ -50,6 +56,19 @@ evidence. Every mapped source must exist in the catalog, use one required
 research cluster, identify its Antidote subsystem, and state both what it may
 support and what it does not establish. Architecture precedent never becomes
 clinical evidence by proximity.
+
+## Comparator and novelty contract
+
+Each comparator row identifies one catalog source, the exact version reviewed,
+peer-review status, evidence grade, overlap, limitations, and all governed
+dimensions. Dimension cells use one of `reported`, `partial`, `proposed`,
+`not-reported`, or `not-applicable` and include bounded detail.
+
+`not-reported` means the capability was not found in that exact artifact. It
+does not mean the capability, implementation, or evidence does not exist
+elsewhere. Novelty decisions must retain source IDs and may be `rejected`,
+`narrowed`, or `unresolved`; absence from a bounded search can never produce an
+unqualified first-system claim.
 
 ## Bibliography shelf versus citations
 

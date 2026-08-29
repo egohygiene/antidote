@@ -35,7 +35,7 @@ The paper should remain the scientific source of truth. The later magazine shoul
 2. **A state-transition design is scientifically plausible.** The iso principle—beginning near the listener's current state and moving toward a desired state—has preliminary experimental support and closely matches Antidote's journey model.
 3. **Binaural beats belong in Antidote as an optional experimental control, not as a presumed mechanism.** Reviews report potentially useful behavioral outcomes, but EEG evidence for literal brainwave entrainment is inconsistent and methodologically heterogeneous.
 4. **Music is a consequential part of psychedelic therapy's setting.** It can guide, support, intensify, or disrupt an experience. The evidence is meaningful but does not yet establish an optimal universal soundtrack or prove that music independently causes clinical improvement.
-5. **Closed-loop adaptive music is already an active research frontier.** MindMelody is the nearest direct comparator; AffectMachine, BEAMERS, personalized affective music players, and LUCID-related work establish neighboring approaches.
+5. **Closed-loop adaptive music is already an active research frontier.** MindMelody is a close semantic-planning comparator, while Daly's aBCMI, Ehrlich's closed-loop BCI, AffectMachine, BEAMERS, personalized affective music players, and LUCID-related work each establish material parts of the proposed architecture.
 6. **Antidote's contribution cannot simply be “EEG-driven closed-loop generated music.”** Its defensible differentiation is an interpretable personal sonic language, narrative/context inputs, an explicit affective journey, optional rather than mandatory physiology, longitudinal individual learning, local-first execution, and visible evidence boundaries.
 7. **Technical controllability is not therapeutic efficacy.** Current generative models can follow text, melody, tempo, key, chord, and dynamic conditions with varying reliability; none thereby proves a health benefit.
 8. **A prototype should initially be framed as a research and reflective-wellness instrument, not a medical treatment.** Clinical claims would require a separate protocol, ethics review, safety monitoring, appropriate expertise, and controlled human research.
@@ -47,7 +47,7 @@ Read these first, in order. Together they establish the closest prior art, core 
 
 | Order | Source | Why it matters |
 |---:|---|---|
-| 1 | Zhang, Sun, and Gu, **“MindMelody: A Closed-Loop EEG-Driven System for Personalized Music Intervention”** (2026), [arXiv:2605.01235](https://arxiv.org/abs/2605.01235) — **D** | Nearest architectural comparator: EEG affect decoding → structured plan → controllable generation → feedback. Treat as a non-clinical preprint with important reporting questions, not therapeutic validation. |
+| 1 | Zhang, Sun, Gu, and Jin, **“MindMelody: A Closed-Loop EEG-Driven System for Personalized Music Intervention”** (2026), [arXiv:2605.01235](https://arxiv.org/abs/2605.01235) — **D** | Direct semantic-planning comparator: EEG affect decoding → structured plan → controllable generation → feedback. Treat as a non-clinical preprint with important reporting questions, not therapeutic validation. |
 | 2 | Agres, Dash, and Chua, **“AffectMachine-Classical”** (2023), [doi:10.3389/fpsyg.2023.1158172](https://doi.org/10.3389/fpsyg.2023.1158172) — **C** | Demonstrates real-time probabilistic generation targeted to valence and arousal; validates conveyed affect rather than health outcomes. |
 | 3 | Janssen, van den Broek, and Westerink, **“Tune in to Your Emotions”** (2012), [doi:10.1007/s11257-011-9107-7](https://doi.org/10.1007/s11257-011-9107-7) — **C/B** | Longitudinal personalized affect modeling from biosignals and a listener's own music; strong precedent for within-person learning. |
 | 4 | Mallik and Russo, **“The Effects of Music & Auditory Beat Stimulation on Anxiety”** (2022), [doi:10.1371/journal.pone.0259312](https://doi.org/10.1371/journal.pone.0259312) — **B** | Tests music, auditory beats, their combination, and a control; also operationalizes current-to-target affective sequencing through the iso principle. |
@@ -62,7 +62,7 @@ Read these first, in order. Together they establish the closest prior art, core 
 
 | System | Inputs | Output | Feedback | Evidence status | Relationship to Antidote |
 |---|---|---|---|---|---|
-| **MindMelody** | EEG-derived global valence/arousal and local affect trajectory | Ten-second generated music through a structured intervention plan and MusicGen-based control | EEG plus subjective ratings | 2026 arXiv preprint; non-clinical pilot; no therapeutic validation | Closest comparator. Antidote must distinguish itself through personal semantic mappings, narrative context, optional physiology, longer-form journeys, longitudinal memory, and evidence-visible controls. |
+| **MindMelody** | EEG-derived global valence/arousal and local affect trajectory | Ten-second generated music through a structured intervention plan and MusicGen-based control | EEG plus subjective ratings | 2026 arXiv preprint; non-clinical pilot; no therapeutic validation | Direct semantic-planning comparator. Candidate differences in personal semantics, context, provenance, and longitudinal learning remain to be established rather than assumed. |
 | **AffectMachine-Classical** | Target valence/arousal | Rule-based probabilistic classical music | Listener validation; biofeedback proposed | Peer-reviewed system and listener study | Strong precedent for probability-space sculpting and interpretable musical parameters. |
 | **BEAMERS** | Commercial EEG, song features, desired emotion variation | Personalized song recommendation | EEG and user reports | 2022 preprint | Precedent for individual variability and desired emotional change; recommends rather than generates music. |
 | **Personalized Affective Music Player** | Peripheral physiology and personal music | Goal-directed selection from the listener's library | Repeated real-world biosignals | Peer-reviewed, multi-week evaluation | Strong precedent for within-person affective modeling and noisy real-world signals. |
@@ -586,3 +586,38 @@ for reproducible workflow packaging.
   stop take precedence over novelty.
 - No source in this cluster proves efficacy, diagnosis, neurological mechanism,
   real-time MVP behavior, or autonomous personalization.
+
+## Comparator and novelty addendum
+
+Issue #34 replaces the preliminary novelty map with a governed 13-dimension
+comparison:
+
+- [Comparator, evidence, and novelty dossier](../notes/COMPARATOR_NOVELTY_MATRIX.md)
+- [Machine-readable comparator matrix](../sources/comparator-novelty-matrix.json)
+
+The comparison rejects first-system claims for closed-loop affective music,
+current-to-target trajectories, real-time generation, smooth musical feedback,
+physiological adaptation, and longitudinal personalization. The remaining
+Antidote contribution is a candidate combination around user-extensible
+semantics, consented context, intended-versus-realized-versus-felt separation,
+provenance, and advisory within-person updating.
+
+### Newly promoted comparator sources
+
+| Source | Comparator role and evidence boundary |
+| --- | --- |
+| Daly et al. (2016), [doi:10.1088/1741-2560/13/4/046022](https://doi.org/10.1088/1741-2560/13/4/046022) | Peer-reviewed longitudinal aBCMI: current state, desired trajectory, generated music, and individual models. Eight completers and constrained generation limit generalization. |
+| Ehrlich et al. (2019), [doi:10.1371/journal.pone.0213516](https://doi.org/10.1371/journal.pone.0213516) and [public dataset](https://github.com/stefan-ehrlich/dataset-affective-music-BCI) | Peer-reviewed continuous, smooth, real-time synthesized affective music in a user-calibrated EEG loop. The BCI pilot included five participants. |
+| Li et al. (2022), BEAMERS [arXiv:2211.14609](https://arxiv.org/abs/2211.14609) | Preprint precedent for desired emotion variation and person-dependent song response; recommends rather than generates music. |
+| Ho and Chen (2011), iHeartLift [doi:10.1109/IEMBS.2011.6090277](https://doi.org/10.1109/IEMBS.2011.6090277) | Early physiological music-tempo feedback loop; short engineering report, not broad outcome evidence. |
+| Monroy-D'Croz et al. (2026), Minimalist BCMI [arXiv:2606.01473](https://arxiv.org/abs/2606.01473) | Direct recent preprint with a valuable null result: target emotion and time did not reliably modulate the EEG control signal in its 22-person preliminary evaluation. |
+| Sayal et al. (2025), [doi:10.3389/fnins.2025.1515377](https://doi.org/10.3389/fnins.2025.1515377) | Systematic review showing a heterogeneous music-neurofeedback field without consensus success measures. |
+| Venkatesan et al. (2026), [doi:10.3389/fnhum.2026.1602004](https://doi.org/10.3389/fnhum.2026.1602004) | Scoping review of commercial music digital therapeutics; product-specific and comparative effectiveness evidence remains limited. |
+
+The already cataloged AffectMachine-Classical
+([doi:10.3389/fpsyg.2023.1158172](https://doi.org/10.3389/fpsyg.2023.1158172)),
+personalized affective music player
+([doi:10.1007/s11257-011-9107-7](https://doi.org/10.1007/s11257-011-9107-7)),
+and LUCID-related randomized study
+([doi:10.1371/journal.pone.0259312](https://doi.org/10.1371/journal.pone.0259312))
+are now promoted with full source records and explicit allowed/prohibited uses.
