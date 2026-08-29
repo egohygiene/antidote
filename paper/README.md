@@ -4,6 +4,10 @@ The canonical manuscript is `paper/paper.tex`, which assembles the numbered
 files under `paper/sections/`. Write directly in those LaTeX section files. Do
 not create a parallel Markdown manuscript.
 
+Use [`paper/roadmap.md`](roadmap.md) as the durable writing sequence. It links
+the evidence, section, figure, synthesis, and live-publication issues and
+defines the resume protocol for future contributors and conversations.
+
 ## Current section map
 
 | File | Writing purpose | Evidence gate |
