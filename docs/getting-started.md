@@ -6,8 +6,10 @@ Antidote's research and publication system is executable. Its desktop MVP has
 an executable workspace, shared v1 contracts, a framework-independent Rust
 session core, and tested SQLite/content-addressed persistence adapters. The
 deterministic mock worker is also executable as a standalone NDJSON process.
-The desktop does not invoke these layers yet, and no real audio model, playback
-experience, or end-to-end session exists.
+The desktop now invokes these layers for one end-to-end synthetic session,
+including deliberate mock-WAV playback, response capture, adverse-event
+handling, cancellation, and restart recovery. No real audio model, therapeutic
+claim, packaged release, or autonomous personalization exists.
 
 ## Prerequisites for current checks
 
@@ -92,6 +94,16 @@ printf '%s\n' '{"protocol_version":"1.0.0","request_id":"health-local","operatio
 The worker accepts synthetic inputs only at this stage. Its exact envelopes,
 operation payloads, message bound, and failure taxonomy are documented in
 [`contracts/protocol/model-worker.v1.md`](../contracts/protocol/model-worker.v1.md).
+
+Run the local desktop experience after bootstrap with:
+
+```sh
+pnpm --filter @egohygiene/antidote-desktop tauri dev
+```
+
+Use synthetic check-in text only. The desktop persists its active session in
+Tauri's application-local data directory and reconstructs the screen from the
+Rust/SQLite event record after a refresh or restart.
 
 ## Navigate the research
 

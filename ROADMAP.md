@@ -161,11 +161,13 @@ without real generation.
 
 **Current evidence:** Workspaces, shared contracts, the authoritative session
 core and generation orchestrator, append-only local persistence, deterministic
-mock worker, and bounded Rust process supervision are implemented through issue
-#15. The Level-1 journey planner now emits deterministic, hashed, traceable
-drafts and supports person rejection and immutable edited revisions. Desktop/
-session composition, playback, response UI, provenance export, and packaging
-remain in the active sequence; the outcome above is not yet complete.
+mock worker, bounded Rust process supervision, and the accessible desktop
+session are implemented through issue #16. The UI now composes exact consented
+context, editable and approved journey revisions, immutable generation specs,
+progress/cancellation/recovery, deliberate synthetic playback, adverse stops,
+and response capture. Provenance export, packaging, and the remaining epic
+integration evidence stay in the active sequence; the outcome above is not yet
+complete.
 
 **Exit criteria:**
 

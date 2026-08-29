@@ -153,9 +153,10 @@ Actual magazine authoring is tracked separately in
   activation and TLS verification remain maintainer-controlled.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
-- Local prototype: authoritative session core, local persistence adapters, and
-  deterministic mock worker implemented; desktop supervision, playback, real
-  model audio, and the end-to-end session remain incomplete.
+- Local prototype: an accessible Tauri/React synthetic session composes the
+  authoritative Rust core, local persistence, deterministic mock worker,
+  deliberate playback, response capture, safety halts, and restart recovery;
+  real-model audio, privacy hardening, packaging, and study use remain incomplete.
 - Formal study data: none collected.
 
 Repository automation and non-manuscript documentation are MIT-licensed. The

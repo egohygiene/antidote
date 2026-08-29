@@ -12,7 +12,7 @@ structural rules, [SYSTEM.md](../SYSTEM.md) owns logical responsibilities, and
 | Root architecture corpus | Purpose, epistemology, ontology, system, design, decisions, and roadmap | Provisional |
 | `docs/decisions/` | Detailed architectural decision records | Implemented and expanding |
 | `contracts/` | Cross-language schemas and executable model-worker protocol | Implemented foundation |
-| `apps/desktop/` | Tauri desktop host and React interface | Workspace scaffold |
+| `apps/desktop/` | Tauri desktop host and React interface | Executable synthetic session; packaging remains target |
 | `crates/` | Framework-independent Rust core and adapters | Session core and persistence implemented; other adapters target |
 | `workers/generation/` | Replaceable local Python model process | Deterministic mock implemented; real adapters target |
 | `experiments/protocols/` | Frozen study definitions and analysis plans | Target |

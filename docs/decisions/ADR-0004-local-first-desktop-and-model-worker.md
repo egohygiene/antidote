@@ -53,9 +53,12 @@ and artifact integrity verification. The core generation orchestrator owns the
 only state-changing commands and records an untrusted worker failure as failed.
 
 The webview still receives no shell or sidecar permission: model execution is a
-Rust application adapter, not a JavaScript capability. Desktop command
-composition, packaged external binaries, operating-system sandboxing, and
-production data paths remain unimplemented and are not implied by this evidence.
+Rust application adapter, not a JavaScript capability. The Tauri host now
+exposes a named-command session API, opens the application-local SQLite record,
+supervises the developer mock worker, and returns recoverable projections to
+React. Packaged external binaries, operating-system sandboxing, privacy-ready
+production data paths, and real-model execution remain unimplemented and are
+not implied by this evidence.
 
 ## Consequences
 

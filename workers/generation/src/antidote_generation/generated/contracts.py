@@ -231,6 +231,7 @@ class ResponseObservation(TypedDict):
     harm: float | None
     stopped_early: NotRequired[bool]
     notes: NotRequired[str]
+    later_aftereffect_requested: NotRequired[bool]
     allow_personal_model_update: NotRequired[bool]
 
 class ResponseObservationFeltState(TypedDict):

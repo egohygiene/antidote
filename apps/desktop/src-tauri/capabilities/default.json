@@ -1,7 +1,7 @@
 {
   "$schema": "../gen/schemas/desktop-schema.json",
   "identifier": "default",
-  "description": "Minimum permissions for the Antidote workspace scaffold",
+  "description": "Deny-by-default permissions for the Antidote mock session interface",
   "windows": ["main"],
   "permissions": ["core:default"]
 }

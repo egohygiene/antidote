@@ -533,6 +533,8 @@ pub struct ResponseObservation {
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub notes: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub later_aftereffect_requested: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
     pub allow_personal_model_update: Option<bool>,
 }
 

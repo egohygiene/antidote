@@ -93,9 +93,14 @@ name = "antidote-desktop"
 version = "0.1.0"
 dependencies = [
  "antidote-core",
+ "antidote-store",
+ "antidote-worker",
  "serde",
+ "serde_json",
  "tauri",
  "tauri-build",
+ "tempfile",
+ "time",
 ]
 
 [[package]]

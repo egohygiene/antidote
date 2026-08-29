@@ -17,8 +17,15 @@ tauri-build.workspace = true
 
 [dependencies]
 antidote-core = { path = "../../../crates/antidote-core" }
+antidote-store = { path = "../../../crates/antidote-store" }
+antidote-worker = { path = "../../../crates/antidote-worker" }
 serde.workspace = true
-tauri.workspace = true
+serde_json.workspace = true
+tauri = { workspace = true, features = ["protocol-asset"] }
+time.workspace = true
+
+[dev-dependencies]
+tempfile = "=3.27.0"
 
 [lints]
 workspace = true
