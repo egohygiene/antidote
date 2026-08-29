@@ -200,6 +200,7 @@ class RepositoryContractTests(unittest.TestCase):
             for relative in (
                 "AGENTS.md",
                 "CONTRIBUTING.md",
+                "SOURCES.md",
                 "SECURITY.md",
                 "SUPPORT.md",
                 "apps/desktop/README.md",
@@ -209,6 +210,9 @@ class RepositoryContractTests(unittest.TestCase):
                 "docs/architecture-overview.md",
                 "docs/getting-started.md",
                 "docs/mvp-toolchains.md",
+                "paper/README.md",
+                "research/atlas/README.md",
+                "research/sources/README.md",
                 "workers/generation/README.md",
             )
         )
