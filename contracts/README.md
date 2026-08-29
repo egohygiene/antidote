@@ -21,16 +21,21 @@ tools.
 | `consent-grant.v1.schema.json` | Authority over sources, purposes, actions, and retention |
 | `working-context-projection.v1.schema.json` | Inspectable derived context and its source lineage |
 | `moment-context.v1.schema.json` | Current state, desired transition, horizon, and explicit constraints |
-| `journey-plan.v1.schema.json` | Editable semantic stages and acoustic-control intentions |
+| `journey-plan.v1.schema.json` | Editable semantic stages, acoustic-control intentions, additive rule traces, control policy, revision lineage, and immutable plan hash |
 | `generation-spec.v1.schema.json` | Immutable model-worker request |
 | `generation-result.v1.schema.json` | Artifact, measured features, warnings, and failure state |
 | `response-observation.v1.schema.json` | Felt response, mismatch, harm, and optional aftereffect |
 
+The journey-plan additions are optional at the compatibility schema boundary so
+older v1 readers remain valid. The Rust execution boundary requires them for a
+new executable plan and verifies their hash, trace coverage, ruleset, lineage,
+and policy before accepting a proposal.
+
 The model-worker transport is defined in
 [`protocol/model-worker.v1.md`](protocol/model-worker.v1.md). The deterministic
-mock under `workers/generation/` executes this transport. That is evidence of a
-protocol implementation, not evidence of Rust/Tauri supervision, a real audio
-model, or an end-to-end session.
+mock under `workers/generation/` executes this transport through the bounded
+Rust supervisor. That is evidence of protocol and supervision implementation,
+not evidence of a real audio model or an end-to-end desktop session.
 
 ## Generation and validation
 

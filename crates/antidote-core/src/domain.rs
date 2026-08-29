@@ -9,7 +9,9 @@ use antidote_contracts::{
 use serde::{Deserialize, Serialize};
 use time::{OffsetDateTime, format_description::well_known::Rfc3339};
 
-use crate::{ApplicationError, DomainError, IdentifierKind, IdentifierSource};
+use crate::{
+    ApplicationError, DomainError, IdentifierKind, IdentifierSource, validate_plan_for_moment,
+};
 
 /// Version of the immutable session-event envelope.
 pub const SESSION_EVENT_SCHEMA_VERSION: &str = "1.0.0";
@@ -86,6 +88,20 @@ pub enum JourneyApprovalState {
         consent_grant_id: String,
         /// Approval time.
         approved_at: String,
+    },
+    /// The person rejected this exact proposal without approving generation.
+    Rejected {
+        /// Visible person-supplied reason.
+        reason: String,
+        /// Rejection time.
+        rejected_at: String,
+    },
+    /// A later immutable plan revision replaced this plan.
+    Superseded {
+        /// Replacement plan identifier.
+        replacement_plan_id: String,
+        /// Supersession time.
+        superseded_at: String,
     },
 }
 
@@ -277,6 +293,13 @@ pub enum SessionCommand {
     RecordMoment { moment: MomentContext },
     /// Record one editable draft journey.
     ProposeJourney { plan: JourneyPlan },
+    /// Replace the current plan with one immutable edited revision.
+    ReviseJourney {
+        plan: JourneyPlan,
+        supersedes_plan_id: String,
+    },
+    /// Reject the current draft without approving any of its choices.
+    RejectJourney { plan_id: String, reason: String },
     /// Explicitly approve the current draft journey.
     ApproveJourney {
         plan_id: String,
@@ -359,6 +382,13 @@ pub enum SessionEvent {
     MomentRecorded { moment: MomentContext },
     /// Draft journey recorded.
     JourneyProposed { plan: JourneyPlan },
+    /// Current journey superseded by a new immutable draft revision.
+    JourneySuperseded {
+        previous_plan_id: String,
+        plan: JourneyPlan,
+    },
+    /// Current journey explicitly rejected by the person.
+    JourneyRejected { plan_id: String, reason: String },
     /// Journey received explicit approval.
     JourneyApproved {
         plan_id: String,
@@ -439,6 +469,7 @@ pub struct Session {
     working_projection: Option<WorkingContextProjection>,
     moment: Option<MomentContext>,
     journey: Option<JourneyState>,
+    journey_history: Vec<JourneyState>,
     generation: Option<GenerationJob>,
     playback_approval: Option<PlaybackApproval>,
     exposure: Option<Exposure>,
@@ -468,6 +499,7 @@ impl Session {
             working_projection: None,
             moment: None,
             journey: None,
+            journey_history: Vec::new(),
             generation: None,
             playback_approval: None,
             exposure: None,
@@ -537,6 +569,12 @@ impl Session {
     #[must_use]
     pub const fn journey(&self) -> Option<&JourneyState> {
         self.journey.as_ref()
+    }
+
+    /// Return immutable earlier plan revisions in supersession order.
+    #[must_use]
+    pub fn journey_history(&self) -> &[JourneyState] {
+        &self.journey_history
     }
 
     /// Return the current generation job.
@@ -612,6 +650,16 @@ impl Session {
             SessionCommand::ProposeJourney { plan } => {
                 self.require_no_safety_halt()?;
                 self.decide_journey(plan)?
+            }
+            SessionCommand::ReviseJourney {
+                plan,
+                supersedes_plan_id,
+            } => {
+                self.require_no_safety_halt()?;
+                self.decide_journey_revision(plan, supersedes_plan_id)?
+            }
+            SessionCommand::RejectJourney { plan_id, reason } => {
+                self.decide_journey_rejection(plan_id, reason)?
             }
             SessionCommand::ApproveJourney { plan_id, consent } => {
                 self.require_no_safety_halt()?;
@@ -844,17 +892,69 @@ impl Session {
         if self.journey.is_some() {
             return Err(DomainError::JourneyAlreadyExists);
         }
-        validate_typed_contract("journey-plan", &plan)?;
+        self.validate_journey_plan(&plan)?;
+        if plan.revision != Some(1) || plan.supersedes_plan_id.is_some() {
+            return Err(DomainError::JourneyInvalid);
+        }
+        Ok(vec![SessionEvent::JourneyProposed { plan }])
+    }
+
+    fn decide_journey_revision(
+        &self,
+        plan: JourneyPlan,
+        supersedes_plan_id: String,
+    ) -> Result<Vec<SessionEvent>, DomainError> {
+        require_identifier(&supersedes_plan_id)?;
+        if self.generation.is_some() {
+            return Err(DomainError::JourneyInvalid);
+        }
+        let current = self.journey.as_ref().ok_or(DomainError::JourneyMissing)?;
+        if current.plan.id != supersedes_plan_id
+            || plan.supersedes_plan_id.as_deref() != Some(supersedes_plan_id.as_str())
+            || plan.revision
+                != current
+                    .plan
+                    .revision
+                    .and_then(|revision| revision.checked_add(1))
+        {
+            return Err(DomainError::JourneyInvalid);
+        }
+        self.validate_journey_plan(&plan)?;
+        Ok(vec![SessionEvent::JourneySuperseded {
+            previous_plan_id: supersedes_plan_id,
+            plan,
+        }])
+    }
+
+    fn decide_journey_rejection(
+        &self,
+        plan_id: String,
+        reason: String,
+    ) -> Result<Vec<SessionEvent>, DomainError> {
+        require_identifier(&plan_id)?;
+        require_identifier(&reason)?;
+        let journey = self.journey.as_ref().ok_or(DomainError::JourneyMissing)?;
+        if journey.plan.id != plan_id {
+            return Err(DomainError::JourneyMissing);
+        }
+        if journey.approval != JourneyApprovalState::Draft {
+            return Err(DomainError::JourneyNotDraft);
+        }
+        Ok(vec![SessionEvent::JourneyRejected { plan_id, reason }])
+    }
+
+    fn validate_journey_plan(&self, plan: &JourneyPlan) -> Result<(), DomainError> {
+        validate_typed_contract("journey-plan", plan)?;
         self.require_same_session(&plan.session_id)?;
         let moment = self.moment.as_ref().ok_or(DomainError::MomentMissing)?;
         if plan.status != JourneyPlanStatus::Draft
             || plan.moment_context_id != moment.id
             || plan.working_projection_id != moment.working_projection_id
+            || validate_plan_for_moment(moment, plan).is_err()
         {
             return Err(DomainError::JourneyInvalid);
         }
-        validate_journey_stages(&plan)?;
-        Ok(vec![SessionEvent::JourneyProposed { plan }])
+        validate_journey_stages(plan)
     }
 
     fn decide_journey_approval(
@@ -1466,6 +1566,30 @@ impl Session {
                     approval: JourneyApprovalState::Draft,
                 });
             }
+            SessionEvent::JourneySuperseded {
+                previous_plan_id,
+                plan,
+            } => {
+                drop(self.decide_journey_revision(plan.clone(), previous_plan_id.clone())?);
+                let mut previous = self.journey.take().ok_or(DomainError::JourneyMissing)?;
+                previous.approval = JourneyApprovalState::Superseded {
+                    replacement_plan_id: plan.id.clone(),
+                    superseded_at: occurred_at.to_owned(),
+                };
+                self.journey_history.push(previous);
+                self.journey = Some(JourneyState {
+                    plan,
+                    approval: JourneyApprovalState::Draft,
+                });
+            }
+            SessionEvent::JourneyRejected { plan_id, reason } => {
+                drop(self.decide_journey_rejection(plan_id, reason.clone())?);
+                let journey = self.journey.as_mut().ok_or(DomainError::JourneyMissing)?;
+                journey.approval = JourneyApprovalState::Rejected {
+                    reason,
+                    rejected_at: occurred_at.to_owned(),
+                };
+            }
             SessionEvent::JourneyApproved {
                 plan_id,
                 consent_grant_id,
@@ -1710,6 +1834,7 @@ fn event_requires_clear_safety(event: &SessionEvent) -> bool {
         SessionEvent::WorkingProjectionAccepted { .. }
             | SessionEvent::MomentRecorded { .. }
             | SessionEvent::JourneyProposed { .. }
+            | SessionEvent::JourneySuperseded { .. }
             | SessionEvent::JourneyApproved { .. }
             | SessionEvent::GenerationRequested { .. }
             | SessionEvent::GenerationApproved { .. }

@@ -3,7 +3,7 @@
 ## Status
 
 This document records the reproducible developer baseline established through
-issues #9–#14. It does not resolve the open decision about end-user
+issues #9–#15. It does not resolve the open decision about end-user
 operating-system or GPU support and does not claim a distributable application.
 
 ## Pinned toolchains

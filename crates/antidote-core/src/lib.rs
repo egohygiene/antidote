@@ -7,6 +7,7 @@
 mod application;
 mod domain;
 mod error;
+mod planner;
 mod ports;
 
 pub use application::{GenerationOrchestrationOutcome, GenerationOrchestrator, SessionService};
@@ -17,6 +18,10 @@ pub use domain::{
     SafetyEvent, SafetyEventKind, Session, SessionCommand, SessionEvent,
 };
 pub use error::{ApplicationError, DomainError, PortFailure};
+pub use planner::{
+    JourneyEdit, PlanningError, RULE_SET_ID, RULE_SET_VERSION, RuleGuidedPlanner,
+    hash_journey_plan, validate_inspectable_plan, validate_plan_for_moment,
+};
 pub use ports::{
     ArtifactStorePort, AudioPort, Clock, EventRepository, ExportPort, IdentifierKind,
     IdentifierSource, WorkerInvocationPort,

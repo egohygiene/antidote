@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.6.0
+version: 0.7.0
 status: provisional
 owners:
   - egohygiene
@@ -48,9 +48,9 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
 | MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
 | Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
-| Rust domain and control plane | Authoritative session core implemented | Pure commands, immutable events, replay, consent gates, safety halts, and ports under `crates/antidote-core/`; concrete adapters remain target |
+| Rust domain and control plane | Authoritative session core and Level-1 planner implemented | Pure commands, immutable events, replay, consent gates, traceable plan rules, immutable revisions, safety halts, and ports under `crates/antidote-core/` |
 | Local persistence | Adapter implemented; integration remains target | Versioned SQLite migrations, immutable event repository, rebuildable lineage views, and atomic content-addressed objects under `crates/antidote-store/` |
-| Local generation worker | Deterministic mock implemented; supervision remains target | Packaged NDJSON process, protocol validation, synthetic WAV/analysis, cancellation, failures, and golden-hash tests under `workers/generation/`; no AI model exists |
+| Local generation worker | Deterministic mock + Rust supervision implemented | Bounded NDJSON process, protocol/capability validation, synthetic WAV/analysis, cancellation, timeout, restart, artifact-integrity, and failure tests; no AI model exists |
 | Formal study | Not started | Requires frozen protocol, consent/privacy decisions, and stop rules |
 
 “Target” and “scaffolded” are not claims of executable functionality.
@@ -177,6 +177,29 @@ process or protocol failure becomes a failed result and cannot become generated.
 Desktop command composition, packaged sidecar paths, operating-system
 sandboxing, and a real model adapter remain separate work.
 
+## Level-1 journey planning
+
+`RuleGuidedPlanner` is a pure Rust application/domain service. For the same
+moment contract, plan identifier, rule-set version, and control policy it emits
+the same draft bytes and SHA-256 content hash. The proposal records:
+
+- the rule-set ID/version and exact input hash;
+- the supported controls and conservative prototype ceilings used;
+- a rationale and uncertainty statement for every derived strategy, duration,
+  stage, semantic instruction, and populated acoustic control; and
+- revision and supersession lineage.
+
+Person edits replace typed semantic or acoustic choices and produce a new
+sealed revision. Rejection, supersession, and approval are separate immutable
+session events; approval never rewrites plan content. The core rejects duration
+mismatch, contradictory inclusions/exclusions, excluded instructions,
+unsupported controls, stagewise combinations the policy cannot express,
+control-ceiling violations, missing derivations, prohibited efficacy or
+deterministic-mechanism rationale, and hash mutation.
+
+These rules are transparent prototype defaults. They do not predict what will
+feel useful, infer consent, learn from history, or make a clinical claim.
+
 ## Local persistence
 
 | Record | Function |
@@ -288,10 +311,10 @@ surfaces even though their evidence may later connect.
 ## Evidence and uncertainty
 
 - **Observed:** The publication architecture, framework-independent session
-  core and generation orchestrator, SQLite event adapter, named lineage
-  projections, content-addressed object store, deterministic mock worker, and
-  bounded Rust process supervisor are implemented. Desktop composition remains
-  planned.
+  core, Level-1 journey planner, generation orchestrator, SQLite event adapter,
+  named lineage projections, content-addressed object store, deterministic mock
+  worker, and bounded Rust process supervisor are implemented. Desktop
+  composition remains planned.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment

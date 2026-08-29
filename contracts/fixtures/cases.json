@@ -260,6 +260,29 @@
         "status": "approved",
         "strategy": "begin with sparse continuity, then add gentle rhythmic definition",
         "total_duration_seconds": 60,
+        "revision": 1,
+        "supersedes_plan_id": null,
+        "rule_set": {
+          "id": "antidote.level-1.transparent-journey",
+          "version": "1.0.0",
+          "input_hash": "abababababababababababababababababababababababababababababababab"
+        },
+        "control_policy": {
+          "supported_controls": [
+            "tempo_bpm",
+            "time_signature",
+            "timbre",
+            "harmony",
+            "density",
+            "spatiality",
+            "dynamics"
+          ],
+          "stagewise_controls": true,
+          "tempo_bpm_min": 48,
+          "tempo_bpm_max": 112,
+          "density_ceiling": 0.65,
+          "spatiality_ceiling": 0.75
+        },
         "stages": [
           {
             "id": "stage-synthetic-1",
@@ -289,6 +312,15 @@
           }
         ],
         "safety_constraints": ["avoid sudden level changes"],
+        "derivations": [
+          {
+            "target": "/strategy",
+            "source": "rule",
+            "rule_id": "strategy.direction.v1",
+            "rationale": "Synthetic fixture demonstrates an inspectable planning rule.",
+            "uncertainty": "Synthetic fixture does not predict a felt response."
+          }
+        ],
         "approved_at": "2026-08-27T12:03:00Z",
         "plan_hash": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc"
       }

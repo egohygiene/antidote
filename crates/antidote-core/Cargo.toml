@@ -12,6 +12,7 @@ version.workspace = true
 antidote-contracts = { path = "../antidote-contracts" }
 serde.workspace = true
 serde_json.workspace = true
+sha2.workspace = true
 time.workspace = true
 
 [lints]

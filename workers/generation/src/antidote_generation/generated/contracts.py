@@ -20,6 +20,10 @@ GenerationResultStatus = Literal["generated", "partial", "cancelled", "failed"]
 
 GenerationSpecOutputFormat = Literal["wav", "flac"]
 
+JourneyPlanControlPolicySupportedControl = Literal["tempo_bpm", "key", "time_signature", "timbre", "harmony", "density", "spatiality", "dynamics"]
+
+JourneyPlanDerivationSource = Literal["rule", "person_edit"]
+
 JourneyPlanStageRole = Literal["meet", "hold", "transition", "release", "integrate", "close", "other"]
 
 JourneyPlanStatus = Literal["draft", "approved", "superseded"]
@@ -138,10 +142,35 @@ class JourneyPlan(TypedDict):
     status: JourneyPlanStatus
     strategy: str
     total_duration_seconds: int
+    revision: NotRequired[int]
+    supersedes_plan_id: NotRequired[str | None]
+    rule_set: NotRequired[JourneyPlanRuleSet]
+    control_policy: NotRequired[JourneyPlanControlPolicy]
     stages: list[JourneyPlanStage]
     safety_constraints: list[str]
+    derivations: NotRequired[list[JourneyPlanDerivation]]
     approved_at: NotRequired[str | None]
     plan_hash: NotRequired[str]
+
+class JourneyPlanControlPolicy(TypedDict):
+    supported_controls: list[JourneyPlanControlPolicySupportedControl]
+    stagewise_controls: bool
+    tempo_bpm_min: float
+    tempo_bpm_max: float
+    density_ceiling: float
+    spatiality_ceiling: float
+
+class JourneyPlanDerivation(TypedDict):
+    target: str
+    source: JourneyPlanDerivationSource
+    rule_id: str
+    rationale: str
+    uncertainty: str
+
+class JourneyPlanRuleSet(TypedDict):
+    id: str
+    version: str
+    input_hash: str
 
 class JourneyPlanStage(TypedDict):
     id: str
