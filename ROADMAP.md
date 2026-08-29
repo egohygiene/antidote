@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.2.0
+version: 0.3.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-27
+updated: 2026-08-29
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -32,7 +32,7 @@ repository: egohygiene/antidote
 visibility: public
 publication: central
 route: /roadmap/antidote/
-updated: 2026-08-27
+updated: 2026-08-29
 -->
 
 ## 2026-08-27 execution snapshot
@@ -160,10 +160,10 @@ SQLite adapter, and mock model worker execute one contract-tested session
 without real generation.
 
 **Current evidence:** Workspaces, shared contracts, the authoritative session
-core, append-only local persistence, and the standalone deterministic mock
-worker are implemented through issue #13. Rust supervision, desktop/session
-composition, playback, response UI, provenance export, and packaging remain in
-the active sequence; the outcome above is not yet complete.
+core and generation orchestrator, append-only local persistence, deterministic
+mock worker, and bounded Rust process supervision are implemented through issue
+#14. Desktop/session composition, playback, response UI, provenance export, and
+packaging remain in the active sequence; the outcome above is not yet complete.
 
 **Exit criteria:**
 

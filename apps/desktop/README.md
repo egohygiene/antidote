@@ -27,8 +27,10 @@ belong to Rust domain/application ports and versioned contracts.
 ## Current permission boundary
 
 The default Tauri capability grants only `core:default`. It does not grant shell,
-sidecar, filesystem, network, notification, or model permissions. Those
-capabilities require explicit implementation and review in later issues.
+sidecar, filesystem, network, notification, or model permissions. The Rust
+worker supervisor does not require general process authority in the webview;
+desktop command composition and packaged worker lifecycle still require
+explicit implementation and review.
 
 ## Commands
 

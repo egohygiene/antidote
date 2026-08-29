@@ -8,8 +8,9 @@ use antidote_core::contracts::{
 };
 use antidote_core::{
     ApplicationError, Clock, ConsentSelection, DomainError, EventRepository, ExposureStopReason,
-    GenerationJobState, IdentifierKind, IdentifierSource, ModelUpdateState, PersonalModelSnapshot,
-    PortFailure, RecordedEvent, SafetyEventKind, SessionCommand, SessionService,
+    GenerationJobState, GenerationOrchestrator, IdentifierKind, IdentifierSource, ModelUpdateState,
+    PersonalModelSnapshot, PortFailure, RecordedEvent, SafetyEventKind, SessionCommand,
+    SessionService, WorkerInvocationPort,
 };
 use serde::de::DeserializeOwned;
 use serde_json::Value;
@@ -188,6 +189,95 @@ fn service_through_generation_request() -> TestService {
         SessionCommand::RequestGeneration { specification },
     );
     service
+}
+
+#[derive(Debug)]
+struct StubWorker {
+    result: Option<Result<GenerationResult, PortFailure>>,
+}
+
+impl WorkerInvocationPort for StubWorker {
+    fn generate(
+        &mut self,
+        _specification: &GenerationSpec,
+    ) -> Result<GenerationResult, PortFailure> {
+        self.result
+            .take()
+            .expect("stub generation must be invoked exactly once")
+    }
+
+    fn cancel(&mut self, _generation_spec_id: &str) -> Result<(), PortFailure> {
+        Ok(())
+    }
+}
+
+#[test]
+fn orchestrator_records_only_rust_owned_start_and_terminal_events() {
+    let mut service = service_through_generation_request();
+    execute(
+        &mut service,
+        SessionCommand::ApproveGeneration {
+            consent: ConsentSelection::explicit("consent-all"),
+        },
+    );
+    let worker = StubWorker {
+        result: Some(Ok(fixture("generation-result-valid"))),
+    };
+    let mut orchestrator = GenerationOrchestrator::new(service, worker);
+    let outcome = orchestrator
+        .generate(SESSION_ID)
+        .expect("trusted result must append through commands");
+    assert_eq!(outcome.started.len(), 1);
+    assert_eq!(outcome.terminal.len(), 1);
+    assert!(outcome.worker_failure.is_none());
+
+    let (service, _worker) = orchestrator.into_parts();
+    let session = service
+        .load_session(SESSION_ID)
+        .expect("stream must replay");
+    assert_eq!(
+        session.generation().map(|generation| generation.state),
+        Some(GenerationJobState::Generated)
+    );
+}
+
+#[test]
+fn orchestrator_translates_worker_failure_without_completing_generation() {
+    let mut service = service_through_generation_request();
+    execute(
+        &mut service,
+        SessionCommand::ApproveGeneration {
+            consent: ConsentSelection::explicit("consent-all"),
+        },
+    );
+    let worker = StubWorker {
+        result: Some(Err(PortFailure::new("worker_crash"))),
+    };
+    let mut orchestrator = GenerationOrchestrator::new(service, worker);
+    let outcome = orchestrator
+        .generate(SESSION_ID)
+        .expect("worker failure classification must append");
+    assert_eq!(
+        outcome.worker_failure.as_ref().map(PortFailure::operation),
+        Some("worker_crash")
+    );
+
+    let (service, _worker) = orchestrator.into_parts();
+    let session = service
+        .load_session(SESSION_ID)
+        .expect("stream must replay");
+    let generation = session.generation().expect("generation must exist");
+    assert_eq!(generation.state, GenerationJobState::Failed);
+    assert_eq!(
+        generation.result.as_ref().map(|result| &result.status),
+        Some(&antidote_core::contracts::GenerationResultStatus::Failed)
+    );
+    assert!(
+        generation
+            .result
+            .as_ref()
+            .is_some_and(|result| result.artifacts.is_empty())
+    );
 }
 
 fn service_through_response() -> TestService {

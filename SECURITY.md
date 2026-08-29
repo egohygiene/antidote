@@ -11,7 +11,7 @@ automation surfaces, including:
 
 - publication, CI, Pages, dependency, and generated-artifact behavior;
 - contract validation and path or archive handling;
-- future Tauri command and sidecar permissions;
+- Rust worker-supervisor policy and future Tauri command or packaged-sidecar permissions;
 - model loading, remote code, weight integrity, and subprocess isolation;
 - consent bypass, private-context exposure, logging, retention, or export;
 - audio playback, cancellation, partial artifacts, and unsafe recovery behavior.
@@ -42,7 +42,10 @@ information, do not place that information in a public issue.
 - Audit any required `trust_remote_code` before enabling it.
 - Never commit credentials, proprietary weights, private datasets, or signing
   material.
-- Treat localhost and sidecar messages as untrusted, size-bounded input.
+- Treat localhost and worker messages as untrusted, size-bounded input.
+- Launch workers without shell interpolation, clear inherited environment,
+  expose only host-approved protocol paths, and verify returned artifact paths,
+  sizes, and hashes.
 
 ## Clinical and emotional safety
 

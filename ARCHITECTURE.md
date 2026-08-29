@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.5.0
+version: 0.6.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-28
+updated: 2026-08-29
 governed_by:
   - architecture-architecture
 depends_on:
@@ -166,9 +166,16 @@ The executable mock worker implements the complete v1 operation set with a
 atomic synthetic WAV realization, declared WAV analysis, cooperative
 cancellation, and explicit simulated timeout, partial-output, and crash
 classes. It has no database, network, model package, or weight dependency. Its
-golden artifact hash proves deterministic bytes for the canonical fixture. The
-Rust supervisor, Tauri sidecar permissions, production paths, and real model
-adapter remain separate work.
+golden artifact hash proves deterministic bytes for the canonical fixture.
+The `antidote-worker` Rust adapter now launches it without shell interpolation,
+clears and rebuilds its explicit environment, negotiates identity and
+capabilities, correlates progress and cancellation, enforces deadlines, drains
+stderr without retaining content, and verifies every returned artifact against
+a host-created directory, byte limit, and SHA-256 digest. The core
+`GenerationOrchestrator` appends start and terminal facts through commands; a
+process or protocol failure becomes a failed result and cannot become generated.
+Desktop command composition, packaged sidecar paths, operating-system
+sandboxing, and a real model adapter remain separate work.
 
 ## Local persistence
 
@@ -281,9 +288,10 @@ surfaces even though their evidence may later connect.
 ## Evidence and uncertainty
 
 - **Observed:** The publication architecture, framework-independent session
-  core, SQLite event adapter, named lineage projections, content-addressed
-  object store, and deterministic protocol-conformant mock worker are
-  implemented. Desktop supervision and worker integration remain planned.
+  core and generation orchestrator, SQLite event adapter, named lineage
+  projections, content-addressed object store, deterministic mock worker, and
+  bounded Rust process supervisor are implemented. Desktop composition remains
+  planned.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment

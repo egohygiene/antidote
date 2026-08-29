@@ -45,9 +45,17 @@ The deterministic mock worker under `workers/generation/` now implements the
 complete v1 NDJSON operation set without PyTorch, weights, network access, or
 database authority. It validates before filesystem mutation, writes synthetic
 WAV artifacts atomically, reports stable identity and hashes, redacts progress,
-and classifies cancellation and simulated failure paths. Rust process
-supervision and Tauri capability grants remain unimplemented and are not implied
-by this evidence.
+and classifies cancellation and simulated failure paths. The Rust supervisor
+under `crates/antidote-worker/` now applies explicit process configuration,
+protocol negotiation, capability checks, correlation, bounded progress,
+cancellation, timeouts, restart, redacted diagnostics, output-directory grants,
+and artifact integrity verification. The core generation orchestrator owns the
+only state-changing commands and records an untrusted worker failure as failed.
+
+The webview still receives no shell or sidecar permission: model execution is a
+Rust application adapter, not a JavaScript capability. Desktop command
+composition, packaged external binaries, operating-system sandboxing, and
+production data paths remain unimplemented and are not implied by this evidence.
 
 ## Consequences
 

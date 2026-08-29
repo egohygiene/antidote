@@ -9,7 +9,7 @@ mod domain;
 mod error;
 mod ports;
 
-pub use application::SessionService;
+pub use application::{GenerationOrchestrationOutcome, GenerationOrchestrator, SessionService};
 pub use domain::{
     ConsentSelection, ExportApproval, Exposure, ExposureState, ExposureStopReason, GenerationJob,
     GenerationJobState, JourneyApprovalState, JourneyState, ModelUpdateProposal, ModelUpdateState,

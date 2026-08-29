@@ -3,7 +3,7 @@
 ## Status
 
 This document records the reproducible developer baseline established through
-issues #9–#13. It does not resolve the open decision about end-user
+issues #9–#14. It does not resolve the open decision about end-user
 operating-system or GPU support and does not claim a distributable application.
 
 ## Pinned toolchains
@@ -34,13 +34,19 @@ The matrix describes development evidence only. Minimum end-user OS versions,
 packaging, signing, GPU/CPU tiers, and audio-device behavior remain open
 decisions.
 
-## Tauri capability baseline
+## Desktop and process capability baseline
 
-The default capability grants only `core:default` to the main window. The
-foundation does not grant shell, sidecar, filesystem, URL, notification,
-network, or model permissions. Issue #14 must add the minimum sidecar capability
-only after executable, argument, environment, path, message-size, cancellation,
-and cleanup policies are implemented.
+The default capability still grants only `core:default` to the main window. The
+webview does not launch the worker, so it receives no shell, sidecar,
+filesystem, URL, notification, network, or model permission. The implemented
+Rust adapter owns the explicit executable, argument vector, cleared
+environment, working directory, output-root grants, message bounds,
+cancellation, timeout, stderr draining, cleanup, and restart policy.
+
+This is process supervision, not an operating-system sandbox or a packaged
+Tauri sidecar. Desktop command composition and release packaging must preserve
+the Rust-owned boundary without granting general process execution to the
+webview.
 
 ## Bootstrap and recovery
 
@@ -65,6 +71,6 @@ documents, research source, or lockfiles as a recovery shortcut.
 - no model weights, network inference, or telemetry;
 - no private journal, therapy, participant, health, credential, or generated
   audio data;
-- no database access from the worker, personal history, supervised sidecar,
-  playback, or adaptation; and
+- no database access from the worker, personal history, desktop composition,
+  packaged sidecar, playback, or adaptation; and
 - no clinical, efficacy, mechanism, CPU-only, or GPU support claim.

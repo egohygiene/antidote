@@ -118,6 +118,18 @@ dependencies = [
 ]
 
 [[package]]
+name = "antidote-worker"
+version = "0.1.0"
+dependencies = [
+ "antidote-contracts",
+ "antidote-core",
+ "serde",
+ "serde_json",
+ "sha2 0.11.0",
+ "tempfile",
+]
+
+[[package]]
 name = "anyhow"
 version = "1.0.104"
 source = "registry+https://github.com/rust-lang/crates.io-index"
