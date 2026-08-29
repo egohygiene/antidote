@@ -58,14 +58,20 @@ research object while keeping learnability, usefulness, and benefit open.
 
 ### Wave P2 — Publication and visual foundations
 
-- [#36 — Prove the continuous paper preview and Pages review loop](https://github.com/egohygiene/antidote/issues/36)
-- [#45 — Establish the scientific figure and table system](https://github.com/egohygiene/antidote/issues/45)
+- [x] [#36 — Prove the continuous paper preview and Pages review loop](https://github.com/egohygiene/antidote/issues/36) — [preview and live-review contract](../docs/paper-preview.md)
+- [x] [#45 — Establish the scientific figure and table system](https://github.com/egohygiene/antidote/issues/45) — [governed visual manifest](visuals/manifest.json)
 
 Issue #36 is an early canary. It proves that every later section merge can be
 inspected locally, in pull-request artifacts, and at the custom-domain web/PDF
 routes. Issue #45 creates the figure manifest, caption registry, accessibility
 contract, source specifications, and placeholder/final distinction before
 visual production begins.
+
+The issue #45 manifest allocates all fifteen visual concepts already promised
+by the frozen manuscript contract plus the roadmap's consent-scoped context
+projection. One introductory loop is active and visibly provisional; every
+other asset remains planned and inactive until its owning evidence and writing
+issue authorizes production.
 
 ### Wave P3 — Core manuscript
 

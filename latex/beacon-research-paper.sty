@@ -110,14 +110,48 @@
   \vspace{0.2in}%
 }
 
-\newcommand{\BeaconFigure}[3]{%
+\newcommand{\AntidoteDeclareVisualText}[5]{%
+  \expandafter\def\csname AntidoteVisualCaption:#1\endcsname{#2}%
+  \expandafter\def\csname AntidoteVisualAlt:#1\endcsname{#3}%
+  \expandafter\def\csname AntidoteVisualDescription:#1\endcsname{#4}%
+  \expandafter\def\csname AntidoteVisualState:#1\endcsname{#5}%
+}
+\newcommand{\AntidoteVisualCaption}[1]{\csname AntidoteVisualCaption:#1\endcsname}
+\newcommand{\AntidoteVisualAlt}[1]{\csname AntidoteVisualAlt:#1\endcsname}
+\newcommand{\AntidoteVisualDescription}[1]{\csname AntidoteVisualDescription:#1\endcsname}
+\newcommand{\AntidoteVisualState}[1]{\csname AntidoteVisualState:#1\endcsname}
+\expandafter\def\csname BeaconVisualStateNote:planned\endcsname{%
+  \par\smallskip{\footnotesize\bfseries\color{BeaconAccent}Visual state: planned - not final artwork.\par}}
+\expandafter\def\csname BeaconVisualStateNote:placeholder\endcsname{%
+  \par\smallskip{\footnotesize\bfseries\color{BeaconAccent}Visual state: placeholder - not final artwork.\par}}
+\expandafter\def\csname BeaconVisualStateNote:draft\endcsname{%
+  \par\smallskip{\footnotesize\bfseries\color{BeaconAccent}Visual state: draft - not final artwork.\par}}
+\expandafter\def\csname BeaconVisualStateNote:final\endcsname{}
+\newcommand{\BeaconVisualStateNote}[1]{\csname BeaconVisualStateNote:#1\endcsname}
+
+\newcommand{\BeaconFigure}[5]{%
   \begin{figure}[htbp]
     \centering
     \includegraphics[width=0.9\linewidth]{paper/figures/#1.pdf}
     \caption{#2}\label{fig:#1}
-    \par\smallskip{\footnotesize\color{BeaconMuted}\textit{Figure description:} #3\par}
+    \BeaconVisualStateNote{#5}
+    \par\smallskip{\footnotesize\color{BeaconMuted}\textit{Figure description:} #4\par}
   \end{figure}%
 }
+\newcommand{\AntidoteFigure}[1]{%
+  \BeaconFigure{#1}{\AntidoteVisualCaption{#1}}{\AntidoteVisualAlt{#1}}{\AntidoteVisualDescription{#1}}{\AntidoteVisualState{#1}}}
+
+\newcommand{\BeaconTable}[5]{%
+  \begin{table}[htbp]
+    \centering
+    \input{paper/tables/#1}
+    \caption{#2}\label{tab:#1}
+    \BeaconVisualStateNote{#5}
+    \par\smallskip{\footnotesize\color{BeaconMuted}\textit{Table description:} #4\par}
+  \end{table}%
+}
+\newcommand{\AntidoteTable}[1]{%
+  \BeaconTable{#1}{\AntidoteVisualCaption{#1}}{\AntidoteVisualAlt{#1}}{\AntidoteVisualDescription{#1}}{\AntidoteVisualState{#1}}}
 
 \newenvironment{BeaconKeyPoints}{%
   \begin{quote}\color{BeaconInk}\sffamily\small\textbf{Key points}\par\begin{itemize}

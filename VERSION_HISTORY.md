@@ -25,3 +25,6 @@
   explicit non-evidence draft placeholders.
 - Added a gated GitHub Pages artifact containing the landing page, accessible
   paper, PDF, provenance, source archive, manifest, and checksum inventory.
+- Added the governed scientific visual manifest, centralized LaTeX caption
+  registry, per-visual specifications, explicit lifecycle states, and checks
+  for assets, labels, references, accessibility text, prompts, and provenance.

@@ -47,6 +47,9 @@ The manuscript, bibliography, figures, research notes, source records, and
 native publication build are owned here. Start with
 [`paper/README.md`](./paper/README.md), then replace the visibly marked draft
 blocks under `paper/sections/` as the evidence work advances.
+Scientific figures and tables are allocated through the
+[`paper/visuals/manifest.json`](./paper/visuals/manifest.json) contract before
+assets become active.
 
 Use either developer interface:
 
@@ -103,7 +106,7 @@ model or accepts personal data.
 ## Research layout
 
 ```text
-paper/                  canonical LaTeX manuscript, bibliography, and figures
+paper/                  canonical LaTeX manuscript, bibliography, visual manifest, figures, and tables
 scripts/                product-owned build, validation, Pages, and Beacon adapters
 latex/, themes/, web/   standalone research-paper rendering kit
 research/bootstrap/     preserved hypothesis-generating research snapshot

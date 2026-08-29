@@ -58,6 +58,17 @@ regenerate them rather than editing them directly.
 - Do not commit private personal records or formal study data before protocol,
   consent, privacy, and publication classifications are accepted.
 
+## Figure and table contributions
+
+- Begin with `paper/visuals/manifest.json` and the visual's specification.
+- Keep captions, alt text, and long descriptions in the manifest; regenerate
+  the centralized LaTeX registry instead of placing caption text in pixels.
+- Use deterministic SVG or governed LaTeX/structured data for exact visuals.
+- Record prompt, model, hash, license, disclosure, and human label verification
+  before activating generated editorial artwork.
+- Preserve visible placeholder/draft state until every label, claim, contrast,
+  grayscale, print, PDF, and accessible-web check passes.
+
 ## Architecture and contract changes
 
 - Update the owning architecture document or ADR when a durable boundary changes.
