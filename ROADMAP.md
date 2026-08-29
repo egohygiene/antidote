@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.3.0
+version: 0.4.0
 status: provisional
 owners:
   - egohygiene
@@ -35,7 +35,7 @@ route: /roadmap/antidote/
 updated: 2026-08-29
 -->
 
-## 2026-08-27 execution snapshot
+## 2026-08-29 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap
 > handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
@@ -43,8 +43,10 @@ updated: 2026-08-29
 
 **Lifecycle:** research draft with prototype architecture bootstrap
 
-**Current gate:** Review the specialized architecture corpus and MVP contracts,
-then open implementation issues for the first local vertical slice.
+**Current gate:** The MVP implementation sequence is deliberately paused after
+issue #16 while the paper-first workstream verifies the evidence base, proves
+the continuous publication loop, and writes the design/protocol manuscript
+through issue #48.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -101,7 +103,7 @@ download, manifest, and integrity routes through a gated product-owned workflow.
 id: ANT-Q02
 status: active
 depends_on: [ANT-Q01]
-issues: []
+issues: ["egohygiene/antidote#32", "egohygiene/antidote#33", "egohygiene/antidote#34", "egohygiene/antidote#35"]
 -->
 
 #### ANT-Q02 — Verify literature and novelty boundaries
@@ -119,6 +121,40 @@ precedents, and candidate contribution claims across the research streams.
 - [ ] Architecture references are separated from implementation documentation.
 - [ ] The contribution statement is rewritten from verified evidence.
 - [ ] Unsupported efficacy and deterministic mechanism language is absent.
+
+<!-- roadmap-step
+id: ANT-Q02B
+status: active
+depends_on: [ANT-Q01A, ANT-Q02]
+issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48"]
+-->
+
+#### ANT-Q02B — Write and continuously publish the first paper
+
+**State:** `active`
+
+**Outcome:** A source-governed design/protocol manuscript remains continuously
+reviewable through reproducible PDF, accessible web, provenance, arXiv-source,
+and custom-domain Pages projections, then advances through an explicit
+feasibility-revision gate when qualifying evidence exists.
+
+**Execution source:** [`paper/roadmap.md`](paper/roadmap.md)
+
+**Exit criteria:**
+
+- [ ] The living source atlas and broader bibliography shelf are preserved
+  without treating every entry as cited evidence.
+- [ ] Modeling, adaptive-control, real-time audio, and provenance architecture
+  claims have primary-source or normative-standard anchors.
+- [ ] The novelty matrix supports the frozen thesis and contribution boundary.
+- [ ] Every canonical manuscript section completes its evidence-specific issue.
+- [ ] Figures and tables have governed source, captions, alt text, placement,
+  and placeholder/final status.
+- [ ] Table of contents, cross-references, PDF, accessible HTML, provenance, and
+  source packaging pass the native build.
+- [ ] The custom-domain web paper and PDF expose the reviewed source revision.
+- [ ] The design/protocol manuscript contains no invented result or unsupported
+  clinical or neurological-mechanism claim.
 
 <!-- roadmap-step
 id: ANT-Q02A
@@ -154,6 +190,10 @@ issues: ["egohygiene/antidote#9", "egohygiene/antidote#10", "egohygiene/antidote
 #### ANT-Q03 — Bootstrap the local application foundation
 
 **State:** `active`
+
+**Execution note:** Paused by maintainer direction after issue #16 while
+ANT-Q02B is active. Issues #17 and #18 remain the next valid MVP sequence; the
+pause does not change their architecture or acceptance criteria.
 
 **Outcome:** A minimal Tauri/React shell, framework-independent Rust core,
 SQLite adapter, and mock model worker execute one contract-tested session
@@ -290,11 +330,12 @@ as scientific source of truth.
 
 ## Sequencing rationale
 
-Architecture and contracts can progress while literature verification continues,
-but a real generative adapter must not harden scientific claims or experimental
-conditions prematurely. The mock vertical slice tests authority and provenance
-first; the real model slice tests technical feasibility; only then is the study
-protocol frozen and run.
+The paper may progress as a design/protocol manuscript while implementation is
+paused, but it must preserve observed implementation status. A real generative
+adapter must not harden scientific claims or experimental conditions
+prematurely. The mock vertical slice tests authority and provenance first; the
+real model slice tests technical feasibility; only then is the study protocol
+frozen and run.
 
 ## Evidence and uncertainty
 
