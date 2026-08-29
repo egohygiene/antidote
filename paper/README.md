@@ -8,6 +8,19 @@ Use [`paper/roadmap.md`](roadmap.md) as the durable writing sequence. It links
 the evidence, section, figure, synthesis, and live-publication issues and
 defines the resume protocol for future contributors and conversations.
 
+The evidence corpus has three distinct layers:
+
+- the complete living atlas at
+  [`research/atlas/literature-voyage-v0.1.md`](../research/atlas/literature-voyage-v0.1.md);
+- the verified, intentionally broader bibliography shelf in
+  [`references.bib`](references.bib); and
+- citations actually used by the numbered manuscript sections.
+
+Current source states and promotion requirements live in
+[`research/sources/`](../research/sources/). Run
+`python3 scripts/check_sources.py` to verify stable identities, duplicate
+identifiers, source-record coverage, and the cited-versus-shelf distinction.
+
 ## Current section map
 
 | File | Writing purpose | Evidence gate |
@@ -45,6 +58,7 @@ task build
 Run the full source and artifact checks before opening a pull request:
 
 ```sh
+python3 scripts/check_sources.py
 make check-all
 task check-site
 ```

@@ -103,8 +103,9 @@ paper/                  canonical LaTeX manuscript, bibliography, and figures
 scripts/                product-owned build, validation, Pages, and Beacon adapters
 latex/, themes/, web/   standalone research-paper rendering kit
 research/bootstrap/     preserved hypothesis-generating research snapshot
+research/atlas/         complete living literature voyage and reading order
 research/notes/         working evidence and claim ledgers
-research/sources/       primary-source verification records
+research/sources/       source catalog, lifecycle rules, and verification records
 data/                   schemas and explicitly approved research data only
 apps/desktop/           pinned Tauri and React workspace; session UI remains target
 crates/                 Rust contract, domain, store, provenance, and audio boundaries

@@ -57,5 +57,11 @@ supports implementation choices only.
   [Safetensors](https://huggingface.co/docs/safetensors/index) - implementation
   references, not scientific evidence.
 
-The broader architecture source atlas remains a working research record until
-individual entries are verified and promoted into the canonical bibliography.
+The complete living atlas is preserved at
+[`research/atlas/literature-voyage-v0.1.md`](research/atlas/literature-voyage-v0.1.md).
+Its current ownership and lifecycle view is
+[`research/sources/catalog.json`](research/sources/catalog.json), governed by
+[`research/sources/README.md`](research/sources/README.md). The atlas is broader
+than the verified bibliography shelf, and the shelf is broader than current
+manuscript citations. An entry's presence is not endorsement or permission to
+use it as evidence.

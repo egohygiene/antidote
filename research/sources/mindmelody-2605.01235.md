@@ -35,7 +35,40 @@ helpfulness results from a non-clinical pilot. Those are claims of the cited
 preprint and have not been independently reproduced here. The paper is prior
 literature, not proof of Antidote efficacy, clinical validity, or novelty.
 
-## Follow-up
+## Source claims assessed
+
+- The paper describes a closed loop from EEG-derived affect through a semantic
+  intervention plan and controllable music generation to physiological and
+  subjective feedback.
+- The authors characterize their evaluation as a non-clinical pilot.
+- The reported control-adherence, alignment, and helpfulness measures are
+  findings of this preprint, not observations reproduced by Antidote.
+
+## Limitations and unresolved questions
+
+- The reviewed artifact is an arXiv preprint rather than a peer-reviewed
+  clinical trial.
+- The currently visible methods do not clearly resolve the pilot participant
+  count, independent replication, or clinical relevance.
+- No result establishes that its generated audio treats a condition or that
+  EEG provides a universal objective representation of emotion.
+- Novelty conclusions require comparison with additional adaptive and
+  personalized music systems.
+
+## Allowed manuscript use
+
+MindMelody may be cited as adjacent prior art showing that the design
+neighborhood—EEG-derived affect, semantic planning, controllable generation,
+and feedback—is active. The manuscript may accurately attribute the preprint's
+reported system design and non-clinical pilot findings while labeling their
+source and review status.
+
+## Prohibited manuscript use
+
+Do not use this source as proof of Antidote's novelty, efficacy, clinical
+validity, safety, generalizability, or the reliability of EEG emotion inference.
+
+## Remaining follow-up
 
 - Review the complete methods, sample, baselines, measures, limitations, and
   released implementation or data if available.
