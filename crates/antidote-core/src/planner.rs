@@ -1,6 +1,6 @@
 use std::collections::BTreeSet;
 use std::error::Error;
-use std::fmt::{Display, Formatter};
+use std::fmt::{Display, Formatter, Write};
 
 use antidote_contracts::{
     JourneyPlan, JourneyPlanControlPolicy, JourneyPlanControlPolicySupportedControl,
@@ -1033,7 +1033,12 @@ fn hash_serializable<T: Serialize>(value: &T) -> Result<String, PlanningError> {
     let value = serde_json::to_value(value).map_err(|_| PlanningError::InvalidPlan)?;
     let canonical = canonicalize(value);
     let bytes = serde_json::to_vec(&canonical).map_err(|_| PlanningError::InvalidPlan)?;
-    Ok(format!("{:x}", Sha256::digest(bytes)))
+    let digest = Sha256::digest(bytes);
+    let mut encoded = String::with_capacity(digest.len() * 2);
+    for byte in digest {
+        write!(&mut encoded, "{byte:02x}").map_err(|_| PlanningError::InvalidPlan)?;
+    }
+    Ok(encoded)
 }
 
 fn canonicalize(value: Value) -> Value {
