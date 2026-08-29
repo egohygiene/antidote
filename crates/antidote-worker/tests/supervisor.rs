@@ -179,7 +179,8 @@ fn approved_generation_service() -> SessionService<MemoryRepository, FixedClock,
             SessionCommand::AcceptWorkingProjection { projection },
         )
         .expect("projection must append");
-    let moment = fixture::<MomentContext>("moment-context-valid");
+    let mut moment = fixture::<MomentContext>("moment-context-valid");
+    moment.time_horizon_seconds = 10;
     service
         .execute(
             session_id,
