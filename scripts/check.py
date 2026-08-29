@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import html as html_module
 import json
 import re
 import subprocess
@@ -19,6 +20,8 @@ from pathlib import Path
 from urllib.parse import urlparse
 
 import tomllib
+
+from check_visuals import validate_visual_system
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_SECTIONS = (
@@ -53,7 +56,6 @@ ALLOWED_STAGES = {"draft", "submission-ready", "published"}
 PLACEHOLDER = re.compile(r"\b(?:TODO|TBD|FIXME|REPLACE ME)\b", re.IGNORECASE)
 ANTIDOTE_PLACEHOLDER = re.compile(r"\\AntidotePlaceholder\{", re.IGNORECASE)
 INPUT = re.compile(r"\\input\{([^}]+)\}")
-FIGURE = re.compile(r"\\BeaconFigure\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL)
 URL = re.compile(r"https?://[^\s<>{}\[\]\\\"']+")
 REQUIRED_SECTION_ANCHORS = {
     "sec:introduction",
@@ -324,6 +326,13 @@ def main() -> int:
     if not bibliography.is_file():
         errors.append(f"missing bibliography: {bibliography}")
 
+    visual_result = validate_visual_system(
+        project, paper_stage=str(paper.get("stage", "draft"))
+    )
+    errors.extend(str(error) for error in visual_result["errors"])
+    warnings.extend(str(warning) for warning in visual_result["warnings"])
+    active_visuals = visual_result["active"]
+
     for section in REQUIRED_SECTIONS:
         if not re.search(
             rf"\\section\*?\{{{re.escape(section)}\}}", tex, re.IGNORECASE
@@ -334,22 +343,10 @@ def main() -> int:
     for key in sorted(citation_keys(tex) - bibliography_keys(bibliography_text)):
         errors.append(f"citation missing from bibliography: {key}")
     labels = set(re.findall(r"\\label\{([^}]+)\}", tex))
-    labels.update(f"fig:{slug}" for slug, _, _ in FIGURE.findall(tex))
+    labels.update(str(visual["label"]) for visual in active_visuals)
     references = set(re.findall(r"\\(?:ref|eqref|autoref)\{([^}]+)\}", tex))
     for label in sorted(references - labels):
         errors.append(f"reference target is missing: {label}")
-    figures = FIGURE.findall(tex)
-    if not figures:
-        errors.append("paper must exercise at least one BeaconFigure")
-    for slug, caption, description in figures:
-        if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", slug):
-            errors.append(
-                f"figure slug must use lowercase letters, digits, and hyphens: {slug}"
-            )
-        if not (project / "paper" / "figures" / f"{slug}.svg").is_file():
-            errors.append(f"figure source is missing: {slug}.svg")
-        if not caption.strip() or not description.strip():
-            errors.append(f"figure requires caption and description: {slug}")
 
     log_path = build / "paper.log"
     if not log_path.is_file():
@@ -397,8 +394,27 @@ def main() -> int:
                 "web table of contents is missing stable targets: "
                 + ", ".join(missing_toc_targets)
             )
-        if "fig:semantic-acoustic-response-loop" not in identifiers:
-            errors.append("web projection is missing its stable figure anchor")
+        for visual in active_visuals:
+            label = str(visual["label"])
+            if label not in identifiers:
+                errors.append(f"web projection is missing stable visual anchor: {label}")
+            if visual["kind"] == "figure":
+                filename = Path(str(visual["filename"])).name
+                expected_alt = html_module.escape(
+                    str(visual["alt_text"]).strip(), quote=True
+                )
+                pattern = re.compile(
+                    rf'<img\b[^>]*src="figures/{re.escape(filename)}"[^>]*'
+                    rf'alt="{re.escape(expected_alt)}"[^>]*>'
+                )
+                if pattern.search(html) is None:
+                    errors.append(
+                        f"web figure alt text does not match the registry: {label}"
+                    )
+            if visual["state"] != "final" and (
+                f"Visual state: {visual['state']} - not final artwork." not in html
+            ):
+                errors.append(f"web visual state marker is missing: {label}")
 
     provenance_path = build / "provenance.json"
     if not provenance_path.is_file():

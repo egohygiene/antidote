@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description">
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description" data-antidote-state="placeholder">
   <title id="title">Candidate semantic, acoustic, and response loop</title>
   <desc id="description">Semantic intent flows to generated acoustic structure, then to measured individual response. A feedback arrow returns to the next decision. Every link is a hypothesis to test.</desc>
   <defs>
@@ -13,6 +13,7 @@
       .label { font: 16px sans-serif; fill: #6d557d; text-anchor: middle; }
     </style>
   </defs>
+  <text class="label" x="600" y="34">PROVISIONAL STRUCTURE - NOT FINAL ARTWORK</text>
   <rect class="box" x="50" y="80" width="300" height="150"/>
   <text class="heading" x="200" y="135">Semantic intent</text>
   <text class="detail" x="200" y="177">interpretable, personal,</text>
@@ -34,5 +35,5 @@
   <text class="label" x="794" y="136">test</text>
 
   <path class="arrow" d="M 1000 245 C 1000 370, 200 370, 200 245"/>
-  <text class="label" x="600" y="345">longitudinal update: hypothesis to test</text>
+  <text class="label" x="600" y="385">longitudinal update: hypothesis to test</text>
 </svg>

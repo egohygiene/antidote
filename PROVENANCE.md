@@ -64,3 +64,18 @@ The MVP directory tree and JSON Schemas are new Antidote-owned contract
 scaffolds derived from the research architecture review. They do not claim that
 the desktop application, Rust crates, model worker, model adapter, or study
 exists.
+
+## Scientific visual provenance
+
+The issue #45 visual manifest, caption registry projection, source
+specifications, lifecycle model, validator, and table/figure macros are original
+Antidote-owned publication infrastructure. They were informed by Reflector's
+standard of reviewable publication evidence but do not copy Reflector branding,
+artwork, caption text, manuscript content, or visual identity.
+
+The active semantic-acoustic-response SVG is repository-authored provisional
+structure. It contains no third-party image asset and is visibly marked as not
+final artwork. Future exact diagrams must remain reproducible from governed
+vector or structured-data source. Future generated editorial artwork must
+record model/prompt provenance, output identity, reuse terms, disclosure, and
+human label verification before activation.

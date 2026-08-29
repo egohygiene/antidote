@@ -25,9 +25,7 @@ import tomllib
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "beacon-template.toml"
 INPUT_PATTERN = re.compile(r"\\input\{([^}]+)\}")
-FIGURE_PATTERN = re.compile(
-    r"\\BeaconFigure\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL
-)
+VISUAL_PATTERN = re.compile(r"\\Antidote(Figure|Table)\{([^{}]+)\}")
 PLACEHOLDER_PATTERN = re.compile(
     r"\\AntidotePlaceholder\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL
 )
@@ -205,7 +203,15 @@ def expand_inputs(path: Path, source_root: Path, seen: set[Path] | None = None) 
     return INPUT_PATTERN.sub(replace, text)
 
 
-def web_source(work: Path, entrypoint: str) -> str:
+def visual_records(work: Path) -> dict[str, dict]:
+    """Load visual records keyed by their stable slug."""
+    path = work / "paper" / "visuals" / "manifest.json"
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    records = manifest.get("visuals", [])
+    return {record["slug"]: record for record in records}
+
+
+def web_source(work: Path, entrypoint: str, visuals: dict[str, dict]) -> str:
     expanded = expand_inputs(work / entrypoint, work)
     body_match = re.search(
         r"\\begin\{document\}(.*)\\end\{document\}", expanded, re.DOTALL
@@ -218,13 +224,38 @@ def web_source(work: Path, entrypoint: str) -> str:
     body = re.sub(r"\\bibliography\{[^}]+\}", "", body)
     body = re.sub(r"\\appendix\s*", lambda _: r"\section*{Appendix}", body)
 
-    def figure(match: re.Match[str]) -> str:
-        slug, caption, description = (part.strip() for part in match.groups())
+    def visual(match: re.Match[str]) -> str:
+        declared_kind, slug = match.groups()
+        record = visuals.get(slug)
+        if record is None:
+            raise RuntimeError(f"manuscript references unknown visual: {slug}")
+        kind = record["kind"]
+        if declared_kind.lower() != kind:
+            raise RuntimeError(f"visual reference kind mismatch: {slug}")
+        caption = tex_escape(record["caption"])
+        description = tex_escape(record["long_description"])
+        state = record["state"]
+        state_note = (
+            f"\n\\textbf{{Visual state: {tex_escape(state)} - not final artwork.}}\n"
+            if state != "final"
+            else ""
+        )
+        if kind == "figure":
+            filename = Path(record["filename"]).name
+            return (
+                "\n\\begin{figure}\n\\centering\n"
+                f"\\includegraphics{{figures/{filename}}}\n"
+                f"\\caption{{{caption}}}\\label{{fig:{slug}}}\n\\end{{figure}}\n"
+                f"{state_note}\n\\textit{{Figure description:}} {description}\n"
+            )
+        table_source = work / record["filename"]
+        if not table_source.is_file():
+            raise RuntimeError(f"active table source is missing: {record['filename']}")
         return (
-            "\n\\begin{figure}\n\\centering\n"
-            f"\\includegraphics{{figures/{slug}.svg}}\n"
-            f"\\caption{{{caption}}}\\label{{fig:{slug}}}\n\\end{{figure}}\n\n"
-            f"\\textit{{Figure description:}} {description}\n"
+            "\n\\begin{table}\n\\centering\n"
+            + table_source.read_text(encoding="utf-8")
+            + f"\n\\caption{{{caption}}}\\label{{tab:{slug}}}\n\\end{{table}}\n"
+            + f"{state_note}\n\\textit{{Table description:}} {description}\n"
         )
 
     def placeholder(match: re.Match[str]) -> str:
@@ -236,7 +267,7 @@ def web_source(work: Path, entrypoint: str) -> str:
             "\\end{quote}\n"
         )
 
-    return PLACEHOLDER_PATTERN.sub(placeholder, FIGURE_PATTERN.sub(figure, body))
+    return PLACEHOLDER_PATTERN.sub(placeholder, VISUAL_PATTERN.sub(visual, body))
 
 
 def build_web(
@@ -256,10 +287,12 @@ def build_web(
             shutil.copy2(source, web_figures / source.name)
 
     source = work / "paper-for-web.tex"
-    figure_records = FIGURE_PATTERN.findall(
+    visuals = visual_records(work)
+    references = VISUAL_PATTERN.findall(
         expand_inputs(work / config["paper"]["entrypoint"], work)
     )
-    source_text = web_source(work, config["paper"]["entrypoint"])
+    referenced_visuals = [visuals[slug] for _, slug in references]
+    source_text = web_source(work, config["paper"]["entrypoint"], visuals)
     source.write_text(source_text, encoding="utf-8")
     metadata = {
         "title": paper["title"],
@@ -347,13 +380,20 @@ def build_web(
         )
 
     rendered = equation_pattern.sub(anchor_equation, rendered)
-    for slug, caption, _ in figure_records:
+    for record in referenced_visuals:
+        if record["kind"] != "figure":
+            continue
+        slug = record["slug"]
+        filename = Path(record["filename"]).name
         if not re.fullmatch(r"[a-z0-9][a-z0-9-]*", slug):
             raise RuntimeError(f"unsafe figure slug: {slug}")
-        image_pattern = re.compile(rf'<img src="figures/{re.escape(slug)}\.svg"\s*/?>')
+        image_pattern = re.compile(
+            rf'<img src="figures/{re.escape(filename)}"\s*/?>'
+        )
+        alternative = html_module.escape(record["alt_text"].strip(), quote=True)
         image = (
-            f'<img src="figures/{slug}.svg" '
-            f'alt="{html_module.escape(caption.strip(), quote=True)}">'
+            f'<img src="figures/{filename}" '
+            f'alt="{alternative}">'
         )
         rendered, replacements = image_pattern.subn(image, rendered)
         if replacements != 1:

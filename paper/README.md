@@ -29,6 +29,28 @@ Current source states and promotion requirements live in
 `python3 scripts/check_sources.py` to verify stable identities, duplicate
 identifiers, source-record coverage, and the cited-versus-shelf distinction.
 
+## Scientific visuals
+
+[`visuals/manifest.json`](visuals/manifest.json) governs the complete figure
+and table inventory. It assigns every visual a stable ID, owning section,
+scientific purpose, label, dimensions, lifecycle state, source mode,
+specification, caption, alt text, long description, provenance, license,
+claim-ledger boundary, and paper-owned reuse policy.
+
+Caption text remains outside image pixels. The committed
+[`visuals/captions.tex`](visuals/captions.tex) registry is generated from the
+manifest and consumed by `\AntidoteFigure` and `\AntidoteTable`. Exact diagrams
+use deterministic SVG; scientific tables use governed LaTeX and structured
+inputs where applicable. Generated images are reserved for conceptual/editorial
+artwork and require prompt provenance plus human verification.
+
+Read the complete production and accessibility contract in
+[`visuals/README.md`](visuals/README.md). Validate it directly with:
+
+```sh
+python3 scripts/check_visuals.py
+```
+
 ## Current section map
 
 | File | Writing purpose | Evidence gate |
@@ -75,6 +97,7 @@ Run the full source and artifact checks before opening a pull request:
 
 ```sh
 python3 scripts/check_sources.py
+python3 scripts/check_visuals.py
 make check-all
 task check-site
 ```
