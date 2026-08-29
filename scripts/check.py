@@ -32,6 +32,22 @@ REQUIRED_SECTIONS = (
     "Acknowledgements",
     "Contributor statement",
 )
+REQUIRED_TOC_SECTIONS = (
+    "Introduction",
+    "Related work",
+    "System design",
+    "Methods",
+    "Results",
+    "Discussion",
+    "Limitations",
+    "Ethics statement",
+    "Data and code availability",
+    "Acknowledgements",
+    "Contributor statement",
+    "Conclusion",
+    "Working protocol checklist",
+    "Migration provenance",
+)
 ALLOWED_THEMES = {"neutral", "egohygiene"}
 ALLOWED_STAGES = {"draft", "submission-ready", "published"}
 PLACEHOLDER = re.compile(r"\b(?:TODO|TBD|FIXME|REPLACE ME)\b", re.IGNORECASE)
@@ -39,6 +55,22 @@ ANTIDOTE_PLACEHOLDER = re.compile(r"\\AntidotePlaceholder\{", re.IGNORECASE)
 INPUT = re.compile(r"\\input\{([^}]+)\}")
 FIGURE = re.compile(r"\\BeaconFigure\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL)
 URL = re.compile(r"https?://[^\s<>{}\[\]\\\"']+")
+REQUIRED_SECTION_ANCHORS = {
+    "sec:introduction",
+    "sec:related-work",
+    "sec:system-design",
+    "sec:methods",
+    "sec:results",
+    "sec:discussion",
+    "sec:limitations",
+    "sec:ethics-statement",
+    "sec:data-and-code-availability",
+    "sec:acknowledgements",
+    "sec:contributor-statement",
+    "sec:conclusion",
+    "app:working-protocol-checklist",
+    "app:migration-provenance",
+}
 
 
 def load_toml(path: Path) -> dict:
@@ -94,8 +126,20 @@ def pdf_checks(path: Path, errors: list[str]) -> None:
         info = subprocess.run(
             ["pdfinfo", str(path)], check=True, capture_output=True, text=True
         ).stdout
+        destinations = subprocess.run(
+            ["pdfinfo", "-dests", str(path)],
+            check=True,
+            capture_output=True,
+            text=True,
+        ).stdout
         fonts = subprocess.run(
             ["pdffonts", str(path)], check=True, capture_output=True, text=True
+        ).stdout
+        toc_text = subprocess.run(
+            ["pdftotext", "-f", "2", "-l", "2", "-layout", str(path), "-"],
+            check=True,
+            capture_output=True,
+            text=True,
         ).stdout
     except (OSError, subprocess.CalledProcessError) as error:
         errors.append(f"PDF inspection failed: {error}")
@@ -109,6 +153,17 @@ def pdf_checks(path: Path, errors: list[str]) -> None:
         errors.append("paper.pdf must not be encrypted")
     if re.search(r"^JavaScript:\s+yes", info, re.MULTILINE):
         errors.append("paper.pdf must not contain JavaScript")
+    for destination in ('"section.12"', '"appendix.B"', '"figure.caption.1"'):
+        if destination not in destinations:
+            errors.append(f"paper.pdf is missing internal destination: {destination}")
+    if not re.search(r"(?m)^Contents\s*$", toc_text):
+        errors.append("paper.pdf must contain a rendered table of contents")
+    for section in REQUIRED_TOC_SECTIONS:
+        if not re.search(
+            rf"(?m)^\s*(?:\d+|[A-Z])\s+{re.escape(section)}.*\d+\s*$",
+            toc_text,
+        ):
+            errors.append(f"paper.pdf table of contents is missing: {section}")
     rows = [line for line in fonts.splitlines()[2:] if line.strip()]
     if not rows or any(
         re.search(r"\sno\s+(?:yes|no)\s+(?:yes|no)\s+\d+\s+\d+\s*$", row)
@@ -316,6 +371,7 @@ def main() -> int:
             'class="skip-link"',
             '<main id="content"',
             'aria-label="Table of contents"',
+            'name="source-revision"',
             "<figcaption",
         ):
             if marker not in html:
@@ -325,6 +381,24 @@ def main() -> int:
                 errors.append("web image is missing non-empty alternative text")
         if "Figure description:" not in html:
             errors.append("web figure description is missing")
+        identifiers = set(re.findall(r'\sid="([^"]+)"', html))
+        missing_anchors = sorted(REQUIRED_SECTION_ANCHORS - identifiers)
+        if missing_anchors:
+            errors.append(
+                "web projection is missing stable section anchors: "
+                + ", ".join(missing_anchors)
+            )
+        toc_targets = set(
+            re.findall(r'<a\s+[^>]*href="#([^"]+)"', html)
+        )
+        missing_toc_targets = sorted(REQUIRED_SECTION_ANCHORS - toc_targets)
+        if missing_toc_targets:
+            errors.append(
+                "web table of contents is missing stable targets: "
+                + ", ".join(missing_toc_targets)
+            )
+        if "fig:semantic-acoustic-response-loop" not in identifiers:
+            errors.append("web projection is missing its stable figure anchor")
 
     provenance_path = build / "provenance.json"
     if not provenance_path.is_file():

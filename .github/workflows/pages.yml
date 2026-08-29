@@ -88,7 +88,15 @@ jobs:
       - name: Build and validate publication site
         env:
           PAGES_CUSTOM_DOMAIN: "${{ vars.PAGES_CUSTOM_DOMAIN }}"
-        run: task check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+        shell: bash
+        run: |
+          set -euo pipefail
+          make check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+          make_site="$(mktemp -d)"
+          cp -R _site/. "${make_site}/"
+          make clean THEME="egohygiene" BUILD_DIR="build/egohygiene"
+          task check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+          diff --recursive --brief "${make_site}" _site
 
       - name: Prove publication artifact reproducibility
         run: task reproducibility THEME="egohygiene" BUILD_DIR="build/egohygiene"
@@ -127,6 +135,12 @@ jobs:
         uses: step-security/harden-runner@05e31511f85b41b11d1cf0ef85d0992719546e2c
         with:
           egress-policy: audit
+
+      - name: Check out publication verifier
+        # actions/checkout v7.0.1
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1
+        with:
+          persist-credentials: false
 
       - name: Download reviewed Pages artifact
         # actions/download-artifact v8.0.1
@@ -173,79 +187,8 @@ jobs:
               "${base_url}" "${deployed_url}" >&2
             exit 1
           fi
-          for route in \
-            "" \
-            "paper/" \
-            "antidote.pdf" \
-            "magazine/" \
-            "downloads/" \
-            "publication.json" \
-            "site.json" \
-            "provenance.json" \
-            "SHA256SUMS"
-          do
-            url="${base_url}${route}"
-            printf "Checking <%s>\n" "${url}"
-            curl \
-              --fail \
-              --location \
-              --output /dev/null \
-              --retry 12 \
-              --retry-all-errors \
-              --retry-delay 10 \
-              --silent \
-              --show-error \
-              "${url}"
-          done
-
-          site_catalog="$(mktemp)"
-          publication_manifest="$(mktemp)"
-          checksum_manifest="$(mktemp)"
-          curl --fail --location --silent --show-error \
-            "${base_url}site.json" --output "${site_catalog}"
-          curl --fail --location --silent --show-error \
-            "${base_url}publication.json" --output "${publication_manifest}"
-          curl --fail --location --silent --show-error \
-            "${base_url}SHA256SUMS" --output "${checksum_manifest}"
-          python3 - \
-            "${site_catalog}" \
-            "${publication_manifest}" \
-            "${checksum_manifest}" \
-            "${base_url}" \
-            "${EXPECTED_REVISION}" <<'PY'
-          import hashlib
-          import json
-          import pathlib
-          import sys
-
-          catalog = json.loads(pathlib.Path(sys.argv[1]).read_text(encoding="utf-8"))
-          publication = json.loads(
-              pathlib.Path(sys.argv[2]).read_text(encoding="utf-8")
-          )
-          checksum_lines = pathlib.Path(sys.argv[3]).read_text(encoding="utf-8")
-          expected_url = sys.argv[4]
-          expected_revision = sys.argv[5]
-          slots = {slot["id"]: slot for slot in catalog["slots"]}
-
-          checksums = {
-              relative: digest
-              for digest, relative in (
-                  line.split("  ", 1) for line in checksum_lines.splitlines()
-              )
-          }
-          for relative, path in (
-              ("site.json", pathlib.Path(sys.argv[1])),
-              ("publication.json", pathlib.Path(sys.argv[2])),
-          ):
-              observed = hashlib.sha256(path.read_bytes()).hexdigest()
-              assert checksums[relative] == observed
-
-          assert catalog["canonical_url"] == expected_url
-          assert publication["pages_url"] == expected_url
-          assert catalog["source_revision"] == expected_revision
-          assert publication["source_revision"] == expected_revision
-          assert slots["paper"]["status"] == "available"
-          assert slots["magazine"]["status"] == "planned"
-          assert slots["magazine"]["artifacts"] == []
-          assert slots["magazine"]["manifest_path"] is None
-          PY
+          python3 scripts/verify_live_publication.py \
+            --base-url="${base_url}" \
+            --expected-revision="${EXPECTED_REVISION}" \
+            --attempts=12 \
+            --retry-delay=10

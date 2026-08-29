@@ -2,9 +2,11 @@ PYTHON ?= python3
 PROJECT ?= auto
 THEME ?= egohygiene
 BUILD_DIR ?= build/$(THEME)
-TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)"
+PREVIEW_HOST ?= 127.0.0.1
+PREVIEW_PORT ?= 8000
+TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)" --preview-host="$(PREVIEW_HOST)" --preview-port="$(PREVIEW_PORT)"
 
-.PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory mvp-bootstrap mvp-check mvp-contracts mvp-contracts-check mvp-format mvp-lint mvp-test reproducibility site test
+.PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory live-check mvp-bootstrap mvp-check mvp-contracts mvp-contracts-check mvp-format mvp-lint mvp-test preview reproducibility site test
 
 all: build
 
@@ -61,6 +63,12 @@ site:
 
 check-site:
 	$(TASK) check-site
+
+preview:
+	$(TASK) preview
+
+live-check:
+	$(TASK) live-check
 
 test:
 	$(TASK) test

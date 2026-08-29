@@ -57,12 +57,19 @@ placeholder a validation error.
 
 ## Feedback loop
 
-Use either interface while writing:
+Use either interface to build, validate, and serve the same complete local
+publication while writing:
 
 ```sh
-make build
-task build
+make preview
+task preview
 ```
+
+Open `http://127.0.0.1:8000/paper/` for the accessible paper and
+`http://127.0.0.1:8000/antidote.pdf` for the PDF. Stop the server with `Ctrl-C`.
+The complete workflow, CI artifact names, merged-revision check, and LaTeX,
+Pandoc, Pages, DNS/TLS, and stale-cache troubleshooting live in
+[`docs/paper-preview.md`](../docs/paper-preview.md).
 
 Run the full source and artifact checks before opening a pull request:
 

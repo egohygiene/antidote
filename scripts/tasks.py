@@ -202,6 +202,45 @@ def stage_site(project: Path, output: Path, theme: str, python: str) -> None:
     invoke_site_staging(output, ROOT / "_site", python)
 
 
+def preview_site(
+    project: Path,
+    output: Path,
+    theme: str,
+    python: str,
+    host: str,
+    port: int,
+) -> None:
+    """Stage the governed site and serve that exact tree for local review."""
+    if not 1 <= port <= 65535:
+        raise ValueError(f"preview port is outside the valid range: {port}")
+    stage_site(project, output, theme, python)
+    print(f"Previewing the staged publication at http://{host}:{port}/")
+    run(
+        [
+            python,
+            "-m",
+            "http.server",
+            str(port),
+            "--bind",
+            host,
+            "--directory",
+            str(ROOT / "_site"),
+        ]
+    )
+
+
+def verify_live_publication(
+    python: str, base_url: str, expected_revision: str
+) -> None:
+    """Verify that the canonical Pages routes expose one merged revision."""
+    command = [python, str(ROOT / "scripts" / "verify_live_publication.py")]
+    if base_url:
+        command.append(f"--base-url={base_url}")
+    if expected_revision:
+        command.append(f"--expected-revision={expected_revision}")
+    run(command)
+
+
 def check_all(project: Path, output: Path, python: str) -> None:
     """Validate both governed theme projections and the source inventory."""
     build_root = output.parent
@@ -242,6 +281,8 @@ def parse_arguments() -> argparse.Namespace:
             "mvp-format",
             "mvp-lint",
             "mvp-test",
+            "live-check",
+            "preview",
             "reproducibility",
             "site",
             "test",
@@ -251,6 +292,10 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--build-dir", default="build/neutral")
     parser.add_argument("--theme", choices=("neutral", "egohygiene"), default="neutral")
     parser.add_argument("--python", default=sys.executable)
+    parser.add_argument("--preview-host", default="127.0.0.1")
+    parser.add_argument("--preview-port", type=int, default=8000)
+    parser.add_argument("--base-url", default="")
+    parser.add_argument("--expected-revision", default="")
     return parser.parse_args()
 
 
@@ -288,6 +333,21 @@ def main() -> int:
         stage_site(project, output, arguments.theme, arguments.python)
         if arguments.command == "check-site":
             run_tests(arguments.python)
+    elif arguments.command == "preview":
+        preview_site(
+            project,
+            output,
+            arguments.theme,
+            arguments.python,
+            arguments.preview_host,
+            arguments.preview_port,
+        )
+    elif arguments.command == "live-check":
+        verify_live_publication(
+            arguments.python,
+            arguments.base_url,
+            arguments.expected_revision,
+        )
     elif arguments.command == "test":
         run_tests(arguments.python)
     elif arguments.command == "check":

@@ -152,8 +152,9 @@ A future contributor or conversation should:
 4. change the canonical LaTeX or governed research source only;
 5. update the claim ledger, bibliography, figure registry, or architecture
    document when the issue changes their owned boundary;
-6. run `make check-all` and `task check-site`; and
-7. record the merged evidence and live revision before advancing the roadmap.
+6. run `make check-all` and `task check-site`;
+7. after deployment, run `make live-check` from the merged revision; and
+8. record the merged evidence and live revision before advancing the roadmap.
 
 MVP issues #17–#23 remain valid but paused. Paper work must describe their
 capabilities as proposed or incomplete until checked-in, validated evidence

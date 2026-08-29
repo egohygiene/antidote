@@ -7,7 +7,9 @@ vars:
   PROJECT: '{{default "auto" .PROJECT}}'
   THEME: '{{default "egohygiene" .THEME}}'
   BUILD_DIR: '{{default (printf "build/%s" .THEME) .BUILD_DIR}}'
-  RUNNER: '{{.PYTHON}} scripts/tasks.py --project="{{.PROJECT}}" --build-dir="{{.BUILD_DIR}}" --theme="{{.THEME}}" --python="{{.PYTHON}}"'
+  PREVIEW_HOST: '{{default "127.0.0.1" .PREVIEW_HOST}}'
+  PREVIEW_PORT: '{{default "8000" .PREVIEW_PORT}}'
+  RUNNER: '{{.PYTHON}} scripts/tasks.py --project="{{.PROJECT}}" --build-dir="{{.BUILD_DIR}}" --theme="{{.THEME}}" --python="{{.PYTHON}}" --preview-host="{{.PREVIEW_HOST}}" --preview-port="{{.PREVIEW_PORT}}"'
 
 tasks:
   default:
@@ -106,6 +108,16 @@ tasks:
     desc: Build, stage, and validate the Pages publication
     cmds:
       - '{{.RUNNER}} check-site'
+
+  preview:
+    desc: Build and serve the complete local publication preview
+    cmds:
+      - '{{.RUNNER}} preview'
+
+  live-check:
+    desc: Verify canonical routes against the checked-out merged revision
+    cmds:
+      - '{{.RUNNER}} live-check'
 
   test:
     desc: Run Antidote publication contract tests

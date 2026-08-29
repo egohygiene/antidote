@@ -72,8 +72,18 @@ jobs:
         run: |
           set -euo pipefail
           make check-content THEME="${THEME}"
+          make_artifacts="$(mktemp -d)"
+          cp "build/${THEME}/paper.pdf" "${make_artifacts}/paper.pdf"
+          cp "build/${THEME}/provenance.json" "${make_artifacts}/provenance.json"
+          mkdir -p "${make_artifacts}/web"
+          cp "build/${THEME}/web/index.html" "${make_artifacts}/web/index.html"
+          cp -R "build/${THEME}/arxiv" "${make_artifacts}/arxiv"
           make clean THEME="${THEME}"
           task check-content THEME="${THEME}"
+          cmp "${make_artifacts}/paper.pdf" "build/${THEME}/paper.pdf"
+          cmp "${make_artifacts}/web/index.html" "build/${THEME}/web/index.html"
+          cmp "${make_artifacts}/provenance.json" "build/${THEME}/provenance.json"
+          diff --recursive --brief "${make_artifacts}/arxiv" "build/${THEME}/arxiv"
 
       - name: Verify preserved source inventory
         run: python3 scripts/check_source_inventory.py

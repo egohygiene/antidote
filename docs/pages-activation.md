@@ -6,6 +6,9 @@ The repository workflow is intentionally safe before activation:
 - the reviewable artifact is uploaded to the workflow run;
 - the deploy job is skipped unless `PAGES_ENABLED` is exactly `true`.
 
+Local preview, PR artifact review, revision canaries, and live hash verification
+are documented in [`paper-preview.md`](paper-preview.md).
+
 ## Activate the custom-domain publication hub
 
 1. Merge the Antidote publishing setup after its checks pass.
@@ -24,7 +27,8 @@ The repository workflow is intentionally safe before activation:
 10. Create `PAGES_ENABLED` with the exact value `true`.
 11. Open the **GitHub Pages** workflow and run it manually once, or merge a
    matching change to `main`.
-12. Confirm the deploy job verifies `/`, `/paper/`, `/antidote.pdf`,
+12. Confirm the deploy job runs `scripts/verify_live_publication.py` and verifies
+    `/`, `/paper/`, `/antidote.pdf`,
     `/magazine/`, `/downloads/`, `/publication.json`, `/site.json`,
     `/provenance.json`, and `/SHA256SUMS` against the custom HTTPS domain.
 13. Enable **Enforce HTTPS** after GitHub reports the certificate ready.

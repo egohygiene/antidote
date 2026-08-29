@@ -5,6 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="description" content="$abstract$">
   <meta name="generator" content="Beacon research-paper 0.1.0">
+  <meta name="source-revision" content="$source_revision$">
   <meta property="og:type" content="article">
   <meta property="og:title" content="$title$">
   <meta property="og:description" content="$abstract$">
@@ -75,7 +76,7 @@
       <h1>$title$</h1>
       $if(subtitle)$<p class="subtitle">$subtitle$</p>$endif$
       <p class="authors">$for(author)$$author$$sep$ · $endfor$</p>
-      <div class="metadata" aria-label="Paper metadata"><span>$date$</span><span>Version $version$</span><span>$project_id$</span></div>
+      <div class="metadata" aria-label="Paper metadata"><span>$date$</span><span>Version $version$</span><span>$project_id$</span><span>Revision <code>$source_revision_short$</code></span></div>
     </div>
   </header>
   <div class="layout">
@@ -96,6 +97,6 @@
       <article>$body$</article>
     </main>
   </div>
-  <footer>$title$ - version $version$ - <a href="$site_url$">publication hub</a> - <a href="$source_repository$">source</a></footer>
+  <footer>$title$ - version $version$ - revision <code>$source_revision_short$</code> - <a href="$site_url$">publication hub</a> - <a href="$source_repository$">source</a></footer>
 </body>
 </html>

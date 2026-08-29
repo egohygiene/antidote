@@ -46,6 +46,20 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertIn("scripts/tasks.py", taskfile)
         self.assertNotIn("BEACON_PROFILE", makefile)
         self.assertNotIn("resolve_beacon.py", taskfile)
+        for command in ("preview", "live-check"):
+            self.assertRegex(makefile, rf"(?m)^{re.escape(command)}:")
+            self.assertRegex(taskfile, rf"(?m)^  {re.escape(command)}:")
+
+    def test_preview_and_live_checks_reuse_governed_outputs(self) -> None:
+        """Serving and post-merge checks cannot become second build pipelines."""
+        tasks = (ROOT / "scripts" / "tasks.py").read_text(encoding="utf-8")
+        live_check = (ROOT / "scripts" / "verify_live_publication.py").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("stage_site(project, output, theme, python)", tasks)
+        self.assertIn('"-m",\n            "http.server"', tasks)
+        self.assertIn("validate_live_payloads", live_check)
+        self.assertIn('"Cache-Control": "no-cache"', live_check)
 
     def test_pages_deployment_requires_explicit_activation(self) -> None:
         """A merge cannot deploy until the maintainer enables the repository gate."""
@@ -62,6 +76,22 @@ class RepositoryContractTests(unittest.TestCase):
             encoding="utf-8"
         )
         self.assertIn("task reproducibility", workflow)
+        self.assertIn("make check-site", workflow)
+        self.assertIn("task check-site", workflow)
+        self.assertIn("diff --recursive --brief", workflow)
+        self.assertIn("scripts/verify_live_publication.py", workflow)
+
+    def test_pull_requests_upload_review_artifacts_without_deploying(self) -> None:
+        """Both paper and Pages projections must be downloadable before merge."""
+        paper_workflow = (
+            ROOT / ".github" / "workflows" / "research-paper.yml"
+        ).read_text(encoding="utf-8")
+        pages_workflow = (ROOT / ".github" / "workflows" / "pages.yml").read_text(
+            encoding="utf-8"
+        )
+        self.assertIn("antidote-paper-${{ matrix.theme }}-${{ github.sha }}", paper_workflow)
+        self.assertIn("antidote-pages-${{ github.sha }}", pages_workflow)
+        self.assertIn("github.event_name != 'pull_request'", pages_workflow)
 
     def test_lorem_ipsum_is_wrapped_as_non_evidence(self) -> None:
         """Layout filler may appear only through the explicit draft macro."""
@@ -210,6 +240,8 @@ class RepositoryContractTests(unittest.TestCase):
                 "docs/architecture-overview.md",
                 "docs/getting-started.md",
                 "docs/mvp-toolchains.md",
+                "docs/pages-activation.md",
+                "docs/paper-preview.md",
                 "paper/README.md",
                 "research/atlas/README.md",
                 "research/sources/README.md",

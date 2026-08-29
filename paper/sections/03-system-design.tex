@@ -1,15 +1,19 @@
 % Copyright 2026 Alan Szmyt. All rights reserved pending publication license.
 \section{System design}
+\label{sec:system-design}
 
 The proposed system is organized as an interpretable loop rather than an
 opaque optimization target. Semantic intent describes the state transition a
 person is seeking, the generator produces an acoustic realization, and the
 research record preserves response alongside the exact controls and artifact
 identity. Feedback may inform a later trial only under a versioned protocol.
+Figure~\ref{fig:semantic-acoustic-response-loop} makes this candidate loop
+navigable without presenting it as an observed mechanism.
 
 \BeaconFigure{semantic-acoustic-response-loop}{Candidate longitudinal mapping among semantic intent, realized audio, and individual response.}{Three boxes form a loop. Semantic intent points to generated acoustic structure, which points to measured individual response. A feedback arrow returns from response to the next semantic and generation decision. Each connection is labeled as a hypothesis to be tested.}
 
 \subsection{Conceptual conditional model}
+\label{sec:conceptual-conditional-model}
 
 Let $A$ denote generated audio, $S$ the current state, $T$ the desired state or
 trajectory, $H$ the individual's prior response history, and $C$ the semantic
