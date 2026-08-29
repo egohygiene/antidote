@@ -25,9 +25,10 @@ It will not access the local database, search personal history, decide consent,
 update a personal model, control publication, or reinterpret a participant's
 response.
 
-The mock is executable evidence for protocol behavior only. Rust supervision,
-Tauri sidecar permissions, production filesystem paths, playback, real model
-generation, and an end-to-end session remain unimplemented.
+The mock is now exercised through the bounded Rust supervisor in
+`crates/antidote-worker/`. Desktop command composition, packaged sidecar paths,
+operating-system sandboxing, playback, real model generation, and an end-to-end
+session remain unimplemented.
 
 ## Mock behavior
 

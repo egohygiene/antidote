@@ -7,6 +7,7 @@ members = [
   "crates/antidote-core",
   "crates/antidote-provenance",
   "crates/antidote-store",
+  "crates/antidote-worker",
 ]
 
 [workspace.package]
@@ -21,7 +22,7 @@ version = "0.1.0"
 jsonschema = { version = "=0.52.0", default-features = false }
 rusqlite = { version = "=0.40.2", features = ["bundled"] }
 serde = { version = "=1.0.229", features = ["derive"] }
-serde_json = "=1.0.151"
+serde_json = { version = "=1.0.151", features = ["raw_value"] }
 sha2 = "=0.11.0"
 tauri = { version = "=2.11.5" }
 tauri-build = { version = "=2.6.3" }

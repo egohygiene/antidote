@@ -20,9 +20,10 @@ and immutable generation specification, never unrestricted personal history.
 ## Transport envelope
 
 Each input line is one JSON object encoded as UTF-8 and terminated by `\n`. The
-maximum encoded request line, including the newline, is 65,536 bytes. Duplicate
-JSON keys, additional envelope fields, invalid UTF-8, non-object payloads, and
-request IDs outside `[A-Za-z0-9._:-]{1,128}` fail closed.
+maximum encoded request or response line, including the newline, is 65,536
+bytes. Duplicate JSON keys, additional envelope fields, invalid UTF-8,
+non-object payloads, and request IDs outside `[A-Za-z0-9._:-]{1,128}` fail
+closed.
 
 ```json
 {
@@ -95,6 +96,11 @@ Stable failure classes are `invalid_input`, `unsupported_version`,
   time; device class; parameters; input hash; output hashes; and warnings.
 - Capability downgrades are explicit and require host-side policy approval.
 - Worker crashes never mutate canonical session state directly.
+- The host creates a unique output directory below an approved root, sends only
+  that path, and canonicalizes, bounds, sizes, and hashes every returned file.
+- The host treats EOF, malformed output, correlation mismatch, and deadline
+  expiry as failures, terminates the process, cleans the active grant, and may
+  renegotiate a fresh worker.
 - The deterministic mock writes WAV data to a temporary path and only publishes
   a completed artifact through an atomic replacement. Cancellation removes the
   temporary path; a simulated partial result is renamed and classified visibly.
