@@ -69,6 +69,10 @@ publication hub, accessible paper, stable PDF, planned magazine route,
 downloads index, provenance, publication and site manifests, source bundle,
 and complete SHA-256 inventory.
 
+For a served PDF and browser feedback loop, run `make preview` or
+`task preview`. See [`docs/paper-preview.md`](./docs/paper-preview.md) for PR
+artifact review, merged-revision verification, and troubleshooting.
+
 Beacon remains an optional control plane for profile inspection, planning,
 transactional builds, and checksummed packaging:
 
@@ -132,6 +136,10 @@ The canonical route is <https://antidote.egohygiene.io/>. GitHub's
 <https://egohygiene.github.io/antidote/> route remains a technical fallback,
 not a second canonical publication URL. Activation and rollback steps are in
 [`docs/pages-activation.md`](./docs/pages-activation.md).
+
+After a successful `main` deployment, `make live-check` rejects stale routes,
+revision disagreement, and artifact hashes that do not match the published
+manifests.
 
 The stable public route contract is:
 
