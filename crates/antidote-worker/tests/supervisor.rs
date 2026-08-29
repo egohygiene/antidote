@@ -7,11 +7,12 @@ use std::time::Duration;
 
 use antidote_contracts::{
     ConsentGrant, ConsentGrantAction, ConsentGrantPurpose, GenerationResultStatus, GenerationSpec,
-    JourneyPlan, JourneyPlanStatus, MomentContext, WorkingContextProjection,
+    MomentContext, WorkingContextProjection,
 };
 use antidote_core::{
     Clock, ConsentSelection, EventRepository, GenerationJobState, GenerationOrchestrator,
-    IdentifierKind, IdentifierSource, PortFailure, RecordedEvent, SessionCommand, SessionService,
+    IdentifierKind, IdentifierSource, PortFailure, RecordedEvent, RuleGuidedPlanner, SessionCommand,
+    SessionService,
 };
 use antidote_worker::{
     DEFAULT_MAX_ARTIFACT_BYTES, MockSimulation, MockSimulationMode, ProgressDecision,
@@ -178,21 +179,22 @@ fn approved_generation_service() -> SessionService<MemoryRepository, FixedClock,
             SessionCommand::AcceptWorkingProjection { projection },
         )
         .expect("projection must append");
+    let moment = fixture::<MomentContext>("moment-context-valid");
     service
         .execute(
             session_id,
             SessionCommand::RecordMoment {
-                moment: fixture::<MomentContext>("moment-context-valid"),
+                moment: moment.clone(),
             },
         )
         .expect("moment must append");
-    let mut plan: JourneyPlan = fixture("journey-plan-valid");
-    plan.status = JourneyPlanStatus::Draft;
-    plan.approved_at = None;
-    plan.total_duration_seconds = 10;
-    for stage in &mut plan.stages {
-        stage.duration_seconds = 5;
-    }
+    let plan = RuleGuidedPlanner::default()
+        .propose("journey-synthetic-1", &moment)
+        .expect("synthetic moment must produce an inspectable plan");
+    let plan_hash = plan
+        .plan_hash
+        .clone()
+        .expect("planner must seal the proposal");
     service
         .execute(session_id, SessionCommand::ProposeJourney { plan })
         .expect("journey must append");
@@ -205,12 +207,12 @@ fn approved_generation_service() -> SessionService<MemoryRepository, FixedClock,
             },
         )
         .expect("journey approval must append");
+    let mut specification = generation_spec();
+    specification.journey_plan_hash = plan_hash;
     service
         .execute(
             session_id,
-            SessionCommand::RequestGeneration {
-                specification: generation_spec(),
-            },
+            SessionCommand::RequestGeneration { specification },
         )
         .expect("generation request must append");
     service
