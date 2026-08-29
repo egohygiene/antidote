@@ -11,8 +11,8 @@ use antidote_contracts::{
 };
 use antidote_core::{
     Clock, ConsentSelection, EventRepository, GenerationJobState, GenerationOrchestrator,
-    IdentifierKind, IdentifierSource, PortFailure, RecordedEvent, RuleGuidedPlanner, SessionCommand,
-    SessionService,
+    IdentifierKind, IdentifierSource, PortFailure, RecordedEvent, RuleGuidedPlanner,
+    SessionCommand, SessionService,
 };
 use antidote_worker::{
     DEFAULT_MAX_ARTIFACT_BYTES, MockSimulation, MockSimulationMode, ProgressDecision,
