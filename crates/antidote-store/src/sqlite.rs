@@ -633,7 +633,8 @@ fn rebuild_session(transaction: &Transaction<'_>, session_id: &str) -> StoreResu
                 &record,
                 &[],
             )?,
-            SessionEvent::JourneyProposed { plan } => insert_projection(
+            SessionEvent::JourneyProposed { plan }
+            | SessionEvent::JourneySuperseded { plan, .. } => insert_projection(
                 transaction,
                 ProjectionKind::JourneyPlan,
                 event,
@@ -641,23 +642,8 @@ fn rebuild_session(transaction: &Transaction<'_>, session_id: &str) -> StoreResu
                 &record,
                 &[],
             )?,
-            SessionEvent::JourneySuperseded { plan, .. } => insert_projection(
-                transaction,
-                ProjectionKind::JourneyPlan,
-                event,
-                &plan.id,
-                &record,
-                &[],
-            )?,
-            SessionEvent::JourneyRejected { plan_id, .. } => insert_projection(
-                transaction,
-                ProjectionKind::JourneyPlan,
-                event,
-                plan_id,
-                &record,
-                &[],
-            )?,
-            SessionEvent::JourneyApproved { plan_id, .. } => insert_projection(
+            SessionEvent::JourneyRejected { plan_id, .. }
+            | SessionEvent::JourneyApproved { plan_id, .. } => insert_projection(
                 transaction,
                 ProjectionKind::JourneyPlan,
                 event,
