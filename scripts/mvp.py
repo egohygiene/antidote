@@ -60,7 +60,10 @@ def bootstrap(python: str) -> None:
             "--all-groups",
         ]
     )
-    run([cargo, "fetch", "--locked"])
+    # Temporary CI diagnostic: print Cargo's exact resolver delta before the
+    # native checks so the committed lockfile can be repaired precisely.
+    run([cargo, "fetch"])
+    run(["git", "diff", "--", "Cargo.lock"])
 
 
 def contract_checks(python: str) -> None:
