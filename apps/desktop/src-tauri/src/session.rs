@@ -328,10 +328,10 @@ impl DesktopRuntime {
 
     fn snapshot_internal(&self) -> InternalResult<DesktopSnapshot> {
         let session_id = self.active_session_id()?;
-        let session = session_id
-            .as_deref()
-            .map(|identifier| self.service()?.load_session(identifier))
-            .transpose()?;
+        let session = match session_id.as_deref() {
+            Some(identifier) => Some(self.service()?.load_session(identifier)?),
+            None => None,
+        };
         let generation_active = self.inner.generation_active.load(Ordering::Acquire);
         let cancellation_requested = self.inner.cancellation_requested.load(Ordering::Acquire);
         let recovery_required = session.as_ref().is_some_and(|current| {
