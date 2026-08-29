@@ -6,8 +6,8 @@ theme = "egohygiene"
 
 [paper]
 id = "antidote"
-title = "An Interpretable Semantic Framework for Personalized Adaptive Generative Audio"
-subtitle = "Design and N-of-1 Feasibility"
+title = "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys"
+subtitle = "Design and Feasibility Protocol"
 version = "0.1.0"
 date = "2026-08-26"
 language = "en-US"
@@ -22,7 +22,7 @@ keywords = [
   "interpretability",
   "personalization",
 ]
-abstract = "This draft frames an interpretable, person-specific loop from semantic sonic intent through generated acoustic realization to measured affective response. It proposes a methods and N-of-1 feasibility study; no formal study results or clinical efficacy claims are reported."
+abstract = "This design/protocol manuscript formalizes an inspectable research-instrument chain from consented person-and-moment context and explicit semantic intent through time-indexed planning, generated acoustic realization, exposure, separated response measures, and advisory within-person updating. It grounds the proposed architecture in prior work and specifies a prospective feasibility protocol. No formal human study results, clinical efficacy, or neurological mechanism are reported."
 
 [[paper.authors]]
 name = "Alan Szmyt"

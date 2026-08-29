@@ -8,6 +8,14 @@ Use [`paper/roadmap.md`](roadmap.md) as the durable writing sequence. It links
 the evidence, section, figure, synthesis, and live-publication issues and
 defines the resume protocol for future contributors and conversations.
 
+[`manuscript-contract.json`](manuscript-contract.json) is the frozen issue #35
+writing contract. It owns the working identity, thesis, research questions,
+contributions, publication-stage ladder, terminology, claim policy, and the
+purpose, evidence, visual, dependency, completion, and prohibition boundary for
+every canonical LaTeX source. Before drafting a section, read its contract and
+the linked entries in
+[`CLAIM_LEDGER.md`](../research/notes/CLAIM_LEDGER.md).
+
 The evidence corpus has three distinct layers:
 
 - the complete living atlas at
@@ -25,14 +33,15 @@ identifiers, source-record coverage, and the cited-versus-shelf distinction.
 
 | File | Writing purpose | Evidence gate |
 | --- | --- | --- |
-| `01-introduction.tex` | Problem, research question, and bounded contribution preview | Novelty language remains provisional |
-| `02-related-work.tex` | Primary-source synthesis and comparison | Complete the source and novelty matrix first |
+| `01-introduction.tex` | Inspectability problem, staged research questions, and bounded contribution preview | Frozen thesis and novelty boundary |
+| `02-related-work.tex` | Primary-source synthesis and comparison | Governed source and comparator records |
 | `03-system-design.tex` | Components, interfaces, state, and provenance | Distinguish proposed design from implemented system |
 | `04-methods.tex` | Feasibility protocol and analysis plan | Freeze before formal collection |
 | `05-results.tex` | Auditable observations and analyses | No results until the frozen protocol runs |
 | `06-discussion.tex` | Evidence-proportional interpretation | Separate feasibility, efficacy, and mechanism |
 | `07-limitations-and-ethics.tex` | Validity threats, safety, privacy, and review | Resolve ethics requirements before collection |
 | `08-availability-and-contributions.tex` | Reproducibility, access, funding, and roles | Verify identifiers and contributor approvals |
+| `09-conclusion.tex` | Whole-paper answer and evidence-gated handoff | Reconcile body, claims, results status, and limitations |
 | `appendix.tex` | Versioned protocol checklist and supporting material | Keep consistent with the frozen protocol |
 
 ## Placeholder contract
