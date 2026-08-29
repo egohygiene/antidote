@@ -45,7 +45,7 @@ efficacy.
 ### Wave P1 — Evidence and novelty
 
 - [#32 — Consolidate the living source atlas and bibliography shelf](https://github.com/egohygiene/antidote/issues/32)
-- [#33 — Scout adaptive-control and real-time generative-audio architecture](https://github.com/egohygiene/antidote/issues/33)
+- [#33 — Scout adaptive-control and real-time generative-audio architecture](https://github.com/egohygiene/antidote/issues/33) — [evidence dossier](../research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md)
 - [#34 — Build the comparator, evidence, and novelty matrix](https://github.com/egohygiene/antidote/issues/34)
 - [#35 — Freeze the paper thesis, contribution, and section contracts](https://github.com/egohygiene/antidote/issues/35)
 

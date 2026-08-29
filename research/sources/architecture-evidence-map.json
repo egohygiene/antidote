@@ -1,0 +1,214 @@
+{
+  "schema": "antidote.architecture-evidence-map/v1",
+  "updated": "2026-08-29",
+  "scope": "Proposed architecture evidence only; not implementation or therapeutic validation.",
+  "required_clusters": [
+    "state-estimation",
+    "adaptive-control",
+    "human-authority",
+    "semantic-conditioning",
+    "streaming-generation",
+    "acoustic-continuity",
+    "local-provenance"
+  ],
+  "entries": [
+    {
+      "source_id": "deangel-passive-monitoring-00548-8",
+      "cluster": "state-estimation",
+      "subsystem": "consented observation and state-belief layer",
+      "evidence_role": "qualifying-evidence",
+      "support_direction": "conflicting",
+      "bounded_claim": "Passive digital measures are an active research input, but missingness, reporting variability, small samples, and limited generalizability constrain inference.",
+      "does_not_establish": "That passive signals reveal current mood, need, diagnosis, or a safe intervention choice."
+    },
+    {
+      "source_id": "damelio-eda-130831",
+      "cluster": "state-estimation",
+      "subsystem": "optional physiological feature adapter",
+      "evidence_role": "qualifying-evidence",
+      "support_direction": "mixed",
+      "bounded_claim": "Electrodermal-activity models in the reviewed literature estimate arousal more successfully than valence and often mismatch continuous affect theory with classification methods.",
+      "does_not_establish": "A person-independent emotion decoder or an objective description of felt experience."
+    },
+    {
+      "source_id": "lsl-imag.a.136",
+      "cluster": "state-estimation",
+      "subsystem": "optional synchronized sensor boundary",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "Lab Streaming Layer provides an established interface for time-synchronized multimodal recording.",
+      "does_not_establish": "Sensor validity, emotional interpretation, or inclusion in the MVP."
+    },
+    {
+      "source_id": "jain-intent-3359614",
+      "cluster": "state-estimation",
+      "subsystem": "uncertainty-aware observation fusion",
+      "evidence_role": "speculative-transfer",
+      "support_direction": "supporting",
+      "bounded_claim": "Recursive Bayesian filtering can combine multiple observations while retaining uncertainty in a shared-control task.",
+      "does_not_establish": "That assistive-robot intent inference transfers reliably to affect or music."
+    },
+    {
+      "source_id": "jitai-9830-8",
+      "cluster": "adaptive-control",
+      "subsystem": "decision-point and tailoring-rule model",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "JITAI design distinguishes decision points, tailoring variables, intervention options, decision rules, and proximal outcomes.",
+      "does_not_establish": "An effective Antidote decision rule or therapeutic outcome."
+    },
+    {
+      "source_id": "garcia-mpc-90002-2",
+      "cluster": "adaptive-control",
+      "subsystem": "receding-horizon journey controller",
+      "evidence_role": "speculative-transfer",
+      "support_direction": "supporting",
+      "bounded_claim": "Model predictive control supplies a precedent for explicit models, finite-horizon optimization, constraints, and repeated replanning.",
+      "does_not_establish": "That affect is a known controllable plant or that the proposed objective is valid."
+    },
+    {
+      "source_id": "kaelbling-pomdp-00023-x",
+      "cluster": "adaptive-control",
+      "subsystem": "belief-state planning model",
+      "evidence_role": "speculative-transfer",
+      "support_direction": "supporting",
+      "bounded_claim": "POMDPs formalize action selection when state is only partially observed and represented as a belief distribution.",
+      "does_not_establish": "A tractable or ethically acceptable autonomous affect policy."
+    },
+    {
+      "source_id": "amershi-interactive-2513",
+      "cluster": "human-authority",
+      "subsystem": "editable state, intent, and recommendation interface",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "Interactive-machine-learning design benefits from studying and involving end users throughout system development.",
+      "does_not_establish": "That user feedback is complete, unbiased, or automatically improves trust."
+    },
+    {
+      "source_id": "honeycutt-feedback-7464",
+      "cluster": "human-authority",
+      "subsystem": "feedback and correction experience",
+      "evidence_role": "qualifying-evidence",
+      "support_direction": "conflicting",
+      "bounded_claim": "In one controlled interactive-ML study, soliciting feedback reduced trust and perceived accuracy regardless of model improvement.",
+      "does_not_establish": "That Antidote knobs will reduce trust or that feedback should be removed."
+    },
+    {
+      "source_id": "mustango-naacl-459",
+      "cluster": "semantic-conditioning",
+      "subsystem": "typed musical-control adapter",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "Mustango demonstrates text-to-music conditioning with explicit chord, beat, tempo, and key instructions and evaluates adherence.",
+      "does_not_establish": "Exact control realization, continuous prompt mixing, or felt-state change."
+    },
+    {
+      "source_id": "jasco-2406.10970",
+      "cluster": "semantic-conditioning",
+      "subsystem": "time-local journey conditioning adapter",
+      "evidence_role": "emerging-system",
+      "support_direction": "supporting",
+      "bounded_claim": "JASCO combines global text with fine-grained local symbolic and audio conditions for temporally controlled generation.",
+      "does_not_establish": "Real-time generation, open local viability, or emotional benefit."
+    },
+    {
+      "source_id": "musicgen-2306.05284",
+      "cluster": "semantic-conditioning",
+      "subsystem": "generation comparison baseline",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "MusicGen provides a reproducible architecture reference for text- and melody-conditioned music generation.",
+      "does_not_establish": "Commercially usable weights, moment-specific control, or long continuous journeys."
+    },
+    {
+      "source_id": "ace-step-1.5-2602.00744",
+      "cluster": "semantic-conditioning",
+      "subsystem": "future local-model candidate",
+      "evidence_role": "emerging-system",
+      "support_direction": "supporting",
+      "bounded_claim": "ACE-Step 1.5 reports long-duration local generation and explicit musical controls relevant to future benchmarking.",
+      "does_not_establish": "Selection as the production model or verified capability on Antidote hardware."
+    },
+    {
+      "source_id": "wang-streaming-2606.24307",
+      "cluster": "streaming-generation",
+      "subsystem": "future chunk-wise generator",
+      "evidence_role": "emerging-system",
+      "support_direction": "mixed",
+      "bounded_claim": "A 2026 preprint proposes low-latency chunk-wise music generation that accepts changing human inputs while preserving temporal consistency.",
+      "does_not_establish": "Independent replication, production readiness, local performance, or compatibility with Antidote."
+    },
+    {
+      "source_id": "hutchings-adaptive-music-2921979",
+      "cluster": "acoustic-continuity",
+      "subsystem": "context-responsive musical planner",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "An evaluated adaptive game-music system demonstrates context-responsive real-time composition as an established neighboring design space.",
+      "does_not_establish": "Seamless segment interpolation or transfer from gameplay to affective support."
+    },
+    {
+      "source_id": "w3c-web-audio-1.1",
+      "cluster": "acoustic-continuity",
+      "subsystem": "deterministic audio renderer",
+      "evidence_role": "normative-standard",
+      "support_direction": "supporting",
+      "bounded_claim": "Web Audio defines scheduled parameter automation and render-thread processing concepts relevant to sample-accurate playback.",
+      "does_not_establish": "Antidote conformance or musical and emotional continuity."
+    },
+    {
+      "source_id": "ebu-r128-2023",
+      "cluster": "acoustic-continuity",
+      "subsystem": "loudness measurement and normalization",
+      "evidence_role": "normative-standard",
+      "support_direction": "supporting",
+      "bounded_claim": "EBU R 128 supplies a normative loudness-measurement and normalization reference.",
+      "does_not_establish": "A universal listening level, transition method, or safety threshold."
+    },
+    {
+      "source_id": "scroll-2608.21690",
+      "cluster": "local-provenance",
+      "subsystem": "consent-scoped working projection",
+      "evidence_role": "emerging-system",
+      "support_direction": "mixed",
+      "bounded_claim": "Scroll separates lossless history, durable payloads, derived state, and a bounded working view while documenting retrieval failures.",
+      "does_not_establish": "Health-data privacy, consent quality, or correct psychological interpretation."
+    },
+    {
+      "source_id": "local-first-3359591.3359737",
+      "cluster": "local-provenance",
+      "subsystem": "local data-ownership architecture",
+      "evidence_role": "engineering-pattern",
+      "support_direction": "supporting",
+      "bounded_claim": "Local-first software provides a peer-reviewed architecture rationale for local ownership and offline-capable data access.",
+      "does_not_establish": "Encryption, deletion, privacy compliance, or Antidote security."
+    },
+    {
+      "source_id": "aws-event-sourcing",
+      "cluster": "local-provenance",
+      "subsystem": "append-only event authority and rebuildable views",
+      "evidence_role": "engineering-pattern",
+      "support_direction": "supporting",
+      "bounded_claim": "Authoritative engineering guidance describes immutable append-only events and state reconstruction by replay.",
+      "does_not_establish": "Scientific validity, tamper evidence, or privacy."
+    },
+    {
+      "source_id": "w3c-prov-dm",
+      "cluster": "local-provenance",
+      "subsystem": "interoperable lineage model",
+      "evidence_role": "normative-standard",
+      "support_direction": "supporting",
+      "bounded_claim": "W3C PROV defines entities, activities, agents, derivations, responsibility, and provenance bundles.",
+      "does_not_establish": "That recorded assertions are true or that Antidote conforms."
+    },
+    {
+      "source_id": "workflow-run-ro-crate-0309210",
+      "cluster": "local-provenance",
+      "subsystem": "research-export package",
+      "evidence_role": "scientific-precedent",
+      "support_direction": "supporting",
+      "bounded_claim": "Workflow Run RO-Crate demonstrates packaging computational workflow provenance for traceability and reproducibility.",
+      "does_not_establish": "Participant privacy review, semantic correctness, or a complete Antidote export."
+    }
+  ]
+}

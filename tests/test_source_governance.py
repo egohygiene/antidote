@@ -28,6 +28,7 @@ class SourceGovernanceTests(unittest.TestCase):
         self.assertIn("PASS source governance:", result.stdout)
         self.assertIn("catalog sources", result.stdout)
         self.assertIn("verified bibliography entries", result.stdout)
+        self.assertIn("architecture mappings", result.stdout)
 
 
 if __name__ == "__main__":
