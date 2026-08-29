@@ -1,5 +1,8 @@
 //! Tauri lifecycle and capability boundary for the Antidote desktop host.
 
+// Tauri command macros own `State` extraction by value at this adapter boundary.
+#![allow(clippy::needless_pass_by_value)]
+
 mod session;
 
 use session::{
