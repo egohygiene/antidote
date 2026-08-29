@@ -103,6 +103,34 @@ pub enum GenerationSpecOutputFormat {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum JourneyPlanControlPolicySupportedControl {
+    #[serde(rename = "tempo_bpm")]
+    TempoBpm,
+    #[serde(rename = "key")]
+    Key,
+    #[serde(rename = "time_signature")]
+    TimeSignature,
+    #[serde(rename = "timbre")]
+    Timbre,
+    #[serde(rename = "harmony")]
+    Harmony,
+    #[serde(rename = "density")]
+    Density,
+    #[serde(rename = "spatiality")]
+    Spatiality,
+    #[serde(rename = "dynamics")]
+    Dynamics,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum JourneyPlanDerivationSource {
+    #[serde(rename = "rule")]
+    Rule,
+    #[serde(rename = "person_edit")]
+    PersonEdit,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum JourneyPlanStageRole {
     #[serde(rename = "meet")]
     Meet,
@@ -363,12 +391,51 @@ pub struct JourneyPlan {
     pub status: JourneyPlanStatus,
     pub strategy: String,
     pub total_duration_seconds: i64,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub revision: Option<i64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub supersedes_plan_id: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub rule_set: Option<JourneyPlanRuleSet>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub control_policy: Option<JourneyPlanControlPolicy>,
     pub stages: Vec<JourneyPlanStage>,
     pub safety_constraints: Vec<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub derivations: Option<Vec<JourneyPlanDerivation>>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub approved_at: Option<String>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub plan_hash: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct JourneyPlanControlPolicy {
+    pub supported_controls: Vec<JourneyPlanControlPolicySupportedControl>,
+    pub stagewise_controls: bool,
+    pub tempo_bpm_min: f64,
+    pub tempo_bpm_max: f64,
+    pub density_ceiling: f64,
+    pub spatiality_ceiling: f64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct JourneyPlanDerivation {
+    pub target: String,
+    pub source: JourneyPlanDerivationSource,
+    pub rule_id: String,
+    pub rationale: String,
+    pub uncertainty: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct JourneyPlanRuleSet {
+    pub id: String,
+    pub version: String,
+    pub input_hash: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]

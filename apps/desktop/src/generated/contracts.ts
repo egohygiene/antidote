@@ -16,6 +16,10 @@ export type GenerationResultStatus = "generated" | "partial" | "cancelled" | "fa
 
 export type GenerationSpecOutputFormat = "wav" | "flac";
 
+export type JourneyPlanControlPolicySupportedControl = "tempo_bpm" | "key" | "time_signature" | "timbre" | "harmony" | "density" | "spatiality" | "dynamics";
+
+export type JourneyPlanDerivationSource = "rule" | "person_edit";
+
 export type JourneyPlanStageRole = "meet" | "hold" | "transition" | "release" | "integrate" | "close" | "other";
 
 export type JourneyPlanStatus = "draft" | "approved" | "superseded";
@@ -148,10 +152,38 @@ export interface JourneyPlan {
   status: JourneyPlanStatus;
   strategy: string;
   total_duration_seconds: number;
+  revision?: number;
+  supersedes_plan_id?: string | null;
+  rule_set?: JourneyPlanRuleSet;
+  control_policy?: JourneyPlanControlPolicy;
   stages: Array<JourneyPlanStage>;
   safety_constraints: Array<string>;
+  derivations?: Array<JourneyPlanDerivation>;
   approved_at?: string | null;
   plan_hash?: string;
+}
+
+export interface JourneyPlanControlPolicy {
+  supported_controls: Array<JourneyPlanControlPolicySupportedControl>;
+  stagewise_controls: boolean;
+  tempo_bpm_min: number;
+  tempo_bpm_max: number;
+  density_ceiling: number;
+  spatiality_ceiling: number;
+}
+
+export interface JourneyPlanDerivation {
+  target: string;
+  source: JourneyPlanDerivationSource;
+  rule_id: string;
+  rationale: string;
+  uncertainty: string;
+}
+
+export interface JourneyPlanRuleSet {
+  id: string;
+  version: string;
+  input_hash: string;
 }
 
 export interface JourneyPlanStage {

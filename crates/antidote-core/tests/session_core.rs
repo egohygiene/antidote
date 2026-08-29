@@ -4,13 +4,13 @@ use std::collections::BTreeMap;
 
 use antidote_core::contracts::{
     ConsentGrant, ConsentGrantAction, ConsentGrantPurpose, GenerationResult, GenerationSpec,
-    JourneyPlan, JourneyPlanStatus, MomentContext, ResponseObservation, WorkingContextProjection,
+    MomentContext, ResponseObservation, WorkingContextProjection,
 };
 use antidote_core::{
     ApplicationError, Clock, ConsentSelection, DomainError, EventRepository, ExposureStopReason,
     GenerationJobState, GenerationOrchestrator, IdentifierKind, IdentifierSource, ModelUpdateState,
-    PersonalModelSnapshot, PortFailure, RecordedEvent, SafetyEventKind, SessionCommand,
-    SessionService, WorkerInvocationPort,
+    JourneyApprovalState, JourneyEdit, PersonalModelSnapshot, PortFailure, RecordedEvent,
+    RuleGuidedPlanner, SafetyEventKind, SessionCommand, SessionService, WorkerInvocationPort,
 };
 use serde::de::DeserializeOwned;
 use serde_json::Value;
@@ -147,7 +147,7 @@ fn execute(service: &mut TestService, command: SessionCommand) {
         .expect("authorized transition must append");
 }
 
-fn service_through_generation_request() -> TestService {
+fn service_through_moment() -> (TestService, MomentContext) {
     let mut service = service();
     execute(
         &mut service,
@@ -169,11 +169,25 @@ fn service_through_generation_request() -> TestService {
         SessionCommand::AcceptWorkingProjection { projection },
     );
     let moment: MomentContext = fixture("moment-context-valid");
-    execute(&mut service, SessionCommand::RecordMoment { moment });
+    execute(
+        &mut service,
+        SessionCommand::RecordMoment {
+            moment: moment.clone(),
+        },
+    );
+    (service, moment)
+}
 
-    let mut plan: JourneyPlan = fixture("journey-plan-valid");
-    plan.status = JourneyPlanStatus::Draft;
-    plan.approved_at = None;
+fn service_through_generation_request() -> TestService {
+    let (mut service, moment) = service_through_moment();
+
+    let plan = RuleGuidedPlanner::default()
+        .propose("journey-synthetic-1", &moment)
+        .expect("synthetic moment must produce an inspectable plan");
+    let plan_hash = plan
+        .plan_hash
+        .clone()
+        .expect("planner must seal the proposal");
     execute(&mut service, SessionCommand::ProposeJourney { plan });
     execute(
         &mut service,
@@ -183,12 +197,76 @@ fn service_through_generation_request() -> TestService {
         },
     );
 
-    let specification: GenerationSpec = fixture("generation-spec-valid");
+    let mut specification: GenerationSpec = fixture("generation-spec-valid");
+    specification.journey_plan_hash = plan_hash;
     execute(
         &mut service,
         SessionCommand::RequestGeneration { specification },
     );
     service
+}
+
+#[test]
+fn rejected_plan_can_be_superseded_by_an_edited_revision_then_approved() {
+    let (mut service, moment) = service_through_moment();
+    let planner = RuleGuidedPlanner::default();
+    let original = planner
+        .propose("journey-original", &moment)
+        .expect("initial proposal must plan");
+    execute(
+        &mut service,
+        SessionCommand::ProposeJourney {
+            plan: original.clone(),
+        },
+    );
+    execute(
+        &mut service,
+        SessionCommand::RejectJourney {
+            plan_id: original.id.clone(),
+            reason: "The semantic arc does not fit this synthetic moment.".to_owned(),
+        },
+    );
+    let rejected = service.load_session(SESSION_ID).expect("stream must replay");
+    assert!(matches!(
+        rejected.journey().map(|journey| &journey.approval),
+        Some(JourneyApprovalState::Rejected { .. })
+    ));
+
+    let revised = planner
+        .revise(
+            &original,
+            "journey-revised",
+            &moment,
+            &[JourneyEdit::Strategy(
+                "use the person's synthetic edited strategy".to_owned(),
+            )],
+        )
+        .expect("person edit must create an immutable revision");
+    execute(
+        &mut service,
+        SessionCommand::ReviseJourney {
+            plan: revised.clone(),
+            supersedes_plan_id: original.id,
+        },
+    );
+    execute(
+        &mut service,
+        SessionCommand::ApproveJourney {
+            plan_id: revised.id,
+            consent: ConsentSelection::explicit("consent-all"),
+        },
+    );
+
+    let approved = service.load_session(SESSION_ID).expect("stream must replay");
+    assert_eq!(approved.journey_history().len(), 1);
+    assert!(matches!(
+        &approved.journey_history()[0].approval,
+        JourneyApprovalState::Superseded { .. }
+    ));
+    assert!(matches!(
+        approved.journey().map(|journey| &journey.approval),
+        Some(JourneyApprovalState::Approved { .. })
+    ));
 }
 
 #[derive(Debug)]

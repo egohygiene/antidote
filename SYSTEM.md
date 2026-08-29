@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-system
 title: Antidote System
 kind: architecture-document
-version: 0.5.0
+version: 0.6.0
 status: provisional
 owners:
   - egohygiene
@@ -39,7 +39,7 @@ structural organization, process boundaries, and dependency direction.
 | Desktop experience | Workspace scaffold | Pinned host and honest status view exist; session interaction remains target |
 | Consent and context system | Domain core + local persistence | Grants and reviewed projections have fail-closed policies plus rebuildable SQLite views; UI remains target |
 | State and intent system | Authoritative domain core | Moment lineage and one-session transition rules execute independently of frameworks |
-| Journey planning system | Authoritative domain core | Draft plans and exact human approval are distinct executable states; a planner remains target |
+| Journey planning system | Deterministic Level-1 planner + authoritative domain core | Versioned rules produce hashed, traceable drafts; person edits create immutable revisions, and rejection, supersession, and exact approval remain separate events |
 | Generation orchestration | Core + supervised adapter | Rust commands own start and terminal events; the bounded supervisor negotiates, checks capabilities, delivers progress, cancels, times out, verifies artifacts, and restarts |
 | Model worker | Deterministic mock supervised | The packaged Python process exercises all v1 operations through the Rust supervisor; real model adapters remain target |
 | Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
@@ -99,7 +99,9 @@ licensing, and replacement boundaries appropriate to its risk.
   local event/artifact persistence adapters, and deterministic mock model
   worker and Rust process supervisor have integrity, recovery, transition,
   replay, lineage, cancellation, timeout, restart, redaction, and failure-class
-  tests. Desktop command composition remains separate work.
+  tests. The Level-1 planner has stable-input, duration-property, contradiction,
+  control-boundary, trace, edit, supersession, and hash tests. Desktop command
+  composition remains separate work.
 - **Decided for the prototype:** The first executable vertical slice stops at
   rule-guided generation, playback, response capture, and inspectable history.
 - **Proposed:** Advisory personalization and optional sensors follow only after

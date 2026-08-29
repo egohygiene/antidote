@@ -46,3 +46,19 @@ and stop rules, and appropriate human or institutional review.
 - an approved study protocol authorizes a bounded higher-level policy;
 - adverse-event or privacy evidence requires reducing rather than increasing
   adaptation authority.
+
+## Implementation evidence
+
+Issue #15 implements maturity level 1 in `antidote-core`. One versioned rule
+set deterministically maps a synthetic or approved moment context into a draft
+journey with exact duration reconciliation, control-policy ceilings, per-choice
+rationale and uncertainty, additive schema projections, and a canonical
+SHA-256 plan hash. Person edits create a new revision; rejection, supersession,
+and approval remain separate immutable events.
+
+Boundary tests cover stable inputs, transition and duration properties,
+contradictory preferences, exclusions, unsupported controls, stagewise-control
+limits, intensity ceilings, missing traces, prohibited claim language, plan
+tampering, and edited revision lineage. This activates only level 1. It adds no
+LLM planning, inferred consent, clinical recommendation, response prediction,
+longitudinal update, strategy ranking, or autonomous optimization.
