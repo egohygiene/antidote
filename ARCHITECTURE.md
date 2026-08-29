@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.7.0
+version: 0.8.0
 status: provisional
 owners:
   - egohygiene
@@ -47,7 +47,7 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Native publication build and hub | Implemented; deployment remains gated | Make/Task scripts, CI workflows, deterministic Pages staging |
 | Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
 | MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
-| Desktop application | Workspace scaffold | Pinned Tauri/React host and honest status view under `apps/desktop/` |
+| Desktop application | Executable synthetic session | Accessible Tauri/React flow invokes named Rust commands and recovers canonical state under `apps/desktop/` |
 | Rust domain and control plane | Authoritative session core and Level-1 planner implemented | Pure commands, immutable events, replay, consent gates, traceable plan rules, immutable revisions, safety halts, and ports under `crates/antidote-core/` |
 | Local persistence | Adapter implemented; integration remains target | Versioned SQLite migrations, immutable event repository, rebuildable lineage views, and atomic content-addressed objects under `crates/antidote-store/` |
 | Local generation worker | Deterministic mock + Rust supervision implemented | Bounded NDJSON process, protocol/capability validation, synthetic WAV/analysis, cancellation, timeout, restart, artifact-integrity, and failure tests; no AI model exists |
@@ -174,8 +174,11 @@ stderr without retaining content, and verifies every returned artifact against
 a host-created directory, byte limit, and SHA-256 digest. The core
 `GenerationOrchestrator` appends start and terminal facts through commands; a
 process or protocol failure becomes a failed result and cannot become generated.
-Desktop command composition, packaged sidecar paths, operating-system
-sandboxing, and a real model adapter remain separate work.
+The desktop host now composes this supervisor through named Tauri commands,
+persists the canonical session under the application-local data directory, and
+returns bounded projections to React. Repository-relative developer worker
+discovery is temporary; packaged sidecar paths, operating-system sandboxing,
+and a real model adapter remain separate work.
 
 ## Level-1 journey planning
 

@@ -26,9 +26,9 @@ update a personal model, control publication, or reinterpret a participant's
 response.
 
 The mock is now exercised through the bounded Rust supervisor in
-`crates/antidote-worker/`. Desktop command composition, packaged sidecar paths,
-operating-system sandboxing, playback, real model generation, and an end-to-end
-session remain unimplemented.
+`crates/antidote-worker/` and the Tauri desktop's named Rust commands. Packaged
+sidecar paths, operating-system sandboxing, real-model generation, and release
+packaging remain unimplemented.
 
 ## Mock behavior
 

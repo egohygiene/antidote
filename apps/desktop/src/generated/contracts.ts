@@ -250,6 +250,7 @@ export interface ResponseObservation {
   harm: number | null;
   stopped_early?: boolean;
   notes?: string;
+  later_aftereffect_requested?: boolean;
   allow_personal_model_update?: boolean;
 }
 

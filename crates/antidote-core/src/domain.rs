@@ -589,6 +589,24 @@ impl Session {
         self.exposure.as_ref()
     }
 
+    /// Return the current playback approval, if one has been recorded.
+    #[must_use]
+    pub const fn playback_approval(&self) -> Option<&PlaybackApproval> {
+        self.playback_approval.as_ref()
+    }
+
+    /// Return the number of felt responses recorded for this session.
+    #[must_use]
+    pub fn response_count(&self) -> usize {
+        self.responses.len()
+    }
+
+    /// Return safety events in immutable observation order.
+    #[must_use]
+    pub fn safety_events(&self) -> &[SafetyEvent] {
+        &self.safety_events
+    }
+
     /// Return the active safety halt identifier, if continuation is blocked.
     #[must_use]
     pub fn safety_halt_id(&self) -> Option<&str> {

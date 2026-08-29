@@ -46,6 +46,7 @@
     "harm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
     "stopped_early": { "type": "boolean", "default": false },
     "notes": { "type": "string", "maxLength": 8000 },
+    "later_aftereffect_requested": { "type": "boolean", "default": false },
     "allow_personal_model_update": { "type": "boolean", "default": false }
   }
 }

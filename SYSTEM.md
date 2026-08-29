@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-system
 title: Antidote System
 kind: architecture-document
-version: 0.6.0
+version: 0.7.0
 status: provisional
 owners:
   - egohygiene
@@ -36,14 +36,14 @@ structural organization, process boundaries, and dependency direction.
 | --- | --- | --- |
 | Research workspace | Implemented | Owns manuscript, bibliography, source records, claim ledger, figures, protocols, and approved study evidence |
 | Publication system | Implemented | Builds and validates PDF, accessible HTML, source archive, provenance, and the gated publication hub |
-| Desktop experience | Workspace scaffold | Pinned host and honest status view exist; session interaction remains target |
-| Consent and context system | Domain core + local persistence | Grants and reviewed projections have fail-closed policies plus rebuildable SQLite views; UI remains target |
+| Desktop experience | Executable synthetic session | Accessible React/Tauri flow composes check-in, reviewed context, editable journey, generation, playback, response, safety, and recovery through Rust commands |
+| Consent and context system | Executable mock slice | Grants and exact reviewed projections have fail-closed Rust policies, rebuildable SQLite views, and explicit UI review |
 | State and intent system | Authoritative domain core | Moment lineage and one-session transition rules execute independently of frameworks |
 | Journey planning system | Deterministic Level-1 planner + authoritative domain core | Versioned rules produce hashed, traceable drafts; person edits create immutable revisions, and rejection, supersession, and exact approval remain separate events |
 | Generation orchestration | Core + supervised adapter | Rust commands own start and terminal events; the bounded supervisor negotiates, checks capabilities, delivers progress, cancels, times out, verifies artifacts, and restarts |
 | Model worker | Deterministic mock supervised | The packaged Python process exercises all v1 operations through the Rust supervisor; real model adapters remain target |
-| Audio realization system | Target | Validates, stores, assembles, previews, plays, stops, and exports audio without redefining model behavior |
-| Response system | Authoritative domain core | Actual exposure and felt response remain distinct, with response consent and safety-event transitions |
+| Audio realization system | Synthetic preview implemented | A verified mock WAV can be deliberately started and persistently stopped; real-model audio, acoustic adherence, and export remain target |
+| Response system | Executable mock slice | Actual exposure and felt response remain distinct in the UI and core, including mismatch, harm, early-stop, safety-halt, and later-aftereffect intent |
 | Personal learning system | Authoritative proposal core | Evidence-scoped updates require separate proposal and acceptance; failed or rejected proposals preserve the prior snapshot |
 | Provenance and export system | Storage lineage foundation | Immutable event hashes, content addresses, and projection source-event lineage exist; research-export packaging remains target |
 
@@ -96,12 +96,12 @@ licensing, and replacement boundaries appropriate to its risk.
 ## Evidence and uncertainty
 
 - **Observed:** Research and publication systems, the pure Rust session core,
-  local event/artifact persistence adapters, and deterministic mock model
-  worker and Rust process supervisor have integrity, recovery, transition,
+local event/artifact persistence adapters, deterministic mock model worker,
+Rust process supervisor, and desktop session composition have integrity, recovery, transition,
   replay, lineage, cancellation, timeout, restart, redaction, and failure-class
   tests. The Level-1 planner has stable-input, duration-property, contradiction,
-  control-boundary, trace, edit, supersession, and hash tests. Desktop command
-  composition remains separate work.
+  control-boundary, trace, edit, supersession, and hash tests. UI evidence covers
+  happy, invalid-consent, cancellation, crash, restart, and adverse-response paths.
 - **Decided for the prototype:** The first executable vertical slice stops at
   rule-guided generation, playback, response capture, and inspectable history.
 - **Proposed:** Advisory personalization and optional sensors follow only after

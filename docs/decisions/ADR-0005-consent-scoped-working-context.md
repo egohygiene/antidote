@@ -29,6 +29,15 @@ Consent to inspect, summarize, generate, retain, learn, synchronize, export,
 and publish remain separate actions. Manual check-in and semantic entry remain
 available without historical context.
 
+## Implementation evidence
+
+The synthetic desktop session shows the exact optional manual context before
+planning, records only an explicitly confirmed session-scoped grant, and keeps
+personal-model updates disabled. Missing confirmation writes no session event.
+The worker receives the accepted journey specification rather than source
+history. Historical Ego Hygiene sources, derived summarization, revocation UI,
+and privacy-ready retention remain later work.
+
 ## Consequences
 
 - Context use is more legible, purpose-limited, and reproducible.
