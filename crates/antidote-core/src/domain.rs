@@ -1570,10 +1570,7 @@ impl Session {
                 previous_plan_id,
                 plan,
             } => {
-                drop(self.decide_journey_revision(
-                    plan.clone(),
-                    previous_plan_id.clone(),
-                )?);
+                drop(self.decide_journey_revision(plan.clone(), previous_plan_id.clone())?);
                 let mut previous = self.journey.take().ok_or(DomainError::JourneyMissing)?;
                 previous.approval = JourneyApprovalState::Superseded {
                     replacement_plan_id: plan.id.clone(),

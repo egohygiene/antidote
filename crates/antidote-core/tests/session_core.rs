@@ -8,9 +8,10 @@ use antidote_core::contracts::{
 };
 use antidote_core::{
     ApplicationError, Clock, ConsentSelection, DomainError, EventRepository, ExposureStopReason,
-    GenerationJobState, GenerationOrchestrator, IdentifierKind, IdentifierSource, ModelUpdateState,
-    JourneyApprovalState, JourneyEdit, PersonalModelSnapshot, PortFailure, RecordedEvent,
-    RuleGuidedPlanner, SafetyEventKind, SessionCommand, SessionService, WorkerInvocationPort,
+    GenerationJobState, GenerationOrchestrator, IdentifierKind, IdentifierSource,
+    JourneyApprovalState, JourneyEdit, ModelUpdateState, PersonalModelSnapshot, PortFailure,
+    RecordedEvent, RuleGuidedPlanner, SafetyEventKind, SessionCommand, SessionService,
+    WorkerInvocationPort,
 };
 use serde::de::DeserializeOwned;
 use serde_json::Value;
@@ -226,7 +227,9 @@ fn rejected_plan_can_be_superseded_by_an_edited_revision_then_approved() {
             reason: "The semantic arc does not fit this synthetic moment.".to_owned(),
         },
     );
-    let rejected = service.load_session(SESSION_ID).expect("stream must replay");
+    let rejected = service
+        .load_session(SESSION_ID)
+        .expect("stream must replay");
     assert!(matches!(
         rejected.journey().map(|journey| &journey.approval),
         Some(JourneyApprovalState::Rejected { .. })
@@ -257,7 +260,9 @@ fn rejected_plan_can_be_superseded_by_an_edited_revision_then_approved() {
         },
     );
 
-    let approved = service.load_session(SESSION_ID).expect("stream must replay");
+    let approved = service
+        .load_session(SESSION_ID)
+        .expect("stream must replay");
     assert_eq!(approved.journey_history().len(), 1);
     assert!(matches!(
         &approved.journey_history()[0].approval,

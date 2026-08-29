@@ -553,11 +553,12 @@ fn validate_controls(
             JourneyPlanControlPolicySupportedControl::Dynamics,
             policy,
         )?;
-        if controls.tempo_bpm.is_some_and(|tempo| {
-            tempo < policy.tempo_bpm_min || tempo > policy.tempo_bpm_max
-        }) || controls
-            .density
-            .is_some_and(|density| density > policy.density_ceiling)
+        if controls
+            .tempo_bpm
+            .is_some_and(|tempo| tempo < policy.tempo_bpm_min || tempo > policy.tempo_bpm_max)
+            || controls
+                .density
+                .is_some_and(|density| density > policy.density_ceiling)
             || controls
                 .spatiality
                 .is_some_and(|spatiality| spatiality > policy.spatiality_ceiling)
@@ -566,10 +567,7 @@ fn validate_controls(
         }
     }
     if !policy.stagewise_controls {
-        let first = plan
-            .stages
-            .first()
-            .ok_or(PlanningError::InvalidPlan)?;
+        let first = plan.stages.first().ok_or(PlanningError::InvalidPlan)?;
         if plan
             .stages
             .iter()
@@ -773,11 +771,10 @@ fn controls_for_stage(
     let spatiality: f64 = [0.30, 0.50, 0.35][effective_index];
     let supports = |control| policy.supported_controls.contains(&control);
     JourneyPlanStageAcousticControls {
-        tempo_bpm: supports(JourneyPlanControlPolicySupportedControl::TempoBpm)
-            .then(|| (base_tempo + tempo_offsets[effective_index]).clamp(
-                policy.tempo_bpm_min,
-                policy.tempo_bpm_max,
-            )),
+        tempo_bpm: supports(JourneyPlanControlPolicySupportedControl::TempoBpm).then(|| {
+            (base_tempo + tempo_offsets[effective_index])
+                .clamp(policy.tempo_bpm_min, policy.tempo_bpm_max)
+        }),
         key: None,
         time_signature: supports(JourneyPlanControlPolicySupportedControl::TimeSignature)
             .then(|| "4/4".to_owned()),
@@ -794,10 +791,7 @@ fn controls_for_stage(
     }
 }
 
-fn safety_constraints(
-    moment: &MomentContext,
-    policy: &JourneyPlanControlPolicy,
-) -> Vec<String> {
+fn safety_constraints(moment: &MomentContext, policy: &JourneyPlanControlPolicy) -> Vec<String> {
     let mut constraints = vec![
         "keep transitions gradual and person-reviewable".to_owned(),
         format!(
@@ -863,11 +857,7 @@ fn add_stage_derivations(
             controls.tempo_bpm.is_some(),
             "control.tempo-bounded.v1",
         ),
-        (
-            "key",
-            controls.key.is_some(),
-            "control.key-explicit.v1",
-        ),
+        ("key", controls.key.is_some(), "control.key-explicit.v1"),
         (
             "time_signature",
             controls.time_signature.is_some(),
@@ -961,10 +951,7 @@ fn apply_edit(plan: &mut JourneyPlan, edit: &JourneyEdit) -> Result<(), Planning
     Ok(())
 }
 
-fn mark_person_edits(
-    plan: &mut JourneyPlan,
-    edits: &[JourneyEdit],
-) -> Result<(), PlanningError> {
+fn mark_person_edits(plan: &mut JourneyPlan, edits: &[JourneyEdit]) -> Result<(), PlanningError> {
     let edit_targets = edits
         .iter()
         .map(|edit| edit_targets(plan, edit))

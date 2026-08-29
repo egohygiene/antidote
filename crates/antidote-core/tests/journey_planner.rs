@@ -3,8 +3,8 @@ use antidote_core::contracts::{
     JourneyPlanDerivationSource, MomentContext, MomentContextDesiredTransitionDirection,
 };
 use antidote_core::{
-    JourneyEdit, PlanningError, RuleGuidedPlanner, hash_journey_plan,
-    validate_inspectable_plan, validate_plan_for_moment,
+    JourneyEdit, PlanningError, RuleGuidedPlanner, hash_journey_plan, validate_inspectable_plan,
+    validate_plan_for_moment,
 };
 use serde::de::DeserializeOwned;
 use serde_json::Value;
@@ -108,7 +108,9 @@ fn person_edits_create_a_new_hashed_revision_and_replace_traces() {
                 JourneyEdit::Strategy("use the person's edited sparse arc".to_owned()),
                 JourneyEdit::StageSemanticIntent {
                     stage_index: 1,
-                    semantic_intent: vec!["leave more room around the central transition".to_owned()],
+                    semantic_intent: vec![
+                        "leave more room around the central transition".to_owned(),
+                    ],
                 },
                 JourneyEdit::StageAcousticControls {
                     stage_index: 1,
