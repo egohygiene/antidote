@@ -1,0 +1,753 @@
+{
+  "schema": "antidote.manuscript-contract/v1",
+  "version": "0.1.0",
+  "status": "frozen",
+  "frozen_by": "egohygiene/antidote#35",
+  "last_reviewed": "2026-08-29",
+  "revision_policy": "Changes require a version bump, claim-ledger reconciliation, and review through the owning section issue. Issue #47 may supersede the working title and abstract only after the complete body is coherent.",
+  "identity": {
+    "working_title": "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys",
+    "subtitle": "Design and Feasibility Protocol",
+    "paper_type": "design-science and systems paper with a prospective N-of-1 feasibility protocol",
+    "primary_audiences": [
+      "human-computer interaction researchers",
+      "music and audio generation researchers",
+      "personal informatics and digital health researchers",
+      "research software and reproducibility practitioners"
+    ],
+    "clinical_position": "research instrument; not a treatment, diagnostic, medical device, or validated digital therapeutic"
+  },
+  "thesis": {
+    "statement": "Person-and-moment generative audio becomes scientifically testable only when the transformation from consented context and explicit semantic intent through a time-indexed journey plan, generated acoustic realization, actual exposure, separated response measures, and any advisory within-person update is preserved as distinct, inspectable, provenance-linked records.",
+    "establishes_now": "The design/protocol manuscript formalizes this research-instrument contract, grounds its components in prior work, describes the implemented and proposed boundaries honestly, and specifies how later feasibility evidence may be collected and interpreted.",
+    "does_not_establish": "The manuscript does not establish novelty of the individual components, learnability of a personal mapping, successful affect regulation, therapeutic benefit, clinical safety, or a neurological mechanism."
+  },
+  "research_questions": [
+    {
+      "id": "RQ1",
+      "kind": "design",
+      "question": "How can a local research instrument represent, generate, and evaluate a person-and-moment audio journey while keeping consented context, semantic intent, planned controls, realized acoustics, exposure, response, and longitudinal updates inspectable and non-interchangeable?",
+      "answerable_stage": "design-protocol",
+      "answer_boundary": "Answered through the governed model, architecture, prototype status, and protocol; no human benefit is inferred."
+    },
+    {
+      "id": "RQ2",
+      "kind": "technical-feasibility",
+      "question": "Can the implemented instrument preserve its declared authority, provenance, control-adherence, continuity, interruption, and recovery contracts across a complete local session?",
+      "answerable_stage": "feasibility-revision",
+      "answer_boundary": "Technical evidence may enter only after the applicable MVP gate is complete and the claim ledger approves promotion."
+    },
+    {
+      "id": "RQ3",
+      "kind": "within-person-feasibility",
+      "question": "Across repeated sessions, do provenance-linked person-and-moment records support useful advisory relationships among semantic intent, acoustic realization, and self-reported response without increasing burden, surprise, mismatch, or harm?",
+      "answerable_stage": "feasibility-revision",
+      "answer_boundary": "Requires a frozen protocol, resolved ethics and privacy gates, qualifying observations, and uncertainty-aware analysis."
+    }
+  ],
+  "contributions": [
+    {
+      "id": "CONTRIB-1",
+      "title": "Evidence-bounded problem formulation",
+      "statement": "A governed comparator and claim boundary that places Antidote among prior closed-loop, current-to-target, controllable, physiologically adaptive, and longitudinal music systems without claiming those components as new.",
+      "claim_ids": [
+        "ANT-SRC-003",
+        "ANT-CLM-001",
+        "ANT-NEG-001"
+      ],
+      "status": "established research artifact",
+      "permitted_verbs": [
+        "synthesizes",
+        "distinguishes",
+        "bounds"
+      ],
+      "prohibited_inferences": [
+        "exhaustive systematic review",
+        "patentability finding",
+        "first-system claim"
+      ]
+    },
+    {
+      "id": "CONTRIB-2",
+      "title": "End-to-end inspectability contract",
+      "statement": "A person-and-moment model that preserves consented context, semantic intent, time-indexed planning, generated acoustic realization, exposure, perceived and felt response, usefulness or harm, aftereffect, and advisory updating as separately governed records.",
+      "claim_ids": [
+        "ANT-CLM-001",
+        "ANT-CLM-003",
+        "ANT-CAN-001"
+      ],
+      "status": "formalized design contribution",
+      "permitted_verbs": [
+        "proposes",
+        "formalizes",
+        "separates"
+      ],
+      "prohibited_inferences": [
+        "complete combination is globally novel",
+        "inspectability guarantees truth or safety",
+        "provenance validates an outcome"
+      ]
+    },
+    {
+      "id": "CONTRIB-3",
+      "title": "Two-rate adaptive-audio architecture",
+      "statement": "A proposed separation between an uncertain, person-correctable deliberative loop and a deterministic audio loop, with typed semantic mixins, receding-horizon planning, generate-ahead buffering, and independent semantic and waveform continuity checks.",
+      "claim_ids": [
+        "ANT-SRC-002",
+        "ANT-HYP-002",
+        "ANT-CLM-005"
+      ],
+      "status": "proposed architecture; not implemented end to end",
+      "permitted_verbs": [
+        "proposes",
+        "draws on",
+        "transfers"
+      ],
+      "prohibited_inferences": [
+        "validated affect controller",
+        "hard-real-time generator",
+        "stable or optimal policy",
+        "seamless or beneficial listening experience"
+      ]
+    },
+    {
+      "id": "CONTRIB-4",
+      "title": "Human-authority and uncertainty model",
+      "statement": "A local-first authority model in which context, proposals, generation, playback, retention, export, and personal-model updates remain consent-scoped, inspectable, interruptible, and human-correctable.",
+      "claim_ids": [
+        "ANT-CLM-002",
+        "ANT-CLM-004"
+      ],
+      "status": "design contract with partially implemented mock evidence",
+      "permitted_verbs": [
+        "requires",
+        "preserves",
+        "constrains"
+      ],
+      "prohibited_inferences": [
+        "perfect privacy",
+        "meaningful consent is automatic",
+        "more controls necessarily improve trust"
+      ]
+    },
+    {
+      "id": "CONTRIB-5",
+      "title": "Evidence-disciplined feasibility protocol",
+      "statement": "A prospective evaluation and reporting contract that keeps intended control, acoustic adherence, perceived expression, felt response, immediate usefulness or harm, aftereffect, and clinical outcome distinct while retaining null, negative, missing, interrupted, and adverse observations.",
+      "claim_ids": [
+        "ANT-HYP-001",
+        "ANT-HYP-003",
+        "ANT-CLM-003"
+      ],
+      "status": "protocol contribution pending issue #40 freeze",
+      "permitted_verbs": [
+        "specifies",
+        "pre-registers",
+        "distinguishes"
+      ],
+      "prohibited_inferences": [
+        "completed study",
+        "observed human result",
+        "efficacy or mechanism"
+      ]
+    }
+  ],
+  "stage_ladder": [
+    {
+      "id": "writing-preview",
+      "order": 1,
+      "entry_gate": "The manuscript contract is frozen and placeholders remain visibly labeled as non-evidence.",
+      "permitted_claims": "Governed source syntheses, design decisions, implemented repository facts, and explicitly labeled hypotheses.",
+      "prohibited_claims": "Human outcomes, clinical benefit, mechanism, or completion of proposed runtime behavior."
+    },
+    {
+      "id": "design-protocol",
+      "order": 2,
+      "entry_gate": "Issues #36 through #47 complete the evidence-bounded prose, figures, publication loop, and frozen prospective protocol.",
+      "permitted_claims": "What the reviewed literature reports, what the repository implements, what the design formalizes, and what the protocol prospectively specifies.",
+      "prohibited_claims": "Any result that depends on an unrun protocol or unimplemented model capability."
+    },
+    {
+      "id": "feasibility-revision",
+      "order": 3,
+      "entry_gate": "Applicable MVP, ethics, privacy, protocol-version, provenance, and claim-ledger promotion gates are complete.",
+      "permitted_claims": "Auditable technical checks and qualifying N-of-1 observations, each labeled at its actual evidence level.",
+      "prohibited_claims": "Generalized efficacy, clinical safety, universal mappings, or causal mechanism."
+    },
+    {
+      "id": "reviewable-preprint",
+      "order": 4,
+      "entry_gate": "Issue #48 verifies complete sources, claims, figures, accessibility, artifacts, independent review, and live revision identity.",
+      "permitted_claims": "Only statements traceable to governed sources, reproducible repository evidence, or qualifying protocol observations.",
+      "prohibited_claims": "Peer-review, endorsement, DOI, clinical validation, or novelty beyond the bounded search."
+    }
+  ],
+  "terminology": [
+    {
+      "term": "moment-specific personalization",
+      "definition": "Shorthand for tailoring a proposal to one individual's present, consent-scoped moment, desired transition, explicit semantic language, exclusions, and relevant prior evidence. It is not a claim that the system knows the person's true state or uniquely invents moment-aware personalization.",
+      "ontology_concepts": [
+        "Individual",
+        "Moment",
+        "Consent grant",
+        "Desired transition",
+        "Personal model snapshot"
+      ],
+      "prohibited_conflations": [
+        "diagnosis",
+        "fixed profile",
+        "objective need",
+        "novelty by itself"
+      ]
+    },
+    {
+      "term": "semantic intent",
+      "definition": "The inspectable, user-authored combination of desired transition, semantic descriptors, inclusions, exclusions, and priorities that states what the person wants the journey to explore.",
+      "ontology_concepts": [
+        "Desired transition",
+        "Semantic descriptor"
+      ],
+      "prohibited_conflations": [
+        "raw prompt text",
+        "predicted emotion",
+        "acoustic realization"
+      ]
+    },
+    {
+      "term": "journey",
+      "definition": "The governed progression represented by an accepted journey plan and its time-bounded stages; it is an intended audio experience, not proof of a state transition.",
+      "ontology_concepts": [
+        "Journey strategy",
+        "Journey plan",
+        "Journey stage"
+      ],
+      "prohibited_conflations": [
+        "single prompt",
+        "generated artifact",
+        "successful outcome"
+      ]
+    },
+    {
+      "term": "semantic mixin",
+      "definition": "A typed, versioned, reversible semantic control object with a human-readable purpose, bounds, neutral position, exclusions, and adapter mapping; it is not undocumented prompt concatenation.",
+      "ontology_concepts": [
+        "Semantic descriptor",
+        "Acoustic control",
+        "Generation specification"
+      ],
+      "prohibited_conflations": [
+        "linear emotion control",
+        "raw prompt fragment",
+        "guaranteed model behavior"
+      ]
+    },
+    {
+      "term": "conditioning state",
+      "definition": "The versioned set of approved semantic and acoustic controls supplied to a model adapter for a bounded generation interval, including provenance, uncertainty, conflicts, and exclusions.",
+      "ontology_concepts": [
+        "Working projection",
+        "Journey stage",
+        "Generation specification"
+      ],
+      "prohibited_conflations": [
+        "person's true emotion",
+        "unrestricted personal context",
+        "generator output"
+      ]
+    },
+    {
+      "term": "acoustic realization",
+      "definition": "The audio artifact actually produced together with measured acoustic features and control-adherence estimates; requested or declared properties are not treated as realized until measured.",
+      "ontology_concepts": [
+        "Audio artifact",
+        "Feature report"
+      ],
+      "prohibited_conflations": [
+        "semantic intent",
+        "expressed emotion",
+        "felt response"
+      ]
+    },
+    {
+      "term": "exposure",
+      "definition": "The recorded playback event through which the person actually encounters an audio artifact, including timing, completion, interruption, and stop or safety events.",
+      "ontology_concepts": [
+        "Exposure",
+        "Safety event"
+      ],
+      "prohibited_conflations": [
+        "artifact generation",
+        "complete listening",
+        "response"
+      ]
+    },
+    {
+      "term": "response",
+      "definition": "A provenance-linked self-report, behavior, or optional measurement associated with an exposure. Perceived expression, felt state, usefulness, harm, and later aftereffect remain separate fields or observations.",
+      "ontology_concepts": [
+        "Response observation",
+        "Safety event",
+        "Aftereffect"
+      ],
+      "prohibited_conflations": [
+        "expressed emotion",
+        "acoustic adherence",
+        "benefit",
+        "clinical outcome"
+      ]
+    },
+    {
+      "term": "usefulness or harm",
+      "definition": "The person's immediate appraisal of whether an exposure was helpful, neutral, mismatched, burdensome, distressing, or otherwise adverse in that moment; intensity and catharsis are not automatic proxies.",
+      "ontology_concepts": [
+        "Response observation",
+        "Safety event"
+      ],
+      "prohibited_conflations": [
+        "emotional intensity",
+        "engagement",
+        "treatment effect"
+      ]
+    },
+    {
+      "term": "aftereffect",
+      "definition": "A response observation intentionally collected after the immediate session window at a declared interval and linked to the relevant exposure.",
+      "ontology_concepts": [
+        "Aftereffect"
+      ],
+      "prohibited_conflations": [
+        "immediate response",
+        "durable benefit",
+        "clinical follow-up"
+      ]
+    }
+  ],
+  "claim_policy": {
+    "ledger": "research/notes/CLAIM_LEDGER.md",
+    "required_classes": [
+      "source",
+      "source synthesis",
+      "hypothesis",
+      "observation",
+      "interpretation",
+      "claim",
+      "claim candidate",
+      "rejected claim"
+    ],
+    "status_verbs": {
+      "implemented": [
+        "implements",
+        "records",
+        "validates"
+      ],
+      "formalized": [
+        "formalizes",
+        "defines",
+        "separates"
+      ],
+      "proposed": [
+        "proposes",
+        "may",
+        "is designed to"
+      ],
+      "unverified": [
+        "hypothesizes",
+        "asks whether",
+        "remains to be evaluated"
+      ]
+    },
+    "globally_prohibited": [
+      "first closed-loop affective music system",
+      "validated treatment or digital therapeutic",
+      "objective inference of a person's true emotion or need",
+      "guaranteed state transition or therapeutic benefit",
+      "specific neurological mechanism without qualifying evidence",
+      "synthetic fixture presented as human evidence"
+    ]
+  },
+  "sections": [
+    {
+      "path": "paper/paper.tex",
+      "owner_issues": [
+        47
+      ],
+      "purpose": "Own document-level assembly, title metadata, bibliography, appendix boundary, and final build order.",
+      "depends_on": [
+        36,
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        45,
+        46
+      ],
+      "required_evidence": [
+        "Every included source has completed its owning issue.",
+        "Metadata agrees with beacon-project.toml and the claim ledger."
+      ],
+      "planned_visuals": [],
+      "completion_criteria": [
+        "The build order matches this contract.",
+        "Title, abstract, bibliography, and appendix render in both themes."
+      ],
+      "prohibited": [
+        "A second manuscript source",
+        "Final title or abstract claims absent from the body"
+      ]
+    },
+    {
+      "path": "paper/sections/manuscript.tex",
+      "owner_issues": [
+        47
+      ],
+      "purpose": "Coordinate the canonical numbered section order without owning substantive prose.",
+      "depends_on": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44
+      ],
+      "required_evidence": [
+        "All numbered section files exist and appear exactly once."
+      ],
+      "planned_visuals": [],
+      "completion_criteria": [
+        "Coordinator order matches the argument and this contract.",
+        "Conclusion is a dedicated final numbered section."
+      ],
+      "prohibited": [
+        "Substantive duplicate manuscript prose"
+      ]
+    },
+    {
+      "path": "paper/sections/01-introduction.tex",
+      "owner_issues": [
+        37
+      ],
+      "purpose": "Motivate the inspectability problem, state RQ1, bound RQ2 and RQ3, and preview only the accepted contribution combination.",
+      "depends_on": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "required_evidence": [
+        "Comparator matrix for the research gap",
+        "Claim ledger for thesis and contribution wording",
+        "Primary source records for any motivating empirical statement"
+      ],
+      "planned_visuals": [
+        "person-moment-journey model",
+        "evidence and claim classification"
+      ],
+      "completion_criteria": [
+        "Problem, gap, questions, scope, and contributions agree with this contract.",
+        "The originating experience is hypothesis-generating only.",
+        "No broad novelty, efficacy, or mechanism language remains."
+      ],
+      "prohibited": [
+        "Claim that personalization, semantic planning, or closed-loop generation is new",
+        "Promise that a mapping is learnable or beneficial"
+      ]
+    },
+    {
+      "path": "paper/sections/02-related-work.tex",
+      "owner_issues": [
+        38
+      ],
+      "purpose": "Synthesize the closest systems and qualifying evidence by capability, evidence grade, disagreement, and remaining combination boundary.",
+      "depends_on": [
+        32,
+        33,
+        34,
+        35
+      ],
+      "required_evidence": [
+        "Promoted source records",
+        "Architecture evidence map",
+        "Comparator and novelty matrix",
+        "Verified bibliography identities"
+      ],
+      "planned_visuals": [
+        "literature landscape and comparator table"
+      ],
+      "completion_criteria": [
+        "Every substantive comparison traces to an exact reviewed artifact.",
+        "Conflicting and null findings remain visible.",
+        "Search absence is described as bounded, never global."
+      ],
+      "prohibited": [
+        "Citation counting as evidence strength",
+        "Architecture precedent presented as outcome evidence",
+        "Unqualified first-system language"
+      ]
+    },
+    {
+      "path": "paper/sections/03-system-design.tex",
+      "owner_issues": [
+        39
+      ],
+      "purpose": "Formalize the person-moment model, inspectable record chain, two-rate architecture, semantic mixer, planning horizon, buffer, continuity, provenance, and failure boundaries.",
+      "depends_on": [
+        33,
+        35,
+        45
+      ],
+      "required_evidence": [
+        "Architecture evidence map and source records",
+        "Repository architecture and ontology",
+        "Checked-in implementation status"
+      ],
+      "planned_visuals": [
+        "holistic closed-loop architecture",
+        "Semantic Intent Mixer",
+        "state estimation, receding horizon, and generate-ahead buffer",
+        "semantic versus waveform continuity",
+        "provenance and privacy-reviewed export"
+      ],
+      "completion_criteria": [
+        "Notation has one meaning and is dimensionally coherent.",
+        "Implemented, proposed, and unavailable behavior are visibly separated.",
+        "Every transferred formalism states what does not transfer."
+      ],
+      "prohibited": [
+        "Person modeled as a controllable plant",
+        "Model estimate presented as true emotion",
+        "Crossfade presented as musical or emotional coherence",
+        "Unimplemented real-time generation claim"
+      ]
+    },
+    {
+      "path": "paper/sections/04-methods.tex",
+      "owner_issues": [
+        40
+      ],
+      "purpose": "Specify and freeze the prospective technical and N-of-1 feasibility protocol, measures, assignments, analysis, provenance, safety, and mutation rules.",
+      "depends_on": [
+        35,
+        39,
+        43
+      ],
+      "required_evidence": [
+        "Final construct definitions",
+        "Versioned protocol and analysis plan",
+        "Ethics, privacy, consent, exclusion, and stop decisions",
+        "Verified instrument and implementation capabilities"
+      ],
+      "planned_visuals": [
+        "feasibility protocol timeline",
+        "measurement and evidence table"
+      ],
+      "completion_criteria": [
+        "Variables, conditions, measures, assignments, exclusions, stopping, missingness, and analysis are reproducible.",
+        "Protocol versions and mutations are explicit.",
+        "Optional physiology never defines the person's state by itself."
+      ],
+      "prohibited": [
+        "Retrospective protocol fitted to desired outcomes",
+        "Formal collection before ethics and safety gates",
+        "Clinical efficacy design language"
+      ]
+    },
+    {
+      "path": "paper/sections/05-results.tex",
+      "owner_issues": [
+        41
+      ],
+      "purpose": "Provide a governed reporting structure for technical verification and later qualifying observations without populating unrun results.",
+      "depends_on": [
+        35,
+        40
+      ],
+      "required_evidence": [
+        "Frozen protocol version",
+        "Source record and provenance for every promoted result",
+        "Claim-ledger approval for technical evidence from MVP issue #18"
+      ],
+      "planned_visuals": [
+        "control-adherence results",
+        "exposure and response completeness",
+        "null, negative, missing, interrupted, and adverse outcomes"
+      ],
+      "completion_criteria": [
+        "The design/protocol manuscript states that no formal human results exist.",
+        "Every future slot declares its source, protocol, analysis, and evidence class.",
+        "Technical evidence is never labeled therapeutic."
+      ],
+      "prohibited": [
+        "Synthetic fixture presented as observation",
+        "Originating catharsis presented as a formal result",
+        "Invented values or example statistics that resemble findings"
+      ]
+    },
+    {
+      "path": "paper/sections/06-discussion.tex",
+      "owner_issues": [
+        42
+      ],
+      "purpose": "Interpret the framework and its evidence-bounded combination, compare plausible alternatives, and define falsifiable future directions.",
+      "depends_on": [
+        37,
+        38,
+        39,
+        40,
+        41
+      ],
+      "required_evidence": [
+        "Completed preceding manuscript sections",
+        "Comparator matrix and claim ledger",
+        "Reported limitations and contradictory evidence"
+      ],
+      "planned_visuals": [],
+      "completion_criteria": [
+        "Interpretations remain proportional to the available evidence.",
+        "Alternative explanations and failure conditions are explicit.",
+        "Future directions identify the evidence needed to change a claim."
+      ],
+      "prohibited": [
+        "Retroactive expansion of methods or results",
+        "Design elegance presented as empirical success",
+        "Feasibility presented as efficacy"
+      ]
+    },
+    {
+      "path": "paper/sections/07-limitations-and-ethics.tex",
+      "owner_issues": [
+        43
+      ],
+      "purpose": "Audit validity, uncertainty, human risk, consent, privacy, licensing, accessibility, hearing safety, misuse, and actual ethics-review status.",
+      "depends_on": [
+        35,
+        38,
+        39,
+        40,
+        42
+      ],
+      "required_evidence": [
+        "Construct and protocol definitions",
+        "Implemented safety and privacy boundaries",
+        "Actual ethics-review determination",
+        "Model, data, and generated-audio licensing records"
+      ],
+      "planned_visuals": [
+        "risk, mitigation, and unresolved-status table"
+      ],
+      "completion_criteria": [
+        "Mitigations and unresolved risks remain distinct.",
+        "Formal collection is not implied to be authorized.",
+        "Limitations constrain the Discussion and Conclusion."
+      ],
+      "prohibited": [
+        "Local-first presented as perfect security",
+        "Provenance presented as truth, ownership, or consent",
+        "Absence of reported harm presented as safety"
+      ]
+    },
+    {
+      "path": "paper/sections/08-availability-and-contributions.tex",
+      "owner_issues": [
+        44
+      ],
+      "purpose": "State verified artifact availability, reproducibility boundaries, licensing, authorship, funding, acknowledgements, and conflicts.",
+      "depends_on": [
+        35,
+        36
+      ],
+      "required_evidence": [
+        "Existing stable routes and artifacts",
+        "Verified repository and build metadata",
+        "Reviewed CRediT roles, licenses, funding, acknowledgements, and conflicts"
+      ],
+      "planned_visuals": [],
+      "completion_criteria": [
+        "Every access statement resolves or states its exact status.",
+        "Private, sensitive, copyrighted, or unavailable material is not promised.",
+        "Manuscript, code, figures, sources, and model assets have distinct license boundaries."
+      ],
+      "prohibited": [
+        "Unminted DOI or release",
+        "Institutional endorsement",
+        "Public availability of sensitive data"
+      ]
+    },
+    {
+      "path": "paper/sections/09-conclusion.tex",
+      "owner_issues": [
+        47
+      ],
+      "purpose": "Answer RQ1 at the design evidence level, summarize only supported contributions and limitations, and state the gates for RQ2 and RQ3.",
+      "depends_on": [
+        37,
+        38,
+        39,
+        40,
+        41,
+        42,
+        43,
+        44,
+        46
+      ],
+      "required_evidence": [
+        "Complete manuscript body",
+        "Final claim-ledger reconciliation",
+        "Limitations and actual results status"
+      ],
+      "planned_visuals": [],
+      "completion_criteria": [
+        "The conclusion answers only questions supported by the body.",
+        "The design/protocol contribution remains distinct from future feasibility evidence.",
+        "No new evidence or claim appears here first."
+      ],
+      "prohibited": [
+        "Efficacy, mechanism, or clinical conclusion",
+        "New contribution absent from Introduction and Discussion",
+        "Future work stated as completed"
+      ]
+    },
+    {
+      "path": "paper/sections/appendix.tex",
+      "owner_issues": [
+        40,
+        41
+      ],
+      "purpose": "Preserve versioned protocol, analysis, provenance, and supporting material required to reproduce or audit the manuscript.",
+      "depends_on": [
+        35,
+        40,
+        41
+      ],
+      "required_evidence": [
+        "Frozen protocol and analysis versions",
+        "Migration and artifact provenance",
+        "Supporting material cited from the body"
+      ],
+      "planned_visuals": [
+        "supporting protocol and evidence tables when needed"
+      ],
+      "completion_criteria": [
+        "Appendix material agrees with the canonical protocol and body.",
+        "Sensitive or unavailable material is excluded or access-controlled.",
+        "Every appendix artifact has an owning source and version."
+      ],
+      "prohibited": [
+        "Unreviewed result hidden outside the Results section",
+        "Private participant or personal context",
+        "Alternative protocol presented as the frozen protocol"
+      ]
+    }
+  ],
+  "conclusion_decision": {
+    "decision": "dedicated numbered section",
+    "path": "paper/sections/09-conclusion.tex",
+    "rationale": "A dedicated conclusion makes the final claim boundary independently reviewable and prevents future directions in Discussion from becoming the manuscript's answer by implication.",
+    "owner_issue": 47
+  }
+}

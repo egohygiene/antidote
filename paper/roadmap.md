@@ -44,13 +44,17 @@ efficacy.
 
 ### Wave P1 — Evidence and novelty
 
-- [#32 — Consolidate the living source atlas and bibliography shelf](https://github.com/egohygiene/antidote/issues/32)
-- [#33 — Scout adaptive-control and real-time generative-audio architecture](https://github.com/egohygiene/antidote/issues/33) — [evidence dossier](../research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md)
-- [#34 — Build the comparator, evidence, and novelty matrix](https://github.com/egohygiene/antidote/issues/34) — [governed dossier](../research/notes/COMPARATOR_NOVELTY_MATRIX.md)
-- [#35 — Freeze the paper thesis, contribution, and section contracts](https://github.com/egohygiene/antidote/issues/35)
+- [x] [#32 — Consolidate the living source atlas and bibliography shelf](https://github.com/egohygiene/antidote/issues/32)
+- [x] [#33 — Scout adaptive-control and real-time generative-audio architecture](https://github.com/egohygiene/antidote/issues/33) — [evidence dossier](../research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md)
+- [x] [#34 — Build the comparator, evidence, and novelty matrix](https://github.com/egohygiene/antidote/issues/34) — [governed dossier](../research/notes/COMPARATOR_NOVELTY_MATRIX.md)
+- [x] [#35 — Freeze the paper thesis, contribution, and section contracts](https://github.com/egohygiene/antidote/issues/35) — [manuscript contract](manuscript-contract.json)
 
 The paper does not begin with prose inflation. It begins by testing whether the
 claimed gap and contribution survive primary-source comparison.
+
+Wave P1 freezes an inspectability thesis rather than a broad adaptive-music
+novelty claim. The contract makes the complete transformation chain the
+research object while keeping learnability, usefulness, and benefit open.
 
 ### Wave P2 — Publication and visual foundations
 
@@ -112,8 +116,9 @@ figures, metadata, build outputs, Pages routes, checksums, and the roadmap.
 | `06-discussion.tex` | #42 | Evidence-proportional interpretation and future directions |
 | `07-limitations-and-ethics.tex` | #43 | Validity, risk, privacy, consent, and ethics status |
 | `08-availability-and-contributions.tex` | #44 | Verified access, reproducibility, roles, funding, and conflicts |
+| `09-conclusion.tex` | #47 | Whole-paper answer constrained by results status and limitations |
 | `appendix.tex` | #40, #41 | Frozen protocol checklist and supporting analysis material |
-| title, abstract, conclusion, coordinator | #47 | Whole-paper synthesis and consistency |
+| title, abstract, and coordinator | #47 | Whole-paper synthesis and consistency |
 
 ## Initial visual inventory
 
@@ -142,7 +147,8 @@ A future contributor or conversation should:
 
 1. read `AGENTS.md`, `EPISTEMOLOGY.md`, and this roadmap;
 2. inspect issue #31 and the next unclosed, dependency-ready child;
-3. read that issue's required source records and affected section contract;
+3. read that issue's required source records and its entry in
+   `paper/manuscript-contract.json`;
 4. change the canonical LaTeX or governed research source only;
 5. update the claim ledger, bibliography, figure registry, or architecture
    document when the issue changes their owned boundary;

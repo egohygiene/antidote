@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.4.0
+version: 0.5.0
 status: provisional
 owners:
   - egohygiene
@@ -44,9 +44,10 @@ updated: 2026-08-29
 **Lifecycle:** research draft with prototype architecture bootstrap
 
 **Current gate:** The MVP implementation sequence is deliberately paused after
-issue #16 while the paper-first workstream verifies the evidence base, proves
-the continuous publication loop, and writes the design/protocol manuscript
-through issue #48.
+issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
+and section boundaries through issue #35 and now proves the continuous
+publication loop before writing the design/protocol manuscript through issue
+#48.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -101,27 +102,30 @@ download, manifest, and integrity routes through a gated product-owned workflow.
 
 <!-- roadmap-step
 id: ANT-Q02
-status: active
+status: complete
 depends_on: [ANT-Q01]
 issues: ["egohygiene/antidote#32", "egohygiene/antidote#33", "egohygiene/antidote#34", "egohygiene/antidote#35"]
 -->
 
 #### ANT-Q02 — Verify literature and novelty boundaries
 
-**State:** `active`
+**State:** `complete`
 
 **Outcome:** A primary-source atlas separates overlap, open gaps, architecture
 precedents, and candidate contribution claims across the research streams.
 
 **Exit criteria:**
 
-- [ ] Each promoted bibliography entry has a primary-source assessment.
+- [x] Each promoted bibliography entry has a primary-source assessment.
 - [x] MindMelody and other adaptive-audio comparators have a structured overlap
   analysis in the [issue #34 comparator and novelty matrix](research/notes/COMPARATOR_NOVELTY_MATRIX.md).
 - [x] Architecture references are separated from implementation documentation
   in the [issue #33 evidence map](research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md).
-- [ ] The contribution statement is rewritten from verified evidence.
-- [ ] Unsupported efficacy and deterministic mechanism language is absent.
+- [x] The contribution statement is rewritten from verified evidence in the
+  [issue #35 manuscript contract](paper/manuscript-contract.json) and
+  [claim ledger](research/notes/CLAIM_LEDGER.md).
+- [x] Unsupported efficacy and deterministic mechanism language is prohibited
+  by the manuscript contract and claim ledger.
 
 <!-- roadmap-step
 id: ANT-Q02B
@@ -143,11 +147,11 @@ feasibility-revision gate when qualifying evidence exists.
 
 **Exit criteria:**
 
-- [ ] The living source atlas and broader bibliography shelf are preserved
+- [x] The living source atlas and broader bibliography shelf are preserved
   without treating every entry as cited evidence.
-- [ ] Modeling, adaptive-control, real-time audio, and provenance architecture
+- [x] Modeling, adaptive-control, real-time audio, and provenance architecture
   claims have primary-source or normative-standard anchors.
-- [ ] The novelty matrix supports the frozen thesis and contribution boundary.
+- [x] The novelty matrix supports the frozen thesis and contribution boundary.
 - [ ] Every canonical manuscript section completes its evidence-specific issue.
 - [ ] Figures and tables have governed source, captions, alt text, placement,
   and placeholder/final status.

@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-ontology
 title: Antidote Ontology
 kind: architecture-document
-version: 0.1.0
+version: 0.2.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-08-29
 governed_by:
   - architecture-ontology
 depends_on:
@@ -45,18 +45,23 @@ versioned schemas, and storage or code types remain implementation concerns.
 | Consent grant | Time-, source-, purpose-, and action-scoped authority to use context or perform an operation |
 | Working projection | An inspectable, derived view created from approved sources for one purpose |
 | Semantic descriptor | A word, metaphor, image, memory, relation, inclusion, exclusion, or other human-readable sonic meaning |
+| Semantic intent | The inspectable combination of desired transition, semantic descriptors, inclusions, exclusions, and priorities that states what the person wants a journey to explore |
+| Semantic mixin | A typed, versioned, reversible semantic control with a human-readable purpose, bounds, neutral position, exclusions, and model-adapter mapping |
 | Personal sonic mapping | An uncertain relationship between semantic meaning, acoustic realization, context, and prior response for one individual |
 | Journey strategy | A high-level approach for moving from the current state toward the desired transition |
 | Journey plan | An ordered, editable set of stages, intentions, constraints, and acoustic controls |
 | Journey stage | A time-bounded portion of a plan with an intended role and transition conditions |
 | Acoustic control | A requested property such as tempo, timbre, harmony, density, dynamics, spatiality, or rhythmic structure |
+| Conditioning state | The versioned approved semantic and acoustic controls supplied to a model adapter for one bounded generation interval, including conflicts, exclusions, uncertainty, and provenance |
 | Model adapter | A replaceable boundary that translates a generation specification to and from one model implementation |
 | Generation specification | The immutable, versioned instruction set sent across the model boundary |
 | Generation run | One attempted model invocation, including runtime state, warnings, and lineage |
 | Audio artifact | A generated or assembled media object identified by content hash and format |
 | Feature report | Measured acoustic properties and control-adherence estimates for an artifact |
+| Acoustic realization | An audio artifact together with its measured feature report; requested or declared properties are not realized until measured |
 | Exposure | The actual playback event through which a person encounters an artifact |
 | Response observation | A self-report, behavior, or optional measurement associated with an exposure |
+| Usefulness or harm | The person's immediate appraisal of whether an exposure was helpful, neutral, mismatched, burdensome, distressing, or otherwise adverse in that moment |
 | Aftereffect | A response observation intentionally collected after the immediate session window |
 | Personal model snapshot | A versioned, uncertain summary of within-person evidence at a point in time |
 | Safety event | Distress, mismatch, adverse response, exclusion, stop, or other event requiring visibility or changed behavior |
@@ -72,13 +77,16 @@ versioned schemas, and storage or code types remain implementation concerns.
 - **State observations**, a **Desired transition**, a working projection, and
   **Personal sonic mappings** inform a proposed **Journey strategy**.
 - A journey strategy becomes an editable **Journey plan** composed of **Journey
-  stages**, **Semantic descriptors**, and **Acoustic controls**.
-- A **Model adapter** executes a **Generation specification** as a **Generation
-  run** and produces an **Audio artifact** plus warnings.
-- Analysis derives a **Feature report** from the artifact; it does not establish
-  the person's felt response.
+  stages**, **Semantic intent**, **Semantic mixins**, and **Acoustic controls**.
+- The accepted plan creates a bounded **Conditioning state** within an immutable
+  **Generation specification**; a **Model adapter** executes it as a
+  **Generation run** and produces an **Audio artifact** plus warnings.
+- Analysis derives a **Feature report** and therefore an inspectable **Acoustic
+  realization** from the artifact; it does not establish the person's felt
+  response.
 - An **Exposure** connects actual playback to one or more **Response
-  observations**, **Aftereffects**, or **Safety events**.
+  observations**, immediate **Usefulness or harm** appraisals,
+  **Aftereffects**, or **Safety events**.
 - Approved evidence may update a new **Personal model snapshot** while
   preserving the prior snapshot and the evidence responsible for the change.
 - An **Experiment protocol** constrains assignments, measurements, adaptation,
@@ -89,8 +97,10 @@ versioned schemas, and storage or code types remain implementation concerns.
 ## State distinctions
 
 - Current state is not desired state.
+- Semantic intent is not a model estimate or unrestricted prompt.
 - Intended acoustic control is not realized acoustic feature.
 - Expressed emotion is not felt emotion.
+- Felt response is not immediate usefulness or harm.
 - Immediate catharsis is not necessarily later benefit.
 - Personal history is not the current moment.
 - Model confidence is not participant certainty.
