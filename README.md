@@ -66,14 +66,18 @@ without Beacon. Outputs are written to `build/<theme>/`:
 - an arXiv-oriented source archive;
 - `provenance.json`.
 
-Build the complete local publication site with either `make check-site` or
-`task check-site`. The staged result appears under `_site/` and includes the
+Build the complete local publication site with either
+`make check-site HOLON_SOURCE=../holon` or
+`task check-site HOLON_SOURCE=../holon`. The Holon path must be the exact
+commit recorded in `publication/antidote-site-suite.lock.json`. The staged
+result appears under `_site/` and includes the
 publication hub, accessible paper, stable PDF, planned magazine route,
 downloads index, provenance, publication and site manifests, source bundle,
 and complete SHA-256 inventory.
 
-For a served PDF and browser feedback loop, run `make preview` or
-`task preview`. See [`docs/paper-preview.md`](./docs/paper-preview.md) for PR
+For a served PDF and browser feedback loop, run
+`make preview HOLON_SOURCE=../holon` or its Task equivalent. See
+[`docs/paper-preview.md`](./docs/paper-preview.md) for PR
 artifact review, merged-revision verification, and troubleshooting.
 
 Beacon remains an optional control plane for profile inspection, planning,
@@ -131,7 +135,9 @@ MIT-licensed profile, not a copy of those provisional templates.
 
 ## Pages publication
 
-The workflow always builds a reviewable Pages artifact but deploys only when
+The workflow materializes Holon's exact-pinned LaunchKit/Zensical site suite,
+composes Antidote's byte-preserved publication artifacts, and always uploads a
+reviewable Pages artifact. It deploys only when
 the repository variable `PAGES_ENABLED` is exactly `true`. This keeps merges
 green until the repository's Pages source, DNS, and TLS are configured.
 
@@ -147,11 +153,13 @@ manifests.
 The stable public route contract is:
 
 - `/` — publication catalog;
+- `/docs/`, `/architecture/`, and `/legal/` — shared-framework public surfaces
+  populated and governed by Antidote;
 - `/paper/` and `/antidote.pdf` — available paper editions;
 - `/magazine/` — an explicitly planned slot with no fabricated download;
 - `/downloads/` — available paper artifacts and integrity evidence;
-- `/publication.json`, `/site.json`, and `/SHA256SUMS` — machine-readable
-  publication state.
+- `/publication.json`, `/site.json`, `/site-suite.provenance.json`, and
+  `/SHA256SUMS` — machine-readable publication and composition state.
 
 Actual magazine authoring is tracked separately in
 [issue #5](https://github.com/egohygiene/antidote/issues/5).

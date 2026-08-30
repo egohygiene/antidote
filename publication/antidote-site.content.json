@@ -1,0 +1,327 @@
+{
+  "schema": "antidote.site-content/v1",
+  "site": {
+    "canonicalUrl": "https://antidote.egohygiene.io/",
+    "basePath": "/",
+    "packageName": "@egohygiene/antidote-site",
+    "title": "Antidote — interpretable adaptive audio research",
+    "description": "A transparent research program for translating semantic intent into inspectable generative-audio journeys and carefully separated response evidence."
+  },
+  "assets": {
+    "favicon": "site/assets/favicon.svg",
+    "socialImage": "site/assets/social-preview.svg",
+    "landingStyles": "site/styles/antidote-launchkit.css",
+    "documentationStyles": "site/styles/antidote-zensical.css"
+  },
+  "launchkit": {
+    "schema": "holon.launchkit-content/v1",
+    "identity": {
+      "wordmark": "Antidote"
+    },
+    "navigation": [
+      { "label": "Paper", "href": "/paper/" },
+      { "label": "Documentation", "href": "/docs/" },
+      { "label": "Architecture", "href": "/architecture/" },
+      { "label": "Downloads", "href": "/downloads/" }
+    ],
+    "announcement": {
+      "label": "Inspect the publication evidence",
+      "href": "/publication.json"
+    },
+    "hero": {
+      "eyebrow": "Interpretable adaptive generative audio",
+      "title": "Shape a journey without hiding the decisions.",
+      "description": "Antidote is a local-first research program for expressing a desired transition, reviewing a semantic journey, generating bounded audio, and keeping intended controls, realized acoustics, exposure, and personal response separate.",
+      "actions": [
+        { "label": "Read the paper", "href": "/paper/", "tone": "primary" },
+        { "label": "Open the PDF", "href": "/antidote.pdf", "tone": "secondary" }
+      ]
+    },
+    "proof": {
+      "title": "Evidence proportional by construction",
+      "items": [
+        "Inspectable journey plans",
+        "Consent-scoped context",
+        "Deterministic publication",
+        "No invented human results"
+      ]
+    },
+    "demo": {
+      "eyebrow": "Current state",
+      "title": "The instrument is transparent; the scientific claims remain bounded.",
+      "description": "The repository contains an executable synthetic desktop session and deterministic mock worker. A real model, formal participant study, and therapeutic-efficacy evidence are not yet available.",
+      "metrics": [
+        { "label": "Paper", "value": "writing draft" },
+        { "label": "Prototype", "value": "synthetic mock" },
+        { "label": "Human results", "value": "not collected" }
+      ]
+    },
+    "features": {
+      "eyebrow": "Research system",
+      "title": "Keep meaning, generation, listening, and response inspectable.",
+      "description": "Each boundary has an explicit owner and produces evidence for the next human decision.",
+      "items": [
+        {
+          "eyebrow": "Intent",
+          "title": "Describe the desired journey",
+          "description": "Capture the present moment, direction, inclusions, exclusions, duration, and uncertainty in language a person can inspect and edit."
+        },
+        {
+          "eyebrow": "Plan",
+          "title": "Review before generation",
+          "description": "Expose the semantic stages, acoustic controls, rationales, unsupported capabilities, and immutable generation specification before approval."
+        },
+        {
+          "eyebrow": "Artifact",
+          "title": "Verify what was produced",
+          "description": "Record worker identity, parameters, warnings, realized features, artifact hashes, and provenance without treating generation as a successful response."
+        },
+        {
+          "eyebrow": "Response",
+          "title": "Let the person interpret the experience",
+          "description": "Keep actual exposure, felt response, mismatch, harm, usefulness, and optional later aftereffect distinct from system intent."
+        }
+      ]
+    },
+    "useCases": {
+      "eyebrow": "Research program",
+      "title": "One framework, several deliberately separated questions.",
+      "description": "Technical controllability, experiential feasibility, efficacy, and mechanism require different evidence and cannot substitute for one another.",
+      "items": [
+        {
+          "title": "System design",
+          "description": "Formalize a person–moment–journey model, semantic intent mixer, predictive horizon, and continuity constraints as testable design proposals."
+        },
+        {
+          "title": "Technical verification",
+          "description": "Test contract fidelity, control adherence, latency, buffering, deterministic fixtures, provenance, and failure behavior."
+        },
+        {
+          "title": "Later feasibility research",
+          "description": "Evaluate within-person experience only through a frozen protocol with consent, stopping rules, null outcomes, harms, and uncertainty."
+        }
+      ]
+    },
+    "code": {
+      "eyebrow": "Reproducible publication",
+      "title": "Build the same governed artifacts through Make or Task.",
+      "description": "Antidote owns its paper and publication commands. Holon supplies exact-pinned site profiles and never becomes manuscript or brand authority.",
+      "language": "shell",
+      "value": "make check-all\ntask check-all\n\nmake check-site HOLON_SOURCE=../holon\ntask check-site HOLON_SOURCE=../holon"
+    },
+    "architecture": {
+      "eyebrow": "Bounded flow",
+      "title": "Human authority stays visible at every seam.",
+      "description": "The design separates reviewed context, journey planning, model execution, deliberate exposure, response, and research export.",
+      "items": [
+        {
+          "eyebrow": "01",
+          "title": "Project only consented context",
+          "description": "The worker never receives unrestricted personal history or database access."
+        },
+        {
+          "eyebrow": "02",
+          "title": "Negotiate the journey",
+          "description": "Explicit person direction outranks inference, and unsupported controls remain visible before approval."
+        },
+        {
+          "eyebrow": "03",
+          "title": "Record exposure and response",
+          "description": "Playback is deliberate, stop remains first class, and adverse or null responses are retained rather than optimized away."
+        }
+      ]
+    },
+    "integrations": {
+      "eyebrow": "Ego Hygiene ecosystem",
+      "title": "Reuse infrastructure without moving authority.",
+      "description": "Each repository contributes one governed concern while Antidote remains the research and publication owner.",
+      "items": [
+        {
+          "title": "Holon",
+          "description": "Materializes exact-pinned LaunchKit and Zensical profiles into a deterministic four-surface site.",
+          "href": "https://github.com/egohygiene/holon"
+        },
+        {
+          "title": "Beacon",
+          "description": "Supplies the pinned research-paper profile from which Antidote owns its standalone native build kit.",
+          "href": "https://github.com/egohygiene/beacon"
+        },
+        {
+          "title": "Identity",
+          "description": "Defines the boundary between canonical creative intent and replaceable product projections.",
+          "href": "https://github.com/egohygiene/identity"
+        }
+      ]
+    },
+    "trust": {
+      "eyebrow": "Publication evidence",
+      "title": "Inspect the exact revision and bytes.",
+      "description": "The public artifact retains its paper provenance while adding immutable framework pins and a complete site checksum inventory.",
+      "links": [
+        { "label": "Publication manifest", "href": "/publication.json" },
+        { "label": "Site catalog", "href": "/site.json" },
+        { "label": "Build provenance", "href": "/provenance.json" },
+        { "label": "Site-suite evidence", "href": "/site-suite.provenance.json" },
+        { "label": "SHA-256 inventory", "href": "/SHA256SUMS" }
+      ]
+    },
+    "faq": {
+      "eyebrow": "Boundaries",
+      "title": "What the current work does—and does not—establish.",
+      "description": "Clear status language is part of the system, not a disclaimer added afterward.",
+      "items": [
+        {
+          "question": "Is Antidote a treatment?",
+          "answer": "No. It is a research and reflective-wellness prototype. The paper does not establish clinical efficacy, diagnosis, or a neurological mechanism."
+        },
+        {
+          "question": "Does the current MVP use a real generative model?",
+          "answer": "No. The executable path uses a deterministic synthetic mock worker. A real adapter requires a separate license, integrity, hardware, safety, and control-adherence review."
+        },
+        {
+          "question": "Does Holon own Antidote's content or identity?",
+          "answer": "No. Holon owns reusable materialization and rendering profiles. Antidote owns its reviewed content, visual inputs, research claims, paper artifacts, and publication decisions."
+        },
+        {
+          "question": "Has a participant study started?",
+          "answer": "No. The design/protocol manuscript can define a future method, but merging it does not authorize collection or imply ethics approval."
+        }
+      ]
+    },
+    "finalCta": {
+      "title": "Start with the evidence boundary.",
+      "description": "Read the design paper, inspect the architecture, and follow each available artifact back to its exact source revision.",
+      "actions": [
+        { "label": "Read the accessible paper", "href": "/paper/", "tone": "primary" },
+        { "label": "Explore the architecture", "href": "/architecture/", "tone": "secondary" }
+      ]
+    },
+    "footer": {
+      "summary": "Antidote is an Ego Hygiene research program for interpretable, personalized adaptive generative audio.",
+      "groups": [
+        {
+          "title": "Research",
+          "links": [
+            { "label": "Paper", "href": "/paper/" },
+            { "label": "PDF", "href": "/antidote.pdf" },
+            { "label": "Downloads", "href": "/downloads/" },
+            { "label": "Magazine", "href": "/magazine/" }
+          ]
+        },
+        {
+          "title": "Project",
+          "links": [
+            { "label": "Documentation", "href": "/docs/" },
+            { "label": "Architecture", "href": "/architecture/" },
+            { "label": "Repository", "href": "https://github.com/egohygiene/antidote" }
+          ]
+        }
+      ],
+      "legal": [
+        { "label": "Legal and trust", "href": "/legal/" },
+        { "label": "Accessibility", "href": "/legal/accessibility/" },
+        { "label": "Security", "href": "https://github.com/egohygiene/antidote/security/policy" }
+      ]
+    }
+  },
+  "siteSuite": {
+    "schema": "holon.site-suite-content/v1",
+    "product": {
+      "name": "Antidote",
+      "description": "A transparent local research instrument and continuously published design-science program for personalized adaptive generative audio.",
+      "repositoryUrl": "https://github.com/egohygiene/antidote"
+    },
+    "documentation": {
+      "title": "Antidote documentation",
+      "introduction": "Use Antidote by preserving consent, human authority, evidence class, provenance, and the distinction between intended controls and observed response.",
+      "pages": [
+        {
+          "slug": "start",
+          "title": "Start with Antidote",
+          "summary": "Orient to the research, publication, and synthetic prototype boundaries.",
+          "body": "Antidote combines a reproducible research workspace with an emerging local research instrument. Begin with the [paper](/paper/) for the design and evidence boundary, then use the architecture surface to inspect responsibility and trust zones. The current executable session uses synthetic fixtures and a deterministic mock worker; no real model or participant result is implied.\n\nThe repository-owned Make and Task commands build the paper independently. The public site adds Holon's exact-pinned presentation profiles without changing manuscript source, paper bytes, publication provenance, or Antidote's authority over claims."
+        },
+        {
+          "slug": "publication",
+          "title": "Publication and integrity",
+          "summary": "Verify the paper, site composition, exact revision, and complete checksum inventory.",
+          "body": "The [publication manifest](/publication.json) describes the paper artifacts. The [site catalog](/site.json) describes stable routes and honest publication slots. The [site-suite evidence](/site-suite.provenance.json) records Holon's immutable commit and blueprint identities. [SHA256SUMS](/SHA256SUMS) covers every staged public file.\n\nThe paper remains available as accessible HTML, PDF, provenance JSON, and an independently compilable arXiv source archive. The magazine route remains planned with no fabricated edition or download."
+        },
+        {
+          "slug": "prototype-boundary",
+          "title": "Prototype boundary",
+          "summary": "Understand what the executable synthetic session proves.",
+          "body": "The Rust core owns consent, session transitions, journey approval, orchestration, events, safety policy, and provenance. React and Tauri own presentation and desktop capability. The isolated Python worker receives only an approved semantic projection, accepted journey plan, and immutable generation specification.\n\nThe deterministic mock proves protocol behavior and failure handling. It does not establish model quality, experiential benefit, clinical efficacy, or mechanism. Real-model selection and formal data collection require later evidence and review gates."
+        },
+        {
+          "slug": "contributing",
+          "title": "Contributing",
+          "summary": "Keep proposed behavior and scientific claims proportional to checked-in evidence.",
+          "body": "Before changing claims, methods, results, or conclusions, read the epistemology, scientific boundaries, claim ledger, and relevant primary-source records. Before changing runtime behavior, read the system, architecture, accepted decisions, and affected contracts.\n\nUse `make check-all` or `task check-all` for the paper and `make check-site HOLON_SOURCE=../holon` or its Task equivalent for the exact-pinned public composition. Never place private health, therapy, journal, credential, participant, or model-token data in fixtures or public source."
+        }
+      ]
+    },
+    "architecture": {
+      "title": "Antidote architecture",
+      "introduction": "Antidote separates research truth, human authority, local runtime behavior, replaceable model execution, and public projections.",
+      "diagram": "flowchart TD\n  person[Person and present moment] --> consent[Consent-scoped projection]\n  consent --> core[Rust domain and application core]\n  core --> plan[Inspectable journey plan]\n  plan --> worker[Capability-scoped model worker]\n  worker --> artifact[Audio artifact and feature report]\n  artifact --> exposure[Deliberate exposure and stop]\n  exposure --> response[Person-reported response]\n  response --> core\n  core --> export[Privacy-reviewed provenance export]",
+      "decisions": [
+        {
+          "id": "ADR-0002",
+          "title": "Own native publication execution and gate Pages deployment",
+          "status": "accepted",
+          "summary": "Antidote owns independently runnable paper builds and publishes only a previously reviewed Pages artifact.",
+          "href": "https://github.com/egohygiene/antidote/blob/main/docs/decisions/ADR-0002-standalone-publication-and-pages.md"
+        },
+        {
+          "id": "ADR-0004",
+          "title": "Use a local-first desktop host with an isolated model worker",
+          "status": "accepted",
+          "summary": "The Rust core retains domain authority while the Python worker receives only the accepted bounded generation input.",
+          "href": "https://github.com/egohygiene/antidote/blob/main/docs/decisions/ADR-0004-local-first-desktop-and-model-worker.md"
+        },
+        {
+          "id": "ADR-0008",
+          "title": "Adopt Holon's exact-pinned public site suite",
+          "status": "accepted",
+          "summary": "Holon owns reusable LaunchKit and Zensical profiles; Antidote owns content, identity inputs, paper composition, integrity, and publication.",
+          "href": "https://github.com/egohygiene/antidote/blob/main/docs/decisions/ADR-0008-holon-site-suite-adoption.md"
+        }
+      ]
+    },
+    "legal": {
+      "title": "Antidote legal, safety, and trust",
+      "introduction": "Public policy projections identify their evidence and update boundary; they do not replace the canonical repository records.",
+      "pages": [
+        {
+          "slug": "license",
+          "title": "Licensing",
+          "summary": "Separate repository, manuscript, figure, framework, dependency, model, and generated-audio rights.",
+          "body": "The repository publishes its applicable license in canonical source. The manuscript, figures, third-party references, Holon profiles, Zensical dependency graph, future model assets, and generated audio may have different terms. Review the corresponding source records and notices before reuse.\n\nThe public site does not grant rights to future model weights, training data, participant material, private records, or generated audio merely by linking to the research program.",
+          "lastUpdated": "2026-08-30"
+        },
+        {
+          "slug": "accessibility",
+          "title": "Accessibility",
+          "summary": "Static readability, keyboard access, focus, contrast, reduced motion, and artifact accessibility are release concerns.",
+          "body": "The publication checks semantic landmarks, headings, local links, focus behavior, responsive layouts, reduced motion, PDF properties, and accessible web output. Automated checks support but do not replace human review.\n\nReport barriers through the Antidote issue tracker with the route, browser, assistive technology, and reproduction steps. The paper remains available in both accessible HTML and PDF projections.",
+          "lastUpdated": "2026-08-30"
+        },
+        {
+          "slug": "scientific-boundary",
+          "title": "Scientific and safety boundary",
+          "summary": "A transparent prototype and intense experience do not establish benefit, treatment, or mechanism.",
+          "body": "Antidote is a research and reflective-wellness prototype, not a medical treatment or diagnostic system. The originating N-of-1 experience is hypothesis-generating context only. Intended controls, generated acoustics, actual exposure, felt response, usefulness, harm, and later aftereffect remain distinct.\n\nFormal participant collection requires a frozen protocol, consent and privacy review, stopping rules, adverse-event handling, and appropriate independent review. Merging code or a protocol does not authorize collection.",
+          "lastUpdated": "2026-08-30"
+        },
+        {
+          "slug": "privacy",
+          "title": "Privacy and local-first limits",
+          "summary": "Local-first narrows exposure but is not a claim of perfect security or secure deletion.",
+          "body": "The target instrument keeps canonical state and generation local and sends the worker only an approved semantic projection. Private journal, therapy, health, participant, credential, and model-token data must not enter this repository, public fixtures, logs, or publication artifacts.\n\nEncryption, key recovery, backup, retention, deletion, crash reporting, and operating-system isolation require explicit implementation and review before non-developer personal use. Provenance does not prove truth, consent, ownership, or clinical validity.",
+          "lastUpdated": "2026-08-30"
+        }
+      ]
+    }
+  }
+}

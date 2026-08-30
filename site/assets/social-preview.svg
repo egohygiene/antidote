@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 630" role="img" aria-labelledby="title description">
+  <title id="title">Antidote research program</title>
+  <desc id="description">Antidote title beside an inspectable path from intent through sound to personal response.</desc>
+  <defs>
+    <radialGradient id="glow" cx="70%" cy="20%" r="75%">
+      <stop offset="0" stop-color="#164234"/>
+      <stop offset="1" stop-color="#050b09"/>
+    </radialGradient>
+  </defs>
+  <rect width="1200" height="630" rx="36" fill="url(#glow)"/>
+  <g fill="none" stroke-linecap="round">
+    <path d="M630 405c90-210 180-210 270-80 48 70 98 58 170-54" stroke="#7cf2b9" stroke-width="10"/>
+    <circle cx="630" cy="405" r="15" fill="#b39dff"/>
+    <circle cx="834" cy="286" r="15" fill="#74dcec"/>
+    <circle cx="1070" cy="271" r="15" fill="#f4ca7a"/>
+  </g>
+  <text x="90" y="245" fill="#eff9f3" font-family="Inter, system-ui, sans-serif" font-size="108" font-weight="800">Antidote</text>
+  <text x="96" y="322" fill="#bed0c5" font-family="Inter, system-ui, sans-serif" font-size="34">interpretable adaptive generative audio research</text>
+  <text x="96" y="485" fill="#7cf2b9" font-family="ui-monospace, monospace" font-size="24">intent → structure → exposure → response</text>
+</svg>

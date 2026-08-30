@@ -7,11 +7,14 @@
 from __future__ import annotations
 
 import argparse
+import json
 import shutil
 import subprocess
 import sys
 import tempfile
 from pathlib import Path
+
+import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 REPRODUCIBLE_ARTIFACTS = (
@@ -159,19 +162,49 @@ def run_mvp(command: str, python: str) -> None:
     )
 
 
-def invoke_site_staging(build: Path, destination: Path, python: str) -> None:
+def build_site_suite(
+    build_directory: Path,
+    holon_source: Path,
+    destination: Path,
+    python: str,
+) -> None:
+    """Build the exact-pinned Holon surfaces for one Antidote revision."""
+    provenance = json.loads(
+        (build_directory / "provenance.json").read_text(encoding="utf-8")
+    )
+    with (ROOT / "beacon-project.toml").open("rb") as stream:
+        paper_version = tomllib.load(stream)["paper"]["version"]
+    run(
+        [
+            python,
+            str(ROOT / "scripts" / "build_site_suite.py"),
+            f"--repository-root={ROOT}",
+            f"--holon-source={holon_source}",
+            f"--output={destination}",
+            f"--source-revision={provenance['source_revision']}",
+            f"--paper-version={paper_version}",
+        ]
+    )
+
+
+def invoke_site_staging(
+    build: Path, site_suite: Path, destination: Path, python: str
+) -> None:
     """Stage one complete site tree from an already validated paper build."""
     run(
         [
             python,
             str(ROOT / "scripts" / "stage_pages.py"),
             f"--build-dir={build}",
+            f"--site-suite-dir={site_suite}",
             f"--output-dir={destination}",
         ]
     )
 
 
-def verify_site_reproducibility(build: Path, python: str) -> None:
+def verify_site_reproducibility(
+    build: Path, site_suite: Path, python: str
+) -> None:
     """Stage twice and require byte-identical route and integrity trees."""
     with tempfile.TemporaryDirectory(
         prefix=".antidote-pages-", dir=ROOT
@@ -179,8 +212,8 @@ def verify_site_reproducibility(build: Path, python: str) -> None:
         temporary_root = Path(temporary)
         first = temporary_root / "first"
         second = temporary_root / "second"
-        invoke_site_staging(build, first, python)
-        invoke_site_staging(build, second, python)
+        invoke_site_staging(build, site_suite, first, python)
+        invoke_site_staging(build, site_suite, second, python)
         first_files = {
             path.relative_to(first) for path in first.rglob("*") if path.is_file()
         }
@@ -194,12 +227,27 @@ def verify_site_reproducibility(build: Path, python: str) -> None:
     print("PASS reproducible Pages routes, manifests, and checksum inventory.")
 
 
-def stage_site(project: Path, output: Path, theme: str, python: str) -> None:
+def stage_site(
+    project: Path,
+    output: Path,
+    theme: str,
+    python: str,
+    holon_source: Path | None,
+) -> None:
     """Build and stage the Antidote-owned GitHub Pages projection."""
+    if holon_source is None:
+        raise ValueError(
+            "site commands require --holon-source pointing to the exact pinned checkout"
+        )
     build(project, output, theme, python)
     validate(project, output, theme, python)
-    verify_site_reproducibility(output, python)
-    invoke_site_staging(output, ROOT / "_site", python)
+    with tempfile.TemporaryDirectory(
+        prefix=".antidote-pages-", dir=ROOT
+    ) as temporary:
+        site_suite = Path(temporary) / "site-suite"
+        build_site_suite(output, holon_source, site_suite, python)
+        verify_site_reproducibility(output, site_suite, python)
+        invoke_site_staging(output, site_suite, ROOT / "_site", python)
 
 
 def preview_site(
@@ -207,13 +255,14 @@ def preview_site(
     output: Path,
     theme: str,
     python: str,
+    holon_source: Path | None,
     host: str,
     port: int,
 ) -> None:
     """Stage the governed site and serve that exact tree for local review."""
     if not 1 <= port <= 65535:
         raise ValueError(f"preview port is outside the valid range: {port}")
-    stage_site(project, output, theme, python)
+    stage_site(project, output, theme, python, holon_source)
     print(f"Previewing the staged publication at http://{host}:{port}/")
     run(
         [
@@ -296,6 +345,7 @@ def parse_arguments() -> argparse.Namespace:
     parser.add_argument("--preview-port", type=int, default=8000)
     parser.add_argument("--base-url", default="")
     parser.add_argument("--expected-revision", default="")
+    parser.add_argument("--holon-source", default="")
     return parser.parse_args()
 
 
@@ -304,6 +354,7 @@ def main() -> int:
     arguments = parse_arguments()
     project = resolve_project(arguments.project)
     output = resolve(arguments.build_dir)
+    holon_source = resolve(arguments.holon_source) if arguments.holon_source else None
 
     if arguments.command == "build":
         build(project, output, arguments.theme, arguments.python)
@@ -330,7 +381,13 @@ def main() -> int:
     elif arguments.command.startswith("mvp-"):
         run_mvp(arguments.command.removeprefix("mvp-"), arguments.python)
     elif arguments.command in {"site", "check-site"}:
-        stage_site(project, output, arguments.theme, arguments.python)
+        stage_site(
+            project,
+            output,
+            arguments.theme,
+            arguments.python,
+            holon_source,
+        )
         if arguments.command == "check-site":
             run_tests(arguments.python)
     elif arguments.command == "preview":
@@ -339,6 +396,7 @@ def main() -> int:
             output,
             arguments.theme,
             arguments.python,
+            holon_source,
             arguments.preview_host,
             arguments.preview_port,
         )

@@ -5,6 +5,8 @@
 /dist/
 /_site/
 /.antidote-pages-*/
+/.antidote-site-suite-*/
+/.holon-source/
 /target/
 apps/desktop/dist/
 apps/desktop/src-tauri/gen/

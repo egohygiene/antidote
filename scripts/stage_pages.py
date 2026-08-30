@@ -39,12 +39,16 @@ PLANNED_SLOT_FIELDS = {
 }
 REQUIRED_ROUTES = {
     "home": "",
+    "documentation": "docs/",
+    "architecture": "architecture/",
+    "legal": "legal/",
     "paper": "paper/",
     "paper-pdf": "antidote.pdf",
     "magazine": "magazine/",
     "downloads": "downloads/",
     "publication-manifest": "publication.json",
     "site-catalog": "site.json",
+    "site-suite-evidence": "site-suite.provenance.json",
     "checksums": "SHA256SUMS",
 }
 
@@ -149,6 +153,8 @@ def resolve_site_path(site: Path, document: Path, target: str) -> Path:
     )
     if not relative or relative.endswith("/"):
         candidate = candidate / "index.html"
+    elif candidate.is_dir():
+        candidate = candidate / "index.html"
     resolved = candidate.resolve()
     if resolved != site and site not in resolved.parents:
         raise ValueError(f"local route escapes staged site: {target}")
@@ -226,6 +232,9 @@ def validate_page_metadata(site: Path, pages_url: str) -> None:
     """Validate canonical metadata and baseline accessibility on public pages."""
     expected = {
         "index.html": pages_url,
+        "docs/index.html": urljoin(pages_url, "docs/"),
+        "architecture/index.html": urljoin(pages_url, "architecture/"),
+        "legal/index.html": urljoin(pages_url, "legal/"),
         "paper/index.html": urljoin(pages_url, "paper/"),
         "magazine/index.html": urljoin(pages_url, "magazine/"),
         "downloads/index.html": urljoin(pages_url, "downloads/"),
@@ -236,13 +245,17 @@ def validate_page_metadata(site: Path, pages_url: str) -> None:
         markers = (
             '<html lang="',
             'name="viewport"',
-            'class="skip-link" href="#content"',
-            '<main id="content"',
+            "<main",
             "<title>",
         )
         missing = [marker for marker in markers if marker not in html]
         if missing:
             raise RuntimeError(f"{relative} is missing page marker(s): {missing}")
+        if (
+            not re.search(r'class="[^"]*(?:skip-link|md-skip)[^"]*"', html)
+            or not re.search(r'href="#[^"]+"', html)
+        ):
+            raise RuntimeError(f"{relative} is missing a fragment-targeted skip link")
         canonical_marker = f'<link rel="canonical" href="{canonical}">'
         if html.count(canonical_marker) != 1:
             raise RuntimeError(f"{relative} must declare exactly one canonical URL")
@@ -287,6 +300,121 @@ def validate_site_assets(site: Path) -> None:
     missing = [marker for marker in required_markers if marker not in stylesheet]
     if missing:
         raise RuntimeError(f"site stylesheet is missing responsive marker(s): {missing}")
+
+
+def validate_site_suite_input(site_suite: Path, source_revision: str) -> dict:
+    """Verify Holon's pre-composition artifact and its Antidote evidence."""
+    required = (
+        "index.html",
+        "docs/index.html",
+        "architecture/index.html",
+        "legal/index.html",
+        "site-suite.manifest.json",
+        "site-suite.provenance.json",
+    )
+    missing = [relative for relative in required if not (site_suite / relative).is_file()]
+    if missing:
+        raise FileNotFoundError(f"site-suite input is incomplete: {missing}")
+    provenance = json.loads(
+        (site_suite / "site-suite.provenance.json").read_text(encoding="utf-8")
+    )
+    if provenance.get("schema") != "antidote.site-suite-provenance/v1":
+        raise RuntimeError("site-suite input has an unexpected evidence schema")
+    if provenance.get("sourceRevision") != source_revision:
+        raise RuntimeError("site-suite and paper inputs disagree on source revision")
+    inventory = provenance.get("artifact", {}).get("inventory")
+    if not isinstance(inventory, list) or not inventory:
+        raise RuntimeError("site-suite evidence has no artifact inventory")
+    seen: set[str] = set()
+    for record in inventory:
+        relative = record.get("path")
+        if (
+            not isinstance(relative, str)
+            or Path(relative).is_absolute()
+            or ".." in Path(relative).parts
+            or relative in seen
+        ):
+            raise RuntimeError(f"unsafe or duplicate site-suite artifact: {relative}")
+        seen.add(relative)
+        target = site_suite / relative
+        if (
+            not target.is_file()
+            or target.stat().st_size != record.get("sizeBytes")
+            or sha256(target) != record.get("sha256")
+        ):
+            raise RuntimeError(f"site-suite artifact drifted: {relative}")
+    expected = {
+        path.relative_to(site_suite).as_posix()
+        for path in site_suite.rglob("*")
+        if path.is_file() and path.name != "site-suite.provenance.json"
+    }
+    if seen != expected:
+        raise RuntimeError("site-suite evidence inventory is incomplete")
+    return provenance
+
+
+def publication_url_for_html(site: Path, page: Path, pages_url: str) -> str:
+    """Return the canonical directory URL for one staged HTML page."""
+    relative = page.relative_to(site).as_posix()
+    route = "" if relative == "index.html" else relative.removesuffix("index.html")
+    return urljoin(pages_url, route)
+
+
+def normalize_suite_metadata(
+    site: Path, pages_url: str, source_revision: str, paper_version: str
+) -> None:
+    """Apply Antidote-owned canonical and revision metadata to suite pages."""
+    roots = (site / "index.html",)
+    pages = list(roots)
+    for surface in ("docs", "architecture", "legal"):
+        pages.extend(sorted((site / surface).rglob("*.html")))
+    for page in pages:
+        html = page.read_text(encoding="utf-8")
+        canonical = publication_url_for_html(site, page, pages_url)
+        canonical_tag = f'<link rel="canonical" href="{canonical}">'
+        if re.search(r'<link rel="canonical" href="[^"]+"\s*/?>', html):
+            html = re.sub(
+                r'<link rel="canonical" href="[^"]+"\s*/?>', canonical_tag, html, count=1
+            )
+        else:
+            html = html.replace("</head>", f"  {canonical_tag}\n</head>")
+        og_tag = f'<meta property="og:url" content="{canonical}">'
+        if re.search(r'<meta property="og:url" content="[^"]+"\s*/?>', html):
+            html = re.sub(
+                r'<meta property="og:url" content="[^"]+"\s*/?>', og_tag, html, count=1
+            )
+        else:
+            html = html.replace("</head>", f"  {og_tag}\n</head>")
+        revision_tag = f'<meta name="source-revision" content="{source_revision}">'
+        if 'name="source-revision"' not in html:
+            html = html.replace("</head>", f"  {revision_tag}\n</head>")
+        title_match = re.search(r"<title>(.*?)</title>", html, flags=re.DOTALL)
+        structured = {
+            "@context": "https://schema.org",
+            "@type": "WebPage",
+            "name": title_match.group(1).strip() if title_match else "Antidote",
+            "url": canonical,
+            "version": paper_version,
+            "isPartOf": {
+                "@type": "WebSite",
+                "name": "Antidote",
+                "url": pages_url,
+            },
+        }
+        block = (
+            '  <script type="application/ld+json">\n'
+            + json.dumps(structured, indent=2, sort_keys=True)
+            + "\n  </script>\n"
+        )
+        html = re.sub(
+            r'\s*<script type="application/ld\+json">.*?</script>\s*',
+            "\n",
+            html,
+            flags=re.DOTALL,
+        )
+        html = html.replace("</head>", block + "</head>")
+        html = html.replace('href=""', 'href="./"')
+        page.write_text(html, encoding="utf-8")
 
 
 def validate_site_catalog(
@@ -475,6 +603,7 @@ def validate_publication_manifest(
 def stage_site(
     root: Path,
     build: Path,
+    site_suite: Path,
     output: Path,
     *,
     custom_domain: str = "",
@@ -482,6 +611,7 @@ def stage_site(
     """Create one complete Pages tree from governed Antidote outputs."""
     root = root.resolve()
     build = build.resolve()
+    site_suite = site_suite.resolve()
     output = output.resolve()
     validate_output_target(root, build, output)
 
@@ -489,6 +619,7 @@ def stage_site(
     paper = config["paper"]
     publication = config["publication"]
     provenance = json.loads((build / "provenance.json").read_text(encoding="utf-8"))
+    validate_site_suite_input(site_suite, provenance["source_revision"])
     archives = sorted((build / "arxiv").glob("*.tar.gz"))
     if len(archives) != 1:
         raise RuntimeError("Pages staging requires exactly one arXiv source archive")
@@ -512,7 +643,7 @@ def stage_site(
         fallback_url = fallback_url.rstrip("/") + "/"
 
     shutil.rmtree(output, ignore_errors=True)
-    output.mkdir(parents=True)
+    shutil.copytree(site_suite, output)
     (output / OWNER_FILE).write_text(OWNER_TEXT, encoding="utf-8")
     replacements = {
         "SITE_BASE_URL": pages_url,
@@ -521,7 +652,6 @@ def stage_site(
         "SOURCE_ARCHIVE_NAME": archives[0].name,
     }
     for source, destination in (
-        (root / "docs" / "index.html", output / "index.html"),
         (root / "docs" / "magazine" / "index.html", output / "magazine" / "index.html"),
         (root / "docs" / "downloads" / "index.html", output / "downloads" / "index.html"),
     ):
@@ -529,13 +659,19 @@ def stage_site(
     assets = root / "docs" / "assets"
     if not assets.is_dir():
         raise FileNotFoundError(f"required site assets directory is missing: {assets}")
-    shutil.copytree(assets, output / "assets")
+    shutil.copytree(assets, output / "assets", dirs_exist_ok=True)
     copy_required(root / "docs" / "site.webmanifest", output / "site.webmanifest")
     copy_required(build / "paper.pdf", output / "antidote.pdf")
     copy_required(build / "provenance.json", output / "provenance.json")
     shutil.copytree(build / "web", output / "paper")
     copy_required(archives[0], output / "downloads" / archives[0].name)
     (output / ".nojekyll").write_text("", encoding="utf-8")
+    normalize_suite_metadata(
+        output,
+        pages_url,
+        provenance["source_revision"],
+        paper["version"],
+    )
 
     artifact_paths = {
         "accessible_web": "paper/index.html",
@@ -661,6 +797,7 @@ def main() -> int:
     parser = argparse.ArgumentParser()
     parser.add_argument("--build-dir", default="build/egohygiene")
     parser.add_argument("--output-dir", default="_site")
+    parser.add_argument("--site-suite-dir", required=True)
     parser.add_argument(
         "--custom-domain",
         default=os.environ.get("PAGES_CUSTOM_DOMAIN", ""),
@@ -672,7 +809,16 @@ def main() -> int:
     output = Path(arguments.output_dir).expanduser()
     if not output.is_absolute():
         output = ROOT / output
-    stage_site(ROOT, build, output, custom_domain=arguments.custom_domain)
+    site_suite = Path(arguments.site_suite_dir).expanduser()
+    if not site_suite.is_absolute():
+        site_suite = ROOT / site_suite
+    stage_site(
+        ROOT,
+        build,
+        site_suite,
+        output,
+        custom_domain=arguments.custom_domain,
+    )
     return 0
 
 

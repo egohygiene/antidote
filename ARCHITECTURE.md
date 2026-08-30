@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.8.0
+version: 0.9.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-29
+updated: 2026-08-30
 governed_by:
   - architecture-architecture
 depends_on:
@@ -44,7 +44,7 @@ logical responsibilities, [ONTOLOGY.md](ONTOLOGY.md) owns domain identity, and
 | Surface | State | Evidence boundary |
 | --- | --- | --- |
 | Research source and claim discipline | Implemented | `paper/`, `research/`, `data/`, and repository checks |
-| Native publication build and hub | Implemented; deployment remains gated | Make/Task scripts, CI workflows, deterministic Pages staging |
+| Native publication build and Holon-composed hub | Implemented; deployment remains gated | Exact-pinned site suite, Make/Task scripts, CI workflows, deterministic Pages staging |
 | Architecture corpus | Provisional | Eighteen repository-local documents indexed by `META.md` |
 | MVP interoperability contracts | Executable foundation | Canonical schemas, generated projections, and shared fixtures under `contracts/` |
 | Desktop application | Executable synthetic session | Accessible Tauri/React flow invokes named Rust commands and recovers canonical state under `apps/desktop/` |
@@ -249,8 +249,9 @@ contracts/
 experiments/
   protocols/               N-of-1 definitions, assignments, measures, and analysis
 paper/, research/, data/   canonical scientific source and approved evidence
-scripts/, latex/, web/     project-owned publication implementation
-docs/                      architecture guides, ADRs, and public hub source
+scripts/, latex/, web/     project-owned publication and composition implementation
+publication/, site/        exact Holon pins, reviewed site content, and bounded adapter
+docs/                      architecture guides, ADRs, and Antidote-owned route source
 ```
 
 The directory READMEs and schemas establish ownership; they do not fabricate an
@@ -295,9 +296,14 @@ optional control-plane behavior. Relay owns reusable workflow implementation;
 Egolint owns lint semantics.
 
 The custom-domain publication hub is a disposable projection over committed
-source. `publication.json` describes the paper and generated `site.json`
-catalogs available or planned formats. No workflow submits a manuscript,
-creates a scientific claim, or activates a planned artifact automatically.
+source. Holon owns its reusable LaunchKit, Zensical, and composition profiles;
+Antidote consumes one exact commit and owns reviewed content, identity inputs,
+paper bytes, routes, manifests, checksums, and deployment. The build validates
+profile Git blobs and SHA-256 inventories in a clean room, then overlays the
+governed paper artifacts. `publication.json` describes the paper and generated
+`site.json` catalogs available or planned formats. No workflow submits a
+manuscript, creates a scientific claim, or activates a planned artifact
+automatically.
 
 ## Deployment and portability
 

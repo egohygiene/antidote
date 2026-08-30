@@ -1,0 +1,26 @@
+:root {
+  --identity-color-canvas: #050b09;
+  --identity-color-surface: #0d1d17;
+  --identity-color-surface-strong: #08130f;
+  --identity-color-ink: #eff9f3;
+  --identity-color-muted: #a8c0b3;
+  --identity-color-accent: #7cf2b9;
+  --identity-color-accent-strong: #74dcec;
+  --identity-color-border: rgb(160 224 190 / 28%);
+}
+
+.md-header,
+.md-tabs {
+  background: #08130f;
+}
+
+.md-typeset a {
+  text-underline-offset: 0.2em;
+}
+
+@media (prefers-contrast: more) {
+  :root {
+    --identity-color-muted: #eff9f3;
+    --identity-color-border: currentColor;
+  }
+}

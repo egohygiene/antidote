@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-decisions
 title: Antidote Decisions
 kind: architecture-document
-version: 0.1.0
+version: 0.2.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-27
-updated: 2026-08-27
+updated: 2026-08-30
 governed_by:
   - architecture-decisions
 depends_on:
@@ -51,6 +51,7 @@ study, or production approval.
 | ADR-0005 | Project only explicitly consented context into a session | Accepted for MVP | [Record](docs/decisions/ADR-0005-consent-scoped-working-context.md) |
 | ADR-0006 | Advance adaptation from rule-guided N-of-1 evidence | Accepted for MVP | [Record](docs/decisions/ADR-0006-adaptation-maturity-ladder.md) |
 | ADR-0007 | Use append-only events and provenance-linked projections | Accepted for MVP | [Record](docs/decisions/ADR-0007-event-and-provenance-record.md) |
+| ADR-0008 | Adopt Holon's exact-pinned site suite | Accepted | [Record](docs/decisions/ADR-0008-holon-site-suite-adoption.md) |
 
 ## Open decisions
 
@@ -66,8 +67,8 @@ study, or production approval.
 
 ## Evidence and uncertainty
 
-- **Observed:** ADR-0001 through ADR-0003 are already present and govern the
-  standalone publication system.
+- **Observed:** ADR-0001 through ADR-0003 and ADR-0008 govern the standalone
+  publication system and exact-pinned shared site composition.
 - **Decided for the prototype:** ADR-0004 through ADR-0007 define the first
   executable research-instrument boundary.
 - **Proposed:** Machine-readable ADR frontmatter will follow the organization
