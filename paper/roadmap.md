@@ -75,7 +75,7 @@ issue authorizes production.
 
 ### Wave P3 — Core manuscript
 
-- [#37 — Write the Introduction and research-gap section](https://github.com/egohygiene/antidote/issues/37)
+- [x] [#37 — Write the Introduction and research-gap section](https://github.com/egohygiene/antidote/issues/37)
 - [#38 — Write Related Work and the evidence synthesis](https://github.com/egohygiene/antidote/issues/38)
 - [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39)
 - [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40)
