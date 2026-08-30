@@ -2,39 +2,152 @@
 \section{Introduction}
 \label{sec:introduction}
 
-Generative audio systems increasingly allow people to express musical intent
-through natural language and other high-level controls. At the same time,
-research in music psychology, affective computing, adaptive music, and adjacent
-clinical contexts suggests that musical experiences can interact meaningfully
-with subjective state. What remains under-specified is how a research
-instrument can preserve the complete transformation from a person's consented
-moment and semantic intent through a planned journey, generated acoustic
-realization, actual exposure, separated response measures, and any later
-advisory update without treating those records as interchangeable.
-Figure~\ref{fig:semantic-acoustic-response-loop} provides a deliberately
-provisional map of that separation; its return path is a hypothesis for later
-study, not an observed mechanism.
+Personalizing audio is not only a question of which music suits a person. It is
+also a question of what that person wants to explore in a particular moment,
+how the intended transition should unfold, what audio is actually produced and
+heard, and how the person's response should---or should not---inform a later
+proposal. Prior systems already connect parts of this problem. They select
+music from current and desired affect while learning person-specific
+associations \citep{janssen2012tune}; generate music along affective
+trajectories inside physiological feedback loops
+\citep{daly2016abcmi,ehrlich2019closedloop}; expose interpretable controls for
+real-time affective generation \citep{agres2023affectmachine}; and mediate
+estimated state through a semantic plan before controllable generation
+\citep{zhang2026mindmelody}. These precedents make a broad claim to
+``personalized,'' ``closed-loop,'' or ``interpretable'' music generation
+untenable.
+
+They also expose a more specific research problem. A requested transition is
+not the same record as an estimated present state; an accepted semantic plan is
+not the audio a model realizes; a generated artifact is not evidence that it
+was played; and the affect a listener perceives in music is not necessarily the
+affect that listener feels. Emotional intensity, immediate usefulness or harm,
+and a later aftereffect are distinct again. If these transformations are
+collapsed into a prompt, a model output, or a single success score, it becomes
+difficult to reconstruct which consented context informed a proposal, where a
+mismatch arose, what the person actually encountered, or what evidence could
+justify changing a later proposal. We therefore treat inspectability of the
+complete transformation chain as the research object; we do not treat
+inspectability as a guarantee of correctness, meaningful consent, privacy,
+safety, or benefit.
+
+Antidote originated in one researcher's self-report of a strongly cathartic
+intentional generative-audio session. That lived observation motivates asking
+whether more deliberate person-and-moment audio journeys can be represented
+and studied. It is not a study result, an efficacy signal, a neurological
+mechanism, or evidence that the experience will generalize. Throughout this
+manuscript it remains a hypothesis-generating observation.
+
+We organize the resulting design space around four linked but
+non-interchangeable terms. The \emph{person} contributes explicit authority,
+semantic language, exclusions, and potentially relevant prior records. The
+\emph{moment} is a consent-scoped and correctable representation of present
+context, not an objective diagnosis or inferred need. The \emph{journey} is an
+accepted, time-indexed progression toward an intended experience, not proof
+that a state transition occurred. The \emph{audio} is the realized artifact,
+whose identity and measured properties remain separate from its requested
+meaning and from the person's response. Figure~\ref{fig:semantic-acoustic-response-loop}
+introduces this person--moment--journey--audio chain. Its return path is a
+hypothesis for later within-person inquiry, not an observed adaptive mechanism.
 
 \AntidoteFigure{semantic-acoustic-response-loop}
 
-This manuscript treats that question as a research direction rather than an
-established finding. The originating N-of-1 catharsis experience is classified
-as an \textbf{observation} and a \textbf{hypothesis generator}; it is not a
-result of the proposed study and does not establish efficacy, mechanism, or
-generalizability.
+\subsection{Research gap}
+\label{sec:research-gap}
 
-\subsection{Central research question}
-\label{sec:central-research-question}
+The relevant literature does not leave an empty technical category for
+Antidote to fill. Longitudinal person-specific modeling, current-to-target
+selection, generated affective trajectories, smooth real-time feedback,
+interpretable musical controls, and semantic intervention planning all have
+documented precedent \citep{janssen2012tune,daly2016abcmi,
+ehrlich2019closedloop,agres2023affectmachine,zhang2026mindmelody}.
+Furthermore, a recent preliminary brain--computer music study reported
+nonsignificant target-emotion and time effects while person and trial variation
+dominated its observed variance \citep{monroy2026minimalist}. Technical loop
+closure therefore cannot be assumed to establish reliable affective change.
 
-How can a local research instrument represent, generate, and evaluate a
-person-and-moment audio journey while keeping consented context, semantic
-intent, planned controls, realized acoustics, exposure, response, and
-longitudinal updates inspectable and non-interchangeable?
+Instead, our bounded review identifies an operational gap: it did not find one
+evaluated system that preserves, as a complete governed chain, (1) the context
+a person permitted for a particular purpose, (2) user-extensible semantic
+intent and exclusions, (3) an accepted time-indexed journey plan, (4) the
+generated artifact and measured acoustic realization, (5) actual exposure,
+(6) perceived expression, felt response, immediate usefulness or harm, and
+later aftereffect as separate observations, and (7) any proposed within-person
+update with its provenance and explicit human approval. ``Did not find'' is a
+bounded-review result, not proof that no such system exists. The proposed
+combination may constitute a useful research-system contribution; its global
+novelty, technical feasibility, learnability, and benefit remain unresolved.
 
-The design/protocol manuscript can answer that architecture question. Whether
-the implemented instrument satisfies its technical contracts and whether
-repeated sessions reveal useful within-person relationships are separate,
-evidence-gated feasibility questions. Neither is answered by the present
-conceptual framing.
+This framing shifts the central question away from whether a system can infer
+an emotion and generate music. It asks whether a research instrument can make
+the entire person-and-moment audio hypothesis inspectable enough to specify,
+challenge, reproduce, and evaluate without promoting one record type into
+another.
 
-\AntidotePlaceholder{introduction narrative}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Replace this layout filler with the motivating problem, the precise research gap, and a bounded preview of the paper's contribution.}
+\subsection{Staged research questions}
+\label{sec:staged-research-questions}
+
+The manuscript separates a design question from two later feasibility
+questions:
+
+\begin{description}
+  \item[RQ1---design.] How can a local research instrument represent,
+    generate, and evaluate a person-and-moment audio journey while keeping
+    consented context, semantic intent, planned controls, realized acoustics,
+    exposure, response, and longitudinal updates inspectable and
+    non-interchangeable?
+
+  \item[RQ2---technical feasibility.] Can the implemented instrument preserve
+    its declared authority, provenance, control-adherence, continuity,
+    interruption, and recovery contracts across a complete local session?
+
+  \item[RQ3---within-person feasibility.] Across repeated sessions, do
+    provenance-linked person-and-moment records support useful advisory
+    relationships among semantic intent, acoustic realization, and
+    self-reported response without increasing burden, surprise, mismatch, or
+    harm?
+\end{description}
+
+The design/protocol manuscript is structured to address RQ1 by formalizing the
+research instrument and its evaluation boundary. RQ2 requires an end-to-end
+implemented session and auditable technical checks. RQ3 additionally requires
+a frozen protocol, resolved ethics and privacy gates, qualifying
+repeated-session observations, and uncertainty-aware analysis. Neither later
+question is answered by the originating experience, the literature review, a
+repository fixture, or the proposed architecture.
+
+\subsection{Bounded contributions}
+\label{sec:introduction-contributions}
+
+Within those limits, the complete design/protocol manuscript is scoped to five
+contributions at explicitly different evidence states:
+
+\begin{enumerate}
+  \item it \emph{bounds} the problem against prior closed-loop,
+    current-to-target, controllable, physiologically adaptive, and longitudinal
+    music systems rather than presenting those ingredients as new;
+  \item it \emph{formalizes} an end-to-end inspectability contract that keeps
+    consented context, semantic intent, planning, acoustic realization,
+    exposure, response layers, provenance, and advisory updating distinct;
+  \item it \emph{proposes} a two-rate adaptive-audio architecture that
+    separates uncertain, person-correctable deliberation from deterministic
+    generate-ahead rendering, without claiming a validated controller or
+    seamless listening experience;
+  \item it \emph{requires} a local-first authority model in which context use,
+    plan acceptance, generation, playback, retention, export, and
+    personal-model updates remain interruptible and human-correctable, while
+    distinguishing the partially implemented mock path from proposed runtime
+    behavior; and
+  \item it will \emph{specify prospectively} an evidence-disciplined
+    feasibility boundary that retains null, negative, missing, interrupted, and
+    adverse observations and never substitutes intended control, acoustic
+    adherence, perceived expression, felt response, usefulness or harm, or
+    aftereffect for one another.
+\end{enumerate}
+
+The remainder of the manuscript locates these contributions in prior work,
+formalizes the system and its mathematical objects, specifies the prospective
+feasibility method and results boundary, discusses only evidence-proportional
+interpretations, states limitations and ethical constraints, and records
+availability and reproducibility conditions before concluding with the gates
+required to revisit RQ2 and RQ3.

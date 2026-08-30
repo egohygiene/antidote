@@ -175,6 +175,22 @@ class ManuscriptContractTests(unittest.TestCase):
         )
         self.assertNotIn("better target future state transitions", introduction)
 
+    def test_intro_is_complete_and_preserves_the_staged_questions(self) -> None:
+        """Issue #37 prose must retain every evidence-gated research question."""
+        contract = load_contract()
+        introduction = (
+            ROOT / "paper" / "sections" / "01-introduction.tex"
+        ).read_text(encoding="utf-8")
+        normalized_introduction = re.sub(r"\s+", " ", introduction)
+        self.assertNotIn("\\AntidotePlaceholder", introduction)
+        self.assertIn("\\label{sec:research-gap}", introduction)
+        for research_question in contract["research_questions"]:
+            self.assertIn(
+                research_question["question"],
+                normalized_introduction,
+                research_question["id"],
+            )
+
 
 if __name__ == "__main__":
     unittest.main()
