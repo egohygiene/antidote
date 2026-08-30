@@ -83,8 +83,8 @@ Use either interface to build, validate, and serve the same complete local
 publication while writing:
 
 ```sh
-make preview
-task preview
+make preview HOLON_SOURCE=../holon
+task preview HOLON_SOURCE=../holon
 ```
 
 Open `http://127.0.0.1:8000/paper/` for the accessible paper and
@@ -99,7 +99,7 @@ Run the full source and artifact checks before opening a pull request:
 python3 scripts/check_sources.py
 python3 scripts/check_visuals.py
 make check-all
-task check-site
+task check-site HOLON_SOURCE=../holon
 ```
 
 The PDF appears at `build/egohygiene/paper.pdf`, the accessible paper at

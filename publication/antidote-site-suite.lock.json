@@ -1,0 +1,51 @@
+{
+  "schema": "antidote.holon-site-suite-lock/v1",
+  "holon": {
+    "repository": "https://github.com/egohygiene/holon",
+    "commit": "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6",
+    "profiles": {
+      "launchkit": {
+        "id": "landing-launchkit",
+        "version": "1.0.0",
+        "path": "blueprints/launchkit/blueprint.json",
+        "gitBlob": "3629339d25facb1e5b36cf6ab381c0744f1e3a14",
+        "sha256": "1c1eae1922770aa945f1a2d5ff100ed2ebf631aab44d906e930b6b9bc456d22b"
+      },
+      "zensical": {
+        "id": "docs-zensical",
+        "version": "1.0.0",
+        "path": "blueprints/zensical/blueprint.json",
+        "gitBlob": "5f6e385d54d6271c7fe89f441787d6b253cf9fb0",
+        "sha256": "bee6792f7d911ac8e679a5d8eccb3c70b29b09a4567ab50ef0981e1c4efa462a",
+        "upstream": {
+          "repository": "https://github.com/zensical/zensical",
+          "version": "0.0.57",
+          "tag": "v0.0.57",
+          "tagObject": "ad8188ee60ae9187d64a4fe7c4970d3a1947028d",
+          "commit": "f18bb9957cb2740e5dd66d4a438c780b4e15d64c",
+          "license": "MIT",
+          "developmentStatus": "alpha"
+        }
+      },
+      "siteSuite": {
+        "id": "site-suite",
+        "version": "1.0.0",
+        "path": "blueprints/site-suite/blueprint.json",
+        "gitBlob": "2635781f74fd1ba5ee5e6d742dcfabdd0289606b",
+        "sha256": "fa65745ec581397c7afa3175ad7f492ee23881d3576a4eadf07c06d4b0076965"
+      }
+    }
+  },
+  "consumerProof": {
+    "repository": "https://github.com/egohygiene/identity",
+    "issue": 57,
+    "pullRequest": 62,
+    "mergedCommit": "1c9fd6352cf4dc7e8274dab42270946d17c81aa1"
+  },
+  "ownership": {
+    "profiles": "egohygiene/holon",
+    "contentAndIdentityInputs": "egohygiene/antidote",
+    "paperAndPublication": "egohygiene/antidote",
+    "deployment": "egohygiene/antidote-pages-workflow"
+  }
+}

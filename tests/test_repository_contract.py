@@ -56,7 +56,9 @@ class RepositoryContractTests(unittest.TestCase):
         live_check = (ROOT / "scripts" / "verify_live_publication.py").read_text(
             encoding="utf-8"
         )
-        self.assertIn("stage_site(project, output, theme, python)", tasks)
+        self.assertIn(
+            "stage_site(project, output, theme, python, holon_source)", tasks
+        )
         self.assertIn('"-m",\n            "http.server"', tasks)
         self.assertIn("validate_live_payloads", live_check)
         self.assertIn('"Cache-Control": "no-cache"', live_check)
@@ -80,6 +82,7 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertIn("task check-site", workflow)
         self.assertIn("diff --recursive --brief", workflow)
         self.assertIn("scripts/verify_live_publication.py", workflow)
+        self.assertIn("HOLON_SOURCE=\".holon-source\"", workflow)
 
     def test_pull_requests_upload_review_artifacts_without_deploying(self) -> None:
         """Both paper and Pages projections must be downloadable before merge."""

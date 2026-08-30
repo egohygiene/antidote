@@ -28,9 +28,10 @@ are documented in [`paper-preview.md`](paper-preview.md).
 11. Open the **GitHub Pages** workflow and run it manually once, or merge a
    matching change to `main`.
 12. Confirm the deploy job runs `scripts/verify_live_publication.py` and verifies
-    `/`, `/paper/`, `/antidote.pdf`,
+    `/`, `/docs/`, `/architecture/`, `/legal/`, `/paper/`, `/antidote.pdf`,
     `/magazine/`, `/downloads/`, `/publication.json`, `/site.json`,
-    `/provenance.json`, and `/SHA256SUMS` against the custom HTTPS domain.
+    `/provenance.json`, `/site-suite.provenance.json`, and `/SHA256SUMS`
+    against the custom HTTPS domain.
 13. Enable **Enforce HTTPS** after GitHub reports the certificate ready.
 
 The canonical base in `beacon-project.toml` is

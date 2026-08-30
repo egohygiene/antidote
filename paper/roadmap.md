@@ -158,7 +158,8 @@ A future contributor or conversation should:
 4. change the canonical LaTeX or governed research source only;
 5. update the claim ledger, bibliography, figure registry, or architecture
    document when the issue changes their owned boundary;
-6. run `make check-all` and `task check-site`;
+6. run `make check-all` and
+   `task check-site HOLON_SOURCE=../holon` against the accepted exact checkout;
 7. after deployment, run `make live-check` from the merged revision; and
 8. record the merged evidence and live revision before advancing the roadmap.
 

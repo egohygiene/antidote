@@ -41,6 +41,13 @@ def fixture_payloads() -> dict[str, bytes]:
     pdf = b"%PDF-1.7\nfixture\n"
     archive = b"fixture archive"
     provenance = encode({"source_revision": REVISION})
+    site_suite = encode(
+        {
+            "schema": "antidote.site-suite-provenance/v1",
+            "sourceRevision": REVISION,
+            "framework": {"commit": VERIFY.HOLON_COMMIT},
+        }
+    )
     artifacts = {
         "accessible_web": {
             "path": "paper/index.html",
@@ -92,6 +99,9 @@ def fixture_payloads() -> dict[str, bytes]:
     )
     route_payloads = {
         "": b"home",
+        "docs/": b"docs",
+        "architecture/": b"architecture",
+        "legal/": b"legal",
         "paper/": html,
         "paper/index.html": html,
         "antidote.pdf": pdf,
@@ -100,6 +110,7 @@ def fixture_payloads() -> dict[str, bytes]:
         "publication.json": publication,
         "site.json": catalog,
         "provenance.json": provenance,
+        "site-suite.provenance.json": site_suite,
         "downloads/antidote-0.1.0.tar.gz": archive,
     }
     route_files = {

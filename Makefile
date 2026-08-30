@@ -4,7 +4,8 @@ THEME ?= egohygiene
 BUILD_DIR ?= build/$(THEME)
 PREVIEW_HOST ?= 127.0.0.1
 PREVIEW_PORT ?= 8000
-TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)" --preview-host="$(PREVIEW_HOST)" --preview-port="$(PREVIEW_PORT)"
+HOLON_SOURCE ?=
+TASK := $(PYTHON) scripts/tasks.py --project="$(PROJECT)" --build-dir="$(BUILD_DIR)" --theme="$(THEME)" --python="$(PYTHON)" --preview-host="$(PREVIEW_HOST)" --preview-port="$(PREVIEW_PORT)" --holon-source="$(HOLON_SOURCE)"
 
 .PHONY: all beacon-build beacon-doctor beacon-package beacon-plan beacon-validate bootstrap-check build check check-all check-content check-links check-site clean inventory live-check mvp-bootstrap mvp-check mvp-contracts mvp-contracts-check mvp-format mvp-lint mvp-test preview reproducibility site test
 

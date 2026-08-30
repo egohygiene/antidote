@@ -22,18 +22,26 @@ import tomllib
 
 ROOT = Path(__file__).resolve().parents[1]
 REVISION = re.compile(r"[0-9a-f]{40}")
+HOLON_COMMIT = "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6"
 REQUIRED_ROUTES = {
     "home": "",
+    "documentation": "docs/",
+    "architecture": "architecture/",
+    "legal": "legal/",
     "paper": "paper/",
     "paper-pdf": "antidote.pdf",
     "magazine": "magazine/",
     "downloads": "downloads/",
     "publication-manifest": "publication.json",
     "site-catalog": "site.json",
+    "site-suite-evidence": "site-suite.provenance.json",
     "checksums": "SHA256SUMS",
 }
 ROUTE_FILES = {
     "": "index.html",
+    "docs/": "docs/index.html",
+    "architecture/": "architecture/index.html",
+    "legal/": "legal/index.html",
     "paper/": "paper/index.html",
     "magazine/": "magazine/index.html",
     "downloads/": "downloads/index.html",
@@ -80,13 +88,26 @@ def validate_live_payloads(
     base_url = normalize_base_url(base_url)
     if REVISION.fullmatch(expected_revision) is None:
         raise ValueError("expected revision must be a full lowercase Git commit")
-    for required in ("site.json", "publication.json", "provenance.json", "SHA256SUMS"):
+    for required in (
+        "site.json",
+        "publication.json",
+        "provenance.json",
+        "site-suite.provenance.json",
+        "SHA256SUMS",
+    ):
         if required not in payloads:
             raise KeyError(f"live response is missing: {required}")
 
     catalog = json.loads(payloads["site.json"].decode("utf-8"))
     publication = json.loads(payloads["publication.json"].decode("utf-8"))
     provenance = json.loads(payloads["provenance.json"].decode("utf-8"))
+    site_suite = json.loads(
+        payloads["site-suite.provenance.json"].decode("utf-8")
+    )
+    if site_suite.get("schema") != "antidote.site-suite-provenance/v1":
+        raise RuntimeError("live site-suite evidence has an unexpected schema")
+    if site_suite.get("framework", {}).get("commit") != HOLON_COMMIT:
+        raise RuntimeError("live site-suite evidence does not identify accepted Holon")
     route_map = {route["id"]: route["path"] for route in catalog["routes"]}
     if len(catalog["routes"]) != len(route_map) or route_map != REQUIRED_ROUTES:
         raise RuntimeError(
@@ -115,6 +136,7 @@ def validate_live_payloads(
         "site.json": catalog.get("source_revision"),
         "publication.json": publication.get("source_revision"),
         "provenance.json": provenance.get("source_revision"),
+        "site-suite.provenance.json": site_suite.get("sourceRevision"),
     }
     stale = {name: value for name, value in revisions.items() if value != expected_revision}
     if stale:
@@ -244,7 +266,13 @@ def main() -> int:
     base_url = normalize_base_url(arguments.base_url)
     revision = arguments.expected_revision
 
-    initial_paths = ("site.json", "publication.json", "provenance.json", "SHA256SUMS")
+    initial_paths = (
+        "site.json",
+        "publication.json",
+        "provenance.json",
+        "site-suite.provenance.json",
+        "SHA256SUMS",
+    )
     payloads = {
         path: fetch(
             base_url,

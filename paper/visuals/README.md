@@ -25,7 +25,8 @@ and verify the committed LaTeX registry:
 python3 scripts/check_visuals.py --write-registry
 ```
 
-`make check-all` and `task check-site` also validate the complete system.
+`make check-all` and `task check-site HOLON_SOURCE=../holon` also validate the
+complete system.
 
 ## Lifecycle
 

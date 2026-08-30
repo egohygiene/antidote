@@ -87,6 +87,50 @@ class StagePagesTests(unittest.TestCase):
             encoding="utf-8",
         )
         (root / "docs" / "site.webmanifest").write_text("{}\n", encoding="utf-8")
+        suite = root / "site-suite"
+        for route in ("docs", "architecture", "legal"):
+            (suite / route).mkdir(parents=True, exist_ok=True)
+        (suite / "assets").mkdir(parents=True)
+        (suite / "index.html").write_text(
+            page_template(
+                "",
+                '<a href="./docs/">Docs</a>'
+                '<a href="./architecture/">Architecture</a>'
+                '<a href="./legal/">Legal</a>'
+                '<a href="./paper/">Paper</a>',
+                "./",
+            ),
+            encoding="utf-8",
+        )
+        for route in ("docs", "architecture", "legal"):
+            (suite / route / "index.html").write_text(
+                page_template(f"{route}/", '<a href="../">Home</a>', "../"),
+                encoding="utf-8",
+            )
+        (suite / "assets" / "suite.css").write_text(
+            "/* exact-pinned suite fixture */\n", encoding="utf-8"
+        )
+        (suite / "site-suite.manifest.json").write_text("{}\n", encoding="utf-8")
+        suite_inventory = [
+            {
+                "path": path.relative_to(suite).as_posix(),
+                "sha256": STAGE_PAGES.sha256(path),
+                "sizeBytes": path.stat().st_size,
+            }
+            for path in sorted(suite.rglob("*"))
+            if path.is_file()
+        ]
+        (suite / "site-suite.provenance.json").write_text(
+            json.dumps(
+                {
+                    "schema": "antidote.site-suite-provenance/v1",
+                    "sourceRevision": "a" * 40,
+                    "artifact": {"inventory": suite_inventory},
+                }
+            )
+            + "\n",
+            encoding="utf-8",
+        )
         (root / "beacon-project.toml").write_text(
             """
 [paper]
@@ -130,7 +174,7 @@ pages_custom_domain = "antidote.egohygiene.io"
             root = Path(temporary)
             build = self.create_fixture(root)
             output = root / "_site"
-            manifest = STAGE_PAGES.stage_site(root, build, output)
+            manifest = STAGE_PAGES.stage_site(root, build, root / "site-suite", output)
             catalog = json.loads((output / "site.json").read_text(encoding="utf-8"))
             routes = {route["id"]: route["path"] for route in catalog["routes"]}
 
@@ -141,6 +185,18 @@ pages_custom_domain = "antidote.egohygiene.io"
             self.assertTrue((output / "magazine" / "index.html").is_file())
             self.assertTrue((output / "downloads" / "index.html").is_file())
             self.assertTrue((output / "antidote.pdf").is_file())
+            self.assertTrue((output / "docs" / "index.html").is_file())
+            self.assertTrue((output / "architecture" / "index.html").is_file())
+            self.assertTrue((output / "legal" / "index.html").is_file())
+            self.assertTrue((output / "site-suite.provenance.json").is_file())
+            self.assertEqual(
+                (output / "paper" / "index.html").read_bytes(),
+                (build / "web" / "index.html").read_bytes(),
+            )
+            self.assertEqual(
+                (output / "antidote.pdf").read_bytes(),
+                (build / "paper.pdf").read_bytes(),
+            )
             self.assertTrue((output / STAGE_PAGES.OWNER_FILE).is_file())
             self.assertFalse((output / "CNAME").exists())
             checksum_text = (output / "SHA256SUMS").read_text(encoding="utf-8")
@@ -157,7 +213,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-planned-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             catalog = json.loads((output / "site.json").read_text(encoding="utf-8"))
             slots = {slot["id"]: slot for slot in catalog["slots"]}
 
@@ -174,6 +232,7 @@ pages_custom_domain = "antidote.egohygiene.io"
             manifest = STAGE_PAGES.stage_site(
                 root,
                 self.create_fixture(root),
+                root / "site-suite",
                 root / "_site",
                 custom_domain="Antidote.EgoHygiene.io.",
             )
@@ -187,6 +246,7 @@ pages_custom_domain = "antidote.egohygiene.io"
                 STAGE_PAGES.stage_site(
                     root,
                     self.create_fixture(root),
+                    root / "site-suite",
                     root / "_site",
                     custom_domain="other.egohygiene.io",
                 )
@@ -201,7 +261,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-links-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             index = output / "index.html"
             index.write_text(
                 index.read_text(encoding="utf-8").replace(
@@ -217,7 +279,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-fragment-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             index = output / "index.html"
             index.write_text(
                 index.read_text(encoding="utf-8").replace(
@@ -238,7 +302,7 @@ pages_custom_domain = "antidote.egohygiene.io"
             sentinel = unowned / "sentinel.txt"
             sentinel.write_text("preserve\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "unowned Pages output"):
-                STAGE_PAGES.stage_site(root, build, unowned)
+                STAGE_PAGES.stage_site(root, build, root / "site-suite", unowned)
             self.assertEqual(sentinel.read_text(encoding="utf-8"), "preserve\n")
 
             git_directory = root / ".git"
@@ -246,7 +310,9 @@ pages_custom_domain = "antidote.egohygiene.io"
             git_sentinel = git_directory / "sentinel"
             git_sentinel.write_text("preserve\n", encoding="utf-8")
             with self.assertRaisesRegex(ValueError, "non-generated Pages output"):
-                STAGE_PAGES.stage_site(root, build, git_directory)
+                STAGE_PAGES.stage_site(
+                    root, build, root / "site-suite", git_directory
+                )
             self.assertEqual(git_sentinel.read_text(encoding="utf-8"), "preserve\n")
 
     def test_rejects_fabricated_planned_slot_metadata(self) -> None:
@@ -254,7 +320,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-planned-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             catalog_path = output / "site.json"
             catalog = json.loads(catalog_path.read_text(encoding="utf-8"))
             magazine = next(slot for slot in catalog["slots"] if slot["id"] == "magazine")
@@ -273,7 +341,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-paper-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             catalog = json.loads((output / "site.json").read_text(encoding="utf-8"))
             paper = next(slot for slot in catalog["slots"] if slot["id"] == "paper")
             paper["version"] = "999.0.0"
@@ -323,7 +393,7 @@ pages_custom_domain = "antidote.egohygiene.io"
             )
 
             output = root / "_site"
-            manifest = STAGE_PAGES.stage_site(root, build, output)
+            manifest = STAGE_PAGES.stage_site(root, build, root / "site-suite", output)
             catalog = json.loads((output / "site.json").read_text(encoding="utf-8"))
             self.assertIsNone(manifest["custom_domain"])
             self.assertIsNone(catalog["custom_domain"])
@@ -337,7 +407,9 @@ pages_custom_domain = "antidote.egohygiene.io"
         with tempfile.TemporaryDirectory(prefix="antidote-checksum-") as temporary:
             root = Path(temporary)
             output = root / "_site"
-            STAGE_PAGES.stage_site(root, self.create_fixture(root), output)
+            STAGE_PAGES.stage_site(
+                root, self.create_fixture(root), root / "site-suite", output
+            )
             (output / "untracked.txt").write_text("not inventoried\n", encoding="utf-8")
             with self.assertRaisesRegex(RuntimeError, "inventory mismatch"):
                 STAGE_PAGES.validate_checksums(output)
@@ -349,8 +421,8 @@ pages_custom_domain = "antidote.egohygiene.io"
             build = self.create_fixture(root)
             first = root / "_site-first"
             second = root / "_site-second"
-            STAGE_PAGES.stage_site(root, build, first)
-            STAGE_PAGES.stage_site(root, build, second)
+            STAGE_PAGES.stage_site(root, build, root / "site-suite", first)
+            STAGE_PAGES.stage_site(root, build, root / "site-suite", second)
 
             self.assertEqual(
                 (first / "site.json").read_bytes(), (second / "site.json").read_bytes()

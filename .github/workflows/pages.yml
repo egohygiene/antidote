@@ -12,7 +12,9 @@ on:
       - "docs/**"
       - "latex/**"
       - "paper/**"
+      - "publication/**"
       - "scripts/**"
+      - "site/**"
       - "tests/**"
       - "themes/**"
       - "web/**"
@@ -28,7 +30,9 @@ on:
       - "docs/**"
       - "latex/**"
       - "paper/**"
+      - "publication/**"
       - "scripts/**"
+      - "site/**"
       - "tests/**"
       - "themes/**"
       - "web/**"
@@ -39,6 +43,9 @@ on:
 permissions:
   contents: read
 
+env:
+  HOLON_COMMIT: "2600baff6f6d944094da81b77e1a9a2e9e7a1cd6"
+
 concurrency:
   group: "pages-${{ github.workflow }}-${{ github.ref }}"
   cancel-in-progress: true
@@ -47,7 +54,7 @@ jobs:
   build:
     name: Build Pages artifact
     runs-on: ubuntu-24.04
-    timeout-minutes: 25
+    timeout-minutes: 40
     steps:
       - name: Harden runner
         # step-security/harden-runner v2.21.0
@@ -61,6 +68,39 @@ jobs:
         with:
           fetch-depth: 0
           persist-credentials: false
+
+      - name: Check out the accepted Holon site suite
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          repository: egohygiene/holon
+          ref: ${{ env.HOLON_COMMIT }}
+          path: .holon-source
+          persist-credentials: false
+
+      - name: Verify the checked-out Holon commit
+        shell: bash
+        run: test "$(git -C .holon-source rev-parse HEAD)" = "${HOLON_COMMIT}"
+
+      - name: Set up Python
+        uses: actions/setup-python@ece7cb06caefa5fff74198d8649806c4678c61a1 # v6.0.0
+        with:
+          python-version: "3.12"
+
+      - name: Install the pinned Python resolver
+        run: python3 -m pip install "uv==0.11.33"
+
+      - name: Set up Node.js
+        uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6.5.0
+        with:
+          node-version: "24.19.0"
+
+      - name: Activate pinned pnpm
+        shell: bash
+        run: |
+          set -euo pipefail
+          corepack enable
+          corepack prepare "pnpm@11.24.0" --activate
+          pnpm --version
 
       - name: Install the pinned Task runner
         # go-task/setup-task v1
@@ -91,11 +131,11 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          make check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+          make check-site THEME="egohygiene" BUILD_DIR="build/egohygiene" HOLON_SOURCE=".holon-source"
           make_site="$(mktemp -d)"
           cp -R _site/. "${make_site}/"
           make clean THEME="egohygiene" BUILD_DIR="build/egohygiene"
-          task check-site THEME="egohygiene" BUILD_DIR="build/egohygiene"
+          task check-site THEME="egohygiene" BUILD_DIR="build/egohygiene" HOLON_SOURCE=".holon-source"
           diff --recursive --brief "${make_site}" _site
 
       - name: Prove publication artifact reproducibility

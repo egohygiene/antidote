@@ -9,7 +9,8 @@ vars:
   BUILD_DIR: '{{default (printf "build/%s" .THEME) .BUILD_DIR}}'
   PREVIEW_HOST: '{{default "127.0.0.1" .PREVIEW_HOST}}'
   PREVIEW_PORT: '{{default "8000" .PREVIEW_PORT}}'
-  RUNNER: '{{.PYTHON}} scripts/tasks.py --project="{{.PROJECT}}" --build-dir="{{.BUILD_DIR}}" --theme="{{.THEME}}" --python="{{.PYTHON}}" --preview-host="{{.PREVIEW_HOST}}" --preview-port="{{.PREVIEW_PORT}}"'
+  HOLON_SOURCE: '{{default "" .HOLON_SOURCE}}'
+  RUNNER: '{{.PYTHON}} scripts/tasks.py --project="{{.PROJECT}}" --build-dir="{{.BUILD_DIR}}" --theme="{{.THEME}}" --python="{{.PYTHON}}" --preview-host="{{.PREVIEW_HOST}}" --preview-port="{{.PREVIEW_PORT}}" --holon-source="{{.HOLON_SOURCE}}"'
 
 tasks:
   default:

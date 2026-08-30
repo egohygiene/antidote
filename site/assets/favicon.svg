@@ -1,0 +1,9 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64" role="img" aria-labelledby="title description">
+  <title id="title">Antidote mark</title>
+  <desc id="description">A mint path moving through three points on a dark circular field.</desc>
+  <circle cx="32" cy="32" r="30" fill="#08130f"/>
+  <path d="M14 40c8-20 17-20 25-8 4 6 8 5 12-5" fill="none" stroke="#7cf2b9" stroke-linecap="round" stroke-width="5"/>
+  <circle cx="14" cy="40" r="4" fill="#b39dff"/>
+  <circle cx="35" cy="28" r="4" fill="#74dcec"/>
+  <circle cx="51" cy="27" r="4" fill="#f4ca7a"/>
+</svg>
