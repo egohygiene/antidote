@@ -2,20 +2,196 @@
 \section{Related work}
 \label{sec:related-work}
 
-The living source atlas remains broader than the material this manuscript will
-cite. The governed comparison covers music and affect regulation, personalized
-music systems, controllable generative audio, adaptive or closed-loop systems,
-music as an active setting variable, and semantic interpretability. Individual
-claims may enter the manuscript only from their promoted source records.
+The living source atlas is intentionally broader than both the bibliography
+shelf and the sources cited here. This section uses only promoted records and
+organizes them by the question for which each source is informative. A study
+may establish that an architecture existed while providing weak evidence for a
+listener outcome; a theoretical framework may clarify measurement without
+validating an implementation; and a normative or engineering precedent may
+support a design transfer without becoming empirical affective evidence.
 
-MindMelody is an important direct comparator because it describes a closed-loop
-system that mediates EEG-derived affect through a semantic planning layer and
-controllable music generation \citep{zhang2026mindmelody}. Its existence is
-evidence that this design neighborhood is active prior art. Its reported pilot
-results are not evidence that Antidote is effective. The broader comparator
-review also rejects first-system claims for closed-loop, current-to-target,
-real-time generative, interpretable, physiologically adaptive, and longitudinal
-music systems.
+\subsection{Musical emotion, meaning, and response constructs}
+\label{sec:related-musical-response}
+
+Musical response is not a direct readout of an acoustic feature. Juslin and
+V\"astfj\"all describe multiple candidate induction mechanisms---including
+brain-stem reflexes, evaluative conditioning, emotional contagion, imagery,
+episodic memory, and musical expectancy in addition to appraisal---whose
+timing, volitional influence, cultural dependence, and relation to musical
+structure differ \citep{juslin2008emotional}. The framework is theoretical,
+but it makes a single acoustic-to-emotion rule an inadequate research model.
+It also motivates retaining a person's context and interpretation rather than
+treating a classifier output as the mechanism that operated.
+
+Measurement work reinforces that distinction. Across four studies, Zentner
+et al. derived and replicated the nine-factor Geneva Emotional Music Scale and
+reported differences by genre and by whether emotion was perceived in the
+music or felt by the listener \citep{zentner2008emotions}. This supports a
+music-specific response vocabulary while also showing why no group-derived
+taxonomy should replace personally meaningful language. AffectMachine-
+Classical offers a complementary technical boundary: its 26-participant study
+evaluated whether generated excerpts communicated intended affect, not whether
+listeners felt that affect or benefited from it
+\citep{agres2023affectmachine}. Expression alignment, felt response,
+usefulness, and harm are therefore separate outcome questions.
+
+An exclusively positive account of musical intensity would be incomplete.
+Silverman et al.'s theoretical model treats music-induced harm as potentially
+affective, behavioral, cognitive, identity-related, interpersonal, physical,
+or spiritual, arising through interactions among context, deliverer, music,
+and recipient \citep{silverman2020complicated}. The model does not estimate
+risk or validate Antidote's safeguards. It does require the research record to
+retain mismatch, unwelcome intensity, and harm for the person's interpretation
+rather than recoding them as failed optimization or successful catharsis.
+
+\subsection{Current-to-target and longitudinal personalization}
+\label{sec:related-personalization}
+
+Person- and moment-conditioned music predates Antidote. The personalized
+affective music player combined current and desired affect, physiological
+observations, and person-specific associations to select existing music over
+multiple weeks \citep{janssen2012tune}. Its three-participant field evaluation
+is too small to establish robust generalization, but it is direct precedent for
+current-to-goal selection and longitudinal personal modeling.
+
+The LUCID trial extended this design neighborhood to an explicit calm target,
+the iso principle, preference information, and reinforcement-learning-based
+sequencing of pre-existing tracks and nature sounds
+\citep{mallik2022effects}. The open-label single-session study randomized 163
+participants across music-plus-beats, music, beats, and pink-noise conditions;
+some differences appeared in the moderate trait-anxiety subgroup and were less
+differentiated in the high-anxiety subgroup. Commercial involvement, subgroup
+dependence, and the inseparability of several design components prevent the
+study from validating a universal journey or mechanism. BEAMERS likewise
+documents strong person-dependent variation in response to the same song while
+using EEG in a personalized recommendation setting \citep{li2022beamers}; as a
+preprint, it is a comparator rather than an independent basis for an outcome
+claim.
+
+Together, these systems reject novelty claims based on personalization,
+current-to-target sequencing, physiology, or longitudinal learning alone. They
+also leave a methodological reason to model the unit of inquiry as a
+person--moment--journey record rather than a fixed ``best music'' profile.
+
+\subsection{Closed-loop and psychophysiological music systems}
+\label{sec:related-closed-loop}
+
+Physiological feedback has been connected to music at several levels of
+complexity. iHeartLift used heart-rate-related feedback to manipulate music
+tempo, demonstrating a narrow real-time loop rather than a semantic generator
+\citep{ho2011iheartlift}. Daly et al.'s affective brain--computer music
+interface combined EEG and other physiology, a desired affective trajectory,
+algorithmic generation, and a person-specific model across sessions
+\citep{daly2016abcmi}. Eight participants completed its longitudinal protocol;
+attrition, constrained generation, and signal limitations qualify the result.
+Ehrlich et al. reported continuous generated musical feedback with smooth
+parameter control and user calibration, using an 11-listener perceptual study
+and a five-participant BCI pilot \citep{ehrlich2019closedloop}. The preliminary
+outcomes were heterogeneous and did not establish reliable regulation.
+
+MindMelody is the closest recent semantic comparator. It connects real-time
+EEG processing to global and local affect trajectories, a retrieval-augmented
+semantic intervention plan, controllable MusicGen-based generation, and
+physiological and subjective feedback \citep{zhang2026mindmelody}. Its reviewed
+v2 preprint reports technical evaluations and a randomized within-subject
+non-clinical pilot, but the pilot participant count was not found in the
+visible methods. The system is strong prior art for an affect estimate to
+semantic plan to generated music to response loop; its pilot is not Antidote
+evidence and does not settle clinical efficacy.
+
+Conflicting findings must remain in the same comparison. A 22-participant
+preliminary minimalist brain--computer musical interface reported
+nonsignificant target-emotion and time effects, with participant and trial
+variation dominating the observed variance \citep{monroy2026minimalist}.
+At field level, a systematic review found heterogeneous music-neurofeedback
+methods and no consensus success measure \citep{sayal2025musicloop}. A separate
+scoping review of commercial music-based digital therapeutics found product
+presence but insufficient direct evidence for real-world effectiveness or
+superiority over generic music \citep{venkatesan2026mdt}. Technical loop
+closure, product availability, and beneficial response are therefore three
+different evidence classes.
+
+\subsection{Controllable generation and real-time architecture}
+\label{sec:related-controllable-generation}
+
+Interpretable generation controls also have established precedent.
+AffectMachine-Classical maps continuous valence and arousal controls to a
+rule-based and probabilistic generator that can change musical parameters bar
+by bar \citep{agres2023affectmachine}; MindMelody exposes semantic plan fields
+including tempo, texture density, section dynamics, and a target affect
+trajectory \citep{zhang2026mindmelody}. Mustango adds explicit chord, beat,
+tempo, and key conditioning to text-to-music generation and evaluates
+condition adherence \citep{melechovsky2024mustango}. JASCO demonstrates global
+text conditioning combined with local time-varying symbolic and audio
+conditions \citep{tal2024jasco}. These systems support a translation from
+human-readable intent into inspectable generator controls. They do not make
+prompt mixtures perceptually linear, guarantee requested conditions in the
+realized artifact, or establish felt-response control.
+
+Antidote's timing and adaptation proposal therefore transfers engineering
+ideas rather than outcome evidence. Adaptive game-music research supplies
+precedents for transition-aware musical structure
+\citep{hutchings2020adaptive}; just-in-time adaptive intervention design
+separates decision points, tailoring variables, and intervention options
+\citep{nahumshani2018jitai}; model-predictive control supplies receding-horizon
+re-estimation \citep{garcia1989mpc}; and partially observable planning supplies
+belief-state reasoning under uncertainty \citep{kaelbling1998pomdp}.
+Interactive machine learning further motivates visible correction and override
+instead of treating an estimate as authority \citep{amershi2014interactive}.
+These transfers inform a two-rate, generate-ahead architecture. They do not
+model a person as a controllable plant, validate an affect transition model,
+define a therapeutic reward, or establish a stable real-time generator.
+
+\subsection{Auditory beats: behavioral findings versus entrainment}
+\label{sec:related-auditory-beats}
+
+Auditory-beat outcomes and brainwave entrainment require separate claims. The
+LUCID factorial comparison permits reporting subgroup-dependent behavioral
+differences among music, beat, combined, and noise conditions
+\citep{mallik2022effects}; it does not isolate a universal beat-frequency
+mechanism. In contrast, Ingendoh et al.'s systematic review asked specifically
+whether binaural-beat stimulation entrains EEG activity. Among 14 included
+studies, five supported the entrainment hypothesis, eight contradicted it, and
+one was mixed, with substantial heterogeneity in stimulation, design, EEG
+measures, and analysis \citep{ingendoh2023binaural}. Binaural beats can thus be
+treated as testable psychoacoustic controls, but the reviewed evidence does not
+justify a rule that a frequency produces a known neural or therapeutic state.
+
+\subsection{Music as setting and phenomenological variable}
+\label{sec:related-setting}
+
+Psychedelic research provides adjacent evidence that music can shape an
+experience without being reducible to a treatment ingredient. In interviews
+with 19 patients receiving psilocybin with psychological support for
+treatment-resistant depression, Kaelen et al. identified welcome influences
+such as emotion, imagery, guidance, openness, calm, and safety, alongside
+unwelcome emotion, resistance, and misguidance
+\citep{kaelen2018hidden}. Music-experience ratings were associated with acute
+experience and later symptom change, but the small exploratory study had no
+no-music comparison and cannot isolate music, playlist, preparation, support,
+drug, or expectancy effects.
+
+Rowe et al.'s scoping review included 19 papers from 10 studies and 330 total
+participants \citep{rowe2026psychedelic}. It found preliminary relationships
+with intensified emotion, meaning and imagery processes, and neural-dynamics
+measures, while emphasizing small samples, methodological inconsistency, and
+poorly standardized music conditions. The eligible evidence concerned LSD,
+psilocybin, and ayahuasca rather than establishing a ketamine--music
+comparison. This literature supports treating music as an active, temporally
+structured, sometimes unwelcome setting variable. It does not validate
+generated therapeutic music, an optimized soundtrack, or Antidote as a
+psychedelic or ketamine intervention.
+
+\subsection{Capability-level comparison}
+\label{sec:related-comparison}
+
+Table~\ref{tab:research-landscape-comparator} projects the governed comparator
+matrix into capability families. A reported mark means only that the reviewed
+artifact described the capability; it is not an evidence grade or a positive
+outcome. Partial and unreported cells remain explicit, and the Antidote row is
+labeled as a proposed reference profile rather than an evaluated system.
+
+\AntidoteTable{research-landscape-comparator}
 
 \subsection{Bounded contribution}
 \label{sec:bounded-contribution}
@@ -29,4 +205,12 @@ records. The bounded review did not identify that complete chain in one
 evaluated system; this is a contribution rationale, not proof of global
 novelty, learnability, or benefit.
 
-\AntidotePlaceholder{literature synthesis}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris. Replace this filler with a primary-source comparison matrix synthesized into prose, including explicit overlap, disagreement, and the remaining novelty boundary.}
+The gap handed to System Design is consequently narrower than ``adaptive
+music.'' Prior work establishes the ingredients and several close loops. The
+remaining design question is how to keep the complete person-and-moment
+transformation inspectable and human-correctable across context permission,
+semantic intent, time-indexed planning, generated realization, actual
+exposure, separated response layers, provenance, and any advisory update. Our
+bounded review did not identify that complete governed chain in one evaluated
+system. This statement supports the proposed combination boundary only; it is
+not a global novelty, feasibility, or benefit claim.

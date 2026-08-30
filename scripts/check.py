@@ -138,7 +138,7 @@ def pdf_checks(path: Path, errors: list[str]) -> None:
             ["pdffonts", str(path)], check=True, capture_output=True, text=True
         ).stdout
         toc_text = subprocess.run(
-            ["pdftotext", "-f", "2", "-l", "2", "-layout", str(path), "-"],
+            ["pdftotext", "-f", "2", "-l", "6", "-layout", str(path), "-"],
             check=True,
             capture_output=True,
             text=True,

@@ -191,6 +191,43 @@ class ManuscriptContractTests(unittest.TestCase):
                 research_question["id"],
             )
 
+    def test_related_work_is_complete_and_evidence_structured(self) -> None:
+        """Issue #38 must retain the promoted streams and bounded handoff."""
+        related_work = (
+            ROOT / "paper" / "sections" / "02-related-work.tex"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("\\AntidotePlaceholder", related_work)
+        for label in (
+            "sec:related-musical-response",
+            "sec:related-personalization",
+            "sec:related-closed-loop",
+            "sec:related-controllable-generation",
+            "sec:related-auditory-beats",
+            "sec:related-setting",
+            "sec:related-comparison",
+            "sec:bounded-contribution",
+        ):
+            self.assertIn(f"\\label{{{label}}}", related_work)
+        for citation in (
+            "juslin2008emotional",
+            "zentner2008emotions",
+            "monroy2026minimalist",
+            "ingendoh2023binaural",
+            "kaelen2018hidden",
+            "rowe2026psychedelic",
+            "melechovsky2024mustango",
+            "nahumshani2018jitai",
+        ):
+            self.assertIn(citation, related_work)
+        self.assertEqual(
+            related_work.count(
+                "\\AntidoteTable{research-landscape-comparator}"
+            ),
+            1,
+        )
+        self.assertIn("bounded review did not identify", related_work)
+        self.assertIn("not a global novelty", related_work)
+
 
 if __name__ == "__main__":
     unittest.main()

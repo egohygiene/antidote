@@ -56,8 +56,17 @@ class VisualContractTests(unittest.TestCase):
         self.assertEqual(result["errors"], [])
         manifest = result["manifest"]
         self.assertEqual(len(manifest["visuals"]), 16)
-        self.assertEqual(len(result["active"]), 1)
-        self.assertEqual(result["active"][0]["state"], "placeholder")
+        self.assertEqual(
+            {visual["id"] for visual in result["active"]},
+            {"ANT-FIG-001", "ANT-TBL-002"},
+        )
+        self.assertEqual(
+            {visual["id"]: visual["state"] for visual in result["active"]},
+            {
+                "ANT-FIG-001": "placeholder",
+                "ANT-TBL-002": "draft",
+            },
+        )
         self.assertEqual(
             {visual["kind"] for visual in manifest["visuals"]},
             {"figure", "table"},
