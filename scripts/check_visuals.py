@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import json
 import re
 import sys
@@ -38,6 +39,15 @@ ALLOWED_SOURCE_MODES = {
     "deterministic-table",
     "generated-editorial",
 }
+
+GENERATOR_PATH = Path(__file__).with_name("generate_skeleton_visuals.py")
+GENERATOR_SPEC = importlib.util.spec_from_file_location(
+    "generate_skeleton_visuals", GENERATOR_PATH
+)
+if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
+    raise RuntimeError("cannot load skeleton visual generator")
+SKELETON_VISUALS = importlib.util.module_from_spec(GENERATOR_SPEC)
+GENERATOR_SPEC.loader.exec_module(SKELETON_VISUALS)
 
 
 class DuplicateKeyError(ValueError):
@@ -181,6 +191,8 @@ def validate_visual_system(
         errors.append("visual manifest schema must be antidote.visual-manifest/v1")
     if manifest.get("version") != "0.1.0":
         errors.append("visual manifest version must be 0.1.0")
+    if manifest.get("production_issue") != "egohygiene/antidote#46":
+        errors.append("visual manifest production issue must remain egohygiene/antidote#46")
     for policy in (
         "format_policy",
         "accessibility_policy",
@@ -483,6 +495,14 @@ def validate_visual_system(
             errors.append("caption registry is stale or contains orphaned entries")
     except (OSError, ValueError) as error:
         errors.append(f"caption registry cannot be validated: {error}")
+
+    try:
+        for relative, expected in SKELETON_VISUALS.expected_assets(project).items():
+            asset = project / relative
+            if not asset.is_file() or asset.read_text(encoding="utf-8") != expected:
+                errors.append(f"generated skeleton visual is stale: {relative}")
+    except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"generated skeleton visuals cannot be validated: {error}")
 
     return {"errors": errors, "warnings": warnings, "active": active, "manifest": manifest}
 

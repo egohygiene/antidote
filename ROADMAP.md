@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.5.0
+version: 0.6.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-29
+updated: 2026-09-03
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -32,10 +32,10 @@ repository: egohygiene/antidote
 visibility: public
 publication: central
 route: /roadmap/antidote/
-updated: 2026-08-29
+updated: 2026-09-03
 -->
 
-## 2026-08-29 execution snapshot
+## 2026-09-03 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap
 > handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
@@ -45,9 +45,10 @@ updated: 2026-08-29
 
 **Current gate:** The MVP implementation sequence is deliberately paused after
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
-and section boundaries through issue #35 and now proves the continuous
-publication loop before writing the design/protocol manuscript through issue
-#48.
+section boundaries, and visual governance through issue #45. Issue #77 now
+materializes the complete paper-shaped skeleton; issue #39 is the next writing
+issue after that gate, followed by the design/protocol manuscript sequence
+through issue #48 and the launch sequence in issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -131,7 +132,7 @@ precedents, and candidate contribution claims across the research streams.
 id: ANT-Q02B
 status: active
 depends_on: [ANT-Q01A, ANT-Q02]
-issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48"]
+issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77"]
 -->
 
 #### ANT-Q02B — Write and continuously publish the first paper
@@ -152,6 +153,8 @@ feasibility-revision gate when qualifying evidence exists.
 - [x] Modeling, adaptive-control, real-time audio, and provenance architecture
   claims have primary-source or normative-standard anchors.
 - [x] The novelty matrix supports the frozen thesis and contribution boundary.
+- [x] The complete section, appendix, bibliography-surface, and visual skeleton
+  is governed by stable placeholder identities before section writing resumes.
 - [ ] Every canonical manuscript section completes its evidence-specific issue.
 - [ ] Figures and tables have governed source, captions, alt text, placement,
   and placeholder/final status.
@@ -299,8 +302,8 @@ bounded interpretations from the frozen protocol.
 <!-- roadmap-step
 id: ANT-Q07
 status: planned
-depends_on: [ANT-Q01A, ANT-Q02]
-issues: ["egohygiene/antidote#5"]
+depends_on: [ANT-Q01A, ANT-Q02B]
+issues: ["egohygiene/antidote#5", "egohygiene/antidote#70", "egohygiene/antidote#71", "egohygiene/antidote#72", "egohygiene/antidote#73", "egohygiene/antidote#74"]
 -->
 
 #### ANT-Q07 — Author the first magazine edition
@@ -319,6 +322,29 @@ as scientific source of truth.
 - [ ] Native builds produce verified web, digital, and print projections.
 - [ ] Accessibility, print, provenance, and checksum checks pass.
 - [ ] The planned hub slot becomes available atomically with real artifacts.
+
+<!-- roadmap-step
+id: ANT-Q08
+status: planned
+depends_on: [ANT-Q02B, ANT-Q07]
+issues: ["egohygiene/antidote#69", "egohygiene/antidote#75", "egohygiene/antidote#76"]
+-->
+
+#### ANT-Q08 — Release and launch the paper and magazine together
+
+**State:** `planned`
+
+**Outcome:** One reproducible versioned bundle, archival record, publication
+hub, and human-approved LinkedIn post expose the paper and magazine together
+without strengthening the paper's claims.
+
+**Exit criteria:**
+
+- [ ] Paper and magazine artifacts share one approved release identity.
+- [ ] Release assets, manifests, provenance, checksums, and public routes agree.
+- [ ] Archival metadata and DOI, if approved, resolve to the reviewed version.
+- [ ] LinkedIn copy and imagery receive explicit author approval.
+- [ ] Post-launch verification records the public revision and working links.
 
 ### Roadmap-to-issue handoff
 
@@ -344,8 +370,9 @@ frozen and run.
 
 ## Evidence and uncertainty
 
-- **Observed:** Research and publication foundations are present; no runtime
-  prototype or formal study data exists.
+- **Observed:** Research and publication foundations plus the mock local session
+  slice through issue #16 are present; no real model study or formal human
+  outcome data exists.
 - **Decided for this roadmap:** The next executable milestone is a mock local
   contract slice, not a clinical or adaptive system.
 - **Proposed:** Architecture work may generate issues after this corpus is

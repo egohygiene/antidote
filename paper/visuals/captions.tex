@@ -13,7 +13,7 @@
   {Evidence classes used by Antidote and the promotion boundary between them.}
   {A five-row table defines source, hypothesis, observation, interpretation, and claim as separate evidence classes.}
   {Rows define what each evidence class means, what artifact may support it, and which promotion step requires review. The table emphasizes that generated explanations are not sources, observations are not automatically claims, and no layer silently promotes itself to the next.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {research-landscape-comparator}
@@ -27,88 +27,109 @@
   {Proposed separation of the uncertainty-aware deliberative loop from the deterministic generate-ahead audio loop.}
   {A two-lane architecture separates slow human-correctable planning from fast deterministic audio generation, buffering, playback, and safety controls.}
   {The upper lane contains consented context, a correctable state belief, semantic intent, receding-horizon planning, and explicit human approval. The lower lane contains immutable generation specifications, the model adapter, verification, a generate-ahead buffer, renderer, exposure, and stop controls. Provenance links cross the lanes without granting the worker adaptation authority.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {consent-scoped-context-projection}
   {Consent-scoped transformation from private context to the bounded projection available to planning and generation.}
   {Private context passes through an explicit consent gate into a minimized working projection; excluded fields never reach the model worker.}
   {A private context store sits outside the generation boundary. A consent grant selects purpose, fields, retention, and expiration, producing a reviewable working projection. Only that minimized projection can inform planning and the immutable generation specification. Excluded, revoked, or expired fields terminate at a blocked path rather than reaching the worker.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {semantic-intent-mixer}
   {Typed semantic mixins combine into a reviewable conditioning state under explicit human authority.}
   {User-controlled semantic mixin cards with bounds, neutral positions, exclusions, and priorities feed a reviewable conditioning state.}
   {Several semantic mixin cards expose a human-readable purpose, current value, neutral position, bounds, exclusions, priority, and adapter mapping. The cards combine into a versioned conditioning state that the person may inspect, correct, accept, or reject before generation. No arrow claims that a mixin directly causes an emotion.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {predictive-horizon-buffer}
   {Receding-horizon planning and buffer deadlines under an uncertain, person-correctable state belief.}
   {A timeline separates state estimation and short-horizon planning from queued generation segments and the playback deadline.}
   {A time axis shows the current playback cursor, verified buffered audio, generation in progress, and a future planning horizon. Above it, an uncertain state belief is corrected by the person before the next plan is accepted. Deadline and safety margins are marked independently from claims about subjective response or model quality.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {semantic-waveform-continuity}
   {Independent semantic-conditioning and waveform-continuity checks across adjacent generated segments.}
   {Two aligned lanes compare semantic control interpolation above with acoustic overlap and continuity measurements below.}
   {The upper lane shows two versioned conditioning states and a bounded semantic transition. The lower lane shows adjacent audio segments, overlap or crossfade regions, waveform and feature measurements, and acceptance or fallback decisions. Separate indicators make clear that semantic similarity does not guarantee smooth audio and smooth audio does not prove intended meaning.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {provenance-privacy-export}
   {Provenance-linked session records pass through consent, redaction, privacy review, and explicit export approval.}
   {Session events and artifact hashes enter an export gate that checks consent, redaction, privacy review, and human approval before release.}
   {Versioned session events, model identity, control records, exposure, response, and artifact hashes feed an export candidate. Four gates check purpose and consent scope, excluded or sensitive fields, privacy review, and explicit human approval. Any failed or unresolved gate stops export and records the reason; a successful path emits a manifest and checksums without asserting truth or safety.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {feasibility-protocol-timeline}
   {Prospective feasibility-session sequence with approval, exposure, response, aftereffect, and stopping boundaries.}
   {A session timeline runs from consent and baseline through plan approval, generation, verification, playback, response, aftereffect, and review.}
   {The timeline begins with protocol version and consent confirmation, then baseline and desired trajectory, plan review, generation and artifact verification, explicit playback approval, exposure with stop controls, immediate separated response measures, a declared aftereffect interval, and later review. Safety events may interrupt the sequence at every exposure-related stage.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {measurement-evidence-matrix}
   {Prospective measurement layers, instruments, timing, provenance, and permitted interpretation.}
   {A matrix separates intended controls, acoustic realization, exposure, perceived expression, felt response, usefulness or harm, and aftereffect.}
   {Each row names one non-interchangeable measurement layer. Columns identify the planned instrument, collection timing, provenance fields, missing-data treatment, and the strongest permitted interpretation. Clinical outcome is shown as outside the initial feasibility protocol rather than inferred from the other rows.}
-  {planned}
+  {placeholder}
+
+\AntidoteDeclareVisualText
+  {moment-journey-equation-map}
+  {Conceptual map of the person-moment representation, journey decision, continuity, and cautious update equations.}
+  {A future formula map will connect the moment state, candidate audio journey, bounded decision rule, continuity measures, and later advisory update.}
+  {The planned diagram will distinguish definitions from conceptual hypotheses, operational quantities, estimators, and future empirical models. Arrows will show which variables feed candidate selection, realization checks, response measurement, and a later approved model update without presenting any equation as a validated law of affect.}
+  {placeholder}
+
+\AntidoteDeclareVisualText
+  {mvp-session-evidence-interface}
+  {Reserved interface evidence view; the current frame contains no implementation screenshot or runtime observation.}
+  {A provisional frame reserves space for a future reviewed MVP interface composite and contains no actual application screenshot.}
+  {If qualifying implementation evidence exists, the final composite may show consent scope, editable journey review, generation progress, deliberate playback, stop authority, and separate response fields. It must hide private context, use clearly identified synthetic or approved records, name the source revision, and avoid implying that interface presence establishes benefit.}
+  {placeholder}
+
+\AntidoteDeclareVisualText
+  {technical-benchmark-panels}
+  {Reserved technical benchmark panels; the current frame contains no measured values or results.}
+  {A provisional frame reserves space for future latency, continuity, control-adherence, interruption, and recovery plots and contains no data.}
+  {The final figure may contain provenance-linked distributions or timelines for generation latency, verified buffer margin, measured acoustic adherence, boundary continuity, cancellation, recovery, and failure outcomes. Every panel must name denominators, hardware and model revisions, missing runs, and uncertainty; synthetic fixtures cannot be presented as observed performance.}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {control-adherence-results}
   {Requested controls and measured acoustic realization for qualifying technical runs.}
   {A future results table will compare requested semantic and acoustic controls with measured realization and uncertainty for each qualifying run.}
   {Rows will represent provenance-linked technical runs only after the relevant implementation and protocol gates pass. Columns will preserve requested controls, measured features, adherence estimates, uncertainty, verification status, and failure notes. The table is not authorized to contain synthetic fixtures as human evidence or to imply subjective benefit.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {exposure-response-completeness}
   {Completeness of exposure, immediate response, usefulness or harm, and later aftereffect records.}
   {A future completeness table distinguishes generated, played, completed, interrupted, declined, missing, immediate-response, and later-aftereffect records.}
   {Each provenance-linked trial will occupy one row only after qualifying collection. Columns will distinguish artifact generation from playback exposure, completion from interruption, and each immediate or delayed response measure from missing or declined data. Counts and denominators will remain visible so unavailable observations cannot be interpreted as neutral responses.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {outcomes-accounting}
   {Prespecified accounting for null, negative, missing, interrupted, mismatched, and adverse observations.}
   {A future table gives separate rows to null, negative, missing, interrupted, mismatched, burdensome, distressing, and adverse observations.}
   {The table will preserve each prespecified non-positive category with its definition, denominator, provenance link, and reporting rule. It will not collapse intense emotion into success, treat missing data as neutral, or hide safety-related interruptions. The current manifest contains no fabricated observations or result values.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {risk-mitigation-status}
   {Design and study risks paired with mitigation status, residual uncertainty, and blocking gates.}
   {A risk register table pairs validity, safety, privacy, consent, model, and researcher-role risks with mitigation and unresolved status.}
   {Rows will identify each material risk, affected evidence layer, current status, mitigation, residual risk, accountable owner, and the gate that blocks collection or publication when unresolved. Proposed controls will remain visibly different from implemented checks, and provenance or local execution will not be presented as proof of privacy or safety.}
-  {planned}
+  {placeholder}
 
 \AntidoteDeclareVisualText
   {protocol-evidence-audit}
   {Protocol, artifact, evidence-class, exclusion, and claim-promotion audit for qualifying observations.}
   {A future appendix table links protocol versions, artifacts, hashes, evidence classes, exclusions, and claim decisions for each qualifying record.}
   {The audit table will identify the protocol version, source revision, model and analysis versions, artifact checksum, exposure record, response instruments, evidence class, exclusions, and claim-ledger disposition for each qualifying observation set. It will remain supporting evidence rather than a replacement for methods or results interpretation.}
-  {planned}
+  {placeholder}

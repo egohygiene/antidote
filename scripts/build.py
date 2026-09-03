@@ -27,7 +27,7 @@ MANIFEST = ROOT / "beacon-template.toml"
 INPUT_PATTERN = re.compile(r"\\input\{([^}]+)\}")
 VISUAL_PATTERN = re.compile(r"\\Antidote(Figure|Table)\{([^{}]+)\}")
 PLACEHOLDER_PATTERN = re.compile(
-    r"\\AntidotePlaceholder\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL
+    r"\\AntidotePlaceholder\{([^{}]+)\}\{([^{}]+)\}\{([^{}]+)\}", re.DOTALL
 )
 
 
@@ -220,6 +220,31 @@ def web_source(work: Path, entrypoint: str, visuals: dict[str, dict]) -> str:
         raise RuntimeError("paper entrypoint must contain a document environment")
     body = body_match.group(1)
     body = body.replace(r"\BeaconMakeTitle", "")
+    references = VISUAL_PATTERN.findall(body)
+
+    def visual_list(kind: str, title: str) -> str:
+        """Render a web-native visual list in manuscript reference order."""
+        items: list[str] = []
+        for declared_kind, slug in references:
+            record = visuals.get(slug)
+            if record is None or record.get("kind") != kind:
+                continue
+            if declared_kind.lower() != kind:
+                raise RuntimeError(f"visual reference kind mismatch: {slug}")
+            number = len(items) + 1
+            items.append(
+                rf"\item \textbf{{{kind.title()} {number}.}} "
+                + tex_escape(record["caption"])
+            )
+        return (
+            rf"\section*{{{title}}}\label{{front:{kind}-list}}"
+            + "\n\\begin{enumerate}\n"
+            + "\n".join(items)
+            + "\n\\end{enumerate}\n"
+        )
+
+    body = body.replace(r"\listoffigures", visual_list("figure", "List of Figures"))
+    body = body.replace(r"\listoftables", visual_list("table", "List of Tables"))
     body = re.sub(r"\\bibliographystyle\{[^}]+\}", "", body)
     body = re.sub(r"\\bibliography\{[^}]+\}", "", body)
     body = re.sub(r"\\appendix\s*", lambda _: r"\section*{Appendix}", body)
@@ -259,11 +284,11 @@ def web_source(work: Path, entrypoint: str, visuals: dict[str, dict]) -> str:
         )
 
     def placeholder(match: re.Match[str]) -> str:
-        label, content = (part.strip() for part in match.groups())
+        placeholder_id, title, content = (part.strip() for part in match.groups())
         return (
             "\n\\begin{quote}\n"
-            f"\\textbf{{Draft placeholder -- not evidence ({label}).}} "
-            f"{content}\n"
+            f"\\textbf{{Draft placeholder -- not evidence ({placeholder_id}).}} "
+            f"\\textbf{{Planned content:}} {title}. {content}\n"
             "\\end{quote}\n"
         )
 

@@ -60,24 +60,30 @@ research object while keeping learnability, usefulness, and benefit open.
 
 - [x] [#36 — Prove the continuous paper preview and Pages review loop](https://github.com/egohygiene/antidote/issues/36) — [preview and live-review contract](../docs/paper-preview.md)
 - [x] [#45 — Establish the scientific figure and table system](https://github.com/egohygiene/antidote/issues/45) — [governed visual manifest](visuals/manifest.json)
+- [x] [#77 — Assemble the complete paper and visual skeleton](https://github.com/egohygiene/antidote/issues/77) — [governed paper skeleton](skeleton.json)
 
 Issue #36 is an early canary. It proves that every later section merge can be
 inspected locally, in pull-request artifacts, and at the custom-domain web/PDF
 routes. Issue #45 creates the figure manifest, caption registry, accessibility
 contract, source specifications, and placeholder/final distinction before
-visual production begins.
+visual production begins. Issue #77 then materializes the whole document shape:
+all canonical subsections and appendices, table and figure lists, page budgets,
+stable content-placeholder identities, the additional-reading shelf, and
+realistically sized visual frames. These frames are layout instruments, never
+results or evidence.
 
-The issue #45 manifest allocates all fifteen visual concepts already promised
-by the frozen manuscript contract plus the roadmap's consent-scoped context
-projection. One introductory loop is active and visibly provisional; every
-other asset remains planned and inactive until its owning evidence and writing
-issue authorizes production.
+The visual manifest allocates every visual promised by the frozen manuscript
+contract plus the consent-scoped projection, an equation map, an MVP interface
+evidence slot, and contingent technical benchmark panels. All occupy their
+intended locations so pagination is reviewable. Provisional visuals remain
+visibly labeled, and the screenshot and benchmark slots cannot become evidence
+without qualifying implementation or structured observations.
 
 ### Wave P3 — Core manuscript
 
 - [x] [#37 — Write the Introduction and research-gap section](https://github.com/egohygiene/antidote/issues/37)
 - [x] [#38 — Write Related Work and the evidence synthesis](https://github.com/egohygiene/antidote/issues/38)
-- [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39)
+- [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39) — next after #77
 - [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40)
 - [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41)
 
@@ -110,6 +116,20 @@ completed body supports.
 This gate reconciles source records, bibliography, claim ledger, manuscript,
 figures, metadata, build outputs, Pages routes, checksums, and the roadmap.
 
+### Wave P7 — Magazine, release, and public launch
+
+- [#70 — Freeze the magazine editorial contract and page map](https://github.com/egohygiene/antidote/issues/70)
+- [#71 — Author the evidence-traceable magazine source](https://github.com/egohygiene/antidote/issues/71)
+- [#72 — Design the magazine and produce editorial visuals](https://github.com/egohygiene/antidote/issues/72)
+- [#73 — Build and verify magazine web, digital, and print artifacts](https://github.com/egohygiene/antidote/issues/73)
+- [#74 — Publish the magazine and activate the hub slot](https://github.com/egohygiene/antidote/issues/74)
+- [#75 — Create the versioned paper and magazine release](https://github.com/egohygiene/antidote/issues/75)
+- [#76 — Prepare and publish the approved LinkedIn launch](https://github.com/egohygiene/antidote/issues/76)
+
+[Issue #69](https://github.com/egohygiene/antidote/issues/69) is the
+cross-surface launch epic. The paper remains the scientific source of truth;
+the magazine and LinkedIn post cannot introduce claims absent from it.
+
 ## Canonical section ownership
 
 | Canonical source | Primary issue | Completion boundary |
@@ -123,7 +143,7 @@ figures, metadata, build outputs, Pages routes, checksums, and the roadmap.
 | `07-limitations-and-ethics.tex` | #43 | Validity, risk, privacy, consent, and ethics status |
 | `08-availability-and-contributions.tex` | #44 | Verified access, reproducibility, roles, funding, and conflicts |
 | `09-conclusion.tex` | #47 | Whole-paper answer constrained by results status and limitations |
-| `appendix.tex` | #40, #41 | Frozen protocol checklist and supporting analysis material |
+| `appendix.tex` | #39, #40, #41, #43, #44, #47, #77 | Notation, equation status, protocol, claim audit, consent, provenance, research shelf, and migration record |
 | title, abstract, and coordinator | #47 | Whole-paper synthesis and consistency |
 
 ## Initial visual inventory
@@ -152,10 +172,12 @@ label.
 A future contributor or conversation should:
 
 1. read `AGENTS.md`, `EPISTEMOLOGY.md`, and this roadmap;
-2. inspect issue #31 and the next unclosed, dependency-ready child;
+2. inspect `paper/skeleton.json`, issue #31, issue #69, and the next unclosed,
+   dependency-ready child;
 3. read that issue's required source records and its entry in
    `paper/manuscript-contract.json`;
-4. change the canonical LaTeX or governed research source only;
+4. replace only the placeholder owned by that issue, update its skeleton state,
+   and change the canonical LaTeX or governed research source only;
 5. update the claim ledger, bibliography, figure registry, or architecture
    document when the issue changes their owned boundary;
 6. run `make check-all` and

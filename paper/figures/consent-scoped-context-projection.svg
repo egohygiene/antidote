@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="900" viewBox="0 0 1600 900" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
+  <title id="title">PROVISIONAL Consent-scoped context projection</title>
+  <desc id="description">Visible layout placeholder for Consent-scoped context projection. It contains no results and asserts no mechanism.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102C33"/>
+      <stop offset="1" stop-color="#1D4A45"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 21px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
+      .title { font: 700 40px sans-serif; fill: #FFFFFF; }
+      .purpose { font: 400 24px sans-serif; fill: #D9E7E1; }
+      .card-head { font: 700 15px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
+      .card-copy { font: 600 14px sans-serif; fill: #172D31; }
+      .card-note { font: 400 12px sans-serif; fill: #536A68; }
+      .footer { font: 700 16px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+    </style>
+  </defs>
+  <rect width="1600" height="900" fill="url(#background)"/>
+  <circle cx="1456" cy="162" r="126" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
+  <circle cx="1456" cy="162" r="81" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
+  <text x="128" y="108" class="kicker">ANT-FIG-003 · PROVISIONAL VISUAL FRAME</text>
+  <text x="128" y="153" class="title">
+    <tspan x="128" dy="50">Consent-scoped context projection</tspan>
+  </text>
+  <text x="128" y="306" class="purpose">
+    <tspan x="128" dy="40">Make the authority boundary between private context, an</tspan>
+    <tspan x="128" dy="40">explicit consent grant, the approved working projection, and</tspan>
+    <tspan x="128" dy="40">model-facing input inspectable.</tspan>
+  </text>
+  <rect x="128" y="549" width="408" height="198" rx="16" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="161" y="600" class="card-head">PLANNED STRUCTURE</text>
+  <text x="161" y="634" class="card-copy">
+    <tspan x="161" dy="20">Composition and</tspan>
+    <tspan x="161" dy="20">relationships</tspan>
+  </text>
+  <text x="161" y="688" class="card-note">
+    <tspan x="161" dy="17">Final geometry is owned by issue</tspan>
+    <tspan x="161" dy="17">#46.</tspan>
+  </text>
+  <rect x="592" y="549" width="408" height="198" rx="16" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="625" y="600" class="card-head">EVIDENCE BOUNDARY</text>
+  <text x="625" y="634" class="card-copy">
+    <tspan x="625" dy="20">No results or mechanisms</tspan>
+    <tspan x="625" dy="20">asserted</tspan>
+  </text>
+  <text x="625" y="688" class="card-note">
+    <tspan x="625" dy="17">Caption and claim IDs remain</tspan>
+    <tspan x="625" dy="17">authoritative.</tspan>
+  </text>
+  <rect x="1056" y="549" width="408" height="198" rx="16" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="1089" y="600" class="card-head">REPLACEMENT GATE</text>
+  <text x="1089" y="634" class="card-copy">
+    <tspan x="1089" dy="20">Deterministic, reviewable</tspan>
+    <tspan x="1089" dy="20">asset</tspan>
+  </text>
+  <text x="1089" y="688" class="card-note">
+    <tspan x="1089" dy="17">Must pass accessibility and print</tspan>
+    <tspan x="1089" dy="17">review.</tspan>
+  </text>
+  <text x="128" y="837" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+</svg>

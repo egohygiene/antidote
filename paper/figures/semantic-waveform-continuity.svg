@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="950" viewBox="0 0 1800 950" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
+  <title id="title">PROVISIONAL Semantic and waveform continuity renderer</title>
+  <desc id="description">Visible layout placeholder for Semantic and waveform continuity renderer. It contains no results and asserts no mechanism.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102C33"/>
+      <stop offset="1" stop-color="#1D4A45"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 22px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
+      .title { font: 700 43px sans-serif; fill: #FFFFFF; }
+      .purpose { font: 400 26px sans-serif; fill: #D9E7E1; }
+      .card-head { font: 700 16px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
+      .card-copy { font: 600 15px sans-serif; fill: #172D31; }
+      .card-note { font: 400 12px sans-serif; fill: #536A68; }
+      .footer { font: 700 17px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+    </style>
+  </defs>
+  <rect width="1800" height="950" fill="url(#background)"/>
+  <circle cx="1638" cy="171" r="133" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
+  <circle cx="1638" cy="171" r="86" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
+  <text x="144" y="114" class="kicker">ANT-FIG-006 · PROVISIONAL VISUAL FRAME</text>
+  <text x="144" y="162" class="title">
+    <tspan x="144" dy="52">Semantic and waveform continuity renderer</tspan>
+  </text>
+  <text x="144" y="323" class="purpose">
+    <tspan x="144" dy="43">Keep semantic conditioning continuity and measured waveform</tspan>
+    <tspan x="144" dy="43">continuity as independent checks rather than treating prompt</tspan>
+    <tspan x="144" dy="43">interpolation as proof of smooth audio.</tspan>
+  </text>
+  <rect x="144" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="181" y="634" class="card-head">PLANNED STRUCTURE</text>
+  <text x="181" y="669" class="card-copy">
+    <tspan x="181" dy="21">Composition and</tspan>
+    <tspan x="181" dy="21">relationships</tspan>
+  </text>
+  <text x="181" y="726" class="card-note">
+    <tspan x="181" dy="18">Final geometry is owned by issue</tspan>
+    <tspan x="181" dy="18">#46.</tspan>
+  </text>
+  <rect x="666" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="703" y="634" class="card-head">EVIDENCE BOUNDARY</text>
+  <text x="703" y="669" class="card-copy">
+    <tspan x="703" dy="21">No results or mechanisms</tspan>
+    <tspan x="703" dy="21">asserted</tspan>
+  </text>
+  <text x="703" y="726" class="card-note">
+    <tspan x="703" dy="18">Caption and claim IDs remain</tspan>
+    <tspan x="703" dy="18">authoritative.</tspan>
+  </text>
+  <rect x="1188" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="1225" y="634" class="card-head">REPLACEMENT GATE</text>
+  <text x="1225" y="669" class="card-copy">
+    <tspan x="1225" dy="21">Deterministic, reviewable</tspan>
+    <tspan x="1225" dy="21">asset</tspan>
+  </text>
+  <text x="1225" y="726" class="card-note">
+    <tspan x="1225" dy="18">Must pass accessibility and print</tspan>
+    <tspan x="1225" dy="18">review.</tspan>
+  </text>
+  <text x="144" y="884" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+</svg>
