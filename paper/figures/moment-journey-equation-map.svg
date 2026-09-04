@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
+  <title id="title">PROVISIONAL Moment, journey, and decision equation map</title>
+  <desc id="description">Visible layout placeholder for Moment, journey, and decision equation map. It contains no results and asserts no mechanism.</desc>
+  <defs>
+    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#102C33"/>
+      <stop offset="1" stop-color="#1D4A45"/>
+    </linearGradient>
+    <style>
+      .kicker { font: 700 25px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
+      .title { font: 700 50px sans-serif; fill: #FFFFFF; }
+      .purpose { font: 400 30px sans-serif; fill: #D9E7E1; }
+      .card-head { font: 700 19px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
+      .card-copy { font: 600 18px sans-serif; fill: #172D31; }
+      .card-note { font: 400 14px sans-serif; fill: #536A68; }
+      .footer { font: 700 20px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+    </style>
+  </defs>
+  <rect width="1800" height="1100" fill="url(#background)"/>
+  <circle cx="1638" cy="198" r="154" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
+  <circle cx="1638" cy="198" r="99" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
+  <text x="144" y="132" class="kicker">ANT-FIG-009 · PROVISIONAL VISUAL FRAME</text>
+  <text x="144" y="187" class="title">
+    <tspan x="144" dy="60">Moment, journey, and decision equation map</tspan>
+  </text>
+  <text x="144" y="374" class="purpose">
+    <tspan x="144" dy="50">Connect the person-moment state, predicted response,</tspan>
+    <tspan x="144" dy="50">constrained journey selection, continuity, and longitudinal</tspan>
+    <tspan x="144" dy="50">update equations while labeling their conceptual or</tspan>
+    <tspan x="144" dy="50">operational status.</tspan>
+  </text>
+  <rect x="144" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="181" y="734" class="card-head">PLANNED STRUCTURE</text>
+  <text x="181" y="775" class="card-copy">
+    <tspan x="181" dy="24">Composition and</tspan>
+    <tspan x="181" dy="24">relationships</tspan>
+  </text>
+  <text x="181" y="840" class="card-note">
+    <tspan x="181" dy="21">Final geometry is owned by issue</tspan>
+    <tspan x="181" dy="21">#46.</tspan>
+  </text>
+  <rect x="666" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="703" y="734" class="card-head">EVIDENCE BOUNDARY</text>
+  <text x="703" y="775" class="card-copy">
+    <tspan x="703" dy="24">No results or mechanisms</tspan>
+    <tspan x="703" dy="24">asserted</tspan>
+  </text>
+  <text x="703" y="840" class="card-note">
+    <tspan x="703" dy="21">Caption and claim IDs remain</tspan>
+    <tspan x="703" dy="21">authoritative.</tspan>
+  </text>
+  <rect x="1188" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
+  <text x="1225" y="734" class="card-head">REPLACEMENT GATE</text>
+  <text x="1225" y="775" class="card-copy">
+    <tspan x="1225" dy="24">Deterministic, reviewable</tspan>
+    <tspan x="1225" dy="24">asset</tspan>
+  </text>
+  <text x="1225" y="840" class="card-note">
+    <tspan x="1225" dy="21">Must pass accessibility and print</tspan>
+    <tspan x="1225" dy="21">review.</tspan>
+  </text>
+  <text x="144" y="1023" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+</svg>

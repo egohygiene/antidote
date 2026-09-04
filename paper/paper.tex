@@ -4,14 +4,15 @@
 \input{beacon-generated-metadata.tex}
 \input{paper/visuals/captions.tex}
 
-% Layout-only filler used while the manuscript remains a draft. The build
-% checker rejects these blocks if the project advances to submission-ready or
-% published status.
-\newcommand{\AntidotePlaceholder}[2]{%
+% Layout-only filler used while the manuscript remains a draft. Stable IDs and
+% ownership live in paper/skeleton.json. The build checker rejects active
+% blocks if the project advances to submission-ready or published status.
+\newcommand{\AntidotePlaceholder}[3]{%
   \par\medskip
   \noindent\colorbox{BeaconSurface}{\parbox{\dimexpr\linewidth-2\fboxsep\relax}{%
     \sffamily\small\textbf{Draft placeholder -- not evidence (#1).}\par
-    \color{BeaconMuted}#2}}
+    \textbf{Planned content:} #2\par
+    \color{BeaconMuted}#3}}
   \par\medskip
 }
 
@@ -19,6 +20,10 @@
 \BeaconMakeTitle
 \clearpage
 \tableofcontents
+\clearpage
+\listoffigures
+\clearpage
+\listoftables
 \clearpage
 
 \input{paper/sections/manuscript}

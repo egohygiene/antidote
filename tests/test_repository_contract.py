@@ -103,13 +103,15 @@ class RepositoryContractTests(unittest.TestCase):
             for path in sorted((ROOT / "paper" / "sections").glob("*.tex"))
         )
         placeholders = re.findall(
-            r"\\AntidotePlaceholder\{[^{}]+\}\{([^{}]+)\}",
+            r"\\AntidotePlaceholder\{(ANT-PH-[A-Z]{3}-\d{3})\}"
+            r"\{[^{}]+\}\{([^{}]+)\}",
             section_text,
             flags=re.DOTALL,
         )
         self.assertGreater(len(placeholders), 0)
         self.assertEqual(section_text.count("Lorem ipsum"), len(placeholders))
-        self.assertTrue(all("Lorem ipsum" in body for body in placeholders))
+        self.assertEqual(len({placeholder_id for placeholder_id, _ in placeholders}), len(placeholders))
+        self.assertTrue(all("Lorem ipsum" in body for _, body in placeholders))
 
     def test_architecture_corpus_has_unique_antidote_documents(self) -> None:
         """Every governed architecture node must exist with a stable unique ID."""

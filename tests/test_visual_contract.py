@@ -55,18 +55,15 @@ class VisualContractTests(unittest.TestCase):
         result = VISUALS.validate_visual_system(ROOT)
         self.assertEqual(result["errors"], [])
         manifest = result["manifest"]
-        self.assertEqual(len(manifest["visuals"]), 16)
+        self.assertEqual(len(manifest["visuals"]), 19)
         self.assertEqual(
             {visual["id"] for visual in result["active"]},
-            {"ANT-FIG-001", "ANT-TBL-002"},
+            {visual["id"] for visual in manifest["visuals"]},
         )
-        self.assertEqual(
-            {visual["id"]: visual["state"] for visual in result["active"]},
-            {
-                "ANT-FIG-001": "placeholder",
-                "ANT-TBL-002": "draft",
-            },
-        )
+        states = {visual["id"]: visual["state"] for visual in result["active"]}
+        self.assertEqual(states["ANT-TBL-002"], "draft")
+        self.assertEqual(set(states.values()), {"placeholder", "draft"})
+        self.assertEqual(list(states.values()).count("placeholder"), 18)
         self.assertEqual(
             {visual["kind"] for visual in manifest["visuals"]},
             {"figure", "table"},
@@ -118,6 +115,24 @@ class VisualContractTests(unittest.TestCase):
             )
             result = VISUALS.validate_visual_system(root)
             self.assertTrue(any("orphaned" in error for error in result["errors"]))
+
+    def test_generated_placeholder_drift_is_rejected(self) -> None:
+        """Generated layout frames cannot silently diverge from the manifest."""
+        with tempfile.TemporaryDirectory(prefix="antidote-visual-") as temporary:
+            root = self.fixture(temporary)
+            asset = root / "paper" / "figures" / "holistic-two-rate-architecture.svg"
+            asset.write_text(
+                asset.read_text(encoding="utf-8").replace(
+                    "LAYOUT ONLY", "UNTRACKED CHANGE", 1
+                ),
+                encoding="utf-8",
+            )
+            result = VISUALS.validate_visual_system(root)
+            self.assertIn(
+                "generated skeleton visual is stale: "
+                "paper/figures/holistic-two-rate-architecture.svg",
+                result["errors"],
+            )
 
     def test_placeholder_cannot_enter_submission_ready_output(self) -> None:
         """Visible draft state must block stronger publication stages."""

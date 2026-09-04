@@ -21,7 +21,9 @@ from urllib.parse import urlparse
 
 import tomllib
 
+from check_placeholders import validate_placeholder_system
 from check_visuals import validate_visual_system
+from generate_research_shelf import render_shelf
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_SECTIONS = (
@@ -48,13 +50,18 @@ REQUIRED_TOC_SECTIONS = (
     "Acknowledgements",
     "Contributor statement",
     "Conclusion",
+    "Notation and symbol glossary",
+    "Conceptual and operational equation classification",
     "Working protocol checklist",
+    "Claim and evidence classification index",
+    "Consent and context-projection record",
+    "Provenance and reproducibility checklist",
+    "Further reading and research shelf",
     "Migration provenance",
 )
 ALLOWED_THEMES = {"neutral", "egohygiene"}
 ALLOWED_STAGES = {"draft", "submission-ready", "published"}
 PLACEHOLDER = re.compile(r"\b(?:TODO|TBD|FIXME|REPLACE ME)\b", re.IGNORECASE)
-ANTIDOTE_PLACEHOLDER = re.compile(r"\\AntidotePlaceholder\{", re.IGNORECASE)
 INPUT = re.compile(r"\\input\{([^}]+)\}")
 URL = re.compile(r"https?://[^\s<>{}\[\]\\\"']+")
 REQUIRED_SECTION_ANCHORS = {
@@ -70,7 +77,13 @@ REQUIRED_SECTION_ANCHORS = {
     "sec:acknowledgements",
     "sec:contributor-statement",
     "sec:conclusion",
+    "app:notation-glossary",
+    "app:equation-classification",
     "app:working-protocol-checklist",
+    "app:claim-evidence-index",
+    "app:consent-context-record",
+    "app:provenance-reproducibility",
+    "app:research-shelf",
     "app:migration-provenance",
 }
 
@@ -138,7 +151,7 @@ def pdf_checks(path: Path, errors: list[str]) -> None:
             ["pdffonts", str(path)], check=True, capture_output=True, text=True
         ).stdout
         toc_text = subprocess.run(
-            ["pdftotext", "-f", "2", "-l", "6", "-layout", str(path), "-"],
+            ["pdftotext", "-f", "2", "-l", "12", "-layout", str(path), "-"],
             check=True,
             capture_output=True,
             text=True,
@@ -160,6 +173,9 @@ def pdf_checks(path: Path, errors: list[str]) -> None:
             errors.append(f"paper.pdf is missing internal destination: {destination}")
     if not re.search(r"(?m)^Contents\s*$", toc_text):
         errors.append("paper.pdf must contain a rendered table of contents")
+    for front_matter in ("List of Figures", "List of Tables"):
+        if front_matter not in toc_text:
+            errors.append(f"paper.pdf must contain a rendered {front_matter.lower()}")
     for section in REQUIRED_TOC_SECTIONS:
         if not re.search(
             rf"(?m)^\s*(?:\d+|[A-Z])\s+{re.escape(section)}.*\d+\s*$",
@@ -332,6 +348,22 @@ def main() -> int:
     errors.extend(str(error) for error in visual_result["errors"])
     warnings.extend(str(warning) for warning in visual_result["warnings"])
     active_visuals = visual_result["active"]
+    placeholder_result = validate_placeholder_system(
+        project, paper_stage=str(paper.get("stage", "draft"))
+    )
+    errors.extend(str(error) for error in placeholder_result["errors"])
+    warnings.extend(str(warning) for warning in placeholder_result["warnings"])
+    active_placeholders = placeholder_result["active"]
+
+    research_shelf = project / "paper" / "research-shelf.tex"
+    try:
+        expected_shelf = render_shelf(project)
+        if not research_shelf.is_file():
+            errors.append("generated additional-reading shelf is missing")
+        elif research_shelf.read_text(encoding="utf-8") != expected_shelf:
+            errors.append("generated additional-reading shelf is stale")
+    except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"additional-reading shelf cannot be validated: {error}")
 
     for section in REQUIRED_SECTIONS:
         if not re.search(
@@ -370,6 +402,8 @@ def main() -> int:
             'aria-label="Table of contents"',
             'name="source-revision"',
             "<figcaption",
+            'id="front:figure-list"',
+            'id="front:table-list"',
         ):
             if marker not in html:
                 errors.append(f"web accessibility marker is missing: {marker}")
@@ -378,6 +412,18 @@ def main() -> int:
                 errors.append("web image is missing non-empty alternative text")
         if "Figure description:" not in html:
             errors.append("web figure description is missing")
+        for kind in ("figure", "table"):
+            expected_count = sum(
+                1 for visual in active_visuals if visual["kind"] == kind
+            )
+            listed_count = len(
+                re.findall(rf"<strong>{kind.title()} \d+\.</strong>", html)
+            )
+            if listed_count != expected_count:
+                errors.append(
+                    f"web {kind} list has {listed_count} entries; "
+                    f"expected {expected_count}"
+                )
         identifiers = set(re.findall(r'\sid="([^"]+)"', html))
         missing_anchors = sorted(REQUIRED_SECTION_ANCHORS - identifiers)
         if missing_anchors:
@@ -447,7 +493,7 @@ def main() -> int:
                 (project / "beacon-project.toml").read_text(encoding="utf-8")
             )
         )
-        + len(ANTIDOTE_PLACEHOLDER.findall(tex))
+        + len(active_placeholders)
     )
     if paper.get("stage") in {"submission-ready", "published"} and placeholders:
         errors.append(f"submission-ready source contains {placeholders} placeholder(s)")
