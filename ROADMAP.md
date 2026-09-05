@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.6.0
+version: 0.7.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-09-03
+updated: 2026-09-05
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -32,10 +32,10 @@ repository: egohygiene/antidote
 visibility: public
 publication: central
 route: /roadmap/antidote/
-updated: 2026-09-03
+updated: 2026-09-05
 -->
 
-## 2026-09-03 execution snapshot
+## 2026-09-05 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap
 > handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
@@ -45,10 +45,11 @@ updated: 2026-09-03
 
 **Current gate:** The MVP implementation sequence is deliberately paused after
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
-section boundaries, and visual governance through issue #45. Issue #77 now
-materializes the complete paper-shaped skeleton; issue #39 is the next writing
-issue after that gate, followed by the design/protocol manuscript sequence
-through issue #48 and the launch sequence in issue #69.
+section boundaries, and visual governance through issue #45. Issue #77
+materialized the complete paper-shaped skeleton, and issue #39 now formalizes
+the mathematical model and System Design. Issue #40 is the next writing slice,
+followed by the design/protocol manuscript sequence through issue #48 and the
+launch sequence in issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -155,6 +156,9 @@ feasibility-revision gate when qualifying evidence exists.
 - [x] The novelty matrix supports the frozen thesis and contribution boundary.
 - [x] The complete section, appendix, bibliography-surface, and visual skeleton
   is governed by stable placeholder identities before section writing resumes.
+- [x] System Design formalizes the person--moment model, typed semantic mixer,
+  two-rate architecture, planning horizon, continuity, response, and provenance
+  with centralized equation classes and implementation states.
 - [ ] Every canonical manuscript section completes its evidence-specific issue.
 - [ ] Figures and tables have governed source, captions, alt text, placement,
   and placeholder/final status.

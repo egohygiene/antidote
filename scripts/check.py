@@ -23,6 +23,7 @@ import tomllib
 
 from check_placeholders import validate_placeholder_system
 from check_visuals import validate_visual_system
+from generate_equation_appendix import expected_outputs, validate_registry
 from generate_research_shelf import render_shelf
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -364,6 +365,16 @@ def main() -> int:
             errors.append("generated additional-reading shelf is stale")
     except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors.append(f"additional-reading shelf cannot be validated: {error}")
+
+    try:
+        errors.extend(validate_registry(project))
+        for equation_path, expected_equation_text in expected_outputs(project).items():
+            if not equation_path.is_file():
+                errors.append(f"generated equation appendix is missing: {equation_path}")
+            elif equation_path.read_text(encoding="utf-8") != expected_equation_text:
+                errors.append(f"generated equation appendix is stale: {equation_path}")
+    except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"equation registry cannot be validated: {error}")
 
     for section in REQUIRED_SECTIONS:
         if not re.search(

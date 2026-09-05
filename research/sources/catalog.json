@@ -603,12 +603,13 @@
       "working_title": "Context as an environment: programmatic context management for long-horizon agents",
       "domains": ["context-memory", "architecture"],
       "source_class": "preprint",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "architecture",
       "priority": 12,
       "persistent_id": "arXiv:2608.21690",
       "canonical_url": "https://arxiv.org/abs/2608.21690",
-      "bibliography_key": "lin2026scroll"
+      "bibliography_key": "lin2026scroll",
+      "source_record": "research/sources/scroll-2608.21690.md"
     },
     {
       "id": "who-ai-health-2021",
@@ -690,12 +691,13 @@
       "working_title": "Local-first software: you own your data, in spite of the cloud",
       "domains": ["architecture", "privacy"],
       "source_class": "system",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "architecture",
       "priority": 20,
       "persistent_id": "doi:10.1145/3359591.3359737",
       "canonical_url": "https://doi.org/10.1145/3359591.3359737",
-      "bibliography_key": "kleppmann2019localfirst"
+      "bibliography_key": "kleppmann2019localfirst",
+      "source_record": "research/sources/local-first-3359591.3359737.md"
     },
     {
       "id": "tauri-2",
@@ -815,7 +817,7 @@
       "working_title": "Web Audio API 1.1",
       "domains": ["architecture", "generative-audio"],
       "source_class": "standard",
-      "status": "promoted",
+      "status": "cited",
       "owner": "architecture",
       "priority": 9,
       "canonical_url": "https://www.w3.org/TR/webaudio-1.1/",
@@ -862,23 +864,25 @@
       "working_title": "PROV-DM: the PROV data model",
       "domains": ["provenance", "architecture"],
       "source_class": "standard",
-      "status": "background-only",
+      "status": "cited",
       "owner": "architecture",
       "priority": 20,
       "canonical_url": "https://www.w3.org/TR/prov-dm/",
-      "bibliography_key": "moreau2013prov"
+      "bibliography_key": "moreau2013prov",
+      "source_record": "research/sources/w3c-prov-dm.md"
     },
     {
       "id": "workflow-run-ro-crate-0309210",
       "working_title": "Recording provenance of workflow runs with RO-Crate",
       "domains": ["provenance", "architecture"],
       "source_class": "system",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "architecture",
       "priority": 20,
       "persistent_id": "doi:10.1371/journal.pone.0309210",
       "canonical_url": "https://doi.org/10.1371/journal.pone.0309210",
-      "bibliography_key": "leo2024rocrate"
+      "bibliography_key": "leo2024rocrate",
+      "source_record": "research/sources/workflow-run-ro-crate-0309210.md"
     },
     {
       "id": "model-cards-3287596",
@@ -927,7 +931,7 @@
       "working_title": "Digital health tools for the passive monitoring of depression: a systematic review of methods",
       "domains": ["psychophysiology", "measurement", "adaptive-control"],
       "source_class": "synthesis",
-      "status": "promoted",
+      "status": "cited",
       "owner": "evidence",
       "priority": 7,
       "persistent_id": "doi:10.1038/s41746-021-00548-8",
@@ -940,12 +944,13 @@
       "working_title": "Emotion recognition systems with electrodermal activity: from affective science to affective computing",
       "domains": ["psychophysiology", "measurement", "adaptive-control"],
       "source_class": "synthesis",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "evidence",
       "priority": 8,
       "persistent_id": "doi:10.1016/j.neucom.2025.130831",
       "canonical_url": "https://doi.org/10.1016/j.neucom.2025.130831",
-      "bibliography_key": "damelio2025eda"
+      "bibliography_key": "damelio2025eda",
+      "source_record": "research/sources/damelio-eda-130831.md"
     },
     {
       "id": "jain-intent-3359614",
@@ -1003,24 +1008,26 @@
       "working_title": "Soliciting human-in-the-loop user feedback for interactive machine learning reduces user trust and impressions of model accuracy",
       "domains": ["human-authority", "adaptive-control"],
       "source_class": "primary",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "evidence",
       "priority": 12,
       "persistent_id": "doi:10.1609/hcomp.v8i1.7464",
       "canonical_url": "https://doi.org/10.1609/hcomp.v8i1.7464",
-      "bibliography_key": "honeycutt2020feedback"
+      "bibliography_key": "honeycutt2020feedback",
+      "source_record": "research/sources/honeycutt-feedback-7464.md"
     },
     {
       "id": "wang-streaming-2606.24307",
       "working_title": "Real-time interactive music generation via data-free streaming consistency distillation",
       "domains": ["generative-audio", "adaptive-control", "architecture"],
       "source_class": "preprint",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "architecture",
       "priority": 9,
       "persistent_id": "arXiv:2606.24307v1",
       "canonical_url": "https://arxiv.org/abs/2606.24307",
-      "bibliography_key": "wang2026streaming"
+      "bibliography_key": "wang2026streaming",
+      "source_record": "research/sources/wang-streaming-2606.24307.md"
     },
     {
       "id": "hutchings-adaptive-music-2921979",
@@ -1040,11 +1047,12 @@
       "working_title": "EBU R 128: loudness normalisation and permitted maximum level of audio signals",
       "domains": ["generative-audio", "measurement", "acoustic-continuity"],
       "source_class": "standard",
-      "status": "background-only",
+      "status": "cited",
       "owner": "architecture",
       "priority": 15,
       "canonical_url": "https://tech.ebu.ch/publications/r128",
-      "bibliography_key": "ebu2023r128"
+      "bibliography_key": "ebu2023r128",
+      "source_record": "research/sources/ebu-r128-2023.md"
     },
     {
       "id": "aws-event-sourcing",

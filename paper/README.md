@@ -40,6 +40,22 @@ Current source states and promotion requirements live in
 `python3 scripts/check_sources.py` to verify stable identities, duplicate
 identifiers, source-record coverage, and the cited-versus-shelf distinction.
 
+## Mathematical model
+
+[`equations/registry.json`](equations/registry.json) is the canonical index for
+System Design equations and notation. Every equation has a stable ID, LaTeX
+label, epistemic class, implementation state, plain-language meaning, and
+prohibited inference. The registry generates the reader-facing notation and
+equation-classification appendices:
+
+```sh
+python3 scripts/generate_equation_appendix.py --write
+python3 scripts/generate_equation_appendix.py
+```
+
+Update the System Design source, registry, generated appendix projections, and
+affected visual specification together whenever a formula changes.
+
 ## Scientific visuals
 
 [`visuals/manifest.json`](visuals/manifest.json) governs the complete figure
@@ -69,7 +85,7 @@ python3 scripts/check_visuals.py
 | --- | --- | --- |
 | `01-introduction.tex` | Inspectability problem, staged research questions, and bounded contribution preview | Frozen thesis and novelty boundary |
 | `02-related-work.tex` | Primary-source synthesis and comparison | Governed source and comparator records |
-| `03-system-design.tex` | Components, interfaces, state, and provenance | Distinguish proposed design from implemented system |
+| `03-system-design.tex` | Person--moment model, semantic mixer, two-rate architecture, timing, continuity, response, and provenance | Distinguish definitions, proposals, estimates, future models, and implemented behavior |
 | `04-methods.tex` | Feasibility protocol and analysis plan | Freeze before formal collection |
 | `05-results.tex` | Auditable observations and analyses | No results until the frozen protocol runs |
 | `06-discussion.tex` | Evidence-proportional interpretation | Separate feasibility, efficacy, and mechanism |
@@ -123,6 +139,7 @@ Run the full source and artifact checks before opening a pull request:
 ```sh
 python3 scripts/check_sources.py
 python3 scripts/check_placeholders.py
+python3 scripts/generate_equation_appendix.py
 python3 scripts/generate_research_shelf.py
 python3 scripts/generate_skeleton_visuals.py
 python3 scripts/check_visuals.py
