@@ -137,7 +137,7 @@ class RepositoryContractTests(unittest.TestCase):
     def test_contract_schemas_are_valid_json_with_unique_ids(self) -> None:
         """Cross-language schemas must be parseable and independently identified."""
         paths = sorted((ROOT / "contracts" / "schemas").glob("*.schema.json"))
-        self.assertEqual(len(paths), 7)
+        self.assertEqual(len(paths), 11)
         identifiers: set[str] = set()
         for path in paths:
             schema = json.loads(path.read_text(encoding="utf-8"))
@@ -159,7 +159,7 @@ class RepositoryContractTests(unittest.TestCase):
             (ROOT / "contracts" / "manifest.json").read_text(encoding="utf-8")
         )
         self.assertEqual(manifest.get("schema_version"), "1.0.0")
-        self.assertEqual(len(manifest.get("contracts", [])), 7)
+        self.assertEqual(len(manifest.get("contracts", [])), 11)
         names = [item["name"] for item in manifest["contracts"]]
         self.assertEqual(names, sorted(names))
         self.assertEqual(len(names), len(set(names)))
@@ -172,6 +172,63 @@ class RepositoryContractTests(unittest.TestCase):
             cwd=ROOT,
             check=True,
         )
+
+    def test_prospective_h1_contracts_preserve_scope_and_missingness(self) -> None:
+        """V2 must not couple consent actions or hide absent scalar responses."""
+        consent = json.loads(
+            (ROOT / "contracts" / "schemas" / "consent-grant.v2.schema.json").read_text(
+                encoding="utf-8"
+            )
+        )
+        actions = consent["properties"]["actions"]
+        self.assertEqual(actions["minItems"], 1)
+        self.assertEqual(actions["maxItems"], 1)
+        self.assertIn("analyze", actions["items"]["enum"])
+        self.assertIn("play", actions["items"]["enum"])
+
+        response = json.loads(
+            (
+                ROOT
+                / "contracts"
+                / "schemas"
+                / "response-observation.v2.schema.json"
+            ).read_text(encoding="utf-8")
+        )
+        required = set(response["required"])
+        self.assertTrue(
+            {
+                "instrument_version",
+                "revision",
+                "supersedes_response_id",
+                "correction_reason",
+                "stopped_early",
+                "later_aftereffect_requested",
+                "allow_personal_model_update",
+            }
+            <= required
+        )
+        self.assertIs(response["properties"]["allow_personal_model_update"]["const"], False)
+        state = response["$defs"]["responseState"]
+        self.assertEqual(state["type"], "object")
+        self.assertEqual(
+            set(state["required"]),
+            {"description", "valence", "arousal", "intensity"},
+        )
+        fields = response["$defs"]["missingnessEntry"]["properties"]["field"][
+            "enum"
+        ]
+        conditions = response["allOf"][1:]
+        self.assertEqual(len(conditions), len(fields))
+        for field, condition in zip(fields, conditions, strict=True):
+            missingness = condition["then"]["properties"]["missingness"]
+            self.assertEqual(
+                missingness["contains"]["properties"]["field"]["const"], field
+            )
+            self.assertEqual(missingness["minContains"], 1)
+            self.assertEqual(missingness["maxContains"], 1)
+            present = condition["else"]["properties"]["missingness"]
+            self.assertEqual(present["minContains"], 0)
+            self.assertEqual(present["maxContains"], 0)
 
     def test_shared_contract_fixtures_are_synthetic_and_complete(self) -> None:
         """Every contract must expose shared positive and negative test evidence."""
@@ -199,7 +256,7 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertNotIn("@", serialized)
         self.assertNotIn("http://", serialized)
         self.assertNotIn("https://", serialized)
-        self.assertGreaterEqual(serialized.count("synthetic"), 7)
+        self.assertGreaterEqual(serialized.count("synthetic"), 11)
 
     def test_mvp_scaffold_preserves_authority_boundaries(self) -> None:
         """Workspace bootstrap must not couple the core or overgrant Tauri."""

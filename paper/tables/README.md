@@ -10,7 +10,7 @@ Most planned table filenames remain visibly provisional until their owning
 evidence and manuscript issues authorize content. The three Results tables are
 a deliberate exception: `scripts/generate_results_reporting.py` projects a
 governed empty state from
-`experiments/reporting/results-reporting-v1.json`. Those drafts identify future
+`experiments/reporting/results-reporting-v1.1.json`. Those drafts identify future
 source records, protocol versions, analyses, and blocked states while containing
 no result values. A value-bearing revision must be generated from a qualifying
 result package and reviewed through the claim ledger; values are never entered

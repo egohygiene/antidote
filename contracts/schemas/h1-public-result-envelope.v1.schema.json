@@ -1,0 +1,659 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:h1-public-result-envelope:v1",
+  "title": "Antidote H1 Public Result Envelope v1",
+  "$comment": "Privacy-reviewed aggregate-only H1 envelope. The closed property set intentionally omits participant, session, consent-grant, source-event, row, private-path, raw/free-text-response, per-record-hash, pseudonym, and participant-event timestamp fields. Document and aggregate-artifact hashes are allowed only for public provenance; they are not row commitments.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "package_id",
+    "package_kind",
+    "source_record_id",
+    "stage",
+    "evidence_class",
+    "source_revision",
+    "protocol",
+    "analysis_plan",
+    "evidence_set",
+    "complete_accounting",
+    "public_aggregates",
+    "artifacts",
+    "privacy_review",
+    "promotion"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-(?:FLOW|RESPONSE|SAFETY|AUDIT|PHYSIOLOGY)-[A-Z0-9-]+$" },
+    "package_kind": {
+      "type": "string",
+      "enum": ["flow", "response", "safety", "audit", "physiology"]
+    },
+    "source_record_id": {
+      "type": "string",
+      "enum": [
+        "ANT-REC-H1-FLOW-001",
+        "ANT-REC-H1-RESPONSE-001",
+        "ANT-REC-H1-SAFETY-001",
+        "ANT-REC-H1-AUDIT-001",
+        "ANT-REC-H1-PHYS-001"
+      ]
+    },
+    "stage": { "const": "H1" },
+    "evidence_class": {
+      "type": "string",
+      "enum": ["human-aggregate", "unavailable"]
+    },
+    "source_revision": { "type": "string", "pattern": "^[a-f0-9]{40}$" },
+    "protocol": { "$ref": "#/$defs/versionedArtifact" },
+    "analysis_plan": { "$ref": "#/$defs/analysisPlan" },
+    "evidence_set": { "$ref": "#/$defs/evidenceSet" },
+    "complete_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "public_aggregates": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/numericSummary" }
+    },
+    "artifacts": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/publicArtifact" }
+    },
+    "privacy_review": { "$ref": "#/$defs/privacyReview" },
+    "promotion": { "$ref": "#/$defs/promotion" },
+    "assignment_commitment": { "$ref": "#/$defs/assignmentCommitment" },
+    "flow_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "interruptions": { "$ref": "#/$defs/aggregateAccounting" },
+    "withdrawals": { "$ref": "#/$defs/aggregateAccounting" },
+    "failures": { "$ref": "#/$defs/aggregateAccounting" },
+    "exclusions": { "$ref": "#/$defs/aggregateAccounting" },
+    "missingness": { "$ref": "#/$defs/aggregateAccounting" },
+    "instrument_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+    "response_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "correction_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "immediate_windows": { "$ref": "#/$defs/aggregateAccounting" },
+    "later_windows": { "$ref": "#/$defs/aggregateAccounting" },
+    "analysis_outputs": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/numericSummary" }
+    },
+    "safety_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "mismatches": { "$ref": "#/$defs/aggregateAccounting" },
+    "unwanted_intensity": { "$ref": "#/$defs/aggregateAccounting" },
+    "burden": { "$ref": "#/$defs/aggregateAccounting" },
+    "harm": { "$ref": "#/$defs/aggregateAccounting" },
+    "stops": { "$ref": "#/$defs/aggregateAccounting" },
+    "adverse_events": { "$ref": "#/$defs/aggregateAccounting" },
+    "review_dispositions": { "$ref": "#/$defs/aggregateAccounting" },
+    "package_references": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "type": "string", "pattern": "^ANT-PKG-H1-[A-Z0-9-]+$" }
+    },
+    "cross_package_reconciliation": { "$ref": "#/$defs/aggregateAccounting" },
+    "provenance_linkability": { "$ref": "#/$defs/aggregateAccounting" },
+    "deviations": { "$ref": "#/$defs/aggregateAccounting" },
+    "progression_criteria": { "$ref": "#/$defs/aggregateAccounting" },
+    "progression_disposition": {
+      "type": "string",
+      "enum": ["stop", "revise", "proceed", "not-applicable"]
+    },
+    "protocol_amendment": { "$ref": "#/$defs/amendmentStatus" },
+    "consent_scope": { "$ref": "#/$defs/aggregateAccounting" },
+    "device_manifest": { "$ref": "#/$defs/aggregateAccounting" },
+    "clock_sync": { "$ref": "#/$defs/aggregateAccounting" },
+    "signal_quality": { "$ref": "#/$defs/aggregateAccounting" },
+    "artifact_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+    "dropout": { "$ref": "#/$defs/aggregateAccounting" }
+  },
+  "$defs": {
+    "versionedArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "sha256"],
+      "properties": {
+        "id": { "const": "ANT-PROT-FEAS-001" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "analysisPlan": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["id", "version", "sha256", "deviation_log_sha256"],
+      "properties": {
+        "id": { "const": "ANT-REPORT-RESULTS-001" },
+        "version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "deviation_log_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "evidenceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_set_id", "commitment_profile", "evidence_set_sha256", "record_count"],
+      "properties": {
+        "evidence_set_id": { "type": "string", "pattern": "^ANT-ESET-H1-[A-Z0-9-]+$" },
+        "commitment_profile": { "const": "antidote-evidence-set-commitment/v1" },
+        "evidence_set_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "record_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "sharedH1EvidenceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_set_id", "commitment_profile", "evidence_set_sha256", "record_count"],
+      "properties": {
+        "evidence_set_id": { "const": "ANT-ESET-H1-001" },
+        "commitment_profile": { "const": "antidote-evidence-set-commitment/v1" },
+        "evidence_set_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "record_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "physiologyEvidenceSet": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["evidence_set_id", "commitment_profile", "evidence_set_sha256", "record_count"],
+      "properties": {
+        "evidence_set_id": { "type": "string", "pattern": "^ANT-ESET-H1-PHYS-[A-Z0-9-]+$" },
+        "commitment_profile": { "const": "antidote-evidence-set-commitment/v1" },
+        "evidence_set_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "record_count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "aggregateAccounting": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "denominator", "categories"],
+      "properties": {
+        "status": {
+          "type": "string",
+          "enum": ["available", "unavailable", "not-applicable"]
+        },
+        "denominator": { "type": "integer", "minimum": 0 },
+        "categories": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/categoryCount" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "available" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "denominator": { "type": "integer", "minimum": 1 },
+              "categories": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "$ref": "#/$defs/categoryCount" }
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": { "enum": ["unavailable", "not-applicable"] }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "denominator": { "const": 0 },
+              "categories": { "type": "array", "maxItems": 0 }
+            }
+          }
+        }
+      ]
+    },
+    "categoryCount": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["category", "count"],
+      "properties": {
+        "category": {
+          "type": "string",
+          "pattern": "^(?:ANT-COUNT-[A-Z0-9-]+|present|not_prompted|declined|missed_window|technical_failure|interrupted|not_applicable)$"
+        },
+        "count": { "type": "integer", "minimum": 0 }
+      }
+    },
+    "numericSummary": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["metric_id", "analysis_id", "status", "denominator", "estimate", "lower", "upper", "unit"],
+      "properties": {
+        "metric_id": { "type": "string", "pattern": "^(?:ANT-METRIC-[A-Z0-9-]+|ANT-RES-H1-[A-Z0-9-]+)$" },
+        "analysis_id": { "type": "string", "pattern": "^ANT-AN-H1-[A-Z0-9-]+$" },
+        "status": { "type": "string", "enum": ["available", "unavailable", "not-applicable"] },
+        "denominator": { "type": "integer", "minimum": 0 },
+        "estimate": { "type": ["number", "null"] },
+        "lower": { "type": ["number", "null"] },
+        "upper": { "type": ["number", "null"] },
+        "unit": {
+          "type": "string",
+          "enum": [
+            "count",
+            "proportion",
+            "seconds",
+            "milliseconds",
+            "score",
+            "correlation",
+            "dimensionless",
+            "bpm",
+            "lufs",
+            "dbtp"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "available" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "denominator": { "type": "integer", "minimum": 1 },
+              "estimate": { "type": "number" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": { "enum": ["unavailable", "not-applicable"] }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "denominator": { "const": 0 },
+              "estimate": { "const": null },
+              "lower": { "const": null },
+              "upper": { "const": null }
+            }
+          }
+        }
+      ]
+    },
+    "publicArtifact": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["artifact_id", "kind", "media_type", "sha256"],
+      "properties": {
+        "artifact_id": { "type": "string", "pattern": "^ANT-ART-PUBLIC-[A-Z0-9-]+$" },
+        "kind": { "type": "string", "enum": ["aggregate-table", "aggregate-figure", "aggregate-audit-table"] },
+        "media_type": { "type": "string", "enum": ["application/json", "text/csv", "image/svg+xml", "image/png"] },
+        "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+      }
+    },
+    "privacyReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "scope"],
+      "properties": {
+        "status": { "type": "string", "enum": ["pending", "passed", "failed", "not-applicable"] },
+        "scope": { "const": "aggregate-only-public-envelope" }
+      }
+    },
+    "promotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "claim_ids"],
+      "properties": {
+        "disposition": { "type": "string", "enum": ["blocked", "not-promoted", "eligible-for-review"] },
+        "claim_ids": {
+          "type": "array",
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^ANT-[A-Z]+-[0-9]{3}$" }
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "disposition": { "const": "eligible-for-review" } },
+            "required": ["disposition"]
+          },
+          "then": {
+            "properties": {
+              "claim_ids": {
+                "type": "array",
+                "minItems": 1,
+                "uniqueItems": true,
+                "items": { "type": "string", "pattern": "^ANT-[A-Z]+-[0-9]{3}$" }
+              }
+            }
+          }
+        }
+      ]
+    },
+    "reviewEligiblePromotion": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["disposition", "claim_ids"],
+      "properties": {
+        "disposition": { "const": "eligible-for-review" },
+        "claim_ids": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string", "pattern": "^ANT-[A-Z]+-[0-9]{3}$" }
+        }
+      }
+    },
+    "passedPrivacyReview": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "scope"],
+      "properties": {
+        "status": { "const": "passed" },
+        "scope": { "const": "aggregate-only-public-envelope" }
+      }
+    },
+    "assignmentCommitment": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "schedule_count", "commitment_sha256"],
+      "properties": {
+        "status": { "type": "string", "enum": ["committed", "not-activated", "unavailable"] },
+        "schedule_count": { "type": "integer", "minimum": 0 },
+        "commitment_sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "committed" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "schedule_count": { "const": 720 },
+              "commitment_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": {
+              "status": { "enum": ["not-activated", "unavailable"] }
+            },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "schedule_count": { "const": 0 },
+              "commitment_sha256": { "const": null }
+            }
+          }
+        }
+      ]
+    },
+    "amendmentStatus": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["status", "amendment_id", "sha256"],
+      "properties": {
+        "status": { "type": "string", "enum": ["absent", "approved"] },
+        "amendment_id": { "type": ["string", "null"], "pattern": "^ANT-[A-Z0-9-]+$" },
+        "sha256": { "type": ["string", "null"], "pattern": "^[a-f0-9]{64}$" }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "status": { "const": "absent" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "amendment_id": { "const": null },
+              "sha256": { "const": null }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "status": { "const": "approved" } },
+            "required": ["status"]
+          },
+          "then": {
+            "properties": {
+              "amendment_id": { "type": "string", "pattern": "^ANT-[A-Z0-9-]+$" },
+              "sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" }
+            }
+          }
+        }
+      ]
+    }
+  },
+  "allOf": [
+    {
+      "if": {
+        "properties": { "package_kind": { "const": "flow" } },
+        "required": ["package_kind"]
+      },
+      "then": {
+        "required": ["assignment_commitment", "flow_accounting", "interruptions", "withdrawals", "failures", "exclusions", "missingness"],
+        "properties": {
+          "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-FLOW-[A-Z0-9-]+$" },
+          "source_record_id": { "const": "ANT-REC-H1-FLOW-001" },
+          "evidence_set": { "$ref": "#/$defs/sharedH1EvidenceSet" },
+          "assignment_commitment": { "$ref": "#/$defs/assignmentCommitment" },
+          "flow_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+          "interruptions": { "$ref": "#/$defs/aggregateAccounting" },
+          "withdrawals": { "$ref": "#/$defs/aggregateAccounting" },
+          "failures": { "$ref": "#/$defs/aggregateAccounting" },
+          "exclusions": { "$ref": "#/$defs/aggregateAccounting" },
+          "missingness": { "$ref": "#/$defs/aggregateAccounting" }
+        }
+      },
+      "else": {
+        "properties": {
+          "assignment_commitment": false,
+          "flow_accounting": false,
+          "withdrawals": false,
+          "failures": false,
+          "exclusions": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "package_kind": { "const": "response" } },
+        "required": ["package_kind"]
+      },
+      "then": {
+        "required": ["instrument_version", "response_accounting", "correction_accounting", "immediate_windows", "later_windows", "missingness", "analysis_outputs"],
+        "properties": {
+          "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-RESPONSE-[A-Z0-9-]+$" },
+          "source_record_id": { "const": "ANT-REC-H1-RESPONSE-001" },
+          "evidence_set": { "$ref": "#/$defs/sharedH1EvidenceSet" },
+          "instrument_version": { "type": "string", "pattern": "^[0-9]+\\.[0-9]+\\.[0-9]+$" },
+          "response_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+          "correction_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+          "immediate_windows": { "$ref": "#/$defs/aggregateAccounting" },
+          "later_windows": { "$ref": "#/$defs/aggregateAccounting" },
+          "missingness": { "$ref": "#/$defs/aggregateAccounting" },
+          "analysis_outputs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/numericSummary" }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "instrument_version": false,
+          "response_accounting": false,
+          "correction_accounting": false,
+          "immediate_windows": false,
+          "later_windows": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "package_kind": { "const": "safety" } },
+        "required": ["package_kind"]
+      },
+      "then": {
+        "required": ["safety_accounting", "mismatches", "unwanted_intensity", "burden", "harm", "stops", "interruptions", "adverse_events", "review_dispositions", "missingness"],
+        "properties": {
+          "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-SAFETY-[A-Z0-9-]+$" },
+          "source_record_id": { "const": "ANT-REC-H1-SAFETY-001" },
+          "evidence_set": { "$ref": "#/$defs/sharedH1EvidenceSet" },
+          "safety_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+          "mismatches": { "$ref": "#/$defs/aggregateAccounting" },
+          "unwanted_intensity": { "$ref": "#/$defs/aggregateAccounting" },
+          "burden": { "$ref": "#/$defs/aggregateAccounting" },
+          "harm": { "$ref": "#/$defs/aggregateAccounting" },
+          "stops": { "$ref": "#/$defs/aggregateAccounting" },
+          "interruptions": { "$ref": "#/$defs/aggregateAccounting" },
+          "adverse_events": { "$ref": "#/$defs/aggregateAccounting" },
+          "review_dispositions": { "$ref": "#/$defs/aggregateAccounting" },
+          "missingness": { "$ref": "#/$defs/aggregateAccounting" }
+        }
+      },
+      "else": {
+        "properties": {
+          "safety_accounting": false,
+          "mismatches": false,
+          "unwanted_intensity": false,
+          "burden": false,
+          "harm": false,
+          "stops": false,
+          "adverse_events": false,
+          "review_dispositions": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "package_kind": { "const": "audit" } },
+        "required": ["package_kind"]
+      },
+      "then": {
+        "required": ["package_references", "cross_package_reconciliation", "provenance_linkability", "deviations", "progression_criteria", "progression_disposition"],
+        "properties": {
+          "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-AUDIT-[A-Z0-9-]+$" },
+          "source_record_id": { "const": "ANT-REC-H1-AUDIT-001" },
+          "evidence_set": { "$ref": "#/$defs/sharedH1EvidenceSet" },
+          "package_references": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "type": "string", "pattern": "^ANT-PKG-H1-[A-Z0-9-]+$" }
+          },
+          "cross_package_reconciliation": { "$ref": "#/$defs/aggregateAccounting" },
+          "provenance_linkability": { "$ref": "#/$defs/aggregateAccounting" },
+          "deviations": { "$ref": "#/$defs/aggregateAccounting" },
+          "progression_criteria": { "$ref": "#/$defs/aggregateAccounting" },
+          "progression_disposition": {
+            "type": "string",
+            "enum": ["stop", "revise", "proceed", "not-applicable"]
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "package_references": false,
+          "cross_package_reconciliation": false,
+          "provenance_linkability": false,
+          "deviations": false,
+          "progression_criteria": false,
+          "progression_disposition": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": { "package_kind": { "const": "physiology" } },
+        "required": ["package_kind"]
+      },
+      "then": {
+        "required": ["protocol_amendment", "consent_scope", "device_manifest", "clock_sync", "signal_quality", "artifact_accounting", "dropout", "missingness", "analysis_outputs"],
+        "properties": {
+          "package_id": { "type": "string", "pattern": "^ANT-PKG-H1-PHYSIOLOGY-[A-Z0-9-]+$" },
+          "source_record_id": { "const": "ANT-REC-H1-PHYS-001" },
+          "evidence_set": { "$ref": "#/$defs/physiologyEvidenceSet" },
+          "protocol_amendment": { "$ref": "#/$defs/amendmentStatus" },
+          "consent_scope": { "$ref": "#/$defs/aggregateAccounting" },
+          "device_manifest": { "$ref": "#/$defs/aggregateAccounting" },
+          "clock_sync": { "$ref": "#/$defs/aggregateAccounting" },
+          "signal_quality": { "$ref": "#/$defs/aggregateAccounting" },
+          "artifact_accounting": { "$ref": "#/$defs/aggregateAccounting" },
+          "dropout": { "$ref": "#/$defs/aggregateAccounting" },
+          "missingness": { "$ref": "#/$defs/aggregateAccounting" },
+          "analysis_outputs": {
+            "type": "array",
+            "uniqueItems": true,
+            "items": { "$ref": "#/$defs/numericSummary" }
+          }
+        }
+      },
+      "else": {
+        "properties": {
+          "protocol_amendment": false,
+          "consent_scope": false,
+          "device_manifest": false,
+          "clock_sync": false,
+          "signal_quality": false,
+          "artifact_accounting": false,
+          "dropout": false
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "promotion": { "$ref": "#/$defs/reviewEligiblePromotion" }
+        },
+        "required": ["promotion"]
+      },
+      "then": {
+        "properties": {
+          "evidence_class": { "const": "human-aggregate" },
+          "privacy_review": { "$ref": "#/$defs/passedPrivacyReview" }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "package_kind": { "enum": ["response", "physiology"] }
+        },
+        "required": ["package_kind"]
+      },
+      "else": {
+        "properties": { "analysis_outputs": false }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "package_kind": { "enum": ["flow", "safety"] }
+        },
+        "required": ["package_kind"]
+      },
+      "else": {
+        "properties": { "interruptions": false }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "package_kind": { "enum": ["flow", "response", "safety", "physiology"] }
+        },
+        "required": ["package_kind"]
+      },
+      "else": {
+        "properties": { "missingness": false }
+      }
+    }
+  ]
+}

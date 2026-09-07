@@ -1,0 +1,252 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:response-observation:v2",
+  "title": "Antidote Response Observation v2",
+  "$comment": "Prospective H1 boundary introduced by corrective audit #82. The current MVP remains on response-observation v1 and does not emit protocol-qualified H1 records.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "id",
+    "session_id",
+    "exposure_id",
+    "observed_at",
+    "window",
+    "instrument_version",
+    "revision",
+    "supersedes_response_id",
+    "correction_reason",
+    "perceived_expression",
+    "felt_state",
+    "wanted_intensity",
+    "helpfulness",
+    "resonance",
+    "mismatch",
+    "harm",
+    "surprise",
+    "interaction_burden",
+    "session_burden",
+    "ongoing_effect",
+    "aftereffect_meaning",
+    "missingness",
+    "stopped_early",
+    "later_aftereffect_requested",
+    "allow_personal_model_update"
+  ],
+  "properties": {
+    "schema_version": { "const": "2.0.0" },
+    "id": { "type": "string", "minLength": 1 },
+    "session_id": { "type": "string", "minLength": 1 },
+    "exposure_id": { "type": "string", "minLength": 1 },
+    "observed_at": { "type": "string", "format": "date-time" },
+    "window": {
+      "type": "string",
+      "enum": ["immediate", "later"]
+    },
+    "instrument_version": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "revision": { "type": "integer", "minimum": 1 },
+    "supersedes_response_id": { "type": ["string", "null"], "minLength": 1 },
+    "correction_reason": { "type": ["string", "null"], "minLength": 1, "maxLength": 2000 },
+    "perceived_expression": {
+      "$ref": "#/$defs/responseState",
+      "type": "object"
+    },
+    "felt_state": {
+      "$ref": "#/$defs/responseState",
+      "type": "object"
+    },
+    "wanted_intensity": {
+      "type": ["string", "null"],
+      "enum": ["yes", "no", "unsure", null]
+    },
+    "helpfulness": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "resonance": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "mismatch": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "harm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "surprise": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "interaction_burden": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "session_burden": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "ongoing_effect": {
+      "type": ["string", "null"],
+      "enum": ["yes", "no", "unsure", null]
+    },
+    "aftereffect_meaning": {
+      "type": ["string", "null"],
+      "minLength": 1,
+      "maxLength": 4000
+    },
+    "missingness": {
+      "type": "array",
+      "maxItems": 18,
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/missingnessEntry" }
+    },
+    "stopped_early": { "type": "boolean", "default": false },
+    "notes": { "type": "string", "maxLength": 8000 },
+    "later_aftereffect_requested": { "type": "boolean", "default": false },
+    "allow_personal_model_update": { "const": false }
+  },
+  "$defs": {
+    "responseState": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["description", "valence", "arousal", "intensity"],
+      "properties": {
+        "description": { "type": ["string", "null"], "minLength": 1, "maxLength": 4000 },
+        "valence": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "arousal": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "intensity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    },
+    "missingnessEntry": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["field", "reason"],
+      "properties": {
+        "field": {
+          "type": "string",
+          "enum": [
+            "perceived_expression.description",
+            "perceived_expression.valence",
+            "perceived_expression.arousal",
+            "perceived_expression.intensity",
+            "felt_state.description",
+            "felt_state.valence",
+            "felt_state.arousal",
+            "felt_state.intensity",
+            "wanted_intensity",
+            "helpfulness",
+            "resonance",
+            "mismatch",
+            "harm",
+            "surprise",
+            "interaction_burden",
+            "session_burden",
+            "ongoing_effect",
+            "aftereffect_meaning"
+          ]
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "not_prompted",
+            "declined",
+            "missed_window",
+            "technical_failure",
+            "interrupted",
+            "not_applicable"
+          ]
+        }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if": { "type": "object", "properties": { "revision": { "const": 1 } } },
+      "then": {
+        "type": "object",
+        "properties": {
+          "supersedes_response_id": { "type": "null" },
+          "correction_reason": { "type": "null" }
+        }
+      },
+      "else": {
+        "type": "object",
+        "properties": {
+          "supersedes_response_id": { "type": "string", "minLength": 1 },
+          "correction_reason": { "type": "string", "minLength": 1 }
+        }
+      }
+    },
+    {
+      "if": { "type": "object", "properties": { "perceived_expression": { "type": "object", "properties": { "description": { "type": "null" } }, "required": ["description"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.description" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.description" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "perceived_expression": { "type": "object", "properties": { "valence": { "type": "null" } }, "required": ["valence"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.valence" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.valence" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "perceived_expression": { "type": "object", "properties": { "arousal": { "type": "null" } }, "required": ["arousal"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.arousal" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.arousal" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "perceived_expression": { "type": "object", "properties": { "intensity": { "type": "null" } }, "required": ["intensity"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.intensity" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "perceived_expression.intensity" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "felt_state": { "type": "object", "properties": { "description": { "type": "null" } }, "required": ["description"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.description" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.description" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "felt_state": { "type": "object", "properties": { "valence": { "type": "null" } }, "required": ["valence"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.valence" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.valence" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "felt_state": { "type": "object", "properties": { "arousal": { "type": "null" } }, "required": ["arousal"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.arousal" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.arousal" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "felt_state": { "type": "object", "properties": { "intensity": { "type": "null" } }, "required": ["intensity"] } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.intensity" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "felt_state.intensity" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "wanted_intensity": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "wanted_intensity" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "wanted_intensity" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "helpfulness": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "helpfulness" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "helpfulness" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "resonance": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "resonance" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "resonance" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "mismatch": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "mismatch" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "mismatch" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "harm": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "harm" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "harm" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "surprise": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "surprise" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "surprise" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "interaction_burden": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "interaction_burden" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "interaction_burden" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "session_burden": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "session_burden" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "session_burden" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "ongoing_effect": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "ongoing_effect" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "ongoing_effect" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    },
+    {
+      "if": { "type": "object", "properties": { "aftereffect_meaning": { "type": "null" } } },
+      "then": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "aftereffect_meaning" } }, "required": ["field"] }, "minContains": 1, "maxContains": 1 } } },
+      "else": { "type": "object", "properties": { "missingness": { "type": "array", "contains": { "type": "object", "properties": { "field": { "const": "aftereffect_meaning" } }, "required": ["field"] }, "minContains": 0, "maxContains": 0 } } }
+    }
+  ]
+}

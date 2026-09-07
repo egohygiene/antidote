@@ -1,0 +1,891 @@
+{
+  "schema": "antidote.feasibility-protocol/v1",
+  "protocol_id": "ANT-PROT-FEAS-001",
+  "version": "1.1.0",
+  "status": "frozen-design-protocol",
+  "frozen_on": "2026-09-07",
+  "governed_by": "egohygiene/antidote#40",
+  "amended_by": "egohygiene/antidote#82",
+  "collection_authority": false,
+  "qualifying_records_started": false,
+  "human_collection_started": false,
+  "paper_stage": "design-protocol",
+  "supersession": {
+    "revision_class": "pre-collection-corrective",
+    "supersedes_version": "1.0.0",
+    "superseded_protocol_path": "experiments/protocols/antidote-feasibility-v1.json",
+    "superseded_lock_path": "experiments/protocols/antidote-feasibility-v1.lock.json",
+    "superseded_deviation_log_path": "experiments/protocols/antidote-feasibility-v1.deviations.json",
+    "supersedes_sha256": "dbedbcbb74303373a7e00e95ad063b025d8cf6033864f4ad5a390d15703ba403",
+    "qualifying_records_started_under_superseded_version": false,
+    "human_collection_started_under_superseded_version": false,
+    "reason": "Correct the assignment-space calculation and remove underspecification in analysis, response missingness, safety, progression, and implementation boundaries before any qualifying record exists.",
+    "history_rule": "Version 1.0.0 and its lock remain in-tree at the superseded paths and recoverable from Git history under the recorded SHA-256. No observation, exposure, or participant record is reclassified by this revision because no qualifying record and no human collection began under version 1.0.0."
+  },
+  "title": "Staged technical and within-person feasibility protocol for inspectable person-and-moment generative audio journeys",
+  "purpose": "Prospectively specify how Antidote could test technical controllability and the feasibility of collecting interpretable within-person records without testing or implying clinical efficacy.",
+  "scope": {
+    "technical_feasibility": true,
+    "within_person_record_feasibility": true,
+    "clinical_efficacy": false,
+    "diagnosis_or_treatment": false,
+    "neurological_mechanism": false,
+    "population_generalization": false,
+    "autonomous_personalization": false
+  },
+  "research_questions": [
+    {
+      "id": "RQ1",
+      "stage_ids": ["D0"],
+      "decision": "Addressed by design traceability across the governed record chain; no human outcome is required or inferred."
+    },
+    {
+      "id": "RQ2",
+      "stage_ids": ["T0", "T1"],
+      "decision": "Answerable only from complete technical denominators after the relevant implementation and execution manifests are frozen."
+    },
+    {
+      "id": "RQ3",
+      "stage_ids": ["H1"],
+      "decision": "H1 can test only whether the separated person-and-moment records can be collected, corrected, retained, and provenance-linked with auditable completeness, voluntary-response usability, burden, and safety-event accounting after every human-collection gate is independently cleared. That record-feasibility result is a prerequisite for RQ3; it cannot establish useful advisory relationships, improved targeting, efficacy, or safety."
+    }
+  ],
+  "stages": [
+    {
+      "id": "D0",
+      "name": "Design traceability",
+      "unit": "one governed transformation or authority boundary",
+      "evidence_class": "decided",
+      "current_state": "available-for-design-review",
+      "human_exposure": false,
+      "entry_gate": "The manuscript contract, equation registry, claim ledger, and protocol are synchronized.",
+      "exit_gate": "Every RQ1 construct resolves to a versioned record, equation, contract, or explicit unavailable state."
+    },
+    {
+      "id": "T0",
+      "name": "Synthetic conformance and recovery",
+      "unit": "one deterministic fixture, command trace, or injected failure path",
+      "evidence_class": "repository-observation",
+      "current_state": "executable-mock-slice",
+      "human_exposure": false,
+      "entry_gate": "The checked-in mock worker and test revision are recorded.",
+      "exit_gate": "Authority, schema, replay, interruption, recovery, hash, and provenance checks report complete denominators; promotion remains a separate claim-ledger decision."
+    },
+    {
+      "id": "T1",
+      "name": "Real-model technical qualification",
+      "unit": "one immutable generation specification and terminal generation result",
+      "evidence_class": "technical-observation",
+      "current_state": "blocked-no-real-model",
+      "human_exposure": false,
+      "entry_gate": "A model, adapter, hardware profile, analyzer set, mutation manifest, seed policy, and output-rights review are frozen before the first qualifying run.",
+      "exit_gate": "All planned and failed attempts remain accounted for and the hard authority and artifact-integrity gates pass."
+    },
+    {
+      "id": "H1",
+      "name": "Repeated-session within-person feasibility",
+      "unit": "one assigned session attempt, with exposure analyzed only when verified audio was actually played",
+      "evidence_class": "self-report-and-exposure-observation",
+      "current_state": "blocked-no-collection-authority",
+      "human_exposure": true,
+      "entry_gate": "Every item in human_collection_activation_gates is recorded as independently satisfied under a new activation record.",
+      "exit_gate": "The prespecified audit-completeness, voluntary-response-usability, completion, burden, safety-review, provenance, and analysis-accounting criteria produce a documented stop, revise, or proceed decision about a later bounded protocol; advisory usefulness remains unanswered."
+    }
+  ],
+  "technical_protocol": {
+    "qualification_manifest_required": true,
+    "seed_set": [101, 307, 911],
+    "planned_attempts": {
+      "baseline": 3,
+      "four_supported_mutation_pairs": 24,
+      "boundary_continuity": 6,
+      "failure_and_recovery": 6,
+      "total_if_all_controls_supported": 39
+    },
+    "controlled_mutations": [
+      {
+        "id": "MUT-TEMPO",
+        "factor": "tempo_bpm",
+        "low": 70,
+        "high": 100,
+        "required_measure": "measured_tempo_bpm"
+      },
+      {
+        "id": "MUT-DENSITY",
+        "factor": "density",
+        "low": 0.25,
+        "high": 0.65,
+        "required_measure": "measured_density_analyzer_output"
+      },
+      {
+        "id": "MUT-TIMBRE",
+        "factor": "timbre",
+        "low": ["warm sustained pads"],
+        "high": ["dry plucked acoustic texture"],
+        "required_measure": "versioned_timbre_analyzer_output"
+      },
+      {
+        "id": "MUT-SEMANTIC",
+        "factor": "semantic_intent",
+        "low": ["contained and restrained"],
+        "high": ["open and expansive"],
+        "required_measure": "adapter_conditioning_trace_only"
+      }
+    ],
+    "mutation_rule": "Within each pair, hold model, adapter, hardware profile, duration, output format, base plan, all other controls, and seed constant; mutate exactly one registered factor. Unsupported controls are recorded as unsupported and are not silently replaced.",
+    "boundary_suite": "Create six adjacent-segment pairs spanning low and high planned change. Preserve the accepted semantic conditions, raw segment hashes, renderer settings, and every feature-specific boundary distance.",
+    "failure_suite": [
+      "cancellation",
+      "timeout",
+      "worker_crash",
+      "partial_output",
+      "artifact_hash_mismatch",
+      "restart_and_recovery"
+    ],
+    "measures": [
+      {
+        "id": "TECH-AUTHORITY",
+        "construct": "authority and state-transition conformance",
+        "type": "boolean-per-invariant",
+        "evidence_class": "repository-observation",
+        "equation_ids": ["ANT-EQ-003", "ANT-EQ-007", "ANT-EQ-014"],
+        "source": "versioned test and event traces"
+      },
+      {
+        "id": "TECH-PROVENANCE",
+        "construct": "required provenance field completeness",
+        "type": "count-and-proportion-with-denominator",
+        "evidence_class": "technical-observation",
+        "equation_ids": ["ANT-EQ-007", "ANT-EQ-014"],
+        "source": "generation, artifact, exposure, and response records"
+      },
+      {
+        "id": "TECH-LATENCY",
+        "construct": "component latency and verified buffer margin",
+        "type": "seconds",
+        "evidence_class": "technical-observation",
+        "equation_ids": ["ANT-EQ-010"],
+        "source": "monotonic host timestamps"
+      },
+      {
+        "id": "TECH-ADHERENCE",
+        "construct": "requested versus measured control realization",
+        "type": "feature-specific distance-or-classification",
+        "evidence_class": "model-estimated-and-technical-observation",
+        "equation_ids": ["ANT-EQ-007", "ANT-EQ-012"],
+        "source": "immutable generation specification and versioned feature report"
+      },
+      {
+        "id": "TECH-CONTINUITY",
+        "construct": "semantic and measured acoustic boundary distance",
+        "type": "dimensionless-component-and-aggregate-distances",
+        "evidence_class": "technical-observation",
+        "equation_ids": ["ANT-EQ-011", "ANT-EQ-012", "ANT-EQ-013"],
+        "source": "accepted stage records, analyzer outputs, and renderer trace"
+      },
+      {
+        "id": "TECH-TERMINAL",
+        "construct": "generation and failure terminal state",
+        "type": "categorical-with-latency",
+        "evidence_class": "technical-observation",
+        "equation_ids": ["ANT-EQ-010"],
+        "source": "generation-result contract"
+      }
+    ],
+    "hard_gates": [
+      "No invalid or unapproved context, plan, generation, playback, retention, export, or update transition succeeds.",
+      "Every artifact offered for playback matches its declared content hash, format, and bounded path.",
+      "Every requested stop, cancellation, timeout, or safety halt reaches a recorded terminal state without automatic continuation.",
+      "No unsupported control or missed deadline is reclassified as success.",
+      "No failed, partial, unplayed, or synthetic artifact enters a human-response denominator."
+    ],
+    "performance_threshold_policy": "Hardware- and adapter-specific time, buffer, and analyzer thresholds must be frozen in the T1 qualification manifest before T1 runs. This protocol does not invent universal latency, adherence, perceptual-continuity, or safety thresholds."
+  },
+  "human_protocol": {
+    "design": "prospective single-participant, six-block, three-condition repeated-session feasibility series",
+    "interpretation": "A randomized blocked within-person comparison of record and interaction feasibility, not a blinded treatment trial, a population estimate, or a test of advisory usefulness.",
+    "implementation_boundary": {
+      "current_desktop_mvp_is_h1_instrument": false,
+      "current_desktop_mvp_records_are_h1_eligible": false,
+      "current_desktop_contract_generation": "v1 runtime payloads",
+      "h1_response_contract": "contracts/schemas/response-observation.v2.schema.json",
+      "h1_consent_contract": "contracts/schemas/consent-grant.v2.schema.json",
+      "blocking_implementations": [
+        "protocol-timed baseline, reveal, playback, immediate-response, later-response, and review workflow",
+        "scope-specific consent grant, withdrawal, expiry, and fail-closed enforcement for H1",
+        "field-level response missingness, optional descriptions, wanted-intensity uncertainty, aftereffect, and append-only correction lineage",
+        "assignment commitment and fixed H1 seed enforcement",
+        "minimum-data private research export plus separately minimized public audit envelope",
+        "participant-facing response instrument, accessibility path, and independently reviewed safety workflow"
+      ],
+      "activation_rule": "A future implementation may become the H1 instrument only after every blocking implementation is verified against this protocol and every human-collection activation gate remains independently reviewable. Repository fixtures and ordinary desktop interactions remain ineligible."
+    },
+    "planned_completed_exposures": 18,
+    "blocks": 6,
+    "conditions_per_block": 3,
+    "maximum_scheduled_attempts": 24,
+    "audio_duration_seconds": 480,
+    "minimum_between_exposures_hours": 48,
+    "maximum_exposures_per_seven_days": 3,
+    "later_aftereffect_window_hours": {
+      "target": 24,
+      "minimum": 18,
+      "maximum": 30
+    },
+    "conditions": [
+      {
+        "id": "G",
+        "name": "generic generation",
+        "uses_current_state": false,
+        "uses_desired_transition": false,
+        "uses_personal_context": false,
+        "uses_personal_semantics": false,
+        "plan_editing": false,
+        "instruction": "Create an eight-minute instrumental ambient listening piece with no lyrics, sudden transients, or intentionally intense effects."
+      },
+      {
+        "id": "S",
+        "name": "structured non-personalized journey",
+        "uses_current_state": true,
+        "uses_desired_transition": true,
+        "uses_personal_context": false,
+        "uses_personal_semantics": false,
+        "plan_editing": false,
+        "instruction": "Use the selected current-state and desired-transition categories with one frozen meet-hold-transition-integrate template; do not use free-text history, personal descriptors, or prior-session mappings."
+      },
+      {
+        "id": "P",
+        "name": "negotiated personal semantic journey",
+        "uses_current_state": true,
+        "uses_desired_transition": true,
+        "uses_personal_context": true,
+        "uses_personal_semantics": true,
+        "plan_editing": true,
+        "instruction": "Use only the explicitly approved working projection, person-authored semantic mixins, inclusions, exclusions, and accepted journey-plan revision."
+      }
+    ],
+    "condition_bundle_boundary": "G, S, and P are visibly different intervention-and-interface bundles. They jointly vary context fields, desired-transition use, personal semantic content, plan visibility, and editing; P also includes a negotiated approval interaction. Randomization can support schedule-conditioned within-person bundle contrasts under the frozen design, but no pairwise contrast isolates personalization, any single semantic field, plan editing, approval, or a causal psychological or neurological pathway.",
+    "held_constant": [
+      "model identifier and immutable revision",
+      "adapter and analyzer versions",
+      "hardware and device profile",
+      "eight-minute target duration and output format",
+      "file-level loudness target and true-peak ceiling",
+      "playback device and listening location where feasible",
+      "response-instrument version",
+      "no auditory-beat layer",
+      "no within-exposure generation or personal-model update"
+    ],
+    "audio_file_policy": {
+      "integrated_loudness_target_lufs": -23,
+      "true_peak_ceiling_dbtp": -1,
+      "boundary": "File measurements do not determine sound-pressure level at the ear and do not establish hearing safety. Playback begins at the lowest device level and remains under participant control."
+    },
+    "assignment": {
+      "scheme": "balanced randomized block order",
+      "permutations": ["GSP", "GPS", "SGP", "SPG", "PGS", "PSG"],
+      "rule": "Use every three-condition permutation exactly once; randomize the bijection of those six distinct orders to chronological blocks 1 through 6 with a cryptographically generated assignment seed committed in the activation record before session 1. The allowable schedule space is exactly 6! = 720, not six independent within-block draws.",
+      "allowable_schedule_count": 720,
+      "uniform_selection_algorithm": "Treat [GSP, GPS, SGP, SPG, PGS, PSG] as ranks 0 through 5 and enumerate their permutations in zero-based lexicographic rank order. From a 32-byte cryptographically generated seed, hash seed || a four-byte unsigned big-endian counter with SHA-256 starting at counter 0, read the first two digest bytes as unsigned u, reject u >= 64800 and increment the counter, and otherwise select schedule index u mod 720. Define the commitment as SHA-256 over UTF-8 ANT-H1-ASSIGNMENT-V1 followed by the raw seed. Record the seed, counter, selected index, complete schedule, and commitment before session 1.",
+      "reveal": "Confirm eligibility and baseline before revealing the session condition. Participant blinding is impossible because context and plan review differ visibly; researcher blinding is also impossible in a self-study and must be reported.",
+      "failure_rule": "An assigned failure remains in the attempt ledger. A replacement is allowed only when no exposure started; it retains the original block, chronological slot, condition, and committed block seed at the next eligible time and never erases the failure. Once verified playback starts, the slot is consumed regardless of completion or response and cannot be replaced based on what was heard or reported."
+    },
+    "h1_seed_policy": {
+      "deterministic_seed_required": true,
+      "block_seeds": [101, 307, 911, 1217, 1601, 2027],
+      "mapping": "Map the six listed seeds in order to chronological blocks 1 through 6. Within a block, G, S, and P use the same block seed so that condition bundle is not deliberately confounded with a different seed.",
+      "commitment": "Commit the model and adapter revision, deterministic-seed capability check, six block seeds, and block-order assignment before session 1; do not regenerate, select, or replace a seed after hearing or rating an artifact.",
+      "failure_rule": "If the qualified adapter cannot honor the committed seed, or a seed-specific generation fails, retain the assigned failure. Do not substitute an uncommitted seed or admit a nondeterministic artifact to H1; H1 remains blocked until a pre-collection protocol revision and renewed review specify another policy."
+    },
+    "subjective_scale_anchors": {
+      "valence": {
+        "applies_to": ["baseline current state", "perceived expression", "immediate felt state", "later felt state"],
+        "prompt_template": "For the state or expression named in this item, where is it between very unpleasant and very pleasant?",
+        "range": [-1, 1],
+        "anchors": {"-1": "very unpleasant", "0": "neither pleasant nor unpleasant or evenly mixed", "1": "very pleasant"}
+      },
+      "arousal": {
+        "applies_to": ["baseline current state", "perceived expression", "immediate felt state", "later felt state"],
+        "prompt_template": "For the state or expression named in this item, where is it between very low activation and very high activation?",
+        "range": [-1, 1],
+        "anchors": {"-1": "very low activation", "0": "neither low nor high activation", "1": "very high activation"}
+      },
+      "intensity": {
+        "applies_to": ["baseline current state", "perceived expression", "immediate felt state", "later felt state"],
+        "prompt_template": "How intense is the state or expression named in this item?",
+        "range": [0, 1],
+        "anchors": {"0": "not at all intense", "1": "extremely intense"}
+      },
+      "wanted_intensity": {
+        "applies_to": ["immediate response"],
+        "prompt": "Was the intensity you experienced wanted?",
+        "values": ["yes", "no", "unsure"],
+        "anchors": {"yes": "wanted", "no": "not wanted", "unsure": "unsure whether it was wanted"}
+      },
+      "helpfulness": {
+        "applies_to": ["immediate response", "later response"],
+        "prompt": "How helpful was this session for the purpose you chose for it?",
+        "range": [0, 1],
+        "anchors": {"0": "not at all helpful for my chosen purpose", "1": "as helpful as I could reasonably ask for that purpose"}
+      },
+      "resonance": {
+        "applies_to": ["immediate response"],
+        "prompt": "How much did the experience fit or resonate with you in this moment?",
+        "range": [0, 1],
+        "anchors": {"0": "did not fit or resonate at all", "1": "fit or resonated completely"}
+      },
+      "mismatch": {
+        "applies_to": ["immediate response"],
+        "prompt": "How mismatched was the experience with the intent and plan you had approved or been shown?",
+        "range": [0, 1],
+        "anchors": {"0": "no perceived mismatch", "1": "extreme perceived mismatch"}
+      },
+      "harm": {
+        "applies_to": ["immediate response", "later response"],
+        "prompt": "How much unwanted negative effect do you attribute to this session right now?",
+        "range": [0, 1],
+        "anchors": {"0": "no unwanted negative effect noticed", "1": "extreme unwanted negative effect"}
+      },
+      "surprise": {
+        "applies_to": ["immediate response"],
+        "prompt": "How unexpected was the experience relative to what you had been shown and approved?",
+        "range": [0, 1],
+        "anchors": {"0": "entirely expected", "1": "entirely unexpected"}
+      },
+      "interaction_burden": {
+        "applies_to": ["immediate response"],
+        "prompt": "How burdensome were the check-in, plan review, controls, and response steps?",
+        "range": [0, 1],
+        "anchors": {"0": "not burdensome", "1": "too burdensome to repeat"}
+      },
+      "session_burden": {
+        "applies_to": ["immediate response"],
+        "prompt": "How burdensome was the whole session, including listening?",
+        "range": [0, 1],
+        "anchors": {"0": "not burdensome", "1": "too burdensome to repeat"}
+      },
+      "ongoing_effect": {
+        "applies_to": ["baseline readiness", "later response"],
+        "prompt": "Do you notice any effect from the prior or current session still ongoing?",
+        "values": ["yes", "no", "unsure"],
+        "anchors": {"yes": "an effect is still noticed", "no": "no effect is still noticed", "unsure": "unsure whether an effect is still ongoing"}
+      }
+    },
+    "response_correction_lineage": {
+      "initial_record": "Set revision to 1 and both supersedes_response_id and correction_reason to null.",
+      "corrected_record": "Write a new immutable record with revision equal to the immediately superseded record's revision plus 1, supersedes_response_id equal to that record's id, and a non-empty person-authored correction_reason. Preserve the same session_id, exposure_id, and response window.",
+      "analysis_rule": "Retain every revision for private audit, use only the latest unsuperseded record for response summaries, report public correction counts only, and keep response identifiers and chain links out of public artifacts."
+    },
+    "session_sequence": [
+      {
+        "order": 1,
+        "step": "authority-and-readiness",
+        "rule": "Confirm protocol version, current consent scopes, safe setting, audio setup, and the person's unrestricted choice to proceed, postpone, or stop."
+      },
+      {
+        "order": 2,
+        "step": "baseline-and-target",
+        "rule": "Capture the required person-authored current-state description, pleasure/valence, arousal, intensity, and desired-transition category and description; a target-state object is optional but its description is required when supplied. Record ongoing aftereffect or carryover separately."
+      },
+      {
+        "order": 3,
+        "step": "condition-reveal-and-plan",
+        "rule": "Reveal G, S, or P; show exactly which fields are used; record plan version, edits, approval, interaction time, and generation authority."
+      },
+      {
+        "order": 4,
+        "step": "generation-and-verification",
+        "rule": "Generate from the immutable specification; verify model, adapter, seed policy, parameters, duration, loudness, hash, feature report, warnings, and playable status before exposure."
+      },
+      {
+        "order": 5,
+        "step": "explicit-playback",
+        "rule": "Require a separate start action; keep stop continuously available; record content hash, start time, duration heard, completion, interruption, and stop reason."
+      },
+      {
+        "order": 6,
+        "step": "immediate-response",
+        "rule": "Within five minutes, separately capture perceived musical expression, felt state, whether intensity was wanted, helpfulness, resonance, mismatch, harm, surprise, interaction burden, session burden, optional notes, and missingness."
+      },
+      {
+        "order": 7,
+        "step": "later-aftereffect",
+        "rule": "At the prespecified 18-to-30-hour window, capture the later felt state, helpfulness, harm, ongoing effect, optional meaning, and missingness without rewriting the immediate response."
+      },
+      {
+        "order": 8,
+        "step": "review",
+        "rule": "Close or pause the session, reconcile safety events, preserve corrections as new records, and keep personal-model updating disabled."
+      }
+    ],
+    "eligibility_and_exclusion": {
+      "prospective_eligibility": [
+        "adult able to give and withdraw informed consent",
+        "able to operate the stop control and leave the listening setting",
+        "willing to use the same declared playback setup where feasible",
+        "independent review finds the protocol and self-researcher role acceptable"
+      ],
+      "session_exclusions": [
+        "driving, cycling, operating machinery, or another setting where reduced attention is unsafe",
+        "substance-assisted, ketamine, or psychedelic session",
+        "acute hearing pain, tinnitus flare, or inability to choose a comfortable low level",
+        "current distress for which the person wants urgent human or clinical support rather than an experimental audio session",
+        "ongoing unwanted aftereffect, unresolved adverse response, stale consent, or inability to stop freely",
+        "model, artifact, provenance, privacy, or playback verification failure"
+      ]
+    },
+    "carryover": {
+      "rule": "Require at least 48 hours between exposures and completion or expiry of the later-response window before the next exposure.",
+      "readiness_check": "If the person reports an ongoing aftereffect, mismatch, distress, hearing discomfort, or uncertainty, postpone at least 24 additional hours and repeat readiness review.",
+      "interpretive_boundary": "Spacing and readiness checks reduce but cannot prove elimination of carryover; every flagged session remains visible in primary accounting and sensitivity analysis."
+    }
+  },
+  "measurement_registry": [
+    {
+      "id": "MEAS-BASELINE-STATE",
+      "construct": "person-authored current state",
+      "timing": "pre-condition",
+      "instrument": "Required person-authored description plus Affective Slider-style pleasure/valence and arousal items and intensity",
+      "scale": "Valence -1 very unpleasant, 0 neutral or evenly mixed, 1 very pleasant; arousal -1 very low activation, 0 neither low nor high, 1 very high activation; intensity 0 not at all intense to 1 as intense as the person would describe it in this response; the current-state text required by moment-context v1 has no numeric scale.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/moment-context.v1.schema.json#/properties/current_state"
+      ],
+      "prohibited_inference": "Not an objective emotion, diagnosis, or need."
+    },
+    {
+      "id": "MEAS-DESIRED-TRANSITION",
+      "construct": "desired transition",
+      "timing": "pre-condition",
+      "instrument": "person-selected category and required person-authored description",
+      "scale": "Nominal person-selected category with no ordinal ranking; the description required by moment-context v1 has no numeric scale.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/moment-context.v1.schema.json#/properties/desired_transition"
+      ],
+      "prohibited_inference": "Not a promised endpoint or clinical goal."
+    },
+    {
+      "id": "MEAS-SEMANTIC-CONTROLS",
+      "construct": "requested semantic intent and plan",
+      "timing": "pre-generation",
+      "instrument": "accepted working projection and journey-plan revision",
+      "scale": "typed records, edits, exclusions, and approval",
+      "evidence_class": "self-reported-and-decided",
+      "contract_paths": [
+        "contracts/schemas/working-context-projection.v1.schema.json#/properties/semantic_items",
+        "contracts/schemas/journey-plan.v1.schema.json#/properties/stages"
+      ],
+      "prohibited_inference": "Requested controls are not realized acoustics or felt response."
+    },
+    {
+      "id": "MEAS-ACOUSTIC-REALIZATION",
+      "construct": "generated acoustic realization",
+      "timing": "post-generation-pre-exposure",
+      "instrument": "versioned feature analyzer and artifact verifier",
+      "scale": "feature-specific units, uncertainty, warnings, and hashes",
+      "evidence_class": "model-estimated-and-technical-observation",
+      "contract_paths": [
+        "contracts/schemas/generation-result.v1.schema.json#/properties/feature_report",
+        "contracts/schemas/generation-result.v1.schema.json#/properties/artifacts"
+      ],
+      "prohibited_inference": "Measured features do not reveal perceived expression, felt state, usefulness, harm, or benefit."
+    },
+    {
+      "id": "MEAS-EXPOSURE",
+      "construct": "actual exposure",
+      "timing": "during playback",
+      "instrument": "append-only exposure events",
+      "scale": "artifact hash, timestamps, seconds heard, completion, interruption, and stop reason",
+      "evidence_class": "observed",
+      "implementation_source": "crates/antidote-core/src/domain.rs#Exposure",
+      "prohibited_inference": "A generated but unplayed artifact is not an exposure."
+    },
+    {
+      "id": "MEAS-PERCEIVED-EXPRESSION",
+      "construct": "emotion or meaning perceived in the audio",
+      "timing": "immediate",
+      "instrument": "separate description and Affective Slider-style pleasure/valence, arousal, and intensity items",
+      "scale": "The frozen valence, arousal, and intensity anchors in human_protocol.subjective_scale_anchors; text optional.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/perceived_expression"
+      ],
+      "prohibited_inference": "Perceived expression is not the listener's felt state."
+    },
+    {
+      "id": "MEAS-FELT-STATE",
+      "construct": "felt response",
+      "timing": "immediate-and-later",
+      "instrument": "separate description and Affective Slider-style pleasure/valence, arousal, and intensity items",
+      "scale": "The frozen valence, arousal, and intensity anchors in human_protocol.subjective_scale_anchors; text optional; each prompted but absent scalar is represented by field-level missingness rather than a substituted value.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/felt_state"
+      ],
+      "prohibited_inference": "Felt state is not automatically helpful, harmful, or clinically meaningful."
+    },
+    {
+      "id": "MEAS-APPRAISAL",
+      "construct": "wanted intensity, helpfulness, resonance, mismatch, harm, and surprise",
+      "timing": "immediate; helpfulness and harm repeated later",
+      "instrument": "anchored person-reported items",
+      "scale": "Wanted intensity is nominal yes, no, or unsure. Helpfulness, resonance, mismatch, harm, and surprise each use the exact 0-to-1 endpoint wording in human_protocol.subjective_scale_anchors.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/wanted_intensity",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/helpfulness",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/resonance",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/mismatch",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/harm",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/surprise"
+      ],
+      "prohibited_inference": "Intensity, crying, completion, or engagement is never substituted for helpfulness or harm."
+    },
+    {
+      "id": "MEAS-BURDEN",
+      "construct": "interaction and whole-session burden",
+      "timing": "immediate",
+      "instrument": "two anchored person-reported items",
+      "scale": "Interaction burden and whole-session burden are separate 0-to-1 items, each anchored from 0 not burdensome to 1 too burdensome to repeat.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/interaction_burden",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/session_burden"
+      ],
+      "prohibited_inference": "Low burden does not establish benefit or meaningful consent."
+    },
+    {
+      "id": "MEAS-AFTEREFFECT",
+      "construct": "ongoing effect and optional person-authored meaning",
+      "timing": "baseline-readiness-and-later",
+      "instrument": "Ongoing-effect yes/no/unsure item plus optional free-text meaning in the later window",
+      "scale": "Ongoing effect is nominal yes, no, or unsure with the exact anchors in human_protocol.subjective_scale_anchors; aftereffect meaning is optional text with no numeric scale.",
+      "evidence_class": "self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/ongoing_effect",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/aftereffect_meaning"
+      ],
+      "prohibited_inference": "An ongoing effect is not presumed helpful, harmful, caused solely by the audio, clinically meaningful, or mechanistically explained."
+    },
+    {
+      "id": "MEAS-MISSINGNESS",
+      "construct": "unavailable or declined response fields",
+      "timing": "every collection window",
+      "instrument": "one field-level missingness entry for each prompted but absent field, each with its own prespecified reason",
+      "scale": "Exact enum: not_prompted, declined, missed_window, technical_failure, interrupted, or not_applicable.",
+      "evidence_class": "observed-or-self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/missingness"
+      ],
+      "prohibited_inference": "Missing is not neutral, zero, or a successful response."
+    },
+    {
+      "id": "MEAS-CORRECTION",
+      "construct": "append-only person-authored response correction lineage",
+      "timing": "whenever a response is corrected",
+      "instrument": "new response record referencing the superseded response and recording a correction reason",
+      "scale": "Identifiers and a required non-empty person-authored correction reason; no numeric scale.",
+      "evidence_class": "observed-and-self-reported",
+      "contract_paths": [
+        "contracts/schemas/response-observation.v2.schema.json#/properties/revision",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/supersedes_response_id",
+        "contracts/schemas/response-observation.v2.schema.json#/properties/correction_reason"
+      ],
+      "prohibited_inference": "A correction preserves revision history and does not prove that either version is objectively correct."
+    },
+    {
+      "id": "MEAS-CLINICAL",
+      "construct": "clinical outcome",
+      "timing": "not-collected",
+      "instrument": "none",
+      "scale": "not applicable",
+      "evidence_class": "unavailable",
+      "contract_paths": [],
+      "prohibited_inference": "No feasibility field may be promoted into a clinical endpoint."
+    }
+  ],
+  "analysis_plan": {
+    "version": "1.1.0",
+    "analysis_is_not_started": true,
+    "populations": [
+      "all assigned session attempts",
+      "all verified generated artifacts",
+      "all started exposures",
+      "all completed exposures",
+      "all immediate response windows",
+      "all later response windows"
+    ],
+    "primary_technical_summaries": [
+      "counts and denominators for every planned, generated, partial, cancelled, failed, verified, played, and excluded attempt",
+      "authority and artifact-integrity invariant results",
+      "for each registered component latency and verified buffer-margin variable, n, minimum, maximum, arithmetic median, and the frozen q50, q90, and q95 empirical quantiles",
+      "paired requested-versus-measured control differences by factor and seed",
+      "all semantic and acoustic boundary components rather than only an aggregate continuity score"
+    ],
+    "latency_quantiles": {
+      "probabilities": [0.5, 0.9, 0.95],
+      "units": "seconds",
+      "grouping": "Compute separately for each registered latency component and for verified buffer margin; never pool unlike components or terminal states.",
+      "eligible_values": "Finite, non-missing monotonic-host measurements from attempts in the declared denominator. Failed and cancelled attempts retain their own terminal-state counts; a latency value is omitted only when it was not observable and that absence is reported.",
+      "median": "For ordered values x(1) through x(n), use x((n+1)/2) for odd n and the arithmetic mean of x(n/2) and x(n/2+1) for even n.",
+      "quantile_algorithm": "Fixed linear interpolation: for probability p, h=(n-1)p+1, j=floor(h), g=h-j, and Q(p)=(1-g)x(j)+g x(j+1), with x(n+1) replaced by x(n) at the upper boundary. Compute from unrounded seconds and round only the displayed value.",
+      "threshold_boundary": "These summaries are descriptive. They do not create a universal performance or perceptual threshold."
+    },
+    "primary_human_feasibility_summaries": [
+      "assigned, attempted, exposed, completed, interrupted, postponed, and withdrawn counts by condition",
+      "audit completeness separately from field-level usable voluntary-response completeness, with every canonical missingness reason",
+      "interaction-burden and whole-session-burden distributions as two separate outcomes",
+      "mismatch, harm, hearing-discomfort, distress, and safety-event accounting",
+      "whether semantic, acoustic, exposure, and response records remain provenance-linkable"
+    ],
+    "response_completeness": {
+      "audit_complete_attempt": "An assigned attempt has its assignment, eligibility decision, condition reveal or pre-reveal disposition, generation disposition, exposure disposition, safety disposition, and required provenance links recorded, including when no exposure starts.",
+      "audit_complete_window": "For every scheduled immediate or later window, each field expected in that window contains either a recorded value or one field-level missingness entry using exactly one canonical reason. A decline is audit-complete but is not a usable voluntary response.",
+      "usable_voluntary_value": "A non-null, person-supplied value in the latest non-superseded response record. Generated defaults, inferred values, and any field represented in missingness are not usable responses.",
+      "immediate_core_fields": [
+        "perceived_expression.valence",
+        "perceived_expression.arousal",
+        "felt_state.valence",
+        "felt_state.arousal",
+        "wanted_intensity",
+        "helpfulness",
+        "resonance",
+        "mismatch",
+        "harm",
+        "surprise",
+        "interaction_burden",
+        "session_burden"
+      ],
+      "later_core_fields": [
+        "felt_state.valence",
+        "felt_state.arousal",
+        "helpfulness",
+        "harm",
+        "ongoing_effect"
+      ],
+      "optional_text_fields": ["perceived_expression.description", "felt_state.description", "aftereffect_meaning", "notes"],
+      "denominator": "Use all started exposures for each core-field proportion and display the exact numerator, denominator, and missingness-reason counts.",
+      "progression_threshold_calculation": "For every immediate core field require numerator >= ceil(0.80 * N_started) overall and at least 3 usable values in each condition. For every later core field require numerator >= ceil(0.70 * N_started) overall and at least 2 usable values in each condition. Apply the ceiling separately to the overall integer count; do not round the percentage or pool fields."
+    },
+    "burden_outcomes": {
+      "interaction_burden": "Immediate 0-to-1 rating of check-in, plan-review, control, and response burden; report every value, n, median, and range by condition and overall. This is the only burden item in the progression threshold.",
+      "session_burden": "Immediate 0-to-1 rating of whole-session burden including listening; report every value, n, median, and range by condition and overall. It is a separate contrast outcome and is never substituted for interaction burden.",
+      "contrast_rule": "For both burden outcomes separately, compute each prespecified within-block P-minus-S, P-minus-G, and S-minus-G contrast when both required values exist."
+    },
+    "secondary_within_person_estimands": [
+      "within-block P-minus-S, P-minus-G, and S-minus-G contrasts for immediate helpfulness, resonance, mismatch, harm, interaction burden, and session burden, with the two burden variables never pooled",
+      "difference between perceived-expression and felt-state valence/arousal without declaring either correct",
+      "condition-specific change from baseline to immediate felt-state valence/arousal when both observations exist"
+    ],
+    "descriptive_summary_rule": "For every named response outcome, retain each session value and eligible blockwise contrast in protected analysis output. The public envelope reports only privacy-reviewed aggregate numerators, denominators, arithmetic medians, ranges, and blockwise summaries. No confidence interval or population standard error is implied.",
+    "exact_randomization_analysis": {
+      "eligibility": "Run only for a named outcome when all three chronological position values are present in each of all six blocks. Otherwise report the distribution as unavailable and do not substitute an asymptotic or reduced permutation test.",
+      "outcomes": ["immediate helpfulness", "immediate resonance", "immediate mismatch", "immediate harm", "immediate interaction burden", "immediate session burden"],
+      "contrasts": ["P-minus-S", "P-minus-G", "S-minus-G"],
+      "schedule_enumeration": "Hold each block's three chronological position values fixed. Enumerate lexicographically every bijection of the six distinct orders GSP, GPS, SGP, SPG, PGS, and PSG to chronological blocks 1 through 6. This is exactly 6! = 720 schedules, including the observed schedule; do not make independent within-block assignments.",
+      "statistic": "For each named outcome and contrast A-minus-B, assign labels to position values under the candidate schedule, calculate the six within-block differences y(b,A)-y(b,B), and take their arithmetic mean T. The observed statistic uses the committed observed schedule.",
+      "two_sided_tail": "Retain all 720 unrounded T values in the protected analysis output, together with the inclusive tail count number of schedules with absolute T at least absolute observed T and p_exact=tail_count/720. Equality is assessed on unrounded parsed decimal values and included in the tail; no random tie breaking, plus-one correction, one-sided p-value, or multiplicity-adjusted claim is used.",
+      "public_reporting_boundary": "The public aggregate reports the observed statistic, tail count, exact denominator 720, p_exact, and privacy-reviewed distribution summaries. The 720-value vector remains private unless a separate field-level review finds its release non-disclosive and the export scope is current; its exact artifact hash remains in the private evidence index.",
+      "interpretation": "The distribution is an exploratory randomization reference for this one schedule and one person under the sharp no-condition-bundle-effect null. It is not a population estimate, a confirmatory test, or evidence that any component of a condition bundle caused the outcome."
+    },
+    "excluded_analyses": [
+      "No exploratory variable-pair search among semantic controls, acoustic features, and responses is specified or run in version 1.1.0; the maximum 18 exposures do not support a defensible search.",
+      "No multivariable response regression is specified or run in version 1.1.0; condition indicators plus block, order, and three baseline values would be fragile at the maximum sample size. Any such analysis requires a later protocol, an exact variable registry, and a separately justified sample size."
+    ],
+    "missingness": {
+      "canonical_reasons": ["not_prompted", "declined", "missed_window", "technical_failure", "interrupted", "not_applicable"],
+      "primary": "No outcome imputation. For each absent field, preserve its own field path and exactly one canonical reason: not_prompted, declined, missed_window, technical_failure, interrupted, or not_applicable.",
+      "condition_contrast": "Use only blocks with both required condition observations and report the number and identity of omitted blocks.",
+      "numeric_bounds": {
+        "helpfulness_and_resonance": "Best case 1 and worst case 0 for each missing value.",
+        "mismatch_harm_interaction_burden_session_burden": "Best case 0 and worst case 1 for each missing value.",
+        "valence_and_arousal": "Report the attainable endpoint interval from -1 to 1 without labeling either endpoint best; these fields do not enter a progression threshold.",
+        "intensity_and_surprise": "Report the attainable endpoint interval from 0 to 1 without labeling either endpoint best; these fields do not enter a progression threshold."
+      },
+      "categorical_bounds": "Do not numerically impute wanted_intensity or ongoing_effect. Display every yes, no, unsure, and missingness category.",
+      "progression_use": "Repeat the interaction-burden threshold after replacing each missing interaction-burden value once with 0 and once with 1. Audit-completeness, completed-exposure, usable-response, provenance, and unresolved-safety criteria are factual and cannot be rescued by a bound. If the primary observed-data decision or the two burden-bound decisions disagree, the disposition is revise rather than proceed."
+    },
+    "null_and_negative_rule": "Report zero movement, null contrasts, opposite-direction movement, mismatch, unwanted intensity, burden, harm, stops, failures, and adverse events with the same visibility as favorable observations.",
+    "multiplicity": "No clinical or confirmatory primary endpoint exists. Report all prespecified contrasts and do not select or rename a primary contrast after seeing observations.",
+    "sensitivity_analyses": [
+      "repeat every response summary for all started exposures and for exposures with at least 384 of 480 seconds heard, retaining both denominators",
+      "repeat every response summary with all sessions and after excluding sessions flagged for possible carryover; retain private package-local opaque references and report only the aggregate exclusion count publicly",
+      "report the same per-condition medians and ranges separately for chronological blocks 1 through 3 and 4 through 6 without treating the split as a trend test",
+      "repeat all condition summaries after leaving out each block in turn and display all six versions",
+      "stratify the same summaries by self-researcher versus independently administered status only if administration actually changes; otherwise report not applicable",
+      "compare the primary no-imputation interaction-burden progression result with the exact lower- and upper-endpoint missing-value bounds"
+    ],
+    "equation_boundary": "ANT-EQ-014 defines the separated response record. ANT-EQ-015 and ANT-EQ-016 remain future empirical models: this protocol does not fit a response predictor, define a likelihood, or authorize a personal-model update."
+  },
+  "progression_rule": {
+    "purpose": "Practical stop/revise/proceed decision about whether to design a later bounded protocol, not evidence of efficacy, advisory usefulness, or safety.",
+    "proceed_only_if": [
+      "all hard technical authority and artifact-integrity gates pass",
+      "at least 15 of 18 planned exposures and at least 4 per condition are completed",
+      "100 percent of assigned attempts and scheduled response windows meet the audit-completeness definitions, including field-level reasons for every absent expected field",
+      "for every named immediate core field, usable numerator >= ceil(0.80 * N_started) overall and at least 3 usable values occur in each condition; a decline remains audit-complete but does not count as usable",
+      "for every named later core field, usable numerator >= ceil(0.70 * N_started) overall and at least 2 usable values occur in each condition; a decline remains audit-complete but does not count as usable",
+      "100 percent of eligible response records remain linkable to their condition assignment, approved plan, generation specification, verified artifact, exposure, instrument, protocol, and latest correction lineage",
+      "median interaction burden does not exceed 0.5 on the anchored 0-to-1 item",
+      "the observed-data and both prespecified interaction-burden bound decisions all satisfy the burden threshold",
+      "no safety event remains unresolved",
+      "the participant and an independent reviewer separately judge that another bounded study is acceptable"
+    ],
+    "otherwise": "Stop or revise. A proceed decision does not establish therapeutic benefit, generalizability, privacy, or safety."
+  },
+  "safety_and_adverse_events": {
+    "continuous_authority": "The person may pause, skip, stop, withdraw, or decline any response without penalty or automatic substitution.",
+    "immediate_stop_triggers": [
+      "participant requests stop or revokes consent",
+      "hearing pain, discomfort, or unexpected loudness",
+      "unwanted escalating distress, disorientation, or inability to continue comfortably",
+      "playback, artifact, model, provenance, or stop-control failure",
+      "any circumstance in which continuing no longer feels freely chosen"
+    ],
+    "post_stop": "Stop playback, prevent automatic continuation, offer silence and a clear exit, record only the minimum consented event, and do not solicit optional detail until the person chooses. Urgent concerns are handled through appropriate human or emergency support, not by Antidote.",
+    "operational_definitions": {
+      "high_harm": "A non-missing immediate or later harm rating greater than or equal to 0.75 on the frozen 0-to-1 item, or a person-authored report explicitly asking that the event be treated as high harm even when the rating is absent.",
+      "repeated_high_harm": "High harm associated with two distinct started exposures. Immediate and later ratings from the same exposure count as one exposure for this rule.",
+      "serious_event": "For protocol pausing only: an event for which emergency or urgent human assessment is sought; reported hospitalization; reported persistent hearing change or other persistent functional impairment; disorientation or incapacity that prevents a self-directed exit; a stop-control failure that continues playback after a stop request; or unauthorized access, retention, or export of consent-scoped sensitive data. This operational category is not a diagnosis or clinical severity adjudication.",
+      "unresolved": "An adverse or safety event is unresolved while it lacks a documented disposition, any reported unwanted effect is still ongoing or unsure at the later window, or required independent review is incomplete. A serious event and a stop-control, privacy, or consent failure cannot be auto-closed; independent review must document disposition before another exposure."
+    },
+    "review_rule": "Any unresolved adverse response, serious event, stop-control failure, or repeated high harm pauses the protocol pending independent review. The protocol does not claim that this rule establishes safety.",
+    "adverse_categories": [
+      "mismatch",
+      "unwanted_intensity",
+      "interaction_burden",
+      "distress",
+      "hearing_discomfort",
+      "privacy_or_consent_failure",
+      "technical_safety_failure",
+      "other_participant-described_adverse_response"
+    ]
+  },
+  "optional_physiology": {
+    "enabled": false,
+    "primary_endpoint": false,
+    "real_time_steering": false,
+    "status": "supplemental-module-requires-amendment",
+    "activation_requirements": [
+      "separate opt-in consent and removal path",
+      "device, firmware, channel, units, sampling, clock-sync, and calibration record",
+      "artifact, signal-quality, dropout, and missingness annotations",
+      "person-visible interpretation and correction",
+      "analysis plan frozen before collection",
+      "independent privacy and safety review"
+    ],
+    "interpretive_boundary": "Physiology may be supplemental evidence only. It cannot overwrite self-report, diagnose emotion or need, prove entrainment, or activate generation changes under this protocol."
+  },
+  "privacy_consent_and_retention": {
+    "collection_default": "No collection is authorized by this file or its merge.",
+    "h1_consent_contract": "contracts/schemas/consent-grant.v2.schema.json",
+    "h1_response_contract": "contracts/schemas/response-observation.v2.schema.json",
+    "consent_scopes": [
+      "inspect",
+      "project",
+      "generate",
+      "play",
+      "retain",
+      "analyze",
+      "export",
+      "learn"
+    ],
+    "rules": [
+      "Each scope is separate, current, revocable, and recorded before the corresponding action.",
+      "Manual state and semantic entry remain available without historical context.",
+      "Raw journal, therapy-chat, health, and free-text personal context never enters the public repository or a default research export.",
+      "A public or shared export is fail-closed until minimization, field-level review, destination approval, and provenance completeness pass.",
+      "A public H1 result package contains minimized aggregate denominators and missingness counts plus an opaque evidence-set commitment; it contains no session, response, consent, or source-event identifiers, response text, private paths, or per-record hashes.",
+      "De-identification is not represented as guaranteed anonymity."
+    ],
+    "unresolved_collection_blockers": [
+      "storage encryption and key recovery",
+      "retention expiry and secure deletion",
+      "projection invalidation after revocation or deletion",
+      "backup and restore behavior",
+      "protocol-timed H1 session and response-window implementation",
+      "version 2 scope-specific consent enforcement",
+      "version 2 H1 response, field-level missingness, and append-only correction implementation",
+      "minimum-data private research export and separately minimized public audit envelope",
+      "approved consent and participant-facing materials",
+      "independent determination of applicable ethics or institutional review"
+    ]
+  },
+  "provenance_requirements": [
+    "protocol, analysis-plan, assignment, response-instrument, and deviation-log versions",
+    "source and code revision plus execution environment",
+    "consent-grant and working-projection identifiers retained in the protected evidence index; public envelopes expose only aggregate linkability accounting and no private identifier or content",
+    "moment, journey-plan revision and hash, adapter, model, parameters, and seed policy",
+    "generation terminal state, warnings, timing, feature-analyzer versions, and artifact hashes",
+    "exposure content hash, start, duration heard, completion, interruption, and stop reason",
+    "response window, instrument version, missingness, correction lineage, and later-use permission",
+    "exclusion, carryover, safety, analysis, and claim-ledger disposition"
+  ],
+  "freeze_and_deviations": {
+    "protocol_path": "experiments/protocols/antidote-feasibility-v1.1.json",
+    "lock_path": "experiments/protocols/antidote-feasibility-v1.1.lock.json",
+    "deviation_log_path": "experiments/protocols/antidote-feasibility-v1.1.deviations.json",
+    "before_first_qualifying_record": "Any material change creates a new semantic protocol version, a new content lock, an updated analysis plan, and renewed review before collection.",
+    "after_first_qualifying_record": "Never rewrite the frozen file. Append a timestamped amendment or deviation with rationale, affected records, evidence impact, author, reviewer, and disposition.",
+    "material_changes": [
+      "research question or evidence stage",
+      "condition, assignment, session count, duration, spacing, or carryover rule",
+      "measure, endpoint, threshold, estimand, exclusion, imputation, or sensitivity analysis",
+      "model, adapter, analyzer, hardware class, or seed policy after T1 begins",
+      "consent, privacy, retention, safety, stop, adverse-event, or physiology rule"
+    ],
+    "administrative_changes": "Typographic or link corrections may be logged as nonmaterial only when they do not change execution, interpretation, authority, or evidence eligibility."
+  },
+  "human_collection_activation_gates": [
+    {
+      "id": "GATE-REAL-MODEL",
+      "satisfied": false,
+      "requirement": "Real model, adapter, artifact, cancellation, and T1 technical qualification complete."
+    },
+    {
+      "id": "GATE-PRIVACY",
+      "satisfied": false,
+      "requirement": "Encryption, retention, deletion, backup, projection invalidation, minimum-data private research export, and separately minimized public audit-envelope controls reviewed for the intended setting."
+    },
+    {
+      "id": "GATE-CONSENT",
+      "satisfied": false,
+      "requirement": "The version 2 scope-specific consent contract and participant-facing consent, withdrawal, adverse-response, and data-use materials are implemented and approved for the actual study context."
+    },
+    {
+      "id": "GATE-INDEPENDENT-REVIEW",
+      "satisfied": false,
+      "requirement": "An independent qualified reviewer records the applicable ethics, safety, and researcher-participant determination; no approval is presumed."
+    },
+    {
+      "id": "GATE-ASSIGNMENT",
+      "satisfied": false,
+      "requirement": "Assignment seed, all 720 eligible schedules, selected complete schedule, and the six fixed block seeds are frozen and their enforcement is verified before session 1."
+    },
+    {
+      "id": "GATE-INSTRUMENT",
+      "satisfied": false,
+      "requirement": "The timed session workflow, exact prompts and anchors, version 2 response and append-only correction contract, playback setup, accessibility path, and implementation match this protocol."
+    },
+    {
+      "id": "GATE-ANALYSIS",
+      "satisfied": false,
+      "requirement": "Analysis code and synthetic validation fixtures reproduce the frozen estimands, denominators, missingness, and sensitivity rules."
+    },
+    {
+      "id": "GATE-STOP-GO",
+      "satisfied": false,
+      "requirement": "A documented pilot stop/go decision authorizes only the explicitly reviewed next step."
+    }
+  ],
+  "publication_rules": [
+    "The design/protocol manuscript states that no formal human study has been run.",
+    "T0 repository checks are labeled technical and synthetic where applicable.",
+    "T1 evidence may not enter Results until its execution manifest and complete denominators pass claim-ledger review.",
+    "H1 evidence may not enter Results until collection authority, provenance, deviations, and analysis eligibility are audited.",
+    "H1 may report record and provenance feasibility only; advisory usefulness remains unanswered under this protocol.",
+    "No null, negative, missing, interrupted, or adverse observation is removed because it weakens the narrative.",
+    "No technical, affective, or feasibility result is described as therapeutic efficacy, clinical safety, or neurological mechanism."
+  ]
+}

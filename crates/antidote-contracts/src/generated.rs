@@ -71,6 +71,76 @@ pub enum ConsentGrantStatus {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConsentGrantV2Action {
+    #[serde(rename = "inspect")]
+    Inspect,
+    #[serde(rename = "project")]
+    Project,
+    #[serde(rename = "generate")]
+    Generate,
+    #[serde(rename = "analyze")]
+    Analyze,
+    #[serde(rename = "play")]
+    Play,
+    #[serde(rename = "retain")]
+    Retain,
+    #[serde(rename = "learn")]
+    Learn,
+    #[serde(rename = "export")]
+    Export,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConsentGrantV2Purpose {
+    #[serde(rename = "journey_planning")]
+    JourneyPlanning,
+    #[serde(rename = "generation")]
+    Generation,
+    #[serde(rename = "response_capture")]
+    ResponseCapture,
+    #[serde(rename = "personal_learning")]
+    PersonalLearning,
+    #[serde(rename = "research_export")]
+    ResearchExport,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConsentGrantV2RetentionMode {
+    #[serde(rename = "session_only")]
+    SessionOnly,
+    #[serde(rename = "until_expiry")]
+    UntilExpiry,
+    #[serde(rename = "until_manual_deletion")]
+    UntilManualDeletion,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConsentGrantV2SourceSourceType {
+    #[serde(rename = "manual_entry")]
+    ManualEntry,
+    #[serde(rename = "journal_excerpt")]
+    JournalExcerpt,
+    #[serde(rename = "therapy_chat_excerpt")]
+    TherapyChatExcerpt,
+    #[serde(rename = "prior_session")]
+    PriorSession,
+    #[serde(rename = "imported_note")]
+    ImportedNote,
+    #[serde(rename = "other")]
+    Other,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ConsentGrantV2Status {
+    #[serde(rename = "active")]
+    Active,
+    #[serde(rename = "revoked")]
+    Revoked,
+    #[serde(rename = "expired")]
+    Expired,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum GenerationResultArtifactKind {
     #[serde(rename = "audio")]
     Audio,
@@ -100,6 +170,160 @@ pub enum GenerationSpecOutputFormat {
     Wav,
     #[serde(rename = "flac")]
     Flac,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeAggregateAccountingStatus {
+    #[serde(rename = "available")]
+    Available,
+    #[serde(rename = "unavailable")]
+    Unavailable,
+    #[serde(rename = "not-applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeAmendmentStatusStatus {
+    #[serde(rename = "absent")]
+    Absent,
+    #[serde(rename = "approved")]
+    Approved,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeAssignmentCommitmentStatus {
+    #[serde(rename = "committed")]
+    Committed,
+    #[serde(rename = "not-activated")]
+    NotActivated,
+    #[serde(rename = "unavailable")]
+    Unavailable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeEvidenceClass {
+    #[serde(rename = "human-aggregate")]
+    HumanAggregate,
+    #[serde(rename = "unavailable")]
+    Unavailable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeNumericSummaryStatus {
+    #[serde(rename = "available")]
+    Available,
+    #[serde(rename = "unavailable")]
+    Unavailable,
+    #[serde(rename = "not-applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeNumericSummaryUnit {
+    #[serde(rename = "count")]
+    Count,
+    #[serde(rename = "proportion")]
+    Proportion,
+    #[serde(rename = "seconds")]
+    Seconds,
+    #[serde(rename = "milliseconds")]
+    Milliseconds,
+    #[serde(rename = "score")]
+    Score,
+    #[serde(rename = "correlation")]
+    Correlation,
+    #[serde(rename = "dimensionless")]
+    Dimensionless,
+    #[serde(rename = "bpm")]
+    Bpm,
+    #[serde(rename = "lufs")]
+    Lufs,
+    #[serde(rename = "dbtp")]
+    Dbtp,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopePackageKind {
+    #[serde(rename = "flow")]
+    Flow,
+    #[serde(rename = "response")]
+    Response,
+    #[serde(rename = "safety")]
+    Safety,
+    #[serde(rename = "audit")]
+    Audit,
+    #[serde(rename = "physiology")]
+    Physiology,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopePrivacyReviewStatus {
+    #[serde(rename = "pending")]
+    Pending,
+    #[serde(rename = "passed")]
+    Passed,
+    #[serde(rename = "failed")]
+    Failed,
+    #[serde(rename = "not-applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeProgressionDisposition {
+    #[serde(rename = "stop")]
+    Stop,
+    #[serde(rename = "revise")]
+    Revise,
+    #[serde(rename = "proceed")]
+    Proceed,
+    #[serde(rename = "not-applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopePromotionDisposition {
+    #[serde(rename = "blocked")]
+    Blocked,
+    #[serde(rename = "not-promoted")]
+    NotPromoted,
+    #[serde(rename = "eligible-for-review")]
+    EligibleForReview,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopePublicArtifactKind {
+    #[serde(rename = "aggregate-table")]
+    AggregateTable,
+    #[serde(rename = "aggregate-figure")]
+    AggregateFigure,
+    #[serde(rename = "aggregate-audit-table")]
+    AggregateAuditTable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopePublicArtifactMediaType {
+    #[serde(rename = "application/json")]
+    ApplicationJson,
+    #[serde(rename = "text/csv")]
+    TextCsv,
+    #[serde(rename = "image/svg+xml")]
+    ImageSvgXml,
+    #[serde(rename = "image/png")]
+    ImagePng,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum H1PublicResultEnvelopeSourceRecordId {
+    #[serde(rename = "ANT-REC-H1-FLOW-001")]
+    ANTRECH1FLOW001,
+    #[serde(rename = "ANT-REC-H1-RESPONSE-001")]
+    ANTRECH1RESPONSE001,
+    #[serde(rename = "ANT-REC-H1-SAFETY-001")]
+    ANTRECH1SAFETY001,
+    #[serde(rename = "ANT-REC-H1-AUDIT-001")]
+    ANTRECH1AUDIT001,
+    #[serde(rename = "ANT-REC-H1-PHYS-001")]
+    ANTRECH1PHYS001,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -179,6 +403,64 @@ pub enum MomentContextDesiredTransitionDirection {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PrivateEvidenceIndexPrivateRecordAccountingStatus {
+    #[serde(rename = "included")]
+    Included,
+    #[serde(rename = "excluded")]
+    Excluded,
+    #[serde(rename = "missing")]
+    Missing,
+    #[serde(rename = "withdrawn")]
+    Withdrawn,
+    #[serde(rename = "failed")]
+    Failed,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PrivateEvidenceIndexPrivateRecordPackageScope {
+    #[serde(rename = "flow")]
+    Flow,
+    #[serde(rename = "response")]
+    Response,
+    #[serde(rename = "safety")]
+    Safety,
+    #[serde(rename = "audit")]
+    Audit,
+    #[serde(rename = "physiology")]
+    Physiology,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PrivateEvidenceIndexPrivateRecordReason {
+    #[serde(rename = "not_prompted")]
+    NotPrompted,
+    #[serde(rename = "declined")]
+    Declined,
+    #[serde(rename = "missed_window")]
+    MissedWindow,
+    #[serde(rename = "technical_failure")]
+    TechnicalFailure,
+    #[serde(rename = "interrupted")]
+    Interrupted,
+    #[serde(rename = "not_applicable")]
+    NotApplicable,
+    #[serde(rename = "protocol_exclusion")]
+    ProtocolExclusion,
+    #[serde(rename = "withdrawn")]
+    Withdrawn,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum PrivateEvidenceIndexRetentionDisposition {
+    #[serde(rename = "retained-private")]
+    RetainedPrivate,
+    #[serde(rename = "destroyed-with-tombstone")]
+    DestroyedWithTombstone,
+    #[serde(rename = "not-applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ResponseObservationMissingField {
     #[serde(rename = "perceived_expression")]
     PerceivedExpression,
@@ -216,6 +498,90 @@ pub enum ResponseObservationMissingnessReason {
     Interrupted,
     #[serde(rename = "not_applicable")]
     NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationV2MissingnessEntryField {
+    #[serde(rename = "perceived_expression.description")]
+    PerceivedExpressionDescription,
+    #[serde(rename = "perceived_expression.valence")]
+    PerceivedExpressionValence,
+    #[serde(rename = "perceived_expression.arousal")]
+    PerceivedExpressionArousal,
+    #[serde(rename = "perceived_expression.intensity")]
+    PerceivedExpressionIntensity,
+    #[serde(rename = "felt_state.description")]
+    FeltStateDescription,
+    #[serde(rename = "felt_state.valence")]
+    FeltStateValence,
+    #[serde(rename = "felt_state.arousal")]
+    FeltStateArousal,
+    #[serde(rename = "felt_state.intensity")]
+    FeltStateIntensity,
+    #[serde(rename = "wanted_intensity")]
+    WantedIntensity,
+    #[serde(rename = "helpfulness")]
+    Helpfulness,
+    #[serde(rename = "resonance")]
+    Resonance,
+    #[serde(rename = "mismatch")]
+    Mismatch,
+    #[serde(rename = "harm")]
+    Harm,
+    #[serde(rename = "surprise")]
+    Surprise,
+    #[serde(rename = "interaction_burden")]
+    InteractionBurden,
+    #[serde(rename = "session_burden")]
+    SessionBurden,
+    #[serde(rename = "ongoing_effect")]
+    OngoingEffect,
+    #[serde(rename = "aftereffect_meaning")]
+    AftereffectMeaning,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationV2MissingnessEntryReason {
+    #[serde(rename = "not_prompted")]
+    NotPrompted,
+    #[serde(rename = "declined")]
+    Declined,
+    #[serde(rename = "missed_window")]
+    MissedWindow,
+    #[serde(rename = "technical_failure")]
+    TechnicalFailure,
+    #[serde(rename = "interrupted")]
+    Interrupted,
+    #[serde(rename = "not_applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationV2OngoingEffect {
+    #[serde(rename = "yes")]
+    Yes,
+    #[serde(rename = "no")]
+    No,
+    #[serde(rename = "unsure")]
+    Unsure,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationV2WantedIntensity {
+    #[serde(rename = "yes")]
+    Yes,
+    #[serde(rename = "no")]
+    No,
+    #[serde(rename = "unsure")]
+    Unsure,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationV2Window {
+    #[serde(rename = "immediate")]
+    Immediate,
+    #[serde(rename = "later")]
+    Later,
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
@@ -293,6 +659,41 @@ pub struct ConsentGrantRetention {
 pub struct ConsentGrantSource {
     pub source_id: String,
     pub source_type: ConsentGrantSourceSourceType,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub content_hash: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ConsentGrantV2 {
+    pub schema_version: String,
+    pub id: String,
+    pub session_id: String,
+    pub status: ConsentGrantV2Status,
+    pub created_at: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub expires_at: Option<String>,
+    pub purposes: Vec<ConsentGrantV2Purpose>,
+    pub actions: Vec<ConsentGrantV2Action>,
+    pub sources: Vec<ConsentGrantV2Source>,
+    pub retention: ConsentGrantV2Retention,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ConsentGrantV2Retention {
+    pub mode: ConsentGrantV2RetentionMode,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_derived_projection: Option<bool>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub allow_personal_model_update: Option<bool>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ConsentGrantV2Source {
+    pub source_id: String,
+    pub source_type: ConsentGrantV2SourceSourceType,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub content_hash: Option<String>,
 }
@@ -417,6 +818,219 @@ pub struct GenerationSpecOutput {
     pub format: GenerationSpecOutputFormat,
     pub sample_rate_hz: i64,
     pub channels: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelope {
+    pub schema_version: String,
+    pub package_id: String,
+    pub package_kind: H1PublicResultEnvelopePackageKind,
+    pub source_record_id: H1PublicResultEnvelopeSourceRecordId,
+    pub stage: String,
+    pub evidence_class: H1PublicResultEnvelopeEvidenceClass,
+    pub source_revision: String,
+    pub protocol: H1PublicResultEnvelopeVersionedArtifact,
+    pub analysis_plan: H1PublicResultEnvelopeAnalysisPlan,
+    pub evidence_set: H1PublicResultEnvelopeEvidenceSet,
+    pub complete_accounting: H1PublicResultEnvelopeAggregateAccounting,
+    pub public_aggregates: Vec<H1PublicResultEnvelopeNumericSummary>,
+    pub artifacts: Vec<H1PublicResultEnvelopePublicArtifact>,
+    pub privacy_review: H1PublicResultEnvelopePrivacyReview,
+    pub promotion: H1PublicResultEnvelopePromotion,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub assignment_commitment: Option<H1PublicResultEnvelopeAssignmentCommitment>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub flow_accounting: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub interruptions: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub withdrawals: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub failures: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub exclusions: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub missingness: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub instrument_version: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub response_accounting: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub correction_accounting: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub immediate_windows: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub later_windows: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub analysis_outputs: Option<Vec<H1PublicResultEnvelopeNumericSummary>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub safety_accounting: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub mismatches: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub unwanted_intensity: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub burden: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub harm: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub stops: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub adverse_events: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub review_dispositions: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub package_references: Option<Vec<String>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub cross_package_reconciliation: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub provenance_linkability: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub deviations: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub progression_criteria: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub progression_disposition: Option<H1PublicResultEnvelopeProgressionDisposition>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub protocol_amendment: Option<H1PublicResultEnvelopeAmendmentStatus>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub consent_scope: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub device_manifest: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub clock_sync: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub signal_quality: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub artifact_accounting: Option<H1PublicResultEnvelopeAggregateAccounting>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub dropout: Option<H1PublicResultEnvelopeAggregateAccounting>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeAggregateAccounting {
+    pub status: H1PublicResultEnvelopeAggregateAccountingStatus,
+    pub denominator: i64,
+    pub categories: Vec<H1PublicResultEnvelopeCategoryCount>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeAmendmentStatus {
+    pub status: H1PublicResultEnvelopeAmendmentStatusStatus,
+    pub amendment_id: Option<String>,
+    pub sha256: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeAnalysisPlan {
+    pub id: String,
+    pub version: String,
+    pub sha256: String,
+    pub deviation_log_sha256: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeAssignmentCommitment {
+    pub status: H1PublicResultEnvelopeAssignmentCommitmentStatus,
+    pub schedule_count: i64,
+    pub commitment_sha256: Option<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeCategoryCount {
+    pub category: String,
+    pub count: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeEvidenceSet {
+    pub evidence_set_id: String,
+    pub commitment_profile: String,
+    pub evidence_set_sha256: String,
+    pub record_count: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeNumericSummary {
+    pub metric_id: String,
+    pub analysis_id: String,
+    pub status: H1PublicResultEnvelopeNumericSummaryStatus,
+    pub denominator: i64,
+    pub estimate: Option<f64>,
+    pub lower: Option<f64>,
+    pub upper: Option<f64>,
+    pub unit: H1PublicResultEnvelopeNumericSummaryUnit,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopePassedPrivacyReview {
+    pub status: String,
+    pub scope: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopePhysiologyEvidenceSet {
+    pub evidence_set_id: String,
+    pub commitment_profile: String,
+    pub evidence_set_sha256: String,
+    pub record_count: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopePrivacyReview {
+    pub status: H1PublicResultEnvelopePrivacyReviewStatus,
+    pub scope: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopePromotion {
+    pub disposition: H1PublicResultEnvelopePromotionDisposition,
+    pub claim_ids: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopePublicArtifact {
+    pub artifact_id: String,
+    pub kind: H1PublicResultEnvelopePublicArtifactKind,
+    pub media_type: H1PublicResultEnvelopePublicArtifactMediaType,
+    pub sha256: String,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeReviewEligiblePromotion {
+    pub disposition: String,
+    pub claim_ids: Vec<String>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeSharedH1EvidenceSet {
+    pub evidence_set_id: String,
+    pub commitment_profile: String,
+    pub evidence_set_sha256: String,
+    pub record_count: i64,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct H1PublicResultEnvelopeVersionedArtifact {
+    pub id: String,
+    pub version: String,
+    pub sha256: String,
 }
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -555,6 +1169,34 @@ pub struct MomentContextState {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct PrivateEvidenceIndex {
+    pub schema_version: String,
+    pub evidence_set_id: String,
+    pub commitment_profile: String,
+    pub evidence_set_sha256: String,
+    pub record_count: i64,
+    pub storage_class: String,
+    pub domain_separator: String,
+    pub canonicalization_profile: String,
+    pub record_order: String,
+    pub private_nonce: String,
+    pub records: Vec<PrivateEvidenceIndexPrivateRecord>,
+    pub retention_disposition: PrivateEvidenceIndexRetentionDisposition,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct PrivateEvidenceIndexPrivateRecord {
+    pub opaque_ref: String,
+    pub package_scope: PrivateEvidenceIndexPrivateRecordPackageScope,
+    pub payload_schema_id: String,
+    pub payload_sha256: String,
+    pub accounting_status: PrivateEvidenceIndexPrivateRecordAccountingStatus,
+    pub reason: Option<PrivateEvidenceIndexPrivateRecordReason>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct ResponseObservation {
     pub schema_version: String,
     pub id: String,
@@ -618,6 +1260,55 @@ pub struct ResponseObservationPerceivedExpression {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
+pub struct ResponseObservationV2 {
+    pub schema_version: String,
+    pub id: String,
+    pub session_id: String,
+    pub exposure_id: String,
+    pub observed_at: String,
+    pub window: ResponseObservationV2Window,
+    pub instrument_version: String,
+    pub revision: i64,
+    pub supersedes_response_id: Option<String>,
+    pub correction_reason: Option<String>,
+    pub perceived_expression: ResponseObservationV2ResponseState,
+    pub felt_state: ResponseObservationV2ResponseState,
+    pub wanted_intensity: Option<ResponseObservationV2WantedIntensity>,
+    pub helpfulness: Option<f64>,
+    pub resonance: Option<f64>,
+    pub mismatch: Option<f64>,
+    pub harm: Option<f64>,
+    pub surprise: Option<f64>,
+    pub interaction_burden: Option<f64>,
+    pub session_burden: Option<f64>,
+    pub ongoing_effect: Option<ResponseObservationV2OngoingEffect>,
+    pub aftereffect_meaning: Option<String>,
+    pub missingness: Vec<ResponseObservationV2MissingnessEntry>,
+    pub stopped_early: bool,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub notes: Option<String>,
+    pub later_aftereffect_requested: bool,
+    pub allow_personal_model_update: bool,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ResponseObservationV2MissingnessEntry {
+    pub field: ResponseObservationV2MissingnessEntryField,
+    pub reason: ResponseObservationV2MissingnessEntryReason,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ResponseObservationV2ResponseState {
+    pub description: Option<String>,
+    pub valence: Option<f64>,
+    pub arousal: Option<f64>,
+    pub intensity: Option<f64>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
 pub struct WorkingContextProjection {
     pub schema_version: String,
     pub id: String,
@@ -651,6 +1342,12 @@ pub const CONTRACT_SCHEMAS: &[crate::ContractSchema] = &[
         document: include_str!("../../../contracts/schemas/consent-grant.v1.schema.json"),
     },
     crate::ContractSchema {
+        name: "consent-grant-v2",
+        filename: "schemas/consent-grant.v2.schema.json",
+        id: "urn:egohygiene:antidote:schema:consent-grant:v2",
+        document: include_str!("../../../contracts/schemas/consent-grant.v2.schema.json"),
+    },
+    crate::ContractSchema {
         name: "generation-result",
         filename: "schemas/generation-result.v1.schema.json",
         id: "urn:egohygiene:antidote:schema:generation-result:v1",
@@ -661,6 +1358,14 @@ pub const CONTRACT_SCHEMAS: &[crate::ContractSchema] = &[
         filename: "schemas/generation-spec.v1.schema.json",
         id: "urn:egohygiene:antidote:schema:generation-spec:v1",
         document: include_str!("../../../contracts/schemas/generation-spec.v1.schema.json"),
+    },
+    crate::ContractSchema {
+        name: "h1-public-result-envelope",
+        filename: "schemas/h1-public-result-envelope.v1.schema.json",
+        id: "urn:egohygiene:antidote:schema:h1-public-result-envelope:v1",
+        document: include_str!(
+            "../../../contracts/schemas/h1-public-result-envelope.v1.schema.json"
+        ),
     },
     crate::ContractSchema {
         name: "journey-plan",
@@ -675,10 +1380,22 @@ pub const CONTRACT_SCHEMAS: &[crate::ContractSchema] = &[
         document: include_str!("../../../contracts/schemas/moment-context.v1.schema.json"),
     },
     crate::ContractSchema {
+        name: "private-evidence-index",
+        filename: "schemas/private-evidence-index.v1.schema.json",
+        id: "urn:egohygiene:antidote:schema:private-evidence-index:v1",
+        document: include_str!("../../../contracts/schemas/private-evidence-index.v1.schema.json"),
+    },
+    crate::ContractSchema {
         name: "response-observation",
         filename: "schemas/response-observation.v1.schema.json",
         id: "urn:egohygiene:antidote:schema:response-observation:v1",
         document: include_str!("../../../contracts/schemas/response-observation.v1.schema.json"),
+    },
+    crate::ContractSchema {
+        name: "response-observation-v2",
+        filename: "schemas/response-observation.v2.schema.json",
+        id: "urn:egohygiene:antidote:schema:response-observation:v2",
+        document: include_str!("../../../contracts/schemas/response-observation.v2.schema.json"),
     },
     crate::ContractSchema {
         name: "working-context-projection",

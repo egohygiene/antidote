@@ -46,8 +46,9 @@ updated: 2026-09-07
 **Current gate:** The MVP implementation sequence is deliberately paused after
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
 section boundaries, visual governance, mathematical model, System Design,
-prospective feasibility method, and governed empty-state Results reporting
-through issue #41. Issue #42 is the next writing slice, followed by the
+prospective feasibility method, and governed empty-state Results reporting.
+Issue #82 corrects their pre-collection protocol and reporting contracts before
+issue #42 becomes the next writing slice, followed by the
 accountability and review sequence through issue #48 and the launch sequence in
 issue #69.
 
@@ -133,7 +134,7 @@ precedents, and candidate contribution claims across the research streams.
 id: ANT-Q02B
 status: active
 depends_on: [ANT-Q01A, ANT-Q02]
-issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77"]
+issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77", "egohygiene/antidote#82"]
 -->
 
 #### ANT-Q02B — Write and continuously publish the first paper
@@ -260,19 +261,20 @@ response, and exports provenance.
 id: ANT-Q05
 status: planned
 depends_on: [ANT-Q02, ANT-Q04]
-issues: ["egohygiene/antidote#40", "egohygiene/antidote#41"]
+issues: ["egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#82"]
 -->
 
 #### ANT-Q05 — Freeze the N-of-1 feasibility protocol
 
 **State:** `planned`
 
-**Current evidence:** Issue #40 freezes version 1.0.0 as a design-protocol
-artifact with collection authority set to false. The protocol cannot activate
-until ANT-Q04 and every independent human-collection gate are complete. Issue
-#41 binds every future result slot to a source package, protocol version,
-analysis, evidence class, and promotion review while rendering unavailable
-states without fabricated zeroes.
+**Current evidence:** Issue #40 froze version 1.0.0 as a non-collecting design
+artifact, and issue #41 added its empty-state reporting contract. Corrective
+issue #82 preserves both originals and adds protocol and reporting version
+1.1.0 before any qualifying record: the balanced schedule space, response
+contracts, analysis choices, public evidence-envelope boundary, and result-slot
+coverage are explicit. Collection authority remains false. The protocol cannot
+activate until ANT-Q04 and every independent human-collection gate are complete.
 
 **Outcome:** Variables, conditions, measures, assignments, analysis, safety,
 consent, retention, and provenance are explicit before formal collection.

@@ -1,0 +1,150 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "urn:egohygiene:antidote:schema:private-evidence-index:v1",
+  "title": "Antidote Private Evidence Index v1",
+  "$comment": "Instances contain private commitment material and must remain outside Git. Opaque references are freshly randomized within one package and are never stable cross-package pseudonyms. The evidence_set_sha256 preimage is exactly UTF8(domain_separator) || 0x00 || HEX-DECODE(private_nonce) || 0x00 || RFC8785(canonical_index), where canonical_index contains exactly evidence_set_id, commitment_profile, record_count, and records; records are sorted first by package_scope and then by opaque_ref in ascending UTF-8 byte order before RFC 8785 serialization. schema_version, evidence_set_sha256, storage_class, domain_separator, canonicalization_profile, record_order, and retention_disposition are excluded from canonical_index. No other secret, path, identifier, timestamp, or unstated normalization participates in the commitment.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": [
+    "schema_version",
+    "evidence_set_id",
+    "commitment_profile",
+    "evidence_set_sha256",
+    "record_count",
+    "storage_class",
+    "domain_separator",
+    "canonicalization_profile",
+    "record_order",
+    "private_nonce",
+    "records",
+    "retention_disposition"
+  ],
+  "properties": {
+    "schema_version": { "const": "1.0.0" },
+    "evidence_set_id": { "type": "string", "pattern": "^ANT-ESET-H1-[A-Z0-9-]+$" },
+    "commitment_profile": { "const": "antidote-evidence-set-commitment/v1" },
+    "evidence_set_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "record_count": {
+      "$comment": "Must equal records.length before commitment calculation; JSON Schema cannot express that cross-field equality.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "storage_class": { "const": "private-outside-git" },
+    "domain_separator": { "const": "ANTIDOTE-H1-EVIDENCE-SET-COMMITMENT-V1" },
+    "canonicalization_profile": { "const": "RFC8785" },
+    "record_order": { "const": "package_scope_then_opaque_ref_utf8_ascending" },
+    "private_nonce": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+    "records": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": { "$ref": "#/$defs/privateRecord" }
+    },
+    "retention_disposition": {
+      "type": "string",
+      "enum": ["retained-private", "destroyed-with-tombstone", "not-applicable"]
+    }
+  },
+  "$defs": {
+    "privateRecord": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": [
+        "opaque_ref",
+        "package_scope",
+        "payload_schema_id",
+        "payload_sha256",
+        "accounting_status",
+        "reason"
+      ],
+      "properties": {
+        "opaque_ref": {
+          "$comment": "Fresh package-local random reference; never reuse it in another package or as a participant pseudonym.",
+          "type": "string",
+          "pattern": "^pkg_[A-Za-z0-9_-]{32,64}$"
+        },
+        "package_scope": {
+          "type": "string",
+          "enum": ["flow", "response", "safety", "audit", "physiology"]
+        },
+        "payload_schema_id": { "type": "string", "pattern": "^urn:egohygiene:antidote:schema:[a-z0-9-]+:v[0-9]+$" },
+        "payload_sha256": { "type": "string", "pattern": "^[a-f0-9]{64}$" },
+        "accounting_status": {
+          "type": "string",
+          "enum": ["included", "excluded", "missing", "withdrawn", "failed"]
+        },
+        "reason": {
+          "type": ["string", "null"],
+          "enum": [
+            "not_prompted",
+            "declined",
+            "missed_window",
+            "technical_failure",
+            "interrupted",
+            "not_applicable",
+            "protocol_exclusion",
+            "withdrawn",
+            null
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "if": {
+            "properties": { "accounting_status": { "const": "included" } },
+            "required": ["accounting_status"]
+          },
+          "then": { "properties": { "reason": { "const": null } } }
+        },
+        {
+          "if": {
+            "properties": { "accounting_status": { "const": "excluded" } },
+            "required": ["accounting_status"]
+          },
+          "then": { "properties": { "reason": { "const": "protocol_exclusion" } } }
+        },
+        {
+          "if": {
+            "properties": { "accounting_status": { "const": "missing" } },
+            "required": ["accounting_status"]
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "type": "string",
+                "enum": [
+                  "not_prompted",
+                  "declined",
+                  "missed_window",
+                  "technical_failure",
+                  "interrupted",
+                  "not_applicable"
+                ]
+              }
+            }
+          }
+        },
+        {
+          "if": {
+            "properties": { "accounting_status": { "const": "withdrawn" } },
+            "required": ["accounting_status"]
+          },
+          "then": { "properties": { "reason": { "const": "withdrawn" } } }
+        },
+        {
+          "if": {
+            "properties": { "accounting_status": { "const": "failed" } },
+            "required": ["accounting_status"]
+          },
+          "then": {
+            "properties": {
+              "reason": {
+                "type": "string",
+                "enum": ["technical_failure", "interrupted"]
+              }
+            }
+          }
+        }
+      ]
+    }
+  }
+}

@@ -84,8 +84,9 @@ without qualifying implementation or structured observations.
 - [x] [#37 — Write the Introduction and research-gap section](https://github.com/egohygiene/antidote/issues/37)
 - [x] [#38 — Write Related Work and the evidence synthesis](https://github.com/egohygiene/antidote/issues/38)
 - [x] [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39) — [equation registry](equations/registry.json)
-- [x] [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40) — [frozen design protocol](../experiments/protocols/antidote-feasibility-v1.json)
-- [x] [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41) — [governed reporting contract](../experiments/reporting/results-reporting-v1.json)
+- [x] [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40) — [preserved original protocol](../experiments/protocols/antidote-feasibility-v1.json), superseded before collection by the [corrected v1.1 protocol](../experiments/protocols/antidote-feasibility-v1.1.json) under #82
+- [x] [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41) — [preserved original reporting contract](../experiments/reporting/results-reporting-v1.json), superseded before collection by the [corrected v1.1 reporting contract](../experiments/reporting/results-reporting-v1.1.json) under #82
+- [x] [#82 — Correct pre-collection protocol and Results contract drift](https://github.com/egohygiene/antidote/issues/82) — [current protocol](../experiments/protocols/antidote-feasibility-v1.1.json) and [current reporting contract](../experiments/reporting/results-reporting-v1.1.json)
 
 The Results issue creates an honest reporting contract. It does not authorize
 invented values or promote synthetic fixtures into human evidence. Technical
@@ -143,7 +144,7 @@ the magazine and LinkedIn post cannot introduce claims absent from it.
 | `07-limitations-and-ethics.tex` | #43 | Validity, risk, privacy, consent, and ethics status |
 | `08-availability-and-contributions.tex` | #44 | Verified access, reproducibility, roles, funding, and conflicts |
 | `09-conclusion.tex` | #47 | Whole-paper answer constrained by results status and limitations |
-| `appendix.tex` | #39, #40, #41, #43, #44, #47, #77 | Notation, equation status, protocol, claim audit, consent, provenance, research shelf, and migration record |
+| `appendix.tex` | #39, #40, #41, #43, #44, #47, #77, #82 | Notation, equation status, protocol, claim audit, consent, provenance, research shelf, and migration record |
 | title, abstract, and coordinator | #47 | Whole-paper synthesis and consistency |
 
 ## Initial visual inventory
