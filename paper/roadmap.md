@@ -83,8 +83,8 @@ without qualifying implementation or structured observations.
 
 - [x] [#37 — Write the Introduction and research-gap section](https://github.com/egohygiene/antidote/issues/37)
 - [x] [#38 — Write Related Work and the evidence synthesis](https://github.com/egohygiene/antidote/issues/38)
-- [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39) — next after #77
-- [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40)
+- [x] [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39) — [equation registry](equations/registry.json)
+- [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40) — next
 - [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41)
 
 The Results issue creates an honest reporting contract. It does not authorize

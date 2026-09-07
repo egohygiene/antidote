@@ -33,7 +33,7 @@ class PlaceholderContractTests(unittest.TestCase):
         """Every active content gap must have one stable governed identity."""
         result = PLACEHOLDERS.validate_placeholder_system(ROOT)
         self.assertEqual(result["errors"], [])
-        self.assertEqual(len(result["active"]), 42)
+        self.assertEqual(len(result["active"]), 33)
         identifiers = [record["id"] for record in result["active"]]
         self.assertEqual(len(identifiers), len(set(identifiers)))
 
@@ -44,7 +44,7 @@ class PlaceholderContractTests(unittest.TestCase):
         )
         self.assertEqual(
             len([error for error in result["errors"] if "blocks submission-ready" in error]),
-            42,
+            33,
         )
 
     def test_unregistered_placeholder_is_rejected(self) -> None:
@@ -69,11 +69,16 @@ class PlaceholderContractTests(unittest.TestCase):
             root = self.fixture(temporary)
             path = root / "paper" / "skeleton.json"
             manifest = json.loads(path.read_text(encoding="utf-8"))
-            manifest["placeholders"][0]["state"] = "resolved"
+            active = next(
+                record
+                for record in manifest["placeholders"]
+                if record["state"] == "active"
+            )
+            active["state"] = "resolved"
             path.write_text(json.dumps(manifest), encoding="utf-8")
             result = PLACEHOLDERS.validate_placeholder_system(root)
             self.assertIn(
-                "ANT-PH-SYS-001 resolved placeholder remains in manuscript source",
+                f"{active['id']} resolved placeholder remains in manuscript source",
                 result["errors"],
             )
 

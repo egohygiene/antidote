@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-architecture
 title: Antidote Architecture
 kind: architecture-document
-version: 0.9.0
+version: 0.9.1
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-08-30
+updated: 2026-09-05
 governed_by:
   - architecture-architecture
 depends_on:
@@ -227,8 +227,10 @@ The implemented adapter verifies each serialized event against its content
 digest and the domain replay rules, uses optimistic expected-version appends,
 and treats an exact retry as idempotent. Named projection tables are disposable
 event-classified views with source-event lineage, not a second authority. Object
-writes use synchronized temporary files followed by an atomic no-clobber link. The
-desktop host has not yet selected or opened production database/object paths.
+writes use synchronized temporary files followed by an atomic no-clobber link.
+The desktop host opens an application-local SQLite session record and artifact
+directory. Privacy-ready retention, encryption, recovery, deletion, backup,
+and production object-path policy remain unresolved.
 
 ## Repository boundaries
 
@@ -322,8 +324,9 @@ surfaces even though their evidence may later connect.
 - **Observed:** The publication architecture, framework-independent session
   core, Level-1 journey planner, generation orchestrator, SQLite event adapter,
   named lineage projections, content-addressed object store, deterministic mock
-  worker, and bounded Rust process supervisor are implemented. Desktop
-  composition remains planned.
+  worker, bounded Rust process supervisor, and synthetic desktop-session
+  composition are implemented. This does not include a real music model,
+  adaptive continuity renderer, sensor path, or privacy-ready storage.
 - **Decided for the MVP:** Tauri + React hosts a Rust authority boundary and a
   capability-scoped Python/PyTorch worker; context is explicit and local-first.
 - **Proposed:** W3C PROV concepts and RO-Crate shape shareable experiment

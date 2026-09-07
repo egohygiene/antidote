@@ -1,0 +1,192 @@
+{
+  "schema": "antidote.equation-registry/v1",
+  "version": "0.1.0",
+  "status": "governed",
+  "governed_by": "egohygiene/antidote#39",
+  "source": "paper/sections/03-system-design.tex",
+  "classification_order": [
+    "definitional",
+    "conceptual",
+    "proposed-operationalization",
+    "estimated-model",
+    "future-empirical-model"
+  ],
+  "implementation_states": [
+    "implemented-mock-slice",
+    "formalized-only",
+    "unavailable"
+  ],
+  "equations": [
+    {
+      "id": "ANT-EQ-001",
+      "label": "eq:moment-record",
+      "class": "definitional",
+      "implementation_state": "implemented-mock-slice",
+      "plain_language": "Names the consent-bounded information available for one individual at one decision point; it is not a fixed representation of the person.",
+      "prohibited_inference": "The tuple does not reveal a true emotion, diagnosis, need, or successful outcome."
+    },
+    {
+      "id": "ANT-EQ-002",
+      "label": "eq:context-store",
+      "class": "definitional",
+      "implementation_state": "implemented-mock-slice",
+      "plain_language": "Separates consented source events, replaceable projections, and their versions and provenance.",
+      "prohibited_inference": "The partition does not prove privacy, truth, retention compliance, or correct interpretation."
+    },
+    {
+      "id": "ANT-EQ-003",
+      "label": "eq:working-projection",
+      "class": "proposed-operationalization",
+      "implementation_state": "implemented-mock-slice",
+      "plain_language": "Derives the minimized working view permitted by the active consent grant for one declared purpose.",
+      "prohibited_inference": "A projection is not permission to use excluded, expired, revoked, or out-of-purpose context."
+    },
+    {
+      "id": "ANT-EQ-004",
+      "label": "eq:effective-knob",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Makes current user direction authoritative over accepted suggestions and neutral defaults.",
+      "prohibited_inference": "A knob value does not directly control acoustics, emotion, usefulness, or benefit."
+    },
+    {
+      "id": "ANT-EQ-005",
+      "label": "eq:mixin-smoothing",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Low-pass filters ordinary normalized control changes to reduce jitter while leaving stop, revocation, and exclusion immediate.",
+      "prohibited_inference": "Control smoothing does not establish musical, waveform, or emotional continuity."
+    },
+    {
+      "id": "ANT-EQ-006",
+      "label": "eq:semantic-condition",
+      "class": "definitional",
+      "implementation_state": "formalized-only",
+      "plain_language": "Combines typed semantic mixins under explicit conflict, exclusion, and priority rules.",
+      "prohibited_inference": "Typed composition is not raw text concatenation or evidence of perceptually linear mixing."
+    },
+    {
+      "id": "ANT-EQ-007",
+      "label": "eq:adapter-compilation",
+      "class": "proposed-operationalization",
+      "implementation_state": "formalized-only",
+      "plain_language": "Compiles a model-independent journey into a capability-bounded adapter conditioning state and then an optional native prompt.",
+      "prohibited_inference": "Compilation does not guarantee control adherence, model quality, or felt response."
+    },
+    {
+      "id": "ANT-EQ-008",
+      "label": "eq:belief-state",
+      "class": "estimated-model",
+      "implementation_state": "unavailable",
+      "plain_language": "Represents alternative provisional state hypotheses conditioned on authorized observations and prior controls.",
+      "prohibited_inference": "The belief distribution is not the person's true inner state, an objective need, or a diagnosis."
+    },
+    {
+      "id": "ANT-EQ-009",
+      "label": "eq:receding-horizon",
+      "class": "conceptual",
+      "implementation_state": "unavailable",
+      "plain_language": "Transfers constrained receding-horizon comparison to short, inspectable journey proposals while retaining human approval.",
+      "prohibited_inference": "The equation does not model a person as a known plant or establish stability, optimality, or intervention benefit."
+    },
+    {
+      "id": "ANT-EQ-010",
+      "label": "eq:buffer-deadline",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Requires verified playable audio to cover observation, planning, generation, verification, scheduling, and uncertainty time.",
+      "prohibited_inference": "Meeting the inequality does not establish musical continuity, subjective fit, or real-time performance before measurement."
+    },
+    {
+      "id": "ANT-EQ-011",
+      "label": "eq:semantic-continuity",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Measures bounded change between adjacent typed semantic conditions.",
+      "prohibited_inference": "Semantic proximity does not guarantee perceptual linearity, smooth audio, or desired emotion."
+    },
+    {
+      "id": "ANT-EQ-012",
+      "label": "eq:acoustic-continuity",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Combines normalized boundary distances for measured musical and acoustic features.",
+      "prohibited_inference": "A low aggregate distance does not prove semantic coherence, seamlessness, safety, or benefit."
+    },
+    {
+      "id": "ANT-EQ-013",
+      "label": "eq:equal-power-crossfade",
+      "class": "proposed-operationalization",
+      "implementation_state": "unavailable",
+      "plain_language": "Defines one gain curve for joining two verified signals over an accepted overlap window.",
+      "prohibited_inference": "A crossfade cannot repair incompatible rhythm, harmony, phrase, timbre, meaning, or emotional pacing."
+    },
+    {
+      "id": "ANT-EQ-014",
+      "label": "eq:response-record",
+      "class": "definitional",
+      "implementation_state": "implemented-mock-slice",
+      "plain_language": "Keeps perceived expression, felt response, intensity appraisal, usefulness, harm, resonance, mismatch, and aftereffect as separate fields linked to exposure.",
+      "prohibited_inference": "Intensity, catharsis, completion, or engagement is not automatically success or harm."
+    },
+    {
+      "id": "ANT-EQ-015",
+      "label": "eq:response-model",
+      "class": "future-empirical-model",
+      "implementation_state": "unavailable",
+      "plain_language": "States the future within-person response distribution that would require qualifying exposure-linked observations.",
+      "prohibited_inference": "No response predictor is fitted, validated, or authorized to steer generation."
+    },
+    {
+      "id": "ANT-EQ-016",
+      "label": "eq:personal-update",
+      "class": "future-empirical-model",
+      "implementation_state": "unavailable",
+      "plain_language": "Shows a generic future posterior update while preserving evidence and a prior model snapshot.",
+      "prohibited_inference": "The form supplies no valid likelihood, causal effect, forgetting rule, sample size, or autonomous update authority."
+    }
+  ],
+  "symbols": [
+    {"latex": "i", "unit": "index", "meaning": "Individual identifier; never a fixed person feature vector."},
+    {"latex": "t", "unit": "decision index", "meaning": "Decision point within or between sessions."},
+    {"latex": "n", "unit": "stage index", "meaning": "Journey stage or adjacent generated-audio segment."},
+    {"latex": "z_{i,t}", "unit": "heterogeneous record", "meaning": "Consent-bounded moment information available to the system."},
+    {"latex": "o^{\\mathrm{usr}}_{i,t}", "unit": "observation record", "meaning": "Explicit person-authored check-in and correction observations."},
+    {"latex": "o^{\\mathrm{opt}}_{i,t}", "unit": "observation record", "meaning": "Optional separately consented measurements or derived observations."},
+    {"latex": "g_{i,t}", "unit": "journey representation", "meaning": "Desired direction or time-indexed journey proposal, not a guaranteed state."},
+    {"latex": "\\mathcal{H}_{i,<t}", "unit": "record set", "meaning": "Prior evidence eligible under current retention, consent, and relevance review."},
+    {"latex": "S^{\\mathrm{ctx}}_{i,t}", "unit": "record tuple", "meaning": "Context state separating source events, projections, and provenance."},
+    {"latex": "L_{i,t}", "unit": "event set", "meaning": "Consented lossless source-event record."},
+    {"latex": "P_{i,t}", "unit": "projection set", "meaning": "Replaceable derived context views."},
+    {"latex": "V_{i,t}", "unit": "version and provenance set", "meaning": "Lineage and version information for context derivations."},
+    {"latex": "A_{i,t}", "unit": "authority set", "meaning": "Active source-, purpose-, action-, time-, and retention-scoped consent grant."},
+    {"latex": "c^{\\mathrm{work}}_{i,t}", "unit": "semantic record", "meaning": "Reviewed working context permitted for the current purpose."},
+    {"latex": "\\pi", "unit": "projection operator", "meaning": "Consent-constrained derivation from retained context to a working view."},
+    {"latex": "m_j", "unit": "typed control", "meaning": "Versioned semantic mixin with purpose, bounds, neutral position, and exclusions."},
+    {"latex": "k^{\\mathrm{usr}}_{j,t}, k^{\\mathrm{acc}}_{j,t}, k^0_j", "unit": "dimensionless in [0,1]", "meaning": "Current user value, explicitly accepted suggestion, and neutral default."},
+    {"latex": "\\alpha_{j,t}", "unit": "dimensionless in [0,1]", "meaning": "Smoothed effective mixin authority for an ordinary non-safety control."},
+    {"latex": "\\rho_j", "unit": "dimensionless in (0,1]", "meaning": "Visible mixin-specific smoothing rate."},
+    {"latex": "q_{i,n}", "unit": "typed semantic condition", "meaning": "Resolved, model-independent semantic condition for stage n."},
+    {"latex": "\\oplus", "unit": "typed composition operator", "meaning": "Versioned semantic composition; not numerical addition or text concatenation."},
+    {"latex": "\\Xi_{i,t}", "unit": "constraint set", "meaning": "Active exclusions, safety constraints, and prohibited transitions."},
+    {"latex": "\\prec_{i,t}", "unit": "precedence relation", "meaning": "Visible conflict-resolution and authority order."},
+    {"latex": "J_{i,t}", "unit": "journey-plan record", "meaning": "Accepted model-independent stages, semantic intent, and acoustic controls."},
+    {"latex": "\\mathcal{K}_a", "unit": "capability set", "meaning": "Controls and limits declared by model adapter a."},
+    {"latex": "\\gamma^{(a)}_{i,n}", "unit": "conditioning record", "meaning": "Adapter-bounded conditioning state with uncertainty, conflicts, and provenance."},
+    {"latex": "\\varphi^{(a)}_{i,n}", "unit": "adapter-native text or tokens", "meaning": "Optional prompt projection of the conditioning state; not canonical intent."},
+    {"latex": "b_{i,t}(x)", "unit": "probability", "meaning": "Uncertain system belief assigned to candidate represented state x."},
+    {"latex": "U, u_{i,t}", "unit": "control sequence and control record", "meaning": "Candidate horizon and one semantic or musical control proposal."},
+    {"latex": "H_p", "unit": "decision steps", "meaning": "Finite planning horizon."},
+    {"latex": "\\bar{L}_g,\\bar{D}_{\\Delta},\\bar{R},\\bar{C}_{\\mathrm{burden}}", "unit": "normalized dimensionless costs", "meaning": "Journey mismatch, control change, risk or uncertainty, and interaction burden terms."},
+    {"latex": "B_{i,t}", "unit": "seconds", "meaning": "Duration of verified playable audio already buffered."},
+    {"latex": "\\ell_{\\mathrm{observe}},\\ell_{\\mathrm{plan}},\\ell_{\\mathrm{generate}},\\ell_{\\mathrm{verify}},\\ell_{\\mathrm{schedule}}", "unit": "seconds", "meaning": "Measured component latencies along the generate-ahead path."},
+    {"latex": "M_{i,t}", "unit": "seconds", "meaning": "Hardware- and adapter-specific latency uncertainty margin."},
+    {"latex": "D^{\\mathrm{sem}}_n,D^{\\mathrm{ac}}_n", "unit": "dimensionless", "meaning": "Semantic-plan and measured acoustic-boundary distances."},
+    {"latex": "\\mathcal{F},f_r,d_r,w_r", "unit": "feature set, extractor, normalized distance, and dimensionless weight", "meaning": "Versioned components of the acoustic-boundary comparison."},
+    {"latex": "a_n(s),y(s)", "unit": "sample amplitude", "meaning": "Adjacent input signals and renderer output over an overlap window."},
+    {"latex": "e_{i,t}", "unit": "exposure record", "meaning": "What content was actually played, for how long, and with what interruption state."},
+    {"latex": "\\mathsf{Y}_{i,t}", "unit": "heterogeneous response record", "meaning": "Separated perceived, felt, evaluative, harm, mismatch, and aftereffect observations."},
+    {"latex": "\\theta_i", "unit": "model parameter set", "meaning": "Versioned person-specific response-model hypothesis, if a later protocol fits one."},
+    {"latex": "\\mathcal{D}_{i,1:t}", "unit": "evidence set", "meaning": "Qualifying provenance-linked observations through decision point t."}
+  ]
+}

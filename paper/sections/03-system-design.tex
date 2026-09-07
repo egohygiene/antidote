@@ -2,75 +2,528 @@
 \section{System design}
 \label{sec:system-design}
 
-The proposed system is organized as an interpretable loop rather than an
-opaque optimization target. Semantic intent describes the state transition a
-person is seeking, the generator produces an acoustic realization, and the
-research record preserves response alongside the exact controls and artifact
-identity. Feedback may inform a later trial only under a versioned protocol.
-The holistic architecture, authority boundaries, and two-rate timing model are
-allocated in the governed visual manifest for production alongside this
-section rather than implied by the simpler introductory loop.
+Antidote is designed as an inspectable research instrument, not as an opaque
+audio recommender or an autonomous affect controller. Its unit of inquiry is a
+person encountering a particular acoustic realization in a particular moment
+after approving the context and journey that informed it. The architecture
+therefore preserves each transformation---source record, working projection,
+semantic intent, journey plan, model conditioning, generated artifact,
+measured acoustics, exposure, response, and any later update---as a separately
+identified object. This section addresses RQ1 by defining that chain and the
+authority, timing, uncertainty, and failure boundaries around it.
 
-\subsection{Conceptual conditional model}
+The equations below are a design language. Each is visibly classified as
+\emph{definitional}, \emph{conceptual}, a \emph{proposed operationalization},
+an \emph{estimated model}, or a \emph{future empirical model}. A definition
+names records without asserting a causal law. A conceptual equation transfers
+a useful structure from another field. A proposed operationalization states a
+quantity that could be implemented and tested. An estimated model produces an
+uncertain system view rather than ground truth. A future empirical model is
+neither fitted nor used by the present prototype. Appendix~\ref{app:notation-glossary}
+centralizes the notation, and Appendix~\ref{app:equation-classification}
+records the status and prohibited inference of every equation.
+
+\subsection{Person--moment conditional model}
 \label{sec:conceptual-conditional-model}
 
-Let $A$ denote generated audio, $S$ the current state, $T$ the desired state or
-trajectory, $H$ the individual's prior response history, and $C$ the semantic
-and creative control context. The working model considers
+Let $i$ index an individual and $t$ a decision point within or between
+sessions. Antidote does not represent the person as a fixed feature vector.
+Instead, it defines the information available for one bounded moment as the
+heterogeneous record
 \begin{equation}
-  P(A \mid S, T, H, C).
-  \label{eq:conditional-audio}
+  z_{i,t} =
+  \left(
+    o^{\mathrm{usr}}_{i,t},
+    o^{\mathrm{opt}}_{i,t},
+    c^{\mathrm{work}}_{i,t},
+    g_{i,t},
+    k^{\mathrm{usr}}_{i,t},
+    \mathcal{H}_{i,<t}
+  \right).
+  \label{eq:moment-record}
 \end{equation}
-After exposure at trial $t$, audio $A_t$ is associated with measured response
-$R_t$. The history may then be updated with the tuple
-$(S_t, T_t, C_t, A_t, R_t)$. Equation~\ref{eq:conditional-audio} is a conceptual
-model, not an identified statistical model or demonstrated mechanism.
+\noindent\textit{ANT-EQ-001---Definitional; implementation: represented in
+the executable mock slice.}
+
+Here $o^{\mathrm{usr}}$ contains explicit check-in observations,
+$o^{\mathrm{opt}}$ contains any separately consented optional observations,
+$c^{\mathrm{work}}$ is the reviewed context projection, $g$ is the desired
+journey, $k^{\mathrm{usr}}$ contains direct semantic-control settings, and
+$\mathcal{H}$ denotes eligible prior evidence. Equation~\ref{eq:moment-record}
+is a tuple, not a sum: its members need not share units and none is silently
+converted into ``the person's state.'' Missing optional observations remain
+missing. The same individual may therefore produce different moment records
+at two times, and the same audio may be associated with different responses
+without either response being treated as anomalous.
+
+The desired journey $g_{i,t}$ is a direction and time-indexed proposal---for
+example, staying with, softening, exploring, releasing, focusing, or closing---
+rather than a promised terminal state. The current schemas permit compact
+valence, arousal, intensity, and confidence fields, but preserve free-text
+description because a low-dimensional affect coordinate cannot exhaust the
+person's meaning. Likewise, prior history is eligible evidence only when its
+retention and learning permissions remain active and the person accepts its
+relevance to the present moment.
 
 \subsection{Inspectable record chain}
 \label{sec:design-record-chain}
 
-\AntidotePlaceholder{ANT-PH-SYS-001}{Inspectable record chain}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum, donec ullamcorper nulla non metus auctor fringilla, sed posuere consectetur est at lobortis.}
+The context boundary separates retained source records from replaceable
+interpretations. Following the repository's personal-model contract, the
+context state is defined as
+\begin{equation}
+  S^{\mathrm{ctx}}_{i,t} =
+  \left(L_{i,t}, P_{i,t}, V_{i,t}\right),
+  \label{eq:context-store}
+\end{equation}
+\noindent\textit{ANT-EQ-002---Definitional; implementation: append-only events
+and derived projections exist for the executable mock slice.}
+
+where $L$ is the consented source-event record, $P$ contains derived
+projections, and $V$ contains their versions and provenance. This partition is
+compatible with local-first and event-derived views, but neither local storage
+nor an append-only history proves privacy, truth, or correct interpretation
+\citep{kleppmann2019localfirst,lin2026scroll}. A current consent grant
+$A_{i,t}$ then constrains the view used for a declared purpose:
+\begin{equation}
+  c^{\mathrm{work}}_{i,t}
+  = \pi\!\left(S^{\mathrm{ctx}}_{i,t}; A_{i,t}\right).
+  \label{eq:working-projection}
+\end{equation}
+\noindent\textit{ANT-EQ-003---Proposed operationalization; implementation:
+manual session-scoped projection is enforced in the executable mock slice.}
+
+The projection operator $\pi$ may select, minimize, summarize, or omit records,
+but it must preserve source-event identifiers, derivation version, purpose,
+review state, expiry, and any person-authored edit or exclusion. Revoked,
+expired, excluded, or out-of-purpose fields do not enter the working view. The
+source events remain distinguishable from the projection so a new derivation
+can be audited without rewriting what was originally authorized. Consent to
+inspect, project, generate, retain, learn, export, and publish remains separate;
+manual semantic entry remains usable without historical context.
+
+The record chain continues from the accepted working projection to an immutable
+moment record, a versioned journey-plan revision, an approved generation
+specification, a generation attempt, a content-hashed artifact and feature
+report, an actual exposure, and separated response observations. No skipped
+link is inferred from a later one: generating an artifact does not establish
+playback, and playback does not establish a response.
 
 \AntidoteFigure{consent-scoped-context-projection}
 
-\subsection{Semantic intent and conditioning state}
+\subsection{Semantic intent, mixins, and adapter compilation}
 \label{sec:design-semantic-intent}
 
-\AntidotePlaceholder{ANT-PH-SYS-002}{Semantic intent and conditioning state}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod, cras mattis consectetur purus sit amet fermentum.}
+Semantic intent is the model-independent statement of what the person wants a
+journey to explore. It combines a desired transition with words, metaphors,
+memories, inclusions, exclusions, priorities, and bounded acoustic preferences.
+A semantic mixin $m_j$ is a typed and versioned control object with a
+human-readable purpose, neutral position, bounds, conflicts, and adapter
+mapping. It is not a hidden prompt fragment and does not claim a linear mapping
+to acoustics or felt emotion.
+
+For mixin $j$, the effective normalized control is determined by an explicit
+authority order:
+\begin{equation}
+  k^{\mathrm{eff}}_{j,t} =
+  \begin{cases}
+    k^{\mathrm{usr}}_{j,t}, & \text{when the person sets a current value},\\
+    k^{\mathrm{acc}}_{j,t}, & \text{when the person accepts a suggestion},\\
+    k^{0}_{j}, & \text{otherwise},
+  \end{cases}
+  \qquad k^{\mathrm{eff}}_{j,t}\in[0,1].
+  \label{eq:effective-knob}
+\end{equation}
+\noindent\textit{ANT-EQ-004---Proposed operationalization; implementation:
+the generalized mixin control surface is not implemented.}
+
+An inferred value has no branch in Equation~\ref{eq:effective-knob}: it gains
+authority only through explicit acceptance. A current person-authored value
+therefore outranks an accepted suggestion, which outranks the neutral default.
+An active exclusion or safety constraint may reject a value or block a
+transition, but it may not silently substitute a different intent. Stop,
+revocation, and exclusion act immediately and are never smoothed.
+
+For ordinary non-safety controls, a visible rate parameter may reduce jitter:
+\begin{equation}
+  \alpha_{j,t}
+  = (1-\rho_j)\alpha_{j,t-1}+\rho_j k^{\mathrm{eff}}_{j,t},
+  \qquad 0<\rho_j\leq 1.
+  \label{eq:mixin-smoothing}
+\end{equation}
+\noindent\textit{ANT-EQ-005---Proposed operationalization; implementation:
+control smoothing is not implemented or perceptually validated.}
+
+Both $k$ and $\alpha$ are dimensionless. The rate $\rho_j$, neutral zone, and
+maximum rate of change are mixin-specific, visible policy rather than model
+invention. Smoothing can reduce control jitter; it cannot prove a smooth
+musical transition or a helpful experience.
+
+The resulting semantic condition for journey stage $n$ is
+\begin{equation}
+  q_{i,n} =
+  \operatorname{Resolve}\!\left(
+    q^{\mathrm{base}}_{i,n}
+    \mathbin{\oplus}
+    \bigoplus_{j=1}^{J}\alpha_{j,n}m_j;
+    \Xi_{i,t},\prec_{i,t}
+  \right),
+  \label{eq:semantic-condition}
+\end{equation}
+\noindent\textit{ANT-EQ-006---Definitional; implementation: the typed
+generalized composition remains formalized only.}
+
+where $\oplus$ denotes typed composition, $\Xi$ contains active exclusions and
+constraints, and $\prec$ records the visible precedence order used to resolve
+conflicts. The operator cannot be interpreted as numerical addition or raw
+text concatenation. Human-scale controls may be grounded in established
+conditioning dimensions such as tempo, key, chord, and beat, while remaining
+separate from the model's native prompt representation
+\citep{melechovsky2024mustango,tal2024jasco}.
+
+The accepted journey plan $J_{i,t}$ remains model independent. A replaceable
+adapter $a$ compiles one stage against the adapter capability set
+$\mathcal{K}_a$:
+\begin{equation}
+  \begin{aligned}
+    \gamma^{(a)}_{i,n}
+      &= \operatorname{Compile}_{a}
+         \!\left(J_{i,t},q_{i,n},\mathcal{K}_a\right),\\
+    \varphi^{(a)}_{i,n}
+      &= \operatorname{Prompt}_{a}\!\left(\gamma^{(a)}_{i,n}\right).
+  \end{aligned}
+  \label{eq:adapter-compilation}
+\end{equation}
+\noindent\textit{ANT-EQ-007---Proposed operationalization; implementation:
+only the immutable mock generation boundary is executable.}
+
+The conditioning state $\gamma$ records model-native controls, conflicts,
+downgrades, exclusions, uncertainty, and provenance. The prompt projection
+$\varphi$ is merely
+one adapter-specific projection of $\gamma$; it is not the journey plan or the
+canonical semantic record. An unsupported control must produce a visible
+downgrade or failure before generation. The person may accept the revised
+specification, change the plan, choose another compatible adapter, or stop.
+This separation permits model comparison without rewriting Antidote's domain
+language and recognizes that requested conditions are not guaranteed to be
+realized by current generators \citep{melechovsky2024mustango,tal2024jasco}.
 
 \AntidoteFigure{semantic-intent-mixer}
 
 \subsection{Two-rate architecture and authority}
 \label{sec:design-two-rate-architecture}
 
-\AntidotePlaceholder{ANT-PH-SYS-003}{Two-rate architecture and authority}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper, curabitur blandit tempus porttitor, integer posuere erat a ante venenatis dapibus.}
+The proposed architecture uses two clocks because model deliberation and audio
+rendering have different timing and authority requirements. A slower
+\emph{deliberative loop} operates at meaningful decision points. It may inspect
+authorized observations, maintain alternative state hypotheses, combine
+person-authored intent, propose a short journey horizon, and request future
+generation. Every material change remains visible and correctable. A faster
+\emph{deterministic audio loop} schedules already verified material, applies
+bounded gain and transition curves, tracks playback, and responds immediately
+to stop or underrun conditions. It does not infer psychology or rewrite
+semantic intent. Control-rate and render-rate separation has normative and
+neighboring-system precedents, but does not establish Antidote's conformance or
+response quality \citep{w3c2024webaudio,hutchings2020adaptive,
+ehrlich2019closedloop}.
+
+Authority crosses these loops asymmetrically. The person chooses context,
+desired journey, mixins, plan acceptance, generation, playback, retention,
+export, and whether evidence may inform a later proposal. The Rust domain core
+enforces those transitions and owns the canonical session record. A model
+worker receives only an approved generation specification and cannot read the
+database, change the personal model, initiate playback, or publish an
+interpretation. The renderer may halt or fall back when a deadline or safety
+condition fails, but cannot silently choose a new emotional goal.
+
+At the source revision identified in this manuscript's build provenance, an
+executable synthetic slice already composes a React/Tauri interface, Rust
+session authority, session-scoped context review, deterministic Level-1
+journey planning, SQLite events, a supervised mock worker, verified synthetic
+WAV production, deliberate playback state, response capture, and safety halts.
+This is repository evidence, not human-outcome evidence. The generalized
+Semantic Intent Mixer, probabilistic state estimation, receding-horizon
+controller, generate-ahead queue, continuity engine, real music model, measured
+control adherence, privacy-reviewed export, optional sensors, and autonomous
+adaptation are not implemented. The governed final-figure specification
+requires both groups to be labeled so the proposed system cannot borrow
+credibility from the mock path.
+
+``Closed loop'' therefore names a governed possibility for later evidence to
+inform a new proposal. In v0, planning is rule guided, responses are recorded,
+and a personal-model change requires a separate evidence-linked proposal and
+human acceptance. The worker and controller have no autonomous learning
+authority.
 
 \AntidoteFigure{holistic-two-rate-architecture}
 
-\subsection{Receding-horizon planning and generate-ahead buffering}
+\subsection{State belief, receding horizon, and generate-ahead buffer}
 \label{sec:design-predictive-horizon}
 
-\AntidotePlaceholder{ANT-PH-SYS-004}{Receding-horizon planning and generate-ahead buffering}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Donec sed odio dui, vivamus sagittis lacus vel augue laoreet rutrum faucibus dolor auctor.}
+Real-time evaluation begins with observations rather than a verdict about what
+the person needs. Let $o_{i,1:t}$ contain only provenance-linked explicit
+reports, control changes, playback actions, and optional signals authorized for
+the current purpose. A candidate state estimator may retain alternatives as a
+belief distribution
+\begin{equation}
+  b_{i,t}(x)
+  = \Pr\!\left(
+      X_{i,t}=x
+      \mid o_{i,1:t},u_{i,1:t-1}
+    \right).
+  \label{eq:belief-state}
+\end{equation}
+\noindent\textit{ANT-EQ-008---Estimated model; implementation: no state estimator or sensor path exists in v0.}
+
+Equation~\ref{eq:belief-state} transfers belief-state notation from planning
+under partial observation; Antidote does not claim to implement a POMDP or to
+observe a hidden true emotion \citep{kaelbling1998pomdp}. The state space,
+observation model, calibration, and confidence representation remain study
+questions. Person correction changes the system record and outranks the model
+view. Conflicting, missing, stale, or out-of-distribution observations should
+widen uncertainty or suspend a proposal rather than create false precision.
+Reviews of passive monitoring and electrodermal affect models reinforce this
+validation burden: missingness, feature variation, small samples, limited
+generalizability, and weaker valence inference constrain any future sensor use
+\citep{deangel2022passive,damelio2025eda}.
+
+At a decision point, a conceptual receding-horizon planner may compare a
+sequence $U=(u_t,\ldots,u_{t+H_p})$ of semantic and musical control proposals:
+\begin{equation}
+  \begin{aligned}
+    \mathcal{U}^{\mathrm{adm}}_{i,t}
+      &= \mathcal{U}\!\left(A_{i,t},\Xi_{i,t},\mathcal{K}_a\right),\\
+    U^{*}_{i,t:t+H_p}
+      &\in \operatorname*{arg\,min}_{U\in\mathcal{U}^{\mathrm{adm}}_{i,t}}
+      \sum_{\tau=t}^{t+H_p}
+      \left[
+        \bar{L}_{g}(\hat{x}_{i,\tau\mid t},g_{i,\tau},u_{i,\tau})
+        +\lambda_{\Delta}\bar{D}_{\Delta}(u_{i,\tau},u_{i,\tau-1})
+        +\lambda_{R}\bar{R}(u_{i,\tau})
+        +\lambda_{B}\bar{C}_{\mathrm{burden}}(u_{i,\tau})
+      \right].
+  \end{aligned}
+  \label{eq:receding-horizon}
+\end{equation}
+\noindent\textit{ANT-EQ-009---Conceptual; implementation: v0 uses a
+deterministic rule-guided planner rather than this optimizer.}
+
+The admissible set is constrained by active consent $A$, exclusions and safety
+rules $\Xi$, and adapter capabilities $\mathcal{K}_a$. The four barred terms
+are normalized, dimensionless design costs: represented journey mismatch,
+control change, uncertainty or risk, and interaction burden. Their weights are
+therefore dimensionless policy choices, not learned clinical utilities.
+$\hat{x}_{i,\tau\mid t}$ is a planning estimate, not a predicted lived state.
+Only the first proposed action is shown; nothing is committed until the person
+approves it, after which the system observes and may replan. This is an
+MPC-inspired transfer under JITAI-like decision points, not a stability,
+optimality, intervention, or affect-dynamics claim
+\citep{garcia1989mpc,nahumshani2018jitai}.
+
+Generation must also finish before its audio is needed. If $B_{i,t}$ is the
+verified playable buffer in seconds, the proposed readiness condition is
+\begin{equation}
+  B_{i,t} \geq
+  \ell_{\mathrm{observe}}+\ell_{\mathrm{plan}}+\ell_{\mathrm{generate}}
+  +\ell_{\mathrm{verify}}+\ell_{\mathrm{schedule}}+M_{i,t}.
+  \label{eq:buffer-deadline}
+\end{equation}
+\noindent\textit{ANT-EQ-010---Proposed operationalization; implementation:
+generation latency and a generate-ahead buffer are not yet benchmarked.}
+
+Every term in Equation~\ref{eq:buffer-deadline} is measured in seconds;
+$M_{i,t}$ is an uncertainty margin derived from the declared hardware,
+adapter, and latency distribution. If the condition fails, the renderer uses a
+previously approved continuation, loop, ambient bed, or graceful ending. It
+does not insert unverified bytes or block the audio callback. Emerging
+streaming-generation work makes changing-input, chunk-wise generation a
+plausible future adapter, but does not establish local performance or
+production readiness \citep{wang2026streaming}.
 
 \AntidoteFigure{predictive-horizon-buffer}
 
-\subsection{Semantic and waveform continuity}
+\subsection{Semantic, musical, and waveform continuity}
 \label{sec:design-continuity}
 
-\AntidotePlaceholder{ANT-PH-SYS-005}{Semantic and waveform continuity}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis, maecenas sed diam eget risus varius blandit sit amet non magna.}
+A continuously changing prompt does not by itself produce a continuous
+listening experience. Antidote therefore separates three questions: whether
+neighboring semantic conditions change within their declared bounds, whether
+the realized audio is musically and acoustically compatible at a boundary, and
+whether the renderer joins verified samples without a signal discontinuity.
+
+For adjacent stages $n$ and $n+1$, semantic-plan distance is
+\begin{equation}
+  D^{\mathrm{sem}}_n
+  = d_{\mathcal{Q}}\!\left(q^{\mathrm{tail}}_{i,n},
+                           q^{\mathrm{head}}_{i,n+1}\right),
+  \label{eq:semantic-continuity}
+\end{equation}
+\noindent\textit{ANT-EQ-011---Proposed operationalization; implementation:
+no validated semantic-distance function is selected.}
+
+where $d_{\mathcal{Q}}$ is a versioned, dimensionless distance over compatible
+typed controls and stage roles. It must expose which mixins contributed to the
+distance and cannot assume that interpolation in embedding or prompt space is
+perceptually linear.
+
+Measured acoustic-boundary distance is independent:
+\begin{equation}
+  D^{\mathrm{ac}}_n
+  = \sum_{r\in\mathcal{F}}
+    w_r\,
+    d_r\!\left(
+      f_r(a^{\mathrm{tail}}_n),
+      f_r(a^{\mathrm{head}}_{n+1})
+    \right),
+  \qquad \sum_{r\in\mathcal{F}}w_r=1.
+  \label{eq:acoustic-continuity}
+\end{equation}
+\noindent\textit{ANT-EQ-012---Proposed operationalization; implementation:
+the mock analyzer does not validate musical boundary continuity.}
+
+The feature family $\mathcal{F}$ may include normalized distances for tempo and
+beat phase, key or chord compatibility, loudness, spectral balance and timbre,
+density, and phrase-boundary alignment. The $w_r$ are nonnegative,
+dimensionless, and versioned; the feature-specific $d_r$ functions normalize
+otherwise incompatible units before aggregation. Thresholds for
+$D^{\mathrm{sem}}$ and $D^{\mathrm{ac}}$ require perceptual and technical
+evaluation and may differ by person or listening context. Loudness standards
+can anchor measurement practice without supplying a universal transition or
+hearing-safety threshold \citep{ebu2023r128}.
+
+Within an accepted overlap window $s\in[0,1]$, one waveform-level candidate is
+the equal-power crossfade
+\begin{equation}
+  y(s)
+  = \cos\!\left(\frac{\pi s}{2}\right)a_n(s)
+  + \sin\!\left(\frac{\pi s}{2}\right)a_{n+1}(s).
+  \label{eq:equal-power-crossfade}
+\end{equation}
+\noindent\textit{ANT-EQ-013---Proposed operationalization; implementation:
+no adaptive continuity renderer exists in v0.}
+
+Both input signals and $y$ share the same sample-amplitude units. The equation
+can reduce a gain discontinuity; it cannot repair incompatible meter, phase,
+harmony, phrase, timbre, meaning, or emotional pacing. Resequencing,
+reorchestration, continuation generation, stem mixing, and a graceful ending
+are separate strategies. A transition is eligible for playback only after its
+artifact integrity, buffer margin, semantic condition, acoustic measurements,
+and relevant safety constraints pass their own checks. Failure of any one
+check invokes an approved fallback rather than being hidden by a crossfade.
 
 \AntidoteFigure{semantic-waveform-continuity}
 
 \subsection{Exposure, response, and advisory updating}
 \label{sec:design-response-update}
 
-\AntidotePlaceholder{ANT-PH-SYS-006}{Exposure response and advisory updating}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus.}
+The generated segment $a_n$ is not the exposure $e_{i,t}$. Exposure records
+which content hash was actually played, when playback began, duration heard,
+completion, interruption, stop reason, and safety events. Response is then a
+heterogeneous record linked to that exposure:
+\begin{equation}
+  \mathsf{Y}_{i,t} =
+  \left(
+    y^{\mathrm{perc}}_{i,t},
+    y^{\mathrm{felt}}_{i,t},
+    y^{\mathrm{int}}_{i,t},
+    w^{\mathrm{int}}_{i,t},
+    y^{\mathrm{help}}_{i,t},
+    y^{\mathrm{harm}}_{i,t},
+    y^{\mathrm{res}}_{i,t},
+    y^{\mathrm{mis}}_{i,t},
+    y^{\mathrm{after}}_{i,t}
+  \right).
+  \label{eq:response-record}
+\end{equation}
+\noindent\textit{ANT-EQ-014---Definitional; implementation: the mock slice
+captures a bounded subset and keeps exposure separate.}
+
+The components describe perceived musical expression, felt state, intensity,
+whether that intensity was wanted, immediate helpfulness, possible harm,
+resonance, mismatch, and a later aftereffect. They may contain text, bounded
+scores, categorical values, or missingness, so Equation~\ref{eq:response-record}
+is a record declaration rather than a numeric vector. Intense crying, for
+example, cannot be classified as success or harm from intensity alone; the
+person's appraisal, stop behavior, and later account remain separate evidence.
+
+A future within-person response model could estimate
+\begin{equation}
+  p_{\theta_i}\!\left(
+    \mathsf{Y}_{i,t}
+    \mid e_{i,t},z_{i,t}
+  \right),
+  \label{eq:response-model}
+\end{equation}
+\noindent\textit{ANT-EQ-015---Future empirical model; implementation: no
+response predictor is fitted or used for generation.}
+
+where $\theta_i$ parameterizes a person-specific and versioned hypothesis.
+Conditioning on exposure prevents an unplayed artifact from becoming response
+evidence. The model would need to represent uncertainty, changed meanings,
+missing responses, contradictory sessions, and alternative explanations; it
+could not infer clinical benefit from acoustic adherence or immediate affect.
+
+If a future protocol justified Bayesian updating, a candidate posterior form
+would be
+\begin{equation}
+  p\!\left(\theta_i\mid\mathcal{D}_{i,1:t}\right)
+  \propto
+  p\!\left(
+    \mathsf{Y}_{i,t}
+    \mid e_{i,t},z_{i,t},\theta_i
+  \right)
+  p\!\left(\theta_i\mid\mathcal{D}_{i,<t}\right).
+  \label{eq:personal-update}
+\end{equation}
+\noindent\textit{ANT-EQ-016---Future empirical model; implementation: v0
+records evidence-linked proposals and prohibits autonomous updating.}
+
+Equation~\ref{eq:personal-update} is deliberately generic: it does not specify
+a valid likelihood, prior, forgetting rule, causal effect, or sufficient sample
+size. In the current authority model, eligible observations may support a
+descriptive proposal, but a new personal-model snapshot is created only after
+the person reviews the evidence and accepts the update. Rejection preserves
+both the prior snapshot and the rejected proposal. The design follows an
+interactive-machine-learning rationale while retaining the possibility that
+feedback requests can be burdensome or reduce trust
+\citep{amershi2014interactive,honeycutt2020feedback}.
 
 \AntidoteFigure{moment-journey-equation-map}
 
 \subsection{Provenance and failure boundaries}
 \label{sec:design-provenance-failures}
 
-\AntidotePlaceholder{ANT-PH-SYS-007}{Provenance and failure boundaries}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh, ut fermentum massa justo sit amet risus.}
+Every derived record links to the activity, agent, version, and source records
+that produced it. For generation this includes the accepted plan hash, adapter
+and model identity, code revision, effective parameters, seed when supported,
+device class, elapsed time, warnings, downgrade decisions, output hashes, and
+feature-analyzer versions. For exposure and response it includes the artifact
+hash, playback interval, interruption state, observation window, instrument
+version, missingness, corrections, and permission for later use. W3C PROV
+supplies an interoperable vocabulary for entities, activities, agents, and
+derivations, while Workflow Run RO-Crate demonstrates a packaging pattern for
+computational lineage \citep{moreau2013prov,leo2024rocrate}. Antidote proposes
+to use those concepts; a provenance record remains an assertion to audit, not
+proof that its interpretation is true.
+
+The system fails closed at the boundary whose precondition is missing. Invalid,
+expired, or ambiguous consent prevents projection. Conflicting mixins or an
+unsupported capability prevent compilation until the conflict or downgrade is
+reviewed. A worker crash, malformed response, timeout, partial output, path
+violation, size violation, or hash mismatch cannot become a playable verified
+artifact. A missed generation deadline invokes an approved fallback. A stop,
+reported harm, or safety event halts automatic continuation and is never scored
+as engagement. A failed or rejected model update preserves the prior snapshot.
+An export remains blocked when classification, minimization, redaction,
+consent, privacy review, or destination approval is incomplete.
+
+Append-only events make those transitions reconstructable, while separately
+classified payloads permit future retention and deletion policies to act on
+sensitive content. The present repository implements integrity and replay for
+the synthetic path; encryption, key recovery, backup, secure deletion,
+projection invalidation, real-model sandboxing, and privacy-reviewed research
+export remain unresolved. Local execution and content hashes reduce some
+dependencies and improve traceability, but they do not establish security,
+ownership, meaningful consent, safety, or benefit.
 
 \AntidoteFigure{provenance-privacy-export}

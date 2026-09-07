@@ -228,6 +228,38 @@ class ManuscriptContractTests(unittest.TestCase):
         self.assertIn("bounded review did not identify", related_work)
         self.assertIn("not a global novelty", related_work)
 
+    def test_system_design_is_complete_and_status_bounded(self) -> None:
+        """Issue #39 must retain its equations, authority, and implementation boundary."""
+        system_design = (
+            ROOT / "paper" / "sections" / "03-system-design.tex"
+        ).read_text(encoding="utf-8")
+        self.assertNotIn("\\AntidotePlaceholder", system_design)
+        for label in (
+            "sec:conceptual-conditional-model",
+            "sec:design-record-chain",
+            "sec:design-semantic-intent",
+            "sec:design-two-rate-architecture",
+            "sec:design-predictive-horizon",
+            "sec:design-continuity",
+            "sec:design-response-update",
+            "sec:design-provenance-failures",
+        ):
+            self.assertIn(f"\\label{{{label}}}", system_design)
+        for citation in (
+            "nahumshani2018jitai",
+            "garcia1989mpc",
+            "kaelbling1998pomdp",
+            "amershi2014interactive",
+            "melechovsky2024mustango",
+            "w3c2024webaudio",
+            "moreau2013prov",
+        ):
+            self.assertIn(citation, system_design)
+        self.assertIn("current person-authored value", system_design)
+        self.assertIn("not implemented", system_design)
+        self.assertIn("repository evidence, not human-outcome evidence", system_design)
+        self.assertEqual(system_design.count("\\AntidoteFigure{"), 7)
+
 
 if __name__ == "__main__":
     unittest.main()
