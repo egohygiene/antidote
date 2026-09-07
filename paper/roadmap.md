@@ -98,8 +98,8 @@ human-response findings require the later frozen protocol.
 
 - [x] [#42 — Write Discussion and bounded future directions](https://github.com/egohygiene/antidote/issues/42)
 - [x] [#43 — Write Limitations, ethics, safety, and privacy](https://github.com/egohygiene/antidote/issues/43) — [governed risk register](tables/risk-mitigation-status.json)
-- [#44 — Write availability, reproducibility, and contributor statements](https://github.com/egohygiene/antidote/issues/44) — next
-- [#46 — Produce the core Antidote figures and evidence tables](https://github.com/egohygiene/antidote/issues/46)
+- [x] [#44 — Write availability, reproducibility, and contributor statements](https://github.com/egohygiene/antidote/issues/44) — [verified availability and contributor statements](sections/08-availability-and-contributions.tex)
+- [#46 — Produce the core Antidote figures and evidence tables](https://github.com/egohygiene/antidote/issues/46) — next
 
 Interpretation follows evidence and methods. It does not set their boundaries
 retroactively.

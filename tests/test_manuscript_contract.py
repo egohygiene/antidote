@@ -447,6 +447,96 @@ class ManuscriptContractTests(unittest.TestCase):
             limitations.count("\\AntidoteTable{risk-mitigation-status}"), 1
         )
 
+    def test_availability_and_contributions_match_public_artifact_boundaries(self) -> None:
+        """Issue #44 must state exact access, license, role, and conflict status."""
+        availability = (
+            ROOT / "paper" / "sections" / "08-availability-and-contributions.tex"
+        ).read_text(encoding="utf-8")
+        appendix = (ROOT / "paper" / "sections" / "appendix.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized = re.sub(r"\s+", " ", availability)
+        self.assertNotIn("\\AntidotePlaceholder", availability)
+        self.assertNotIn("ANT-PH-APP-006", appendix)
+        for label in (
+            "sec:data-and-code-availability",
+            "sec:availability-public-artifacts",
+            "sec:availability-exclusions",
+            "sec:acknowledgements",
+            "sec:contributor-statement",
+        ):
+            self.assertIn(f"\\label{{{label}}}", availability)
+        for marker in (
+            "https://github.com/egohygiene/antidote",
+            "https://antidote.egohygiene.io/paper/",
+            "https://antidote.egohygiene.io/antidote.pdf",
+            "https://antidote.egohygiene.io/downloads/",
+            "publication.json",
+            "site.json",
+            "SHA256SUMS",
+            "not an arXiv submission",
+            "No DOI, arXiv identifier, archival release",
+            "cross-platform or perpetual byte identity is therefore not claimed",
+            "blocked-no-collection-authority",
+            "root MIT license does not relicense the manuscript",
+            "OpenAI ChatGPT and Codex",
+            "exact regeneration of AI-assisted intermediate drafts is not claimed",
+            "Writing---original draft",
+            "self-study",
+            "No external commercial sponsorship",
+        ):
+            self.assertIn(marker, normalized)
+        for marker in (
+            "Source and build identity",
+            "Protocol and reporting identity",
+            "Model and artifact identity",
+            "Exposure and response identity",
+            "Claim and exclusion audit",
+            "No qualifying H1 exposure or response package exists",
+        ):
+            self.assertIn(marker, appendix)
+
+    def test_author_roles_and_citation_metadata_are_synchronized(self) -> None:
+        """The CRediT source and preferred paper citation must match metadata."""
+        metadata = tomllib.loads(
+            (ROOT / "beacon-project.toml").read_text(encoding="utf-8")
+        )
+        author = metadata["paper"]["authors"][0]
+        self.assertEqual(author["name"], "Alan Szmyt")
+        self.assertEqual(author["affiliation"], "Ego Hygiene")
+        self.assertEqual(
+            author["credit_roles"],
+            [
+                "Conceptualization",
+                "Data curation",
+                "Investigation",
+                "Methodology",
+                "Project administration",
+                "Software",
+                "Validation",
+                "Visualization",
+                "Writing - original draft",
+                "Writing - review and editing",
+            ],
+        )
+        availability = (
+            ROOT / "paper" / "sections" / "08-availability-and-contributions.tex"
+        ).read_text(encoding="utf-8")
+        self.assertIn(f'version {metadata["paper"]["version"]}', availability)
+        for role in author["credit_roles"]:
+            rendered_role = role.replace(" - ", "---")
+            self.assertIn(rendered_role, availability)
+        citation = (ROOT / "CITATION.cff").read_text(encoding="utf-8")
+        self.assertIn('title: "Antidote research software"', citation)
+        self.assertIn("type: software", citation)
+        self.assertIn("preferred-citation:", citation)
+        self.assertIn(f'title: "{metadata["paper"]["title"]}"', citation)
+        self.assertIn('affiliation: "Ego Hygiene"', citation)
+        self.assertIn(f'version: "{metadata["paper"]["version"]}"', citation)
+        self.assertIn('url: "https://antidote.egohygiene.io/paper/"', citation)
+        self.assertNotIn("identifiers:", citation)
+        self.assertNotIn("date-released:", citation)
+
 
 if __name__ == "__main__":
     unittest.main()
