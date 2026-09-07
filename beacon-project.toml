@@ -7,7 +7,7 @@ theme = "egohygiene"
 [paper]
 id = "antidote"
 title = "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys"
-subtitle = "Design and Feasibility Protocol"
+subtitle = "System Design and Prospective Feasibility Protocol"
 version = "0.1.0"
 date = "2026-08-26"
 language = "en-US"
@@ -22,7 +22,7 @@ keywords = [
   "interpretability",
   "personalization",
 ]
-abstract = "This design/protocol manuscript formalizes an inspectable research-instrument chain from consented person-and-moment context and explicit semantic intent through time-indexed planning, generated acoustic realization, exposure, separated response measures, and advisory within-person updating. It grounds the proposed architecture in prior work and specifies a prospective feasibility protocol. No formal human study results, clinical efficacy, or neurological mechanism are reported."
+abstract = "Background: Prior personalized and closed-loop music systems connect current and desired affect, semantic planning, controllable generation, and feedback, but those components do not by themselves make the full path from authorized context to later response auditable. Objective: We ask how a local research instrument can represent, generate, and evaluate an audio journey for one person in one moment while keeping context, intent, planned controls, realized acoustics, exposure, and response non-interchangeable. Design: Antidote combines a bounded comparator review with a formal record model, a proposed two-rate generate-ahead architecture, an explicit human-authority model, and a frozen prospective N-of-1 feasibility protocol. Rather than claiming novelty for the individual components, the manuscript treats end-to-end inspectability as the design contribution. Current evidence: The repository contains an executable synthetic session using a rule-guided planner and deterministic mock worker. No qualifying real-model package or formal human study exists, and collection authority remains false. Conclusion: The manuscript answers the design question by specifying an inspectable, provenance-linked chain and the gates needed to test it. Technical feasibility, perceived continuity, useful within-person advisory relationships, safety, efficacy, and neurological mechanism remain unanswered."
 
 [[paper.authors]]
 name = "Alan Szmyt"

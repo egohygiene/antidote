@@ -1,6 +1,7 @@
 # Claim ledger
 
-**Status:** frozen manuscript claim contract for issue #35.
+**Status:** frozen manuscript claim contract for issue #35, reconciled through
+issue #47 whole-paper synthesis.
 **Manuscript contract:**
 [`paper/manuscript-contract.json`](../../paper/manuscript-contract.json).
 

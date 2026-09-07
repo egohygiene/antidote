@@ -81,10 +81,33 @@ class ManuscriptContractTests(unittest.TestCase):
         )
         identity = contract["identity"]
         self.assertEqual(contract["schema"], "antidote.manuscript-contract/v1")
-        self.assertEqual(contract["version"], "0.4.0")
+        self.assertEqual(contract["version"], "0.5.0")
         self.assertEqual(contract["status"], "frozen")
         self.assertEqual(identity["working_title"], metadata["paper"]["title"])
         self.assertEqual(identity["subtitle"], metadata["paper"]["subtitle"])
+        self.assertEqual(
+            identity["title_status"], "final-for-reviewable-design-protocol"
+        )
+
+    def test_final_abstract_is_structured_and_evidence_bounded(self) -> None:
+        """Issue #47 abstract must summarize the body without answering RQ2 or RQ3."""
+        contract = load_contract()
+        metadata = tomllib.loads(
+            (ROOT / "beacon-project.toml").read_text(encoding="utf-8")
+        )
+        abstract = metadata["paper"]["abstract"]
+        abstract_contract = contract["abstract_contract"]
+        word_count = len(re.findall(r"\b[\w-]+\b", abstract))
+        self.assertGreaterEqual(word_count, abstract_contract["minimum_words"])
+        self.assertLessEqual(word_count, abstract_contract["maximum_words"])
+        for function in abstract_contract["ordered_functions"]:
+            self.assertIn(f"{function.capitalize()}:", abstract)
+        for boundary in (
+            "No qualifying real-model package or formal human study exists",
+            "collection authority remains false",
+            "remain unanswered",
+        ):
+            self.assertIn(boundary, abstract)
 
     def test_stage_ladder_is_explicit_and_ordered(self) -> None:
         """Every publication state must declare entry and claim boundaries."""
@@ -448,6 +471,37 @@ class ManuscriptContractTests(unittest.TestCase):
         self.assertEqual(
             limitations.count("\\AntidoteTable{risk-mitigation-status}"), 1
         )
+
+    def test_final_conclusion_and_claim_index_preserve_the_evidence_gate(self) -> None:
+        """Issue #47 must resolve synthesis placeholders without promoting evidence."""
+        conclusion = (
+            ROOT / "paper" / "sections" / "09-conclusion.tex"
+        ).read_text(encoding="utf-8")
+        appendix = (ROOT / "paper" / "sections" / "appendix.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized_conclusion = re.sub(r"\s+", " ", conclusion)
+        self.assertNotIn("\\AntidotePlaceholder", conclusion)
+        self.assertNotIn("\\AntidotePlaceholder", appendix)
+        for marker in (
+            "RQ1 is answered",
+            "five bounded contributions",
+            "RQ2 and RQ3 remain unanswered",
+            "No qualifying real-model technical package or formal human-study package exists",
+            "collection authority remains false",
+            "not that a system knows what a person needs",
+        ):
+            self.assertIn(marker, normalized_conclusion)
+        for identifier_range in (
+            "ANT-SRC-001--007",
+            "ANT-HYP-001--003",
+            "ANT-OBS-001--004",
+            "ANT-INT-001--002",
+            "ANT-CLM-001--007",
+            "ANT-CAN-001",
+            "ANT-NEG-001--004",
+        ):
+            self.assertIn(identifier_range, appendix)
 
     def test_availability_and_contributions_match_public_artifact_boundaries(self) -> None:
         """Issue #44 must state exact access, license, role, and conflict status."""
