@@ -10,7 +10,8 @@ but each major technical idea has prior precedent. The contribution is
 therefore a formalized combination and operational separation, not a verified
 first-system claim.
 
-The term \emph{probability-space sculpting} is used as a computational metaphor:
+Following AffectMachine-Classical, the term \emph{probability-space sculpting}
+is used only as a computational metaphor \citep{agres2023affectmachine}:
 semantic prompting and other controls constrain a conditional distribution over
 possible generations rather than deterministically selecting one sound. The
 metaphor becomes scientifically useful only if the intended controls and their
@@ -19,19 +20,258 @@ realized acoustic consequences can be operationalized and tested.
 \subsection{Contribution at the design evidence level}
 \label{sec:discussion-design-contribution}
 
-\AntidotePlaceholder{ANT-PH-DIS-001}{Contribution at the design evidence level}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Donec ullamcorper nulla non metus auctor fringilla, maecenas faucibus mollis interdum.}
+Antidote's contribution at this stage is the specification of a research
+object and its governance, not evidence that an adaptive audio system changes a
+listener's state. Current-to-target selection, person-specific modeling,
+generated affective trajectories, continuous musical feedback, interpretable
+controls, and semantic planning each have prior precedent
+\citep{janssen2012tune,daly2016abcmi,ehrlich2019closedloop,
+agres2023affectmachine,zhang2026mindmelody}. The narrower contribution is to
+formalize how consented context, semantic intent, a time-indexed plan,
+adapter-specific conditioning, acoustic realization, actual exposure,
+separated response constructs, provenance, and a possible later update can
+remain individually inspectable. Our bounded review did not identify that
+complete governed chain in one evaluated system. This supports a candidate
+research-system contribution, not a global first-system claim.
+
+Two separations carry most of the design rationale. The first is epistemic:
+the record that requests a property is not the measurement of its realization,
+and neither record determines what a person perceived, felt, found helpful, or
+found harmful. The second concerns timing and authority: in the proposed
+two-rate architecture, uncertain semantic deliberation may prepare verified
+future material, while a deterministic renderer would own audio deadlines and
+the immediate stop path. These separations make disagreements locatable in
+principle. A plan may be accepted while an adapter visibly downgrades one
+control; an artifact may satisfy its file checks while missing a requested
+acoustic property; or playback may be technically continuous while the person
+reports mismatch. Preserving those possibilities is more defensible than
+calling a prompt, affect label, or aggregate score ``interpretable.'' It does
+not guarantee that the records are understandable, correct, complete, or safe.
+
+Three proposed components turn this separation into falsifiable design claims.
+The Semantic Intent Mixer can be tested for preservation of typed controls,
+exclusions, authority precedence, conflict resolution, and visible adapter
+downgrades; its control values do not imply linear changes in acoustics or felt
+response. The predictive horizon is a receding horizon over candidate controls,
+not a forecast of the person's lived state: it can be tested by whether only the
+first approved action is committed and whether verified future material meets a
+frozen generation deadline. Continuity must be tested separately as
+semantic-plan distance, measured acoustic-boundary distance, and waveform
+scheduling; success at one layer cannot establish the others or a person's
+perception of continuity. None of the three is implemented or validated end to
+end.
+
+Five evidentiary distinctions must therefore remain non-interchangeable.
+Demonstrated implementation means that a named capability executes at a
+reviewed source revision; at that revision, the only executable session
+evidence is the rule-guided synthetic slice described in
+Section~\ref{sec:design-two-rate-architecture}. Technical feasibility must
+remain stage-specific: qualifying T0 records can establish only the synthetic
+authority, schema, replay, interruption, recovery, hash, and provenance
+invariants; T1 would additionally require real-model adherence, continuity,
+latency and buffer-margin, and failure-and-recovery evidence under a frozen
+model, adapter, analyzer, hardware, mutation, and seed manifest. Experiential
+feasibility would require authorized H1 records showing that the procedure and
+its separated response measures can be completed with acceptable burden; it
+would not establish efficacy. Efficacy would require a materially different
+design capable of supporting a causal outcome claim, while a mechanism claim
+would require evidence identifying how an effect arose rather than merely
+observing change. Neither efficacy nor mechanism is tested here.
+
+These arguments establish only the design-level boundary described by RQ1.
+Formal equations and a coherent record model cannot by themselves answer RQ2
+or RQ3. The contribution would need revision if the record chain proves too
+burdensome to use, if its provenance cannot expose where material mismatches
+arise, if model adapters cannot preserve the approved semantic distinctions, or
+if simpler records support equally accountable evaluation. Inspectability is
+consequently a falsifiable design commitment, not an empirical success already
+achieved.
 
 \subsection{Moment-specific and negotiated personalization}
 \label{sec:discussion-negotiated-personalization}
 
-\AntidotePlaceholder{ANT-PH-DIS-002}{Moment-specific and negotiated personalization}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper, curabitur blandit tempus porttitor, donec sed odio dui.}
+The person--moment unit resists treating personalization as retrieval of a
+fixed profile or discovery of an objectively correct sound. A person may want
+to stay with, explore, soften, or close an experience at one time and make a
+different choice later. Antidote therefore represents prior evidence as
+eligible context rather than destiny, a desired journey as a proposal rather
+than a promised endpoint, and semantic language as person-extensible rather
+than as a universal affect vocabulary. ``Moment-specific'' describes this
+conditioning boundary; it does not imply that the system knows what the person
+needs.
+
+``Negotiated'' identifies an authority process rather than an optimization
+result. Within the proposed framework, person-authored intent, an inspectable
+plan, adapter downgrades, and any evidence-linked update proposal remain
+distinct, reviewable records; edits create new revisions, and approvals or
+rejections are recorded where the applicable contract permits them. Model
+uncertainty is not converted into authority by being presented as
+personalization. This process may make the system's assumptions easier to
+contest, but additional interaction may itself create burden, demand
+characteristics, or reduced trust. An accepted plan is thus evidence of a
+recorded choice under the declared interface, not evidence that the plan
+represents a stable preference, was freely understood, or will be helpful.
+
+The response model must be equally conditional. Musical responses may involve
+memory, expectancy, imagery, appraisal, cultural associations, and other
+pathways that are not recoverable from one acoustic feature or affect label
+\citep{juslin2008emotional}. Perceived expression and felt emotion can differ
+\citep{zentner2008emotions}, while intensity may be welcome, unwanted, mixed,
+or harmful in ways that require the person's interpretation
+\citep{silverman2020complicated}. The same realized artifact may therefore
+receive different accounts in different moments without one being treated as
+noise merely because it conflicts with an earlier record.
+
+The frozen H1 design can eventually examine whether those distinctions can be
+collected with acceptable completeness and burden, but its P condition is a
+bundle: it changes contextual input, personal semantic content, plan visibility,
+editing, and approval together. A P-versus-S or P-versus-G contrast cannot
+identify which component mattered, and a favorable response cannot validate an
+objective need estimate. Even repeated provenance-linked records would support
+only a bounded within-person account unless a later protocol prospectively
+tests whether a named advisory relationship predicts new observations. Until
+then, moment-conditioned personalization remains a structured hypothesis and a
+human-authority requirement, not an observed advantage.
 
 \subsection{Alternative explanations and architectures}
 \label{sec:discussion-alternatives}
 
-\AntidotePlaceholder{ANT-PH-DIS-003}{Alternative explanations and architectures}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Morbi leo risus, porta ac consectetur ac, vestibulum at eros, sed posuere consectetur est at lobortis.}
+Any later favorable response would admit explanations other than successful
+moment-specific adaptation. Generic ambient audio might suffice; a current-state
+category with a fixed journey template might capture most of the difference; or
+preference, familiarity, novelty, expectancy, attention, editing effort, and
+interface-mediated agency might shape the report. Output quality, loudness,
+setting, time of day, baseline variation, order, or carryover could also
+confound the intended semantic manipulation. Repeated use may teach instrument
+use or reporting rather than reveal a stable audio--response relationship. The
+G, S, and P conditions preserve an initial comparison among interface bundles,
+but cannot isolate components or mechanisms.
+
+Contradictory evidence makes those alternatives substantive rather than
+ceremonial. Prior systems demonstrate technically closed loops and
+person-specific or affective control, yet their evaluations are small,
+heterogeneous, or directed at different constructs. A recent preprint of a
+preliminary brain--computer musical-interface evaluation reported nonsignificant
+target-emotion and time effects, with person and trial variation dominating its
+observed variance \citep{monroy2026minimalist}. A systematic review likewise
+found heterogeneous
+music-neurofeedback methods and no consensus success measure
+\citep{sayal2025musicloop}; a scoping review of commercial music-based digital
+therapeutics found insufficient direct evidence for real-world effectiveness
+or superiority over generic music \citep{venkatesan2026mdt}. These sources do
+not show that an individual effect is impossible. They do show why loop closure,
+market presence, and a beneficial response cannot substitute for one another.
+
+The proposed architecture is also only one arrangement of the technical
+problem, and four simpler baselines deserve direct comparison. A population
+affect-label pipeline could map a small shared state vocabulary to fixed audio
+rules without personal context. A static recommender could select or sequence
+existing recordings, as prior current-to-target systems do
+\citep{janssen2012tune,mallik2022effects}. Direct physiological conditioning
+could drive continuous controls without a negotiated semantic layer, following
+earlier brain--computer music systems \citep{daly2016abcmi,
+ehrlich2019closedloop}. A one-shot generator could render the complete journey
+offline for human review, avoiding a future-audio buffer and mid-session model
+deadline altogether. Interpretable rule-based and probabilistic generation
+\citep{agres2023affectmachine} and human-authored segments with a fixed
+transition engine provide further alternatives. These arrangements may reduce
+latency, unsupported controls, interaction burden, or transition uncertainty
+at the cost of a smaller or less inspectable generation space. Antidote's
+two-rate proposal should be preferred only if explicit deadlines,
+verification, and fallbacks measurably improve the declared technical
+properties without obscuring person authority.
+
+Several outcomes would count against the proposed arrangement: adapters that
+frequently downgrade accepted intent, a buffer margin that cannot be maintained
+on the frozen hardware, fallbacks that dominate listening, semantic or acoustic
+boundary measures that do not correspond to reviewable failures, or an
+authority path that does not halt reliably. Even technical success would leave
+the response question open. Small boundary distances, accurate tempo, or an
+uninterrupted file cannot establish perceived continuity, fit, usefulness,
+safety, or benefit. Alternative architectures should therefore be compared
+under the same provenance, exposure, missingness, burden, and non-positive
+reporting rules rather than by selecting whichever system produces the most
+persuasive demonstration.
 
 \subsection{Bounded future research program}
 \label{sec:discussion-future-program}
 
-\AntidotePlaceholder{ANT-PH-DIS-004}{Bounded future research program}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Praesent commodo cursus magna, vel scelerisque nisl consectetur et.}
+The next evidence should be acquired within the stages and gates already frozen
+by the protocol rather than by expanding the interpretation of the present
+record. At D0, the immediate question is whether every RQ1 construct and
+governed transformation or authority boundary resolves to a versioned record,
+equation, contract, or explicit unavailable state; satisfying that traceability
+check would not constitute an independent implementation audit. At T0, a
+qualifying synthetic package would have to preserve complete denominators and
+demonstrate the declared authority, schema, replay, interruption, recovery,
+hash, and provenance invariants. Only an explicit claim-ledger promotion could
+turn that package into a synthetic technical result, and no T0 result could
+describe a human exposure or response.
+
+T1 is the next test of the proposed generation path. Before execution it would
+freeze the model, adapter, hardware profile, analyzer set, mutation manifest,
+seed policy, output-rights review, hardware- and adapter-specific thresholds,
+and run plan.
+Its 39-attempt matrix, when every declared control is supported, would test
+one-factor adherence, adjacent-segment continuity, latency and buffer margins,
+and injected failure and recovery. A technically feasible claim would require
+the reserved source package, complete terminal-state accounting, reproducible
+analysis, and review against those frozen thresholds. Any resulting claim
+would remain bounded to that manifest. Unsupported controls would remain
+explicitly unsupported and reduce the applicable attempt denominator; missed
+deadlines against frozen thresholds, integrity failures, or unreliable stopping
+would require the corresponding technical claim to be downgraded or rejected,
+or the design to be revised. Passing T1 would remain specific to the tested
+model and hardware and would not establish perceived continuity or a beneficial
+response.
+
+Optional real-time sensing and genuinely continuous generation are separate
+later studies, not capabilities assumed by H1. Every sensor stream would need
+its own consent, calibration, missingness, uncertainty, synchronization, and
+person-correction contract; its estimate could tailor a proposal but could not
+define the person's state. A streaming generator would likewise need a new
+qualified adapter and deadline study demonstrating that variable-latency model
+work remains outside the audio callback and that stop does not depend on model
+completion. Failure at either gate should default to manual input and, only
+after its own implementation and qualification, generate-ahead playback; it
+must not silently strengthen inference or timing claims.
+
+H1 remains \texttt{blocked-no-collection-authority}: all eight activation
+gates---real-model/T1 qualification, privacy, consent, independent review,
+assignment, instrument, analysis, and pilot stop/go---remain unsatisfied. If
+separately authorized, its six-block G/S/P series targets 18 completed exposures
+within an absolute ceiling of 24 scheduled attempts and can test whether the
+governed records are collectable, correctable, provenance-linked, and usable
+with the prespecified completeness, burden, and safety-event accounting. It can
+describe exploratory within-person bundle contrasts while preserving missing,
+null, opposite-direction, interrupted, burdensome, harmful, and adverse
+observations. It cannot isolate personalization components, estimate a
+population effect, establish safety, or answer whether advisory learning is
+useful. Its progression rule decides only whether another bounded study may be
+acceptable; ``proceed'' is not an outcome claim.
+
+Testing RQ3 would consequently require a new, prospectively frozen protocol
+after H1, not reuse of the H1 observations both to discover and confirm a
+preferred relationship. Such a protocol would need to name the eligible semantic,
+acoustic, exposure, and response variables; specify the response model,
+uncertainty, forgetting and contradiction rules; separate model development
+from evaluation on later observations; and retain human review of every
+proposed update. A useful advisory claim would require prospective evidence
+that a frozen proposal rule adds information for that person's new records
+relative to declared non-adaptive alternatives, while retaining burden,
+mismatch, harm, and missingness. Failure to improve prospective prediction, or
+improvement purchased through unacceptable burden or risk, would count against
+the claim.
+
+Only after those within-person gates should multi-participant work be
+considered. A later study would require a separate ethics
+determination, participant and setting rationale, sample-size justification,
+device and model qualification, accessible procedures, prespecified comparison
+conditions, and an analysis that distinguishes person variation from moment,
+order, and trial variation. It would also need to test rather than assume that
+the semantic vocabulary, control mappings, and response measures transfer
+across people and contexts. No stage described here is a treatment or
+neurological-mechanism evaluation. A claim may be promoted only when its named
+source package and review gate support that promotion; otherwise the relevant
+slot remains unavailable or the candidate remains unchanged, is downgraded, or
+is rejected.

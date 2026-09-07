@@ -331,6 +331,75 @@ class ManuscriptContractTests(unittest.TestCase):
         self.assertEqual(results.count("\\AntidoteTable{"), 3)
         self.assertEqual(results.count("\\AntidoteFigure{"), 2)
 
+    def test_discussion_is_complete_and_evidence_proportional(self) -> None:
+        """Issue #42 must interpret the design without promoting unavailable evidence."""
+        discussion = (ROOT / "paper" / "sections" / "06-discussion.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized_discussion = re.sub(r"\s+", " ", discussion)
+        self.assertNotIn("\\AntidotePlaceholder", discussion)
+        for label in (
+            "sec:discussion-design-contribution",
+            "sec:discussion-negotiated-personalization",
+            "sec:discussion-alternatives",
+            "sec:discussion-future-program",
+        ):
+            self.assertIn(f"\\label{{{label}}}", discussion)
+        for citation in (
+            "janssen2012tune",
+            "daly2016abcmi",
+            "ehrlich2019closedloop",
+            "agres2023affectmachine",
+            "zhang2026mindmelody",
+            "juslin2008emotional",
+            "zentner2008emotions",
+            "silverman2020complicated",
+            "monroy2026minimalist",
+            "sayal2025musicloop",
+            "venkatesan2026mdt",
+        ):
+            self.assertIn(citation, discussion)
+        for boundary in (
+            "not a global first-system claim",
+            "Semantic Intent Mixer",
+            "predictive horizon",
+            "semantic-plan distance",
+            "measured acoustic-boundary distance",
+            "waveform scheduling",
+            "None of the three is implemented or validated end to end",
+            "Five evidentiary distinctions must therefore remain non-interchangeable",
+            "probability-space sculpting",
+            "population affect-label pipeline",
+            "static recommender",
+            "Direct physiological conditioning",
+            "one-shot generator",
+            "mutation manifest",
+            "seed policy",
+            "output-rights review",
+            "Unsupported controls would remain explicitly unsupported",
+            "Optional real-time sensing",
+            "genuinely continuous generation",
+            "blocked-no-collection-authority",
+            "Testing RQ3",
+            "multi-participant work",
+            "Neither efficacy nor mechanism is tested here",
+            "intensity may be welcome, unwanted, mixed, or harmful",
+        ):
+            self.assertIn(boundary, normalized_discussion)
+        ledger_rows = {}
+        for line in LEDGER_PATH.read_text(encoding="utf-8").splitlines():
+            if line.startswith("| ANT-"):
+                cells = [cell.strip() for cell in line.strip("|").split("|")]
+                ledger_rows[cells[0]] = cells
+        for claim_id in (
+            "ANT-OBS-002",
+            "ANT-CLM-002",
+            "ANT-CLM-004",
+            "ANT-CLM-006",
+            "ANT-CLM-007",
+        ):
+            self.assertIn("Discussion", ledger_rows[claim_id][4], claim_id)
+
 
 if __name__ == "__main__":
     unittest.main()

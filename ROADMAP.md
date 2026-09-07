@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.9.0
+version: 0.10.0
 status: provisional
 owners:
   - egohygiene
@@ -46,10 +46,10 @@ updated: 2026-09-07
 **Current gate:** The MVP implementation sequence is deliberately paused after
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
 section boundaries, visual governance, mathematical model, System Design,
-prospective feasibility method, and governed empty-state Results reporting.
-Issue #82 corrects their pre-collection protocol and reporting contracts before
-issue #42 becomes the next writing slice, followed by the
-accountability and review sequence through issue #48 and the launch sequence in
+prospective feasibility method, governed empty-state Results reporting, the
+pre-collection correction, and an evidence-proportional Discussion. Issue #43
+is the next writing slice, followed by the availability, visual-production,
+synthesis, and review sequence through issue #48 and the launch sequence in
 issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
@@ -134,7 +134,7 @@ precedents, and candidate contribution claims across the research streams.
 id: ANT-Q02B
 status: active
 depends_on: [ANT-Q01A, ANT-Q02]
-issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77", "egohygiene/antidote#82"]
+issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77", "egohygiene/antidote#82", "egohygiene/antidote#84"]
 -->
 
 #### ANT-Q02B — Write and continuously publish the first paper
@@ -261,7 +261,7 @@ response, and exports provenance.
 id: ANT-Q05
 status: planned
 depends_on: [ANT-Q02, ANT-Q04]
-issues: ["egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#82"]
+issues: ["egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#82", "egohygiene/antidote#84"]
 -->
 
 #### ANT-Q05 — Freeze the N-of-1 feasibility protocol
@@ -275,6 +275,8 @@ issue #82 preserves both originals and adds protocol and reporting version
 contracts, analysis choices, public evidence-envelope boundary, and result-slot
 coverage are explicit. Collection authority remains false. The protocol cannot
 activate until ANT-Q04 and every independent human-collection gate are complete.
+Issue #84 reserves fail-closed schema admission, cross-package reconciliation,
+and privacy-review enforcement before any H1 package can become review eligible.
 
 **Outcome:** Variables, conditions, measures, assignments, analysis, safety,
 consent, retention, and provenance are explicit before formal collection.

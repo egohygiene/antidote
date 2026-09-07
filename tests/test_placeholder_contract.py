@@ -18,6 +18,7 @@ SPEC = importlib.util.spec_from_file_location("check_placeholders", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 PLACEHOLDERS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLACEHOLDERS)
+EXPECTED_ACTIVE_PLACEHOLDERS = 16
 
 
 class PlaceholderContractTests(unittest.TestCase):
@@ -33,7 +34,7 @@ class PlaceholderContractTests(unittest.TestCase):
         """Every active content gap must have one stable governed identity."""
         result = PLACEHOLDERS.validate_placeholder_system(ROOT)
         self.assertEqual(result["errors"], [])
-        self.assertEqual(len(result["active"]), 20)
+        self.assertEqual(len(result["active"]), EXPECTED_ACTIVE_PLACEHOLDERS)
         identifiers = [record["id"] for record in result["active"]]
         self.assertEqual(len(identifiers), len(set(identifiers)))
 
@@ -44,7 +45,7 @@ class PlaceholderContractTests(unittest.TestCase):
         )
         self.assertEqual(
             len([error for error in result["errors"] if "blocks submission-ready" in error]),
-            20,
+            EXPECTED_ACTIVE_PLACEHOLDERS,
         )
 
     def test_unregistered_placeholder_is_rejected(self) -> None:
