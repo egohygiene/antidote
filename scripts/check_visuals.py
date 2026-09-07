@@ -156,8 +156,8 @@ def claim_ids(project: Path) -> set[str]:
     return set(re.findall(r"(?m)^\| (ANT-[A-Z]+-\d{3}) \|", ledger))
 
 
-def svg_dimensions(path: Path) -> tuple[float, float, str | None]:
-    """Return numeric SVG dimensions and its declared governance state."""
+def svg_dimensions(path: Path) -> tuple[float, float, str | None, ET.Element]:
+    """Return numeric SVG dimensions, governance state, and parsed root."""
     root = ET.parse(path).getroot()
 
     def number(name: str) -> float:
@@ -167,7 +167,60 @@ def svg_dimensions(path: Path) -> tuple[float, float, str | None]:
             raise ValueError(f"SVG {name} must be a numeric pixel dimension: {path}")
         return float(match.group(1))
 
-    return number("width"), number("height"), root.attrib.get("data-antidote-state")
+    return (
+        number("width"),
+        number("height"),
+        root.attrib.get("data-antidote-state"),
+        root,
+    )
+
+
+def svg_accessibility_errors(
+    root: ET.Element, *, width: float, height: float, deterministic: bool
+) -> list[str]:
+    """Validate view-box, text alternatives, and deterministic SVG boundaries."""
+    errors: list[str] = []
+    view_box = root.attrib.get("viewBox", "").split()
+    try:
+        view_box_values = tuple(float(value) for value in view_box)
+    except ValueError:
+        view_box_values = ()
+    if view_box_values != (0.0, 0.0, width, height):
+        errors.append("viewBox must match its declared width and height")
+    if root.attrib.get("role") != "img":
+        errors.append("root role must be img")
+
+    labelled_by = root.attrib.get("aria-labelledby", "").split()
+    ids = {
+        element.attrib["id"]
+        for element in root.iter()
+        if isinstance(element.attrib.get("id"), str)
+    }
+    if len(labelled_by) < 2 or any(identifier not in ids for identifier in labelled_by):
+        errors.append("aria-labelledby must resolve to title and description elements")
+    local_names = {element.tag.rsplit("}", 1)[-1] for element in root.iter()}
+    if "title" not in local_names or "desc" not in local_names:
+        errors.append("accessible title and description elements are required")
+
+    if deterministic:
+        prohibited = local_names & {"foreignObject", "image", "script"}
+        if prohibited:
+            errors.append(
+                "deterministic SVG contains prohibited elements: "
+                + ", ".join(sorted(prohibited))
+            )
+        for element in root.iter():
+            for attribute, value in element.attrib.items():
+                if attribute.rsplit("}", 1)[-1] != "href":
+                    continue
+                normalized = value.strip().lower()
+                if normalized and not normalized.startswith("#"):
+                    errors.append("deterministic SVG contains an external reference")
+                    break
+        serialized = ET.tostring(root, encoding="unicode").lower()
+        if "url(http:" in serialized or "url(https:" in serialized:
+            errors.append("deterministic SVG contains an external stylesheet resource")
+    return errors
 
 
 def duplicates(values: list[str]) -> set[str]:
@@ -415,7 +468,7 @@ def validate_visual_system(
                 errors.append(f"{visual_id} active asset is missing: {filename}")
             elif kind == "figure" and source_format == "svg":
                 try:
-                    width, height, svg_state = svg_dimensions(asset)
+                    width, height, svg_state, svg_root = svg_dimensions(asset)
                     if isinstance(dimensions, dict) and dimensions.get("role") == "actual":
                         expected_dimensions = (
                             float(dimensions.get("width", 0)),
@@ -434,6 +487,13 @@ def validate_visual_system(
                         )
                     if state == "final" and "PROVISIONAL" in svg_text:
                         errors.append(f"{visual_id} final asset retains a provisional marker")
+                    for svg_error in svg_accessibility_errors(
+                        svg_root,
+                        width=width,
+                        height=height,
+                        deterministic=mode == "deterministic-vector",
+                    ):
+                        errors.append(f"{visual_id} {svg_error}")
                 except (ET.ParseError, ValueError, OSError) as error:
                     errors.append(f"{visual_id} SVG is invalid: {error}")
         elif reference_counts[slug]:

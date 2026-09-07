@@ -22,9 +22,11 @@ python3 scripts/check_visuals.py
 During the issue #77 skeleton phase, every planned visual is active in its
 intended location. `scripts/generate_skeleton_visuals.py --write` creates the
 visibly provisional, data-free frames; the default check and visual validator
-reject drift. `ANT-FIG-001` remains a separately authored provisional diagram,
-and `ANT-TBL-002` remains the existing literature-derived draft. Issue #46 owns
-replacement of all provisional frames with reviewed final assets.
+reject drift. `ANT-FIG-001` remains a separately authored provisional diagram;
+`ANT-FIG-002` has advanced to a reviewed deterministic draft; and
+`ANT-TBL-002`, `ANT-TBL-004`, `ANT-TBL-005`, and `ANT-TBL-006` remain governed
+draft tables. Issue #46 owns replacement or finalization of every non-final
+asset.
 
 After changing caption, alt, description, or state text in the manifest, refresh
 and verify the committed LaTeX registry:

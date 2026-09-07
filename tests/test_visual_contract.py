@@ -10,6 +10,7 @@ import json
 import shutil
 import tempfile
 import unittest
+import xml.etree.ElementTree as ET
 from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -61,12 +62,13 @@ class VisualContractTests(unittest.TestCase):
             {visual["id"] for visual in manifest["visuals"]},
         )
         states = {visual["id"]: visual["state"] for visual in result["active"]}
+        self.assertEqual(states["ANT-FIG-002"], "draft")
         self.assertEqual(states["ANT-TBL-002"], "draft")
         self.assertEqual(states["ANT-TBL-004"], "draft")
         self.assertEqual(states["ANT-TBL-005"], "draft")
         self.assertEqual(states["ANT-TBL-006"], "draft")
         self.assertEqual(set(states.values()), {"placeholder", "draft"})
-        self.assertEqual(list(states.values()).count("placeholder"), 15)
+        self.assertEqual(list(states.values()).count("placeholder"), 14)
         self.assertEqual(
             {visual["kind"] for visual in manifest["visuals"]},
             {"figure", "table"},
@@ -123,7 +125,7 @@ class VisualContractTests(unittest.TestCase):
         """Generated layout frames cannot silently diverge from the manifest."""
         with tempfile.TemporaryDirectory(prefix="antidote-visual-") as temporary:
             root = self.fixture(temporary)
-            asset = root / "paper" / "figures" / "holistic-two-rate-architecture.svg"
+            asset = root / "paper" / "figures" / "consent-scoped-context-projection.svg"
             asset.write_text(
                 asset.read_text(encoding="utf-8").replace(
                     "LAYOUT ONLY", "UNTRACKED CHANGE", 1
@@ -133,7 +135,7 @@ class VisualContractTests(unittest.TestCase):
             result = VISUALS.validate_visual_system(root)
             self.assertIn(
                 "generated skeleton visual is stale: "
-                "paper/figures/holistic-two-rate-architecture.svg",
+                "paper/figures/consent-scoped-context-projection.svg",
                 result["errors"],
             )
 
@@ -144,6 +146,151 @@ class VisualContractTests(unittest.TestCase):
             any("must be final" in error for error in result["errors"]),
             result["errors"],
         )
+
+    def test_deterministic_svg_requires_accessible_closed_content(self) -> None:
+        """Deterministic figures cannot depend on inaccessible or remote content."""
+        with tempfile.TemporaryDirectory(prefix="antidote-visual-") as temporary:
+            root = self.fixture(temporary)
+            asset = root / "paper" / "figures" / "holistic-two-rate-architecture.svg"
+            svg = asset.read_text(encoding="utf-8")
+            svg = svg.replace('viewBox="0 0 1800 1200"', 'viewBox="0 0 900 600"')
+            svg = svg.replace('role="img"', 'role="presentation"')
+            svg = svg.replace(
+                "</svg>", '<image href="https://example.invalid/asset.png"/></svg>'
+            )
+            asset.write_text(svg, encoding="utf-8")
+            result = VISUALS.validate_visual_system(root)
+            self.assertTrue(any("viewBox must match" in error for error in result["errors"]))
+            self.assertTrue(any("root role must be img" in error for error in result["errors"]))
+            self.assertTrue(
+                any(
+                    "prohibited elements: image" in error
+                    for error in result["errors"]
+                )
+            )
+            self.assertTrue(any("external reference" in error for error in result["errors"]))
+
+    def test_two_rate_architecture_preserves_governed_topology(self) -> None:
+        """The release diagram must retain its authority and timing boundaries."""
+        asset = ROOT / "paper" / "figures" / "holistic-two-rate-architecture.svg"
+        root = ET.parse(asset).getroot()
+        manifest = self.manifest(ROOT)
+        visual = next(
+            item for item in manifest["visuals"] if item["id"] == "ANT-FIG-002"
+        )
+        self.assertTrue(
+            {
+                "ANT-OBS-002",
+                "ANT-CLM-003",
+                "ANT-CLM-004",
+                "ANT-CLM-005",
+                "ANT-NEG-003",
+                "ANT-NEG-004",
+            }.issubset(visual["claim_ids"])
+        )
+        expected_nodes = {
+            1: ("consented-context", "implemented"),
+            2: ("state-belief", "proposed"),
+            3: ("semantic-intent", "proposed"),
+            4: ("journey-plan", "implemented"),
+            5: ("human-approval", "implemented"),
+            6: ("approved-generation-spec", "implemented"),
+            7: ("model-adapter", "hybrid"),
+            8: ("generate-verify", "hybrid"),
+            9: ("future-audio-buffer", "proposed"),
+            10: ("deterministic-renderer", "proposed"),
+            11: ("listening-exposure", "hybrid"),
+            12: ("response-record", "hybrid"),
+        }
+        node_elements = [
+            element for element in root.iter() if "data-step" in element.attrib
+        ]
+        steps = [int(element.attrib["data-step"]) for element in node_elements]
+        self.assertEqual(len(node_elements), len(expected_nodes))
+        self.assertEqual(len(steps), len(set(steps)))
+        observed_nodes = {
+            int(element.attrib["data-step"]): (
+                element.attrib.get("data-node"),
+                element.attrib.get("data-status"),
+            )
+            for element in node_elements
+        }
+        self.assertEqual(observed_nodes, expected_nodes)
+        for element in root.iter():
+            if element.attrib.get("data-status") != "hybrid":
+                continue
+            self.assertTrue(
+                any(
+                    child.attrib.get("data-role") == "hybrid-divider"
+                    for child in element.iter()
+                ),
+                element.attrib.get("data-node"),
+            )
+
+        boundaries = {
+            element.attrib["data-boundary"]
+            for element in root.iter()
+            if "data-boundary" in element.attrib
+        }
+        self.assertTrue(
+            {
+                "human-authority",
+                "no-automatic-learning",
+                "variable-latency-generation",
+                "fast-audio-loop",
+                "response-record-zone",
+                "worker-capability",
+                "provenance",
+                "safety-paths",
+            }.issubset(boundaries)
+        )
+
+        directed_flows = [
+            element
+            for element in root.iter()
+            if element.tag.rsplit("}", 1)[-1] == "path"
+            and "data-flow" in element.attrib
+        ]
+        expected_flows = {
+            "response-to-future-proposal",
+            "approval-to-model-adapter",
+            "cancel-to-generation",
+            "fallback-to-renderer",
+            "stop-to-exposure",
+            "context-to-belief",
+            "belief-to-intent",
+            "intent-to-plan",
+            "plan-to-approval",
+            "adapter-to-generate",
+            "generate-to-buffer",
+            "buffer-to-renderer",
+            "renderer-to-exposure",
+            "exposure-to-response",
+        }
+        self.assertEqual(len(directed_flows), len(expected_flows))
+        self.assertEqual(
+            {flow.attrib["data-flow"] for flow in directed_flows},
+            expected_flows,
+        )
+        for flow in directed_flows:
+            self.assertIn("marker-end", flow.attrib)
+            self.assertNotIn("marker-start", flow.attrib)
+
+        identified_elements = [
+            element for element in root.iter() if "id" in element.attrib
+        ]
+        element_ids = [element.attrib["id"] for element in identified_elements]
+        self.assertEqual(len(element_ids), len(set(element_ids)))
+        elements_by_id = {
+            element.attrib["id"]: element
+            for element in identified_elements
+        }
+        approval = elements_by_id["approved-generation-spec"]
+        self.assertEqual(approval.attrib.get("data-flow"), "approval-to-model-adapter")
+        self.assertEqual(approval.attrib.get("data-status"), "implemented")
+        future = elements_by_id["future-proposal-only"]
+        self.assertEqual(future.attrib.get("data-flow"), "response-to-future-proposal")
+        self.assertEqual(future.attrib.get("data-status"), "proposed")
 
     def test_generated_editorial_mode_requires_prompt_provenance(self) -> None:
         """Generated artwork may not bypass its prompt record."""
