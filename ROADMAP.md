@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.10.0
+version: 0.11.0
 status: provisional
 owners:
   - egohygiene
@@ -47,9 +47,10 @@ updated: 2026-09-07
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
 section boundaries, visual governance, mathematical model, System Design,
 prospective feasibility method, governed empty-state Results reporting, the
-pre-collection correction, and an evidence-proportional Discussion. Issue #43
-is the next writing slice, followed by the availability, visual-production,
-synthesis, and review sequence through issue #48 and the launch sequence in
+pre-collection correction, an evidence-proportional Discussion, and the
+limitations, ethics, safety, privacy, rights, accessibility, and independent
+review audit. Issue #44 is the next writing slice, followed by visual
+production, synthesis, and review through issue #48 and the launch sequence in
 issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a

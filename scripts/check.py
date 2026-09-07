@@ -33,6 +33,7 @@ from generate_results_reporting import (
     validate_reporting,
 )
 from generate_research_shelf import render_shelf
+from generate_risk_table import expected_outputs as expected_risk_outputs
 
 ROOT = Path(__file__).resolve().parents[1]
 REQUIRED_SECTIONS = (
@@ -407,6 +408,15 @@ def main() -> int:
                 errors.append(f"generated Results table is stale: {results_path}")
     except (OSError, TypeError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors.append(f"Results reporting contract cannot be validated: {error}")
+
+    try:
+        for risk_path, expected_risk_text in expected_risk_outputs(project).items():
+            if not risk_path.is_file():
+                errors.append(f"generated risk table is missing: {risk_path}")
+            elif risk_path.read_text(encoding="utf-8") != expected_risk_text:
+                errors.append(f"generated risk table is stale: {risk_path}")
+    except (OSError, TypeError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"risk register cannot be validated: {error}")
 
     for section in REQUIRED_SECTIONS:
         if not re.search(

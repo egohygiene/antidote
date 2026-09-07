@@ -2,68 +2,291 @@
 \section{Limitations}
 \label{sec:limitations}
 
-The present concept does not establish treatment efficacy, universal mappings
-between audio and mental states, or specific neurological mechanisms. Complex
-mental-health conditions must not be reduced to a single brain region or audio
-parameter. Binaural beats and related phenomena should be treated as testable
-stimulus primitives with uncertain effects. Traditional or contemplative
-ontologies may be studied as human meaning systems; they must not be presented
-as established neuroanatomy.
-
-The proposed N-of-1 design will have limited generalizability and substantial
-risk of expectancy, demand, novelty, and measurement effects. Personalization
-may overfit a short response history. Generative systems and acoustic feature
-extractors may change over time. These risks require explicit versioning,
-negative and null result retention, and conservative interpretation.
+This manuscript establishes a design and a prospective feasibility protocol,
+not treatment efficacy, clinical safety, successful affect regulation,
+learnability of a personal mapping, universal audio--state relationships, or a
+neurological mechanism. Its executable evidence is presently limited to a
+deterministic synthetic session and publication checks at a named source
+revision. The real-model, two-rate rendering, private-data, and formal-study
+paths remain incomplete or blocked. A requirement stated in an architecture or
+protocol is therefore classified below as \emph{specified}, not as an effective
+mitigation. Table~\ref{tab:risk-mitigation-status} summarizes the current
+controls beside their residual risks and blocking gates.
 
 \subsection{Construct and measurement validity}
 \label{sec:limitations-construct-validity}
 
-\AntidotePlaceholder{ANT-PH-LIM-001}{Construct and measurement validity}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum, donec ullamcorper nulla non metus auctor fringilla.}
+The moment representation is a bounded account produced through a particular
+interface; it is not the person's true psychological or physiological state.
+Self-report can preserve experience that an external classifier cannot observe,
+but wording, timing, scale anchors, recall, current arousal, and the wish to make
+the session coherent may all shape a response. Compact affect scales provide a
+measurement precedent \citep{betella2016slider}, yet that precedent does not
+validate Antidote's desired-transition, mismatch, usefulness, harm, burden, or
+aftereffect items. Likewise, optional physiology or behavior would be an
+uncertain observation rather than an objective need: passive-monitoring
+research reports substantial heterogeneity and missing-data concerns, and
+electrodermal activity does not uniquely identify felt valence
+\citep{deangel2022passive,damelio2025eda}.
+
+Semantic intent, requested acoustic controls, measured realization, perceived
+expression, felt response, immediate usefulness or harm, and later aftereffect
+are kept in separate records. This reduces category errors; it does not prove
+that any record validly or reliably measures its named construct. Perceived and
+felt musical emotion may diverge \citep{zentner2008emotions}, and an analyzer's
+tempo, key, loudness, or embedding estimate cannot decide what the audio meant
+to the listener. Person correction and field-level missingness are consequently
+necessary controls, but their usability, responsiveness, test--retest behavior,
+and sensitivity to meaningful within-person change remain unvalidated.
+
+The originating cathartic experience is one retrospective, researcher-authored
+observation without a protocol, comparator, standardized measure, or independent
+interpretation. It motivates the person-and-moment question but is not a Result,
+an effect estimate, or evidence that emotional intensity was helpful. The
+framework's deliberate separation of intensity, welcome or unwanted response,
+harm, and later meaning must survive instrument review before any qualifying
+human observation can support even a feasibility claim.
 
 \subsection{Internal and statistical validity}
 \label{sec:limitations-internal-validity}
 
-\AntidotePlaceholder{ANT-PH-LIM-002}{Internal and statistical validity}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Cras justo odio, dapibus ac facilisis in, egestas eget quam. Aenean lacinia bibendum nulla sed consectetur, donec sed odio dui.}
+The prospective H1 series is an unblinded self-study in which researcher,
+developer, participant, analyst, and author roles overlap. That overlap creates
+expectancy, demand, selective-attention, analytic-flexibility, and role-conflict
+risks that provenance cannot remove. The generic, state-aware, and negotiated
+personal conditions are also visibly different bundles: personal context,
+semantic content, plan visibility, editing, and approval change together.
+Neither a pairwise contrast nor exact randomization can isolate which component
+produced a difference, and no contrast identifies a psychological or
+neurological mechanism.
+
+Baseline fluctuation, time of day, setting, prior activity, familiarity,
+regression toward a person's usual state, repeated instrument use, novelty,
+order, carryover, and learning may all covary with condition. The frozen
+balanced schedule and within-block seed policy constrain some researcher
+degrees of freedom, while near-event assessment can reduce retrospective delay
+\citep{shiffman2008ema}. They do not create blinding, washout, exchangeability,
+or a stable underlying affect process. A stopped or missing response may also be
+informative rather than random, particularly when discontinuation follows
+distress, burden, technical failure, or mismatch.
+
+The target of 18 completed exposures under an absolute ceiling of 24 attempts
+is appropriate only to the declared record-feasibility questions. The series
+cannot estimate a population effect or support a clinical, safety, superiority,
+or causal claim. SPENT and CENT provide useful protocol and complete-reporting
+precedents for N-of-1 work \citep{porcino2020spent,vohra2015cent}; checklist
+alignment does not repair weak measurement, multiplicity, bundled conditions,
+carryover, or investigator conflict. Preserving every assignment, failure,
+exposure, null or opposite-direction observation, adverse response, denominator,
+missingness reason, and prespecified analysis is a transparency control. It is
+not a guarantee of conclusion validity.
 
 \subsection{External and ecological validity}
 \label{sec:limitations-external-validity}
 
-\AntidotePlaceholder{ANT-PH-LIM-003}{External and ecological validity}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Vestibulum id ligula porta felis euismod semper, vivamus sagittis lacus vel augue laoreet rutrum.}
+Any later H1 observation would describe one person under one frozen protocol,
+model, adapter, device path, listening environment, semantic vocabulary, and
+period of life. It would not establish transfer across people, moments,
+languages, cultures, musical histories, sensory tolerances, hearing profiles,
+devices, generators, or clinical contexts. Even within one person, a mapping
+may change after familiarity, major events, medication or substance changes,
+sleep disruption, illness, or a shift in what the same semantic term means.
+Versioning can locate such change; it cannot make the relationship stationary.
+
+The proposed local, self-guided setting is not interchangeable with a music
+therapy relationship, laboratory procedure, guided psychedelic setting, or
+ordinary music listening. The presence of headphones, an eye mask, a check-in,
+or a structured journey may itself alter attention and expectancy. Reviews of
+music-based digital therapeutics and music-neurofeedback systems report
+heterogeneous methods and limited grounds for real-world generalization
+\citep{venkatesan2026mdt,sayal2025musicloop}. Those limitations neither prove
+that Antidote cannot work nor support transporting a favorable demonstration.
+A later multi-participant protocol would need a new sampling rationale,
+accessible procedure, device and setting qualification, and explicit tests of
+which constructs and controls transfer.
 
 \subsection{System, model, and continuity failures}
 \label{sec:limitations-system-failures}
 
-\AntidotePlaceholder{ANT-PH-LIM-004}{System model and continuity failures}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi leo risus, porta ac consectetur ac, vestibulum at eros. Sed posuere consectetur est at lobortis, curabitur blandit tempus porttitor.}
+Every transformation in the proposed chain can fail while producing a
+plausible-looking artifact. A context extractor may omit the relevant detail or
+privilege the wrong one; a state estimate may become confidently wrong; a
+semantic mixin may conflict with an exclusion; an adapter may ignore or
+downgrade a control; an analyzer may mischaracterize the output; and a
+generative model may reproduce, imitate, or introduce unwanted material. Human
+correction constrains authority but does not ensure that a person can identify
+every omission, understand every control, or review effectively while
+distressed.
+
+The two-rate architecture is also prospective. The checked-in application can
+supervise a deterministic mock worker, verify a synthetic WAV, start deliberate
+playback, stop, recover, and record a response. It does not yet implement or
+qualify a real music model, uncertain state estimator, receding-horizon
+controller, verified future-audio buffer, or deterministic continuity renderer.
+Real generation can miss deadlines; supported controls may differ by adapter;
+crossfades can hide a waveform discontinuity while leaving harmony, rhythm,
+timbre, meaning, or pacing incoherent. Normative scheduling and loudness
+references help define tests \citep{w3c2024webaudio,ebu2023r128}; they do not
+establish seamlessness, perceived continuity, or an appropriate experience.
+
+Model, code, analyzer, driver, and hardware drift may invalidate a prior result
+even when a prompt appears unchanged. Immutable specifications, capability
+negotiation, hashes, event replay, versioned analyzers, cancellation, fallbacks,
+and complete failure accounting can make some divergence detectable. Provenance
+records what the governed system says occurred; W3C PROV and workflow-run
+packaging do not prove semantic correctness, authenticity, consent, ownership,
+privacy, or benefit \citep{moreau2013prov,leo2024rocrate}. T1 must therefore
+qualify control adherence, latency, buffer margin, continuity, integrity,
+interruption, and recovery on the exact real-model and hardware manifest before
+that path can inform H1. Fallbacks that dominate playback, unverifiable outputs,
+missed deadlines, or unreliable stopping count against feasibility rather than
+as invisible implementation details.
 
 \AntidoteTable{risk-mitigation-status}
 
 \section{Ethics statement}
 \label{sec:ethics-statement}
 
-No formal participant study or human-subject data collection is reported in
-this draft. Any future protocol must resolve informed consent, privacy, data
-retention, adverse-event handling, researcher-participant role conflicts, and
-the applicable independent ethics-review requirements before collection.
-Antidote is not a substitute for professional care and must not present
-generated audio as treatment.
+No formal participant study, recruitment, human-subject data collection, ethics
+approval, exemption, or independent determination is reported. Protocol
+\texttt{ANT-PROT-FEAS-001} remains
+\texttt{blocked-no-collection-authority}. Publication of this design and
+protocol cannot activate it. Antidote is a research instrument, not a treatment,
+diagnostic, medical device, crisis service, or substitute for professional care.
 
 \subsection{Emotional safety and participant authority}
 \label{sec:ethics-emotional-safety}
 
-\AntidotePlaceholder{ANT-PH-ETH-001}{Emotional safety and participant authority}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod, donec sed odio dui.}
+Music can be unwanted or harmful as well as meaningful. A theoretical model of
+music-induced harm identifies affective, behavioral, cognitive, identity,
+interpersonal, physical, and spiritual dimensions and treats harm as an
+interaction among context, music, recipient, and delivery
+\citep{silverman2020complicated}. Antidote must therefore never optimize tears,
+intensity, duration, completion, engagement, or physiological change as a proxy
+for benefit. Crying, calm, activation, numbness, discomfort, catharsis, and
+distress require the person's interpretation in that moment and again, when
+appropriate, at the declared later interval.
+
+The design preserves explicit playback, skip, stop, correction, grounding, and
+withdrawal authority and gives mismatch, unwanted intensity, harm, hearing
+discomfort, serious or unresolved events, and later aftereffect their own
+records. A stop must halt playback independently of model completion; a safety
+halt must block automatic continuation and personal-model updating. These are
+necessary requirements, not evidence that distress is prevented or resolved.
+The prototype provides no clinical monitoring, emergency response, or reliable
+way to distinguish tolerable challenge from escalating harm.
+
+Before any human exposure, an independently reviewed safety plan must define
+eligibility and exclusions, pre-session information, low-burden stopping,
+grounding and follow-up, adverse-event classification, escalation contacts,
+unresolved-event review, and discontinuation rules. High-risk crisis use,
+unsupervised treatment claims, and guidance for medication or psychoactive-drug
+sessions remain outside v0 authority. Refusal, stopping, non-response, or an
+unfavorable account must not reduce access, be reframed as noncompliance, or be
+used as a negative reward signal.
 
 \subsection{Consent, privacy, and data governance}
 \label{sec:ethics-consent-privacy}
 
-\AntidotePlaceholder{ANT-PH-ETH-002}{Consent privacy and data governance}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Aenean eu leo quam, pellentesque ornare sem lacinia quam venenatis vestibulum.}
+Consent is action- and purpose-specific. Permission to inspect one source does
+not authorize summarization, generation, playback, retention, learning,
+synchronization, research analysis, export, or publication. The current
+synthetic desktop path requires explicit confirmation for a manually entered,
+session-scoped context projection and keeps the worker outside unrestricted
+history. Historical journal or therapy-chat integration, revocation UI,
+retention enforcement, and privacy-ready payload handling are not implemented.
+An inspectable grant or projection also does not demonstrate comprehension,
+voluntariness, or freedom from demand---a particular concern when researcher
+and participant are the same person.
+
+Local-first design can reduce required server transfer and keep an authoritative
+record available on the person's device \citep{kleppmann2019localfirst}; it is
+not perfect security. The current store is not ready for private participant
+data. At-rest encryption, key creation and recovery, operating-system account
+separation, backup policy, retention enforcement, auditable deletion,
+tombstones, derived-projection invalidation, crash-log review, and a production
+worker sandbox remain unresolved. Device compromise, malware, cloud-synced
+folders, backups, screen capture, exports, and another local user can still
+expose sensitive context or response data.
+
+Public provenance presents a second tension: detailed lineage aids audit but can
+increase linkability and re-identification risk. The reporting contract permits
+only privacy-reviewed aggregate public envelopes and keeps row-level human
+records, free text, private paths, stable identifiers, record hashes, and the
+private evidence index outside the repository. Even a reconciled aggregate
+commitment does not establish anonymity, consent, authenticity, truth, or
+completeness. A person must be able to decline retention and export separately;
+the exact deletion effect on events, payloads, projections, analyses, backups,
+and already shared artifacts must be specified before collection. No public
+release may proceed solely because a schema validates or a hash matches.
 
 \subsection{Licensing, bias, accessibility, and hearing safety}
 \label{sec:ethics-licensing-accessibility}
 
-\AntidotePlaceholder{ANT-PH-ETH-003}{Licensing bias accessibility and hearing safety}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas sed diam eget risus varius blandit sit amet non magna. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.}
+No real generator has been selected or qualified for the study. Before a model
+or audio artifact can enter T1, H1, a release, or the magazine, review must cover
+the exact code and weight licenses, redistribution and commercial restrictions,
+training-data documentation and consent, required attribution, model-card
+limitations, remote-code execution, recognizable reproduction or imitation,
+third-party samples, output rights, and the intended distribution context.
+Generative-audio research has historically discussed positive implications far
+more often than negative ones and identifies copyright, agency, bias, privacy,
+misuse, labor, access, and resource concerns as material review categories
+\citep{barnett2023ethical}. That review does not prove that a particular model
+or output violates rights; conversely, an open weight license cannot clear its
+training data or every generated artifact.
+
+Training corpora, control vocabularies, affect labels, and musical evaluation
+may privilege well-represented genres, languages, cultures, instruments, and
+listener assumptions. A person-extensible semantic layer may reduce pressure to
+adopt one vocabulary, but adapter mappings and model outputs can still flatten
+or appropriate meaning. The prototype has automated keyboard and semantic
+checks; it has not established usability with screen readers, reduced-motion or
+low-vision settings, hearing differences, motor constraints, cognitive load,
+trauma-related sensitivities, or users outside the developer context. More
+knobs may increase agency for one person and burden or suggestion effects for
+another. Accessibility and cultural review must precede recruitment rather than
+be inferred from a nominally local interface.
+
+File-level integrated loudness and true-peak constraints can bound some
+digital-output errors but do not determine sound pressure at the ear. The
+WHO--ITU safe-listening standard treats exposure as level over duration and
+recommends dosimetry, accessible information, and volume-limiting options
+\citep{whoitu2019safelistening}. Antidote currently has no calibrated device
+path, at-ear measurement, cumulative-dose accounting, or proof that its lowest
+volume is appropriate. Human exposure therefore requires device-aware
+qualification, conservative defaults, continuously available volume and stop
+control, warnings that do not rely on sound alone, and a response path for
+tinnitus, pain, dizziness, or hearing discomfort. None of those controls alone
+establish hearing safety.
 
 \subsection{Independent review and collection gate}
 \label{sec:ethics-review-gate}
 
-\AntidotePlaceholder{ANT-PH-ETH-004}{Independent review and collection gate}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec ullamcorper nulla non metus auctor fringilla. Integer posuere erat a ante venenatis dapibus posuere velit aliquet.}
+The project has not recorded an institutional review board, research ethics
+committee, or other independent determination, and this manuscript does not
+decide whether a future self-study is exempt or outside a particular regime.
+That determination depends on the final protocol, institution, jurisdiction,
+recruitment, data, claims, and intended use. Self-use, local execution, public
+source code, or the absence of payment does not by itself resolve research
+ethics. WHO health-AI guidance provides a relevant normative foundation for
+autonomy, well-being, transparency, accountability, inclusiveness, and
+responsiveness \citep{who2021ethics}; alignment with those principles is not an
+approval or safety certification.
+
+Before H1 can change state, independent review must document the applicable
+ethics determination and approve or otherwise disposition the exact protocol,
+role conflict, consent process, eligibility and exclusion rules, emotional and
+hearing-safety plan, adverse-event and crisis escalation, compensation if any,
+privacy and data-management plan, retention and deletion behavior, public-export
+boundary, accessibility procedure, device qualification, model and output
+rights audit, analysis plan, and stopping rules. The separate real-model/T1,
+privacy, consent, independent-review, assignment, instrument, analysis, and
+pilot stop/go gates must each be satisfied by named evidence; no gate is
+inherited from the paper or another project. Any material amendment requires a
+new version and renewed review before collection continues.
+
+Until those records exist, formal collection, recruitment, therapeutic use,
+autonomous personalization, sensor inference, and public release of private or
+row-level response data remain prohibited. A later approval would be limited to
+its exact scope and would not prove benefit, privacy, accessibility, or safety.

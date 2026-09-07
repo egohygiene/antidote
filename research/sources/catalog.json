@@ -559,11 +559,13 @@
       "working_title": "The ethical implications of generative audio models",
       "domains": ["generative-audio", "safety"],
       "source_class": "synthesis",
-      "status": "discovered",
+      "status": "cited",
       "owner": "safety",
-      "priority": 20,
+      "priority": 8,
       "persistent_id": "doi:10.1145/3600211.3604686",
-      "canonical_url": "https://doi.org/10.1145/3600211.3604686"
+      "canonical_url": "https://doi.org/10.1145/3600211.3604686",
+      "bibliography_key": "barnett2023ethical",
+      "source_record": "research/sources/barnett-generative-audio-ethics-3604686.md"
     },
     {
       "id": "bettis-digital-emotion-regulation",
@@ -616,11 +618,26 @@
       "working_title": "Ethics and governance of artificial intelligence for health",
       "domains": ["safety"],
       "source_class": "guidance",
-      "status": "background-only",
+      "status": "cited",
       "owner": "safety",
-      "priority": 20,
+      "priority": 8,
       "persistent_id": "ISBN:9789240029200",
-      "canonical_url": "https://www.who.int/publications/i/item/9789240029200"
+      "canonical_url": "https://www.who.int/publications/i/item/9789240029200",
+      "bibliography_key": "who2021ethics",
+      "source_record": "research/sources/who-ai-health-2021.md"
+    },
+    {
+      "id": "who-itu-safe-listening-2019",
+      "working_title": "Safe listening devices and systems: a WHO-ITU standard",
+      "domains": ["safety", "audio-rendering"],
+      "source_class": "standard",
+      "status": "cited",
+      "owner": "safety",
+      "priority": 8,
+      "persistent_id": "ISBN:9789241515276",
+      "canonical_url": "https://www.who.int/publications/i/item/9789241515276",
+      "bibliography_key": "whoitu2019safelistening",
+      "source_record": "research/sources/who-itu-safe-listening-2019.md"
     },
     {
       "id": "haag-closed-loop-neurotechnology-01908-4",
