@@ -9,7 +9,8 @@ the evidence, section, figure, synthesis, and live-publication issues and
 defines the resume protocol for future contributors and conversations.
 
 [`manuscript-contract.json`](manuscript-contract.json) is the frozen issue #35
-writing contract. It owns the working identity, thesis, research questions,
+writing contract, reconciled through the issue #47 synthesis. It owns the final
+reviewable identity, thesis, research questions,
 contributions, publication-stage ladder, terminology, claim policy, and the
 purpose, evidence, visual, dependency, completion, and prohibition boundary for
 every canonical LaTeX source. Before drafting a section, read its contract and
@@ -118,12 +119,13 @@ python3 scripts/check_visuals.py
 ## Governed skeleton and placeholder contract
 
 [`skeleton.json`](skeleton.json) governs the front matter, section page budgets,
-appendix map, and every unfinished prose block. Each Lorem Ipsum paragraph uses
-`\AntidotePlaceholder{stable-id}{planned-content}{layout-filler}`. The rendered
-PDF and web paper label these blocks as draft layout filler and explicitly state
-that they are not evidence. Replace the whole macro invocation when its owner
-issue writes that content, then mark the registry item `resolved`; do not remove
-the warning while leaving filler behind.
+appendix map, and the complete history of prose-block ownership. All registered
+content placeholders are resolved; no Lorem Ipsum remains in the canonical
+manuscript. If a future draft introduces a new layout-only gap, it must receive
+a stable registry identity and use
+`\AntidotePlaceholder{stable-id}{planned-content}{layout-filler}` so PDF and web
+projections identify it as non-evidence. Replace the whole macro invocation and
+mark the registry item `resolved` in the same reviewed change.
 
 Seventeen active visuals occupy their intended manuscript locations and are
 final under the visual contract. Two evidence-contingent Results slots remain
@@ -131,9 +133,9 @@ governed but retired because qualifying T0 and T1 packages do not exist; they
 are not rendered. A later reactivation must supply the required evidence,
 review, manifest transition, and manuscript reference together.
 
-Draft builds warn about the remaining blocks. Changing `paper.stage` in
-`beacon-project.toml` to `submission-ready` or `published` makes any remaining
-placeholder a validation error.
+The checker confirms that no content block remains active. Changing
+`paper.stage` in `beacon-project.toml` to `submission-ready` or `published`
+continues to make any future active placeholder a validation error.
 
 ```sh
 python3 scripts/check_placeholders.py

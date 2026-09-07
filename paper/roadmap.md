@@ -106,7 +106,7 @@ retroactively.
 
 ### Wave P5 — Synthesis
 
-- [#47 — Finalize the title, abstract, conclusion, and whole-paper coherence](https://github.com/egohygiene/antidote/issues/47)
+- [x] [#47 — Finalize the title, abstract, conclusion, and whole-paper coherence](https://github.com/egohygiene/antidote/issues/47) — [final reviewable manuscript identity and synthesis](manuscript-contract.json)
 
 The title and abstract are finalized late so they cannot promise more than the
 completed body supports.
@@ -125,12 +125,15 @@ figures, metadata, build outputs, Pages routes, checksums, and the roadmap.
 - [#72 — Design the magazine and produce editorial visuals](https://github.com/egohygiene/antidote/issues/72)
 - [#73 — Build and verify magazine web, digital, and print artifacts](https://github.com/egohygiene/antidote/issues/73)
 - [#74 — Publish the magazine and activate the hub slot](https://github.com/egohygiene/antidote/issues/74)
+- [#89 — Polish the publication-first Antidote launch site](https://github.com/egohygiene/antidote/issues/89)
 - [#75 — Create the versioned paper and magazine release](https://github.com/egohygiene/antidote/issues/75)
 - [#76 — Prepare and publish the approved LinkedIn launch](https://github.com/egohygiene/antidote/issues/76)
 
 [Issue #69](https://github.com/egohygiene/antidote/issues/69) is the
 cross-surface launch epic. The paper remains the scientific source of truth;
-the magazine and LinkedIn post cannot introduce claims absent from it.
+the magazine and LinkedIn post cannot introduce claims absent from it. Issue
+#89 is the publication-first polish pass after real magazine artifacts exist;
+the later product-first redesign remains independently governed by #63--#66.
 
 ## Canonical section ownership
 

@@ -4,6 +4,19 @@ Antidote is a research publication and an emerging local research instrument,
 not a clinical product. Preserve the distinction between implemented,
 scaffolded, proposed, and unavailable behavior.
 
+## Continuity handoff
+
+After the initial repository and architecture scan, read
+[`CONTINUITY.md`](CONTINUITY.md) before selecting or continuing an issue. It is
+a concise handoff aid, not a replacement for the canonical documents or live
+GitHub state.
+
+Before handing off a completed issue, update `CONTINUITY.md` in the same pull
+request with the issue and branch state, material changes, validation evidence,
+remaining blockers, and exact next issue. Never describe an open pull request
+as merged; verify the current branch, repository history, and GitHub issue or
+pull-request state when resuming.
+
 ## Required context
 
 Before changing claims, methods, results, or conclusions, read:

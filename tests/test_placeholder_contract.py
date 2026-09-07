@@ -18,7 +18,7 @@ SPEC = importlib.util.spec_from_file_location("check_placeholders", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 PLACEHOLDERS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLACEHOLDERS)
-EXPECTED_ACTIVE_PLACEHOLDERS = 2
+EXPECTED_ACTIVE_PLACEHOLDERS = 0
 
 
 class PlaceholderContractTests(unittest.TestCase):
@@ -38,15 +38,12 @@ class PlaceholderContractTests(unittest.TestCase):
         identifiers = [record["id"] for record in result["active"]]
         self.assertEqual(len(identifiers), len(set(identifiers)))
 
-    def test_submission_ready_stage_fails_closed(self) -> None:
-        """A stronger publication stage cannot retain active filler."""
+    def test_submission_ready_stage_has_no_content_placeholder_blocker(self) -> None:
+        """The completed manuscript carries no active content filler."""
         result = PLACEHOLDERS.validate_placeholder_system(
             ROOT, paper_stage="submission-ready"
         )
-        self.assertEqual(
-            len([error for error in result["errors"] if "blocks submission-ready" in error]),
-            EXPECTED_ACTIVE_PLACEHOLDERS,
-        )
+        self.assertEqual(result["errors"], [])
 
     def test_unregistered_placeholder_is_rejected(self) -> None:
         """A contributor cannot add anonymous layout filler."""
@@ -70,16 +67,22 @@ class PlaceholderContractTests(unittest.TestCase):
             root = self.fixture(temporary)
             path = root / "paper" / "skeleton.json"
             manifest = json.loads(path.read_text(encoding="utf-8"))
-            active = next(
+            resolved = next(
                 record
                 for record in manifest["placeholders"]
-                if record["state"] == "active"
+                if record["state"] == "resolved"
             )
-            active["state"] = "resolved"
-            path.write_text(json.dumps(manifest), encoding="utf-8")
+            section = root / resolved["section_path"]
+            section.write_text(
+                section.read_text(encoding="utf-8")
+                + f"\n\\AntidotePlaceholder{{{resolved['id']}}}"
+                + f"{{{resolved['title']}}}"
+                + "{Lorem ipsum dolor sit amet, consectetur adipiscing elit.}\n",
+                encoding="utf-8",
+            )
             result = PLACEHOLDERS.validate_placeholder_system(root)
             self.assertIn(
-                f"{active['id']} resolved placeholder remains in manuscript source",
+                f"{resolved['id']} resolved placeholder remains in manuscript source",
                 result["errors"],
             )
 

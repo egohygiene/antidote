@@ -96,8 +96,8 @@ class RepositoryContractTests(unittest.TestCase):
         self.assertIn("antidote-pages-${{ github.sha }}", pages_workflow)
         self.assertIn("github.event_name != 'pull_request'", pages_workflow)
 
-    def test_lorem_ipsum_is_wrapped_as_non_evidence(self) -> None:
-        """Layout filler may appear only through the explicit draft macro."""
+    def test_completed_manuscript_has_no_lorem_ipsum(self) -> None:
+        """Resolved content placeholders must leave no layout filler behind."""
         section_text = "\n".join(
             path.read_text(encoding="utf-8")
             for path in sorted((ROOT / "paper" / "sections").glob("*.tex"))
@@ -108,7 +108,7 @@ class RepositoryContractTests(unittest.TestCase):
             section_text,
             flags=re.DOTALL,
         )
-        self.assertGreater(len(placeholders), 0)
+        self.assertEqual(len(placeholders), 0)
         self.assertEqual(section_text.count("Lorem ipsum"), len(placeholders))
         self.assertEqual(len({placeholder_id for placeholder_id, _ in placeholders}), len(placeholders))
         self.assertTrue(all("Lorem ipsum" in body for _, body in placeholders))
