@@ -58,8 +58,9 @@ affected visual specification together whenever a formula changes.
 
 ## Results reporting
 
-[`experiments/reporting/results-reporting-v1.json`](../experiments/reporting/results-reporting-v1.json)
-governs the current empty Results state. Every future result slot names its
+[`experiments/reporting/results-reporting-v1.1.json`](../experiments/reporting/results-reporting-v1.1.json)
+governs the current empty Results state. Version 1.0.0 remains preserved beside
+it as the superseded pre-correction contract. Every future result slot names its
 reserved source package, frozen protocol version, analysis pointer, evidence
 class, and promotion boundary. The three Results tables are deterministic,
 value-free projections of that contract:

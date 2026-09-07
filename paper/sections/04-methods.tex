@@ -4,9 +4,17 @@
 
 This paper specifies a prospective design and feasibility protocol rather than
 a clinical efficacy study. The canonical machine-readable artifact is
-\texttt{ANT-PROT-FEAS-001}, version~1.0.0, frozen on 2026-09-07 with status
-\texttt{frozen-design-protocol}. Its merge grants no collection authority: no
-formal human study has begun, all human-collection activation gates remain
+\texttt{ANT-PROT-FEAS-001}, version~1.1.0, frozen on 2026-09-07 with status
+\texttt{frozen-design-protocol}. Issue~\#82 created this pre-collection
+corrective successor after identifying an assignment-space error and several
+underspecified analysis and response rules in version~1.0.0. The exact 1.0.0
+bytes remain in \texttt{antidote-feasibility-v1.json} and are identified by
+SHA-256 \texttt{dbedbcbb74303373a7e00e95ad063b0}\allowbreak
+\texttt{25d8cf6033864f4ad5a390d15703ba403}.
+No qualifying record, exposure, or human collection began under that version;
+accordingly, no formal human study has begun. Version~1.1.0 therefore changes
+no observed result. Its merge likewise grants
+no collection authority: all human-collection activation gates remain
 unsatisfied, and no ethics or safety approval is presumed. The design draws on
 N-of-1 protocol guidance for prospective specification and complete reporting,
 pilot and feasibility guidance for separating practicability from efficacy,
@@ -49,12 +57,16 @@ boundary must resolve to a versioned record, equation, contract, or explicit
 unavailable state. T0 addresses the implemented portion of RQ2 with synthetic,
 deterministic conformance and recovery tests. T1 would extend RQ2 to a frozen
 real-model, adapter, analyzer, hardware, and mutation manifest, but is currently
-\texttt{blocked-no-real-model}. H1 would address RQ3 through a prospective
+\texttt{blocked-no-real-model}. H1 would address the record-feasibility
+prerequisite to RQ3 through a prospective
 repeated-session within-person series, but is
 \texttt{blocked-no-collection-authority}. Passing D0 or T0 neither implies that
-T1 will pass nor authorizes H1. Likewise, technical controllability cannot
-establish that an exposure is subjectively fitting, useful, safe, or
-therapeutically effective.
+T1 will pass nor authorizes H1. H1 can test only whether separated records can
+be collected, corrected, retained, and provenance-linked with auditable
+completeness, voluntary-response usability, burden, and safety-event accounting.
+That is a prerequisite for RQ3, not a test of useful advisory relationships.
+Likewise, technical controllability cannot establish that an exposure is
+subjectively fitting, useful, safe, or therapeutically effective.
 
 \subsection{Units, conditions, and session structure}
 \label{sec:methods-session-structure}
@@ -84,11 +96,24 @@ hearing safety; playback begins at the lowest device level and remains under
 the person's control. Auditory beats, within-exposure adaptation, and personal-
 model updating are excluded from this protocol.
 
+These are visibly different condition-and-interface bundles. They jointly vary
+context fields, desired-transition use, personal semantic content, plan
+visibility, editing, and---for P---negotiated approval. Randomization permits
+only within-person contrasts among those bundles. It cannot isolate
+personalization, a semantic field, plan editing, approval, or a psychological
+or neurological causal pathway.
+
 Each prospective session follows eight governed steps: authority and readiness;
 baseline and desired transition; condition reveal and plan review; generation
 and verification; a separate, explicit playback action; immediate response
 within five minutes; later aftereffect report; and closure or pause. A generated
 but unplayed artifact never enters an exposure or human-response denominator.
+The current desktop MVP is not this H1 instrument, and records produced through
+its schema-generation v1 runtime payloads are not H1-eligible. H1 remains
+blocked until, at minimum, the timed session workflow, separate version~2 consent enforcement,
+version~2 response and correction contract, assignment and seed enforcement,
+participant-facing instrument, safety workflow, and minimum-data private
+research export have been implemented and independently reviewed.
 
 \AntidoteFigure{feasibility-protocol-timeline}
 
@@ -124,6 +149,13 @@ and safety halt to reach recorded terminal states; and no missed deadline,
 partial output, or unsupported control to be reported as success. Hardware- and
 adapter-specific latency, buffer, analyzer, and perceptual thresholds must be
 frozen in the later T1 manifest; this paper invents no universal threshold.
+For each registered component latency and verified buffer-margin variable,
+reporting fixes $n$, minimum, maximum, the ordinary arithmetic median, and
+$q_{0.50}$, $q_{0.90}$, and $q_{0.95}$. Quantiles use fixed linear interpolation:
+$h=(n-1)p+1$, $j=\lfloor h\rfloor$, $g=h-j$, and
+$Q(p)=(1-g)x_{(j)}+g x_{(j+1)}$, with the upper index capped at $n$. Values are
+calculated from unrounded seconds separately for each component and terminal
+state. These summaries remain descriptive rather than universal thresholds.
 
 \subsection{Within-person feasibility measures}
 \label{sec:methods-within-person-measures}
@@ -132,27 +164,46 @@ The proposed H1 instrument uses brief, near-event self-report because ecological
 momentary assessment can reduce recall distance while introducing its own
 burden, reactivity, adherence, and missingness concerns
 \cite{shiffman2008ema}. Baseline captures a person-authored description plus
-valence, arousal, and intensity; desired transition remains a separate category
-and optional description. The compact valence and arousal interaction borrows
-from the Affective Slider \cite{betella2016slider}, but Antidote's wording,
-intensity, response timing, and additional items constitute a new protocol and
-are not validated by that source.
+valence, arousal, and intensity; desired transition remains a separate nominal
+category with a person-authored description. Those descriptions are required
+by the current moment-context contract. The compact valence and arousal
+interaction borrows from the Affective Slider \cite{betella2016slider}, but
+Antidote's wording, intensity, response timing, and additional items constitute
+a new protocol and are not validated by that source.
 
 After exposure, the instrument records perceived musical expression separately
 from felt state. It then records whether the intensity was wanted, as well as
 helpfulness, resonance, mismatch, harm, surprise, interaction burden, and total
 session burden. Helpfulness and harm are asked again in the later aftereffect
-window without overwriting the immediate record. Every bounded item uses its
-declared anchors. A supplied felt-state object requires a description, while a
-declined or unavailable felt-state response is null and named in the field-level
-missingness record. The record also preserves the instrument version,
-correction lineage, window, and missingness reason. No clinical
-outcome is collected, and no emotional direction is prespecified as inherently
-better. In particular, catharsis, crying, arousal, or movement toward a target
-cannot substitute for the person's appraisal of whether the experience was
-wanted, helpful, mismatched, or harmful.
+window together with a yes/no/unsure ongoing-effect item and optional
+person-authored meaning, without overwriting the immediate record. Response
+descriptions are optional in the version~2 response contract; every
+prompted-but-absent response field instead receives its own field path and exactly one
+of \texttt{not\_prompted}, \texttt{declined}, \texttt{missed\_window},
+\texttt{technical\_failure}, \texttt{interrupted}, or
+\texttt{not\_applicable}. A correction is a new record carrying the superseded
+response identifier and correction reason.
 
-Physiology is disabled in version~1.0.0. A future supplemental module would
+Every subjective scale is frozen. Valence runs from $-1$ ``very unpleasant''
+through 0 ``neither pleasant nor unpleasant, or evenly mixed'' to $1$ ``very pleasant''; arousal runs
+from $-1$ ``very low activation'' through 0 ``neither low nor high'' to $1$
+``very high activation''; intensity runs from 0 ``not at all intense'' to 1
+``extremely intense.'' Wanted intensity and
+ongoing effect each use the nominal responses yes, no, and unsure. Helpfulness
+runs from ``not at all helpful for my chosen purpose'' to ``as helpful as I
+could reasonably ask for that purpose''; resonance from ``did not fit or
+resonate at all'' to ``fit or resonated completely''; mismatch from ``no
+perceived mismatch'' to ``extreme perceived mismatch''; harm from ``no unwanted
+negative effect noticed'' to ``extreme unwanted negative effect''; and surprise
+from ``entirely expected'' to ``entirely unexpected.'' Interaction burden and
+whole-session burden are separate items, each running from ``not burdensome''
+to ``too burdensome to repeat.'' No clinical outcome is collected, and no
+emotional direction is prespecified as inherently better. In particular,
+catharsis, crying, arousal, or movement toward a target cannot substitute for
+the person's appraisal of whether the experience was wanted, helpful,
+mismatched, or harmful.
+
+Physiology is disabled in version~1.1.0. A future supplemental module would
 require separate consent; device, calibration, clock, unit, signal-quality,
 artifact, dropout, and missingness records; a frozen analysis; and independent
 privacy and safety review. It could not overwrite self-report, diagnose emotion
@@ -165,12 +216,25 @@ or need, prove entrainment, or steer generation under this protocol.
 
 The six possible orders of G, S, and P are each used once. Their block order is
 randomized with a cryptographically generated seed committed in a separate
-activation record before session~1. Eligibility and baseline are confirmed
-before condition reveal. Participant blinding is impossible because the three
-interfaces disclose different context and plan operations; researcher blinding
-is also impossible in a self-study, and both facts must be reported. A failed
-assigned session remains in the attempt ledger; a replacement may use the same
-condition at the next eligible time but never erases the failure.
+activation record before session~1. This is a bijection of six distinct orders
+to six chronological blocks, so the allowable schedule space is exactly
+$6!=720$. It is not six independent draws. The machine-readable protocol maps
+a 32-byte seed uniformly to a zero-based lexicographic schedule index using
+SHA-256 rejection sampling and records the counter, index, schedule, and
+commitment. H1 additionally fixes block seeds
+101, 307, 911, 1217, 1601, and 2027 in chronological order and uses the same
+block seed for G, S, and P. A model or adapter that cannot honor that commitment
+leaves H1 blocked. The committed seed is never substituted; any pre-exposure
+retry retains it, and no retry is allowed after hearing or rating its output.
+Eligibility and baseline are confirmed before condition
+reveal. Participant blinding is impossible because the three interfaces
+disclose different context and plan operations; researcher blinding is also
+impossible in a self-study, and both facts must be reported. A failed assigned
+session remains in the attempt ledger. A replacement is allowed only before any
+exposure starts, retains the same block, slot, condition, and committed block
+seed, and never erases the failure. Once playback starts, the slot is consumed
+regardless of completion or response and cannot be rerun based on what was heard
+or reported.
 
 At least 48 hours and completion or expiry of the later-response window separate
 exposures. Ongoing aftereffect, mismatch, distress, hearing discomfort, or
@@ -181,54 +245,86 @@ a prespecified sensitivity analysis.
 
 Analyses distinguish all assigned attempts, verified artifacts, started
 exposures, completed exposures, immediate windows, and later windows. No outcome
-is imputed in the primary analysis. Missing, declined, missed-window,
-interrupted, and technical-failure states remain separate; condition contrasts
-use only blocks containing both required observations and disclose every omitted
-block. Best- and worst-case bounded values are used only as sensitivity checks
-for feasibility progression thresholds, never as substituted observations.
+is imputed in the primary analysis. Each prompted but absent field carries its
+own canonical missingness reason. Condition contrasts use only blocks containing
+both required observations and disclose every omitted block. Lower- and
+upper-endpoint values are used only for the prespecified interaction-burden
+progression sensitivity, never as substituted observations.
 
 \subsection{Analysis and sensitivity plan}
 \label{sec:methods-analysis-plan}
 
 Technical reporting includes complete state denominators, invariant outcomes,
-median, range, and empirical latency quantiles, paired control differences by
-factor and seed, and every semantic and acoustic boundary component. Human-
-response feasibility reporting includes assigned through withdrawn counts by
-condition, field-level completeness and reasons, burden distributions, all
-mismatch, harm, hearing-discomfort, distress, and safety events, and the ability
-to link semantic, acoustic, exposure, and response records through provenance.
+the frozen latency summaries, paired control differences by factor and seed,
+and every semantic and acoustic boundary component. Human-response feasibility
+reporting includes assigned through withdrawn counts by condition; audit
+completeness; usable voluntary values by field and canonical missingness reason;
+separate interaction- and whole-session-burden distributions; all mismatch,
+harm, hearing-discomfort, distress, and safety events; and the ability to link
+semantic, acoustic, exposure, response, and correction records through
+provenance. A declined response can be audit-complete but is not counted as a
+usable response.
 
 Secondary within-person estimands are blockwise P-minus-S, P-minus-G, and
 S-minus-G contrasts for immediate helpfulness, resonance, mismatch, harm, and
-burden; differences between perceived-expression and felt-state valence and
-arousal; descriptive rank associations among varied semantic controls, measured
-features, and responses when at least six non-missing, nonconstant pairs exist;
-and condition-specific baseline-to-immediate changes when both observations
-exist. Every session point, denominator, median, range, and blockwise contrast
-is shown. If all six blocks are analyzable, the analysis enumerates all
-$6^6=46{,}656$ within-block condition-label permutations as an exploratory
-within-person randomization distribution, not a population estimate or
-confirmatory test.
+interaction burden and whole-session burden separately; differences between
+perceived-expression and felt-state valence and arousal; and condition-specific
+baseline-to-immediate valence and arousal changes. Protected analysis output
+retains every session point; the public envelope exposes only privacy-reviewed
+aggregate denominators, medians, ranges, and eligible blockwise contrasts.
+Exploratory variable-pair searches and multivariable response regressions are
+not run: with at most 18 exposures, neither a search nor simultaneous condition,
+block, order, and baseline coefficients are defensibly supported. A later
+protocol would have to name its variables, model, and sample-size rationale
+prospectively.
+
+For a named immediate outcome and pairwise contrast, an exact randomization
+distribution is available only when all three chronological position values
+are present in all six blocks. It holds those values fixed, enumerates
+lexicographically all 720 bijections of the six condition orders to the six
+blocks, assigns labels under each schedule, and uses the mean of the six
+within-block A-minus-B differences as the statistic. The two-sided tail includes
+every unrounded statistic with absolute value at least the observed absolute
+value, including ties, and reports the count divided by 720. All 720 statistics
+are retained in the protected analysis output. A public aggregate reports the
+observed statistic, tail count, denominator, exact proportion, and privacy-
+reviewed distribution summaries; the full vector is not released without a
+separate field-level disclosure review and current export scope. No reduced,
+asymptotic, one-sided, plus-one, or multiplicity-adjusted substitute is used.
+This is an exploratory reference for the single person and schedule under a
+sharp no-bundle-effect null, not population inference or component-level causal
+attribution.
 
 Sensitivity analyses compare started exposures with those reaching 80 percent
-of audio, include and exclude carryover flags, compare early and late blocks,
-adjust descriptive models for block, order, and baseline state, leave out one
-block at a time, identify self-researcher versus independently administered
-sessions, distinguish fixed-seed from non-deterministic adapters, and compare
-no-imputation results with bounded missingness scenarios. All prespecified null,
-zero, opposite-direction, negative, missing, interrupted, burdensome, harmful,
-and adverse observations remain visible. No endpoint will be selected or
-renamed after observation.
+of audio (384 of 480 seconds), include and exclude named carryover flags, report
+blocks 1--3 and 4--6 separately without treating the split as a trend test,
+leave out each block in turn, and stratify by administration status only if it
+actually changes. For missing interaction-burden values only, the progression
+decision is repeated once with 0 and once with 1. Audit completeness,
+completion, usable-response proportions, provenance, and unresolved safety are
+factual and cannot be rescued by bounds. Helpfulness and resonance otherwise
+use 1/0 as descriptive best/worst endpoints; mismatch, harm, and both burden
+fields use 0/1; valence, arousal, intensity, and surprise receive endpoint
+ranges without calling either direction better; and nominal fields are never
+numerically imputed. All prespecified null, zero, opposite-direction, negative,
+missing, interrupted, burdensome, harmful, and adverse observations remain
+visible. No endpoint will be selected or renamed after observation.
 
 The progression rule is operational rather than therapeutic. A later bounded
 study may be considered only if the hard technical gates pass; at least 15 of
-18 exposures and at least four per condition complete; at least 80 percent of
-started exposures have an immediate record or explicit decline reason and at
-least 70 percent have the same for later response; median interaction burden is
-no greater than 0.5; no safety event remains unresolved; and the participant
-and an independent reviewer separately find another bounded study acceptable.
-Otherwise the decision is stop or revise. Even a ``proceed'' decision establishes
-neither efficacy, generalizability, privacy, nor safety.
+18 exposures and at least four per condition complete; every assigned attempt
+and scheduled window is audit-complete; and every immediate core field has at
+least 80 percent of the started-exposure count, rounded upward to the next whole
+value, overall and at least three per condition, while every later core field
+has at least 70 percent of that count, again rounded upward, overall and at
+least two per condition.
+Every eligible response must preserve the full protocol-to-correction
+provenance chain. Observed median interaction burden and both its endpoint-bound
+decisions must be no greater than 0.5; no safety event may remain unresolved;
+and the participant and an independent reviewer must separately find another
+bounded study acceptable. Otherwise the decision is stop or revise. Even a
+``proceed'' decision establishes neither advisory usefulness, efficacy,
+generalizability, privacy, nor safety.
 
 Equation ANT-EQ-014 defines the separated response record used here.
 ANT-EQ-015 and ANT-EQ-016 remain unavailable future empirical models: this
@@ -259,13 +355,29 @@ with appropriate human or emergency support, not Antidote. Unresolved adverse
 responses, serious events, stop-control failure, or repeated high harm pause the
 protocol for independent review; these rules do not prove clinical safety.
 
+For those pause rules, ``high harm'' means a non-missing immediate or later harm
+rating of at least 0.75, or an explicit request by the person to treat an event
+as high harm. ``Repeated'' means high harm associated with two distinct started
+exposures; immediate and later reports from one exposure count once. A
+``serious event'' is operationally an event for which urgent or emergency human
+assessment is sought; reported hospitalization, persistent hearing change, or
+persistent functional impairment; incapacity preventing a self-directed exit;
+continued playback after a stop request; or unauthorized access, retention, or
+export of consent-scoped sensitive data. This is not a diagnosis or clinical
+severity judgment. An event is unresolved while it lacks a documented
+disposition, a reported unwanted effect remains ongoing or unsure, or required
+independent review is incomplete. Serious events and stop-control, privacy, or
+consent failures cannot close automatically.
+
 Separate consent scopes govern inspection, projection, generation, playback,
-retention, analysis, export, and any future personal-model use. Raw journal,
+retention, analysis, export, and learning (future personal-model use). Raw journal,
 therapy-chat, health, or other private free text cannot enter the public
 repository or a default research export. Storage encryption and recovery,
 retention expiry and deletion, projection invalidation, backups, participant
 materials, the applicable ethics determination, assignment commitment,
-instrument implementation, analysis code, and pilot stop/go review all remain
-unresolved activation gates. Consequently, this protocol is reproducible as a
-design artifact but is not permission to recruit, expose, collect, or report a
-human result.
+version~2 consent enforcement, protocol timing, version~2 response and
+correction handling, minimum-data private research export, instrument
+implementation, analysis code, and pilot stop/go review all remain unresolved
+activation gates. Consequently, this protocol is reproducible as a design
+artifact but is not permission to recruit, expose, collect, or report a human
+result.

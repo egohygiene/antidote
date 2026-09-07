@@ -80,11 +80,16 @@ class TypeRegistry:
     def discover(self) -> None:
         """Discover every root, inline object, local definition, and enum."""
         for contract in self.contracts.values():
-            for definition_name, definition in contract.schema.get("$defs", {}).items():
+            definitions = contract.schema.get("$defs", {})
+            for definition_name in definitions:
                 generated_name = contract.type_name + to_pascal(definition_name)
                 self.refs[(contract.type_name, f"#/$defs/{definition_name}")] = (
                     generated_name
                 )
+            for definition_name, definition in definitions.items():
+                generated_name = self.refs[
+                    (contract.type_name, f"#/$defs/{definition_name}")
+                ]
                 self._register_object(generated_name, contract.type_name, definition)
             self._register_object(
                 contract.type_name, contract.type_name, contract.schema
@@ -105,9 +110,18 @@ class TypeRegistry:
             return
         enum_values = schema.get("enum")
         if enum_values is not None:
-            if not all(isinstance(value, str) for value in enum_values):
-                raise ValueError(f"only string enums are supported: {type_hint}")
-            candidate = EnumDefinition(type_hint, tuple(enum_values))
+            if not all(
+                value is None or isinstance(value, str) for value in enum_values
+            ):
+                raise ValueError(
+                    f"only string enums, optionally including null, are supported: {type_hint}"
+                )
+            string_values = tuple(
+                value for value in enum_values if isinstance(value, str)
+            )
+            if not string_values:
+                raise ValueError(f"enum must contain a string value: {type_hint}")
+            candidate = EnumDefinition(type_hint, string_values)
             existing = self.enums.get(type_hint)
             if existing is not None and existing != candidate:
                 raise ValueError(f"conflicting enum type: {type_hint}")
@@ -165,11 +179,21 @@ class TypeRegistry:
         elif "const" in schema:
             value = schema["const"]
             if language == "rust":
-                base = "String"
+                if isinstance(value, str):
+                    base = "String"
+                elif isinstance(value, bool):
+                    base = "bool"
+                elif isinstance(value, int):
+                    base = "i64"
+                elif isinstance(value, float):
+                    base = "f64"
+                else:
+                    base = "serde_json::Value"
             elif language == "typescript":
                 base = json.dumps(value)
             else:
-                base = f"Literal[{json.dumps(value)}]"
+                literal = json.dumps(value) if isinstance(value, str) else repr(value)
+                base = f"Literal[{literal}]"
         else:
             types = schema_types(schema)
             primary = types[0] if types else "object"
@@ -289,9 +313,16 @@ def load_manifest() -> tuple[dict[str, Any], list[Contract]]:
             raise ValueError(f"duplicate schema $id: {schema_id}")
         ids.add(schema_id)
         version = schema.get("properties", {}).get("schema_version", {}).get("const")
-        if version != "1.0.0":
+        version_match = re.fullmatch(r"([1-9][0-9]*)\.([0-9]+)\.([0-9]+)", str(version))
+        filename_match = re.search(r"\.v([1-9][0-9]*)\.schema\.json$", schema_path.name)
+        if version_match is None or filename_match is None:
             raise ValueError(
-                f"{schema_path.name} must pin payload schema_version 1.0.0"
+                f"{schema_path.name} must pin a semantic payload schema_version and versioned filename"
+            )
+        major = version_match.group(1)
+        if filename_match.group(1) != major or not schema_id.endswith(f":v{major}"):
+            raise ValueError(
+                f"{schema_path.name} payload major, filename, and $id must agree"
             )
         type_name = entry["type_name"]
         if type_name in type_names:

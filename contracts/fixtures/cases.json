@@ -100,6 +100,83 @@
       }
     },
     {
+      "name": "consent-grant-v2-valid",
+      "contract": "consent-grant-v2",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "consent-v2-synthetic-1",
+        "session_id": "session-v2-synthetic-1",
+        "status": "active",
+        "created_at": "2026-09-07T12:00:00Z",
+        "expires_at": null,
+        "purposes": ["generation"],
+        "actions": ["play"],
+        "sources": [],
+        "retention": {
+          "mode": "session_only",
+          "allow_derived_projection": false,
+          "allow_personal_model_update": false
+        }
+      }
+    },
+    {
+      "name": "consent-grant-v2-analyze-valid",
+      "contract": "consent-grant-v2",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "consent-v2-synthetic-analyze",
+        "session_id": "session-v2-synthetic-1",
+        "status": "active",
+        "created_at": "2026-09-07T12:00:00Z",
+        "purposes": ["generation"],
+        "actions": ["analyze"],
+        "sources": [],
+        "retention": {
+          "mode": "session_only",
+          "allow_derived_projection": false,
+          "allow_personal_model_update": false
+        }
+      }
+    },
+    {
+      "name": "consent-grant-v2-action-invalid",
+      "contract": "consent-grant-v2",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "consent-v2-synthetic-invalid",
+        "session_id": "session-v2-synthetic-1",
+        "status": "active",
+        "created_at": "2026-09-07T12:00:00Z",
+        "purposes": ["response_capture"],
+        "actions": ["diagnose"],
+        "sources": [],
+        "retention": {"mode": "session_only"}
+      }
+    },
+    {
+      "name": "consent-grant-v2-coupled-actions-invalid",
+      "contract": "consent-grant-v2",
+      "valid": false,
+      "category": "limit",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "consent-v2-synthetic-coupled",
+        "session_id": "session-v2-synthetic-1",
+        "status": "active",
+        "created_at": "2026-09-07T12:00:00Z",
+        "purposes": ["generation"],
+        "actions": ["analyze", "play"],
+        "sources": [],
+        "retention": {"mode": "session_only"}
+      }
+    },
+    {
       "name": "working-context-projection-valid",
       "contract": "working-context-projection",
       "valid": true,
@@ -585,6 +662,181 @@
       }
     },
     {
+      "name": "h1-public-result-envelope-valid",
+      "contract": "h1-public-result-envelope",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "package_id": "ANT-PKG-H1-AUDIT-SYNTHETIC",
+        "package_kind": "audit",
+        "source_record_id": "ANT-REC-H1-AUDIT-001",
+        "stage": "H1",
+        "evidence_class": "unavailable",
+        "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol": {
+          "id": "ANT-PROT-FEAS-001",
+          "version": "1.1.0",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "analysis_plan": {
+          "id": "ANT-REPORT-RESULTS-001",
+          "version": "1.1.0",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "deviation_log_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "evidence_set": {
+          "evidence_set_id": "ANT-ESET-H1-001",
+          "commitment_profile": "antidote-evidence-set-commitment/v1",
+          "evidence_set_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "record_count": 0
+        },
+        "complete_accounting": {
+          "status": "unavailable",
+          "denominator": 0,
+          "categories": []
+        },
+        "public_aggregates": [],
+        "artifacts": [],
+        "privacy_review": {
+          "status": "not-applicable",
+          "scope": "aggregate-only-public-envelope"
+        },
+        "promotion": {
+          "disposition": "blocked",
+          "claim_ids": []
+        },
+        "package_references": [],
+        "cross_package_reconciliation": {
+          "status": "unavailable",
+          "denominator": 0,
+          "categories": []
+        },
+        "provenance_linkability": {
+          "status": "unavailable",
+          "denominator": 0,
+          "categories": []
+        },
+        "deviations": {
+          "status": "unavailable",
+          "denominator": 0,
+          "categories": []
+        },
+        "progression_criteria": {
+          "status": "unavailable",
+          "denominator": 0,
+          "categories": []
+        },
+        "progression_disposition": "not-applicable"
+      }
+    },
+    {
+      "name": "h1-public-result-envelope-private-id-invalid",
+      "contract": "h1-public-result-envelope",
+      "valid": false,
+      "category": "unknown_field",
+      "data": {
+        "schema_version": "1.0.0",
+        "package_id": "ANT-PKG-H1-AUDIT-SYNTHETIC",
+        "package_kind": "audit",
+        "source_record_id": "ANT-REC-H1-AUDIT-001",
+        "stage": "H1",
+        "evidence_class": "unavailable",
+        "source_revision": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+        "protocol": {
+          "id": "ANT-PROT-FEAS-001",
+          "version": "1.1.0",
+          "sha256": "bbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbbb"
+        },
+        "analysis_plan": {
+          "id": "ANT-REPORT-RESULTS-001",
+          "version": "1.1.0",
+          "sha256": "cccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccccc",
+          "deviation_log_sha256": "dddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddddd"
+        },
+        "evidence_set": {
+          "evidence_set_id": "ANT-ESET-H1-001",
+          "commitment_profile": "antidote-evidence-set-commitment/v1",
+          "evidence_set_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+          "record_count": 0
+        },
+        "complete_accounting": {"status": "unavailable", "denominator": 0, "categories": []},
+        "public_aggregates": [],
+        "artifacts": [],
+        "privacy_review": {
+          "status": "not-applicable",
+          "scope": "aggregate-only-public-envelope"
+        },
+        "promotion": {"disposition": "blocked", "claim_ids": []},
+        "package_references": [],
+        "cross_package_reconciliation": {"status": "unavailable", "denominator": 0, "categories": []},
+        "provenance_linkability": {"status": "unavailable", "denominator": 0, "categories": []},
+        "deviations": {"status": "unavailable", "denominator": 0, "categories": []},
+        "progression_criteria": {"status": "unavailable", "denominator": 0, "categories": []},
+        "progression_disposition": "not-applicable",
+        "session_id": "session-synthetic-private-must-not-be-public"
+      }
+    },
+    {
+      "name": "private-evidence-index-valid",
+      "contract": "private-evidence-index",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "1.0.0",
+        "evidence_set_id": "ANT-ESET-H1-001",
+        "commitment_profile": "antidote-evidence-set-commitment/v1",
+        "evidence_set_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "record_count": 1,
+        "storage_class": "private-outside-git",
+        "domain_separator": "ANTIDOTE-H1-EVIDENCE-SET-COMMITMENT-V1",
+        "canonicalization_profile": "RFC8785",
+        "record_order": "package_scope_then_opaque_ref_utf8_ascending",
+        "private_nonce": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "records": [
+          {
+            "opaque_ref": "pkg_SYNTHETICpackageLocalReference0001",
+            "package_scope": "response",
+            "payload_schema_id": "urn:egohygiene:antidote:schema:response-observation:v2",
+            "payload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "accounting_status": "included",
+            "reason": null
+          }
+        ],
+        "retention_disposition": "retained-private"
+      }
+    },
+    {
+      "name": "private-evidence-index-public-id-invalid",
+      "contract": "private-evidence-index",
+      "valid": false,
+      "category": "unknown_field",
+      "data": {
+        "schema_version": "1.0.0",
+        "evidence_set_id": "ANT-ESET-H1-001",
+        "commitment_profile": "antidote-evidence-set-commitment/v1",
+        "evidence_set_sha256": "eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee",
+        "record_count": 1,
+        "storage_class": "private-outside-git",
+        "domain_separator": "ANTIDOTE-H1-EVIDENCE-SET-COMMITMENT-V1",
+        "canonicalization_profile": "RFC8785",
+        "record_order": "package_scope_then_opaque_ref_utf8_ascending",
+        "private_nonce": "ffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff",
+        "records": [
+          {
+            "opaque_ref": "pkg_SYNTHETICpackageLocalReference0001",
+            "package_scope": "response",
+            "payload_schema_id": "urn:egohygiene:antidote:schema:response-observation:v2",
+            "payload_sha256": "aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa",
+            "accounting_status": "included",
+            "reason": null,
+            "participant_id": "participant-synthetic-forbidden"
+          }
+        ],
+        "retention_disposition": "retained-private"
+      }
+    },
+    {
       "name": "response-observation-valid",
       "contract": "response-observation",
       "valid": true,
@@ -713,6 +965,244 @@
         "resonance": null,
         "mismatch": null,
         "harm": null
+      }
+    },
+    {
+      "name": "response-observation-v2-immediate-valid",
+      "contract": "response-observation-v2",
+      "valid": true,
+      "category": "valid",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "response-v2-synthetic-1",
+        "session_id": "session-v2-synthetic-1",
+        "exposure_id": "exposure-v2-synthetic-1",
+        "observed_at": "2026-09-07T12:06:00Z",
+        "window": "immediate",
+        "instrument_version": "antidote-response-h1-v2-synthetic",
+        "revision": 1,
+        "supersedes_response_id": null,
+        "correction_reason": null,
+        "perceived_expression": {
+          "description": null,
+          "valence": 0.0,
+          "arousal": 0.25,
+          "intensity": 0.2
+        },
+        "felt_state": {
+          "description": "synthetic neutral response",
+          "valence": 0.1,
+          "arousal": 0.2,
+          "intensity": 0.3
+        },
+        "wanted_intensity": "unsure",
+        "helpfulness": 0.5,
+        "resonance": 0.4,
+        "mismatch": 0.1,
+        "harm": 0.0,
+        "surprise": 0.2,
+        "interaction_burden": 0.1,
+        "session_burden": 0.15,
+        "ongoing_effect": null,
+        "aftereffect_meaning": null,
+        "missingness": [
+          {"field": "perceived_expression.description", "reason": "declined"},
+          {"field": "ongoing_effect", "reason": "not_applicable"},
+          {"field": "aftereffect_meaning", "reason": "not_applicable"}
+        ],
+        "stopped_early": false,
+        "notes": "synthetic fixture only",
+        "later_aftereffect_requested": true,
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-v2-correction-valid",
+      "contract": "response-observation-v2",
+      "valid": true,
+      "category": "valid-correction",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "response-v2-synthetic-2",
+        "session_id": "session-v2-synthetic-1",
+        "exposure_id": "exposure-v2-synthetic-1",
+        "observed_at": "2026-09-08T12:06:00Z",
+        "window": "later",
+        "instrument_version": "antidote-response-h1-v2-synthetic",
+        "revision": 2,
+        "supersedes_response_id": "response-v2-synthetic-prior",
+        "correction_reason": "Synthetic correction of a transcription error.",
+        "perceived_expression": {
+          "description": null,
+          "valence": null,
+          "arousal": null,
+          "intensity": null
+        },
+        "felt_state": {
+          "description": null,
+          "valence": 0.0,
+          "arousal": 0.1,
+          "intensity": null
+        },
+        "wanted_intensity": null,
+        "helpfulness": 0.4,
+        "resonance": null,
+        "mismatch": null,
+        "harm": 0.0,
+        "surprise": null,
+        "interaction_burden": null,
+        "session_burden": null,
+        "ongoing_effect": "yes",
+        "aftereffect_meaning": "Synthetic effect remained noticeable without assigning benefit.",
+        "missingness": [
+          {"field": "perceived_expression.description", "reason": "not_prompted"},
+          {"field": "perceived_expression.valence", "reason": "not_prompted"},
+          {"field": "perceived_expression.arousal", "reason": "not_prompted"},
+          {"field": "perceived_expression.intensity", "reason": "not_prompted"},
+          {"field": "felt_state.description", "reason": "declined"},
+          {"field": "felt_state.intensity", "reason": "declined"},
+          {"field": "wanted_intensity", "reason": "not_prompted"},
+          {"field": "resonance", "reason": "not_prompted"},
+          {"field": "mismatch", "reason": "not_prompted"},
+          {"field": "surprise", "reason": "not_prompted"},
+          {"field": "interaction_burden", "reason": "not_prompted"},
+          {"field": "session_burden", "reason": "not_prompted"}
+        ],
+        "stopped_early": false,
+        "later_aftereffect_requested": false,
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-v2-missingness-invalid",
+      "contract": "response-observation-v2",
+      "valid": false,
+      "category": "missingness",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "response-v2-synthetic-invalid-missingness",
+        "session_id": "session-v2-synthetic-1",
+        "exposure_id": "exposure-v2-synthetic-1",
+        "observed_at": "2026-09-07T12:06:00Z",
+        "window": "immediate",
+        "instrument_version": "antidote-response-h1-v2-synthetic",
+        "revision": 1,
+        "supersedes_response_id": null,
+        "correction_reason": null,
+        "perceived_expression": {
+          "description": "synthetic expression",
+          "valence": 0.0,
+          "arousal": 0.2,
+          "intensity": 0.2
+        },
+        "felt_state": {
+          "description": "synthetic response",
+          "valence": 0.1,
+          "arousal": 0.2,
+          "intensity": 0.3
+        },
+        "wanted_intensity": "yes",
+        "helpfulness": null,
+        "resonance": 0.4,
+        "mismatch": 0.1,
+        "harm": 0.0,
+        "surprise": 0.2,
+        "interaction_burden": 0.1,
+        "session_burden": 0.15,
+        "ongoing_effect": "no",
+        "aftereffect_meaning": "Synthetic absence of a continuing effect.",
+        "missingness": [],
+        "stopped_early": false,
+        "later_aftereffect_requested": false,
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-v2-correction-invalid",
+      "contract": "response-observation-v2",
+      "valid": false,
+      "category": "lineage",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "response-v2-synthetic-invalid-lineage",
+        "session_id": "session-v2-synthetic-1",
+        "exposure_id": "exposure-v2-synthetic-1",
+        "observed_at": "2026-09-08T12:06:00Z",
+        "window": "later",
+        "instrument_version": "antidote-response-h1-v2-synthetic",
+        "revision": 2,
+        "supersedes_response_id": null,
+        "correction_reason": null,
+        "perceived_expression": {
+          "description": "synthetic expression",
+          "valence": 0.0,
+          "arousal": 0.2,
+          "intensity": 0.2
+        },
+        "felt_state": {
+          "description": "synthetic response",
+          "valence": 0.1,
+          "arousal": 0.2,
+          "intensity": 0.3
+        },
+        "wanted_intensity": "no",
+        "helpfulness": 0.3,
+        "resonance": 0.2,
+        "mismatch": 0.4,
+        "harm": 0.0,
+        "surprise": 0.1,
+        "interaction_burden": 0.1,
+        "session_burden": 0.2,
+        "ongoing_effect": "no",
+        "aftereffect_meaning": "Synthetic corrected meaning.",
+        "missingness": [],
+        "stopped_early": false,
+        "later_aftereffect_requested": false,
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-v2-answer-invalid",
+      "contract": "response-observation-v2",
+      "valid": false,
+      "category": "enum",
+      "data": {
+        "schema_version": "2.0.0",
+        "id": "response-v2-synthetic-invalid-answer",
+        "session_id": "session-v2-synthetic-1",
+        "exposure_id": "exposure-v2-synthetic-1",
+        "observed_at": "2026-09-07T12:06:00Z",
+        "window": "immediate",
+        "instrument_version": "antidote-response-h1-v2-synthetic",
+        "revision": 1,
+        "supersedes_response_id": null,
+        "correction_reason": null,
+        "perceived_expression": {
+          "description": "synthetic expression",
+          "valence": 0.0,
+          "arousal": 0.2,
+          "intensity": 0.2
+        },
+        "felt_state": {
+          "description": "synthetic response",
+          "valence": 0.1,
+          "arousal": 0.2,
+          "intensity": 0.3
+        },
+        "wanted_intensity": "declined",
+        "helpfulness": 0.5,
+        "resonance": 0.4,
+        "mismatch": 0.1,
+        "harm": 0.0,
+        "surprise": 0.2,
+        "interaction_burden": 0.1,
+        "session_burden": 0.15,
+        "ongoing_effect": "no",
+        "aftereffect_meaning": "Synthetic meaning.",
+        "missingness": [],
+        "stopped_early": false,
+        "later_aftereffect_requested": false,
+        "allow_personal_model_update": false
       }
     }
   ]

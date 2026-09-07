@@ -8,6 +8,11 @@
       "type_name": "ConsentGrant"
     },
     {
+      "name": "consent-grant-v2",
+      "schema": "schemas/consent-grant.v2.schema.json",
+      "type_name": "ConsentGrantV2"
+    },
+    {
       "name": "generation-result",
       "schema": "schemas/generation-result.v1.schema.json",
       "type_name": "GenerationResult"
@@ -16,6 +21,11 @@
       "name": "generation-spec",
       "schema": "schemas/generation-spec.v1.schema.json",
       "type_name": "GenerationSpec"
+    },
+    {
+      "name": "h1-public-result-envelope",
+      "schema": "schemas/h1-public-result-envelope.v1.schema.json",
+      "type_name": "H1PublicResultEnvelope"
     },
     {
       "name": "journey-plan",
@@ -28,9 +38,19 @@
       "type_name": "MomentContext"
     },
     {
+      "name": "private-evidence-index",
+      "schema": "schemas/private-evidence-index.v1.schema.json",
+      "type_name": "PrivateEvidenceIndex"
+    },
+    {
       "name": "response-observation",
       "schema": "schemas/response-observation.v1.schema.json",
       "type_name": "ResponseObservation"
+    },
+    {
+      "name": "response-observation-v2",
+      "schema": "schemas/response-observation.v2.schema.json",
+      "type_name": "ResponseObservationV2"
     },
     {
       "name": "working-context-projection",

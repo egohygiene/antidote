@@ -6,7 +6,9 @@ Distinguish uncertain planning time from deterministic playback deadlines and bu
 
 ## Required content
 
-Show current cursor, verified audio, generation in progress, future horizon, correction point, deadline, safety margin, and fallback.
+Show current cursor, verified audio, generation in progress, future horizon,
+person correction and negotiated plan-approval boundary, deadline, safety
+margin, and fallback.
 
 ## Evidence and claim boundary
 
@@ -14,7 +16,8 @@ Governed by ANT-HYP-002 and ANT-CLM-005. Timing structure does not establish sta
 
 ## Source plan
 
-Author a scale-consistent SVG using the architecture dossier's symbols and formulas after issue #39 freezes notation.
+Author a scale-consistent SVG using the architecture dossier and the notation
+frozen by issue #39.
 
 ## Accessibility plan
 

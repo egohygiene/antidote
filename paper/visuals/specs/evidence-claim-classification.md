@@ -14,7 +14,8 @@ Governed by ANT-CLM-003 and ANT-NEG-004. Do not imply that a generated explanati
 
 ## Source plan
 
-Render a deterministic LaTeX table from EPISTEMOLOGY.md and the claim ledger after issue #37 fixes its narrative placement.
+Render a deterministic LaTeX table from EPISTEMOLOGY.md, the claim ledger, and
+the narrative placement fixed by issue #37.
 
 ## Accessibility plan
 

@@ -14,11 +14,47 @@ ConsentGrantSourceSourceType = Literal["manual_entry", "journal_excerpt", "thera
 
 ConsentGrantStatus = Literal["active", "revoked", "expired"]
 
+ConsentGrantV2Action = Literal["inspect", "project", "generate", "analyze", "play", "retain", "learn", "export"]
+
+ConsentGrantV2Purpose = Literal["journey_planning", "generation", "response_capture", "personal_learning", "research_export"]
+
+ConsentGrantV2RetentionMode = Literal["session_only", "until_expiry", "until_manual_deletion"]
+
+ConsentGrantV2SourceSourceType = Literal["manual_entry", "journal_excerpt", "therapy_chat_excerpt", "prior_session", "imported_note", "other"]
+
+ConsentGrantV2Status = Literal["active", "revoked", "expired"]
+
 GenerationResultArtifactKind = Literal["audio", "preview", "feature_report", "log"]
 
 GenerationResultStatus = Literal["generated", "partial", "cancelled", "failed"]
 
 GenerationSpecOutputFormat = Literal["wav", "flac"]
+
+H1PublicResultEnvelopeAggregateAccountingStatus = Literal["available", "unavailable", "not-applicable"]
+
+H1PublicResultEnvelopeAmendmentStatusStatus = Literal["absent", "approved"]
+
+H1PublicResultEnvelopeAssignmentCommitmentStatus = Literal["committed", "not-activated", "unavailable"]
+
+H1PublicResultEnvelopeEvidenceClass = Literal["human-aggregate", "unavailable"]
+
+H1PublicResultEnvelopeNumericSummaryStatus = Literal["available", "unavailable", "not-applicable"]
+
+H1PublicResultEnvelopeNumericSummaryUnit = Literal["count", "proportion", "seconds", "milliseconds", "score", "correlation", "dimensionless", "bpm", "lufs", "dbtp"]
+
+H1PublicResultEnvelopePackageKind = Literal["flow", "response", "safety", "audit", "physiology"]
+
+H1PublicResultEnvelopePrivacyReviewStatus = Literal["pending", "passed", "failed", "not-applicable"]
+
+H1PublicResultEnvelopeProgressionDisposition = Literal["stop", "revise", "proceed", "not-applicable"]
+
+H1PublicResultEnvelopePromotionDisposition = Literal["blocked", "not-promoted", "eligible-for-review"]
+
+H1PublicResultEnvelopePublicArtifactKind = Literal["aggregate-table", "aggregate-figure", "aggregate-audit-table"]
+
+H1PublicResultEnvelopePublicArtifactMediaType = Literal["application/json", "text/csv", "image/svg+xml", "image/png"]
+
+H1PublicResultEnvelopeSourceRecordId = Literal["ANT-REC-H1-FLOW-001", "ANT-REC-H1-RESPONSE-001", "ANT-REC-H1-SAFETY-001", "ANT-REC-H1-AUDIT-001", "ANT-REC-H1-PHYS-001"]
 
 JourneyPlanControlPolicySupportedControl = Literal["tempo_bpm", "key", "time_signature", "timbre", "harmony", "density", "spatiality", "dynamics"]
 
@@ -30,9 +66,27 @@ JourneyPlanStatus = Literal["draft", "approved", "superseded"]
 
 MomentContextDesiredTransitionDirection = Literal["stay_with", "soften", "regulate", "uplift", "focus", "release", "explore", "other"]
 
+PrivateEvidenceIndexPrivateRecordAccountingStatus = Literal["included", "excluded", "missing", "withdrawn", "failed"]
+
+PrivateEvidenceIndexPrivateRecordPackageScope = Literal["flow", "response", "safety", "audit", "physiology"]
+
+PrivateEvidenceIndexPrivateRecordReason = Literal["not_prompted", "declined", "missed_window", "technical_failure", "interrupted", "not_applicable", "protocol_exclusion", "withdrawn"]
+
+PrivateEvidenceIndexRetentionDisposition = Literal["retained-private", "destroyed-with-tombstone", "not-applicable"]
+
 ResponseObservationMissingField = Literal["perceived_expression", "felt_state", "wanted_intensity", "helpfulness", "resonance", "mismatch", "harm", "surprise", "interaction_burden", "session_burden"]
 
 ResponseObservationMissingnessReason = Literal["not_prompted", "declined", "missed_window", "technical_failure", "interrupted", "not_applicable"]
+
+ResponseObservationV2MissingnessEntryField = Literal["perceived_expression.description", "perceived_expression.valence", "perceived_expression.arousal", "perceived_expression.intensity", "felt_state.description", "felt_state.valence", "felt_state.arousal", "felt_state.intensity", "wanted_intensity", "helpfulness", "resonance", "mismatch", "harm", "surprise", "interaction_burden", "session_burden", "ongoing_effect", "aftereffect_meaning"]
+
+ResponseObservationV2MissingnessEntryReason = Literal["not_prompted", "declined", "missed_window", "technical_failure", "interrupted", "not_applicable"]
+
+ResponseObservationV2OngoingEffect = Literal["yes", "no", "unsure"]
+
+ResponseObservationV2WantedIntensity = Literal["yes", "no", "unsure"]
+
+ResponseObservationV2Window = Literal["immediate", "later"]
 
 ResponseObservationWindow = Literal["during", "immediate", "later"]
 
@@ -60,6 +114,28 @@ class ConsentGrantRetention(TypedDict):
 class ConsentGrantSource(TypedDict):
     source_id: str
     source_type: ConsentGrantSourceSourceType
+    content_hash: NotRequired[str]
+
+class ConsentGrantV2(TypedDict):
+    schema_version: Literal["2.0.0"]
+    id: str
+    session_id: str
+    status: ConsentGrantV2Status
+    created_at: str
+    expires_at: NotRequired[str | None]
+    purposes: list[ConsentGrantV2Purpose]
+    actions: list[ConsentGrantV2Action]
+    sources: list[ConsentGrantV2Source]
+    retention: ConsentGrantV2Retention
+
+class ConsentGrantV2Retention(TypedDict):
+    mode: ConsentGrantV2RetentionMode
+    allow_derived_projection: NotRequired[bool]
+    allow_personal_model_update: NotRequired[bool]
+
+class ConsentGrantV2Source(TypedDict):
+    source_id: str
+    source_type: ConsentGrantV2SourceSourceType
     content_hash: NotRequired[str]
 
 class GenerationResult(TypedDict):
@@ -136,6 +212,137 @@ class GenerationSpecOutput(TypedDict):
     format: GenerationSpecOutputFormat
     sample_rate_hz: int
     channels: int
+
+class H1PublicResultEnvelope(TypedDict):
+    schema_version: Literal["1.0.0"]
+    package_id: str
+    package_kind: H1PublicResultEnvelopePackageKind
+    source_record_id: H1PublicResultEnvelopeSourceRecordId
+    stage: Literal["H1"]
+    evidence_class: H1PublicResultEnvelopeEvidenceClass
+    source_revision: str
+    protocol: H1PublicResultEnvelopeVersionedArtifact
+    analysis_plan: H1PublicResultEnvelopeAnalysisPlan
+    evidence_set: H1PublicResultEnvelopeEvidenceSet
+    complete_accounting: H1PublicResultEnvelopeAggregateAccounting
+    public_aggregates: list[H1PublicResultEnvelopeNumericSummary]
+    artifacts: list[H1PublicResultEnvelopePublicArtifact]
+    privacy_review: H1PublicResultEnvelopePrivacyReview
+    promotion: H1PublicResultEnvelopePromotion
+    assignment_commitment: NotRequired[H1PublicResultEnvelopeAssignmentCommitment]
+    flow_accounting: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    interruptions: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    withdrawals: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    failures: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    exclusions: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    missingness: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    instrument_version: NotRequired[str]
+    response_accounting: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    correction_accounting: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    immediate_windows: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    later_windows: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    analysis_outputs: NotRequired[list[H1PublicResultEnvelopeNumericSummary]]
+    safety_accounting: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    mismatches: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    unwanted_intensity: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    burden: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    harm: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    stops: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    adverse_events: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    review_dispositions: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    package_references: NotRequired[list[str]]
+    cross_package_reconciliation: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    provenance_linkability: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    deviations: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    progression_criteria: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    progression_disposition: NotRequired[H1PublicResultEnvelopeProgressionDisposition]
+    protocol_amendment: NotRequired[H1PublicResultEnvelopeAmendmentStatus]
+    consent_scope: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    device_manifest: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    clock_sync: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    signal_quality: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    artifact_accounting: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+    dropout: NotRequired[H1PublicResultEnvelopeAggregateAccounting]
+
+class H1PublicResultEnvelopeAggregateAccounting(TypedDict):
+    status: H1PublicResultEnvelopeAggregateAccountingStatus
+    denominator: int
+    categories: list[H1PublicResultEnvelopeCategoryCount]
+
+class H1PublicResultEnvelopeAmendmentStatus(TypedDict):
+    status: H1PublicResultEnvelopeAmendmentStatusStatus
+    amendment_id: str | None
+    sha256: str | None
+
+class H1PublicResultEnvelopeAnalysisPlan(TypedDict):
+    id: Literal["ANT-REPORT-RESULTS-001"]
+    version: str
+    sha256: str
+    deviation_log_sha256: str
+
+class H1PublicResultEnvelopeAssignmentCommitment(TypedDict):
+    status: H1PublicResultEnvelopeAssignmentCommitmentStatus
+    schedule_count: int
+    commitment_sha256: str | None
+
+class H1PublicResultEnvelopeCategoryCount(TypedDict):
+    category: str
+    count: int
+
+class H1PublicResultEnvelopeEvidenceSet(TypedDict):
+    evidence_set_id: str
+    commitment_profile: Literal["antidote-evidence-set-commitment/v1"]
+    evidence_set_sha256: str
+    record_count: int
+
+class H1PublicResultEnvelopeNumericSummary(TypedDict):
+    metric_id: str
+    analysis_id: str
+    status: H1PublicResultEnvelopeNumericSummaryStatus
+    denominator: int
+    estimate: float | None
+    lower: float | None
+    upper: float | None
+    unit: H1PublicResultEnvelopeNumericSummaryUnit
+
+class H1PublicResultEnvelopePassedPrivacyReview(TypedDict):
+    status: Literal["passed"]
+    scope: Literal["aggregate-only-public-envelope"]
+
+class H1PublicResultEnvelopePhysiologyEvidenceSet(TypedDict):
+    evidence_set_id: str
+    commitment_profile: Literal["antidote-evidence-set-commitment/v1"]
+    evidence_set_sha256: str
+    record_count: int
+
+class H1PublicResultEnvelopePrivacyReview(TypedDict):
+    status: H1PublicResultEnvelopePrivacyReviewStatus
+    scope: Literal["aggregate-only-public-envelope"]
+
+class H1PublicResultEnvelopePromotion(TypedDict):
+    disposition: H1PublicResultEnvelopePromotionDisposition
+    claim_ids: list[str]
+
+class H1PublicResultEnvelopePublicArtifact(TypedDict):
+    artifact_id: str
+    kind: H1PublicResultEnvelopePublicArtifactKind
+    media_type: H1PublicResultEnvelopePublicArtifactMediaType
+    sha256: str
+
+class H1PublicResultEnvelopeReviewEligiblePromotion(TypedDict):
+    disposition: Literal["eligible-for-review"]
+    claim_ids: list[str]
+
+class H1PublicResultEnvelopeSharedH1EvidenceSet(TypedDict):
+    evidence_set_id: Literal["ANT-ESET-H1-001"]
+    commitment_profile: Literal["antidote-evidence-set-commitment/v1"]
+    evidence_set_sha256: str
+    record_count: int
+
+class H1PublicResultEnvelopeVersionedArtifact(TypedDict):
+    id: Literal["ANT-PROT-FEAS-001"]
+    version: str
+    sha256: str
 
 class JourneyPlan(TypedDict):
     schema_version: Literal["1.0.0"]
@@ -220,6 +427,28 @@ class MomentContextState(TypedDict):
     intensity: NotRequired[float | None]
     confidence: NotRequired[float | None]
 
+class PrivateEvidenceIndex(TypedDict):
+    schema_version: Literal["1.0.0"]
+    evidence_set_id: str
+    commitment_profile: Literal["antidote-evidence-set-commitment/v1"]
+    evidence_set_sha256: str
+    record_count: int
+    storage_class: Literal["private-outside-git"]
+    domain_separator: Literal["ANTIDOTE-H1-EVIDENCE-SET-COMMITMENT-V1"]
+    canonicalization_profile: Literal["RFC8785"]
+    record_order: Literal["package_scope_then_opaque_ref_utf8_ascending"]
+    private_nonce: str
+    records: list[PrivateEvidenceIndexPrivateRecord]
+    retention_disposition: PrivateEvidenceIndexRetentionDisposition
+
+class PrivateEvidenceIndexPrivateRecord(TypedDict):
+    opaque_ref: str
+    package_scope: PrivateEvidenceIndexPrivateRecordPackageScope
+    payload_schema_id: str
+    payload_sha256: str
+    accounting_status: PrivateEvidenceIndexPrivateRecordAccountingStatus
+    reason: PrivateEvidenceIndexPrivateRecordReason | None
+
 class ResponseObservation(TypedDict):
     schema_version: Literal["1.0.0"]
     id: str
@@ -257,6 +486,45 @@ class ResponseObservationPerceivedExpression(TypedDict):
     arousal: NotRequired[float | None]
     intensity: NotRequired[float | None]
 
+class ResponseObservationV2(TypedDict):
+    schema_version: Literal["2.0.0"]
+    id: str
+    session_id: str
+    exposure_id: str
+    observed_at: str
+    window: ResponseObservationV2Window
+    instrument_version: str
+    revision: int
+    supersedes_response_id: str | None
+    correction_reason: str | None
+    perceived_expression: ResponseObservationV2ResponseState
+    felt_state: ResponseObservationV2ResponseState
+    wanted_intensity: ResponseObservationV2WantedIntensity | None
+    helpfulness: float | None
+    resonance: float | None
+    mismatch: float | None
+    harm: float | None
+    surprise: float | None
+    interaction_burden: float | None
+    session_burden: float | None
+    ongoing_effect: ResponseObservationV2OngoingEffect | None
+    aftereffect_meaning: str | None
+    missingness: list[ResponseObservationV2MissingnessEntry]
+    stopped_early: bool
+    notes: NotRequired[str]
+    later_aftereffect_requested: bool
+    allow_personal_model_update: Literal[False]
+
+class ResponseObservationV2MissingnessEntry(TypedDict):
+    field: ResponseObservationV2MissingnessEntryField
+    reason: ResponseObservationV2MissingnessEntryReason
+
+class ResponseObservationV2ResponseState(TypedDict):
+    description: str | None
+    valence: float | None
+    arousal: float | None
+    intensity: float | None
+
 class WorkingContextProjection(TypedDict):
     schema_version: Literal["1.0.0"]
     id: str
@@ -278,20 +546,28 @@ class WorkingContextProjectionSemanticItem(TypedDict):
 
 ContractName = Literal[
     "consent-grant",
+    "consent-grant-v2",
     "generation-result",
     "generation-spec",
+    "h1-public-result-envelope",
     "journey-plan",
     "moment-context",
+    "private-evidence-index",
     "response-observation",
+    "response-observation-v2",
     "working-context-projection",
 ]
 
 CONTRACT_SCHEMA_IDS: dict[ContractName, str] = {
     "consent-grant": "urn:egohygiene:antidote:schema:consent-grant:v1",
+    "consent-grant-v2": "urn:egohygiene:antidote:schema:consent-grant:v2",
     "generation-result": "urn:egohygiene:antidote:schema:generation-result:v1",
     "generation-spec": "urn:egohygiene:antidote:schema:generation-spec:v1",
+    "h1-public-result-envelope": "urn:egohygiene:antidote:schema:h1-public-result-envelope:v1",
     "journey-plan": "urn:egohygiene:antidote:schema:journey-plan:v1",
     "moment-context": "urn:egohygiene:antidote:schema:moment-context:v1",
+    "private-evidence-index": "urn:egohygiene:antidote:schema:private-evidence-index:v1",
     "response-observation": "urn:egohygiene:antidote:schema:response-observation:v1",
+    "response-observation-v2": "urn:egohygiene:antidote:schema:response-observation:v2",
     "working-context-projection": "urn:egohygiene:antidote:schema:working-context-projection:v1",
 }

@@ -1,0 +1,20 @@
+{
+  "schema": "antidote.protocol-lock/v1",
+  "protocol_id": "ANT-PROT-FEAS-001",
+  "protocol_version": "1.1.0",
+  "protocol_path": "experiments/protocols/antidote-feasibility-v1.1.json",
+  "sha256": "8d6848f148a627424c566f04381103779debd65b4563bd4712652e09cd715024",
+  "frozen_on": "2026-09-07",
+  "governed_by": "egohygiene/antidote#40",
+  "amended_by": "egohygiene/antidote#82",
+  "collection_authority": false,
+  "qualifying_records_started": false,
+  "human_collection_started": false,
+  "supersedes": {
+    "protocol_version": "1.0.0",
+    "protocol_path": "experiments/protocols/antidote-feasibility-v1.json",
+    "lock_path": "experiments/protocols/antidote-feasibility-v1.lock.json",
+    "deviation_log_path": "experiments/protocols/antidote-feasibility-v1.deviations.json",
+    "sha256": "dbedbcbb74303373a7e00e95ad063b025d8cf6033864f4ad5a390d15703ba403"
+  }
+}

@@ -10,11 +10,47 @@ export type ConsentGrantSourceSourceType = "manual_entry" | "journal_excerpt" | 
 
 export type ConsentGrantStatus = "active" | "revoked" | "expired";
 
+export type ConsentGrantV2Action = "inspect" | "project" | "generate" | "analyze" | "play" | "retain" | "learn" | "export";
+
+export type ConsentGrantV2Purpose = "journey_planning" | "generation" | "response_capture" | "personal_learning" | "research_export";
+
+export type ConsentGrantV2RetentionMode = "session_only" | "until_expiry" | "until_manual_deletion";
+
+export type ConsentGrantV2SourceSourceType = "manual_entry" | "journal_excerpt" | "therapy_chat_excerpt" | "prior_session" | "imported_note" | "other";
+
+export type ConsentGrantV2Status = "active" | "revoked" | "expired";
+
 export type GenerationResultArtifactKind = "audio" | "preview" | "feature_report" | "log";
 
 export type GenerationResultStatus = "generated" | "partial" | "cancelled" | "failed";
 
 export type GenerationSpecOutputFormat = "wav" | "flac";
+
+export type H1PublicResultEnvelopeAggregateAccountingStatus = "available" | "unavailable" | "not-applicable";
+
+export type H1PublicResultEnvelopeAmendmentStatusStatus = "absent" | "approved";
+
+export type H1PublicResultEnvelopeAssignmentCommitmentStatus = "committed" | "not-activated" | "unavailable";
+
+export type H1PublicResultEnvelopeEvidenceClass = "human-aggregate" | "unavailable";
+
+export type H1PublicResultEnvelopeNumericSummaryStatus = "available" | "unavailable" | "not-applicable";
+
+export type H1PublicResultEnvelopeNumericSummaryUnit = "count" | "proportion" | "seconds" | "milliseconds" | "score" | "correlation" | "dimensionless" | "bpm" | "lufs" | "dbtp";
+
+export type H1PublicResultEnvelopePackageKind = "flow" | "response" | "safety" | "audit" | "physiology";
+
+export type H1PublicResultEnvelopePrivacyReviewStatus = "pending" | "passed" | "failed" | "not-applicable";
+
+export type H1PublicResultEnvelopeProgressionDisposition = "stop" | "revise" | "proceed" | "not-applicable";
+
+export type H1PublicResultEnvelopePromotionDisposition = "blocked" | "not-promoted" | "eligible-for-review";
+
+export type H1PublicResultEnvelopePublicArtifactKind = "aggregate-table" | "aggregate-figure" | "aggregate-audit-table";
+
+export type H1PublicResultEnvelopePublicArtifactMediaType = "application/json" | "text/csv" | "image/svg+xml" | "image/png";
+
+export type H1PublicResultEnvelopeSourceRecordId = "ANT-REC-H1-FLOW-001" | "ANT-REC-H1-RESPONSE-001" | "ANT-REC-H1-SAFETY-001" | "ANT-REC-H1-AUDIT-001" | "ANT-REC-H1-PHYS-001";
 
 export type JourneyPlanControlPolicySupportedControl = "tempo_bpm" | "key" | "time_signature" | "timbre" | "harmony" | "density" | "spatiality" | "dynamics";
 
@@ -26,9 +62,27 @@ export type JourneyPlanStatus = "draft" | "approved" | "superseded";
 
 export type MomentContextDesiredTransitionDirection = "stay_with" | "soften" | "regulate" | "uplift" | "focus" | "release" | "explore" | "other";
 
+export type PrivateEvidenceIndexPrivateRecordAccountingStatus = "included" | "excluded" | "missing" | "withdrawn" | "failed";
+
+export type PrivateEvidenceIndexPrivateRecordPackageScope = "flow" | "response" | "safety" | "audit" | "physiology";
+
+export type PrivateEvidenceIndexPrivateRecordReason = "not_prompted" | "declined" | "missed_window" | "technical_failure" | "interrupted" | "not_applicable" | "protocol_exclusion" | "withdrawn";
+
+export type PrivateEvidenceIndexRetentionDisposition = "retained-private" | "destroyed-with-tombstone" | "not-applicable";
+
 export type ResponseObservationMissingField = "perceived_expression" | "felt_state" | "wanted_intensity" | "helpfulness" | "resonance" | "mismatch" | "harm" | "surprise" | "interaction_burden" | "session_burden";
 
 export type ResponseObservationMissingnessReason = "not_prompted" | "declined" | "missed_window" | "technical_failure" | "interrupted" | "not_applicable";
+
+export type ResponseObservationV2MissingnessEntryField = "perceived_expression.description" | "perceived_expression.valence" | "perceived_expression.arousal" | "perceived_expression.intensity" | "felt_state.description" | "felt_state.valence" | "felt_state.arousal" | "felt_state.intensity" | "wanted_intensity" | "helpfulness" | "resonance" | "mismatch" | "harm" | "surprise" | "interaction_burden" | "session_burden" | "ongoing_effect" | "aftereffect_meaning";
+
+export type ResponseObservationV2MissingnessEntryReason = "not_prompted" | "declined" | "missed_window" | "technical_failure" | "interrupted" | "not_applicable";
+
+export type ResponseObservationV2OngoingEffect = "yes" | "no" | "unsure";
+
+export type ResponseObservationV2WantedIntensity = "yes" | "no" | "unsure";
+
+export type ResponseObservationV2Window = "immediate" | "later";
 
 export type ResponseObservationWindow = "during" | "immediate" | "later";
 
@@ -58,6 +112,31 @@ export interface ConsentGrantRetention {
 export interface ConsentGrantSource {
   source_id: string;
   source_type: ConsentGrantSourceSourceType;
+  content_hash?: string;
+}
+
+export interface ConsentGrantV2 {
+  schema_version: "2.0.0";
+  id: string;
+  session_id: string;
+  status: ConsentGrantV2Status;
+  created_at: string;
+  expires_at?: string | null;
+  purposes: Array<ConsentGrantV2Purpose>;
+  actions: Array<ConsentGrantV2Action>;
+  sources: Array<ConsentGrantV2Source>;
+  retention: ConsentGrantV2Retention;
+}
+
+export interface ConsentGrantV2Retention {
+  mode: ConsentGrantV2RetentionMode;
+  allow_derived_projection?: boolean;
+  allow_personal_model_update?: boolean;
+}
+
+export interface ConsentGrantV2Source {
+  source_id: string;
+  source_type: ConsentGrantV2SourceSourceType;
   content_hash?: string;
 }
 
@@ -145,6 +224,153 @@ export interface GenerationSpecOutput {
   format: GenerationSpecOutputFormat;
   sample_rate_hz: number;
   channels: number;
+}
+
+export interface H1PublicResultEnvelope {
+  schema_version: "1.0.0";
+  package_id: string;
+  package_kind: H1PublicResultEnvelopePackageKind;
+  source_record_id: H1PublicResultEnvelopeSourceRecordId;
+  stage: "H1";
+  evidence_class: H1PublicResultEnvelopeEvidenceClass;
+  source_revision: string;
+  protocol: H1PublicResultEnvelopeVersionedArtifact;
+  analysis_plan: H1PublicResultEnvelopeAnalysisPlan;
+  evidence_set: H1PublicResultEnvelopeEvidenceSet;
+  complete_accounting: H1PublicResultEnvelopeAggregateAccounting;
+  public_aggregates: Array<H1PublicResultEnvelopeNumericSummary>;
+  artifacts: Array<H1PublicResultEnvelopePublicArtifact>;
+  privacy_review: H1PublicResultEnvelopePrivacyReview;
+  promotion: H1PublicResultEnvelopePromotion;
+  assignment_commitment?: H1PublicResultEnvelopeAssignmentCommitment;
+  flow_accounting?: H1PublicResultEnvelopeAggregateAccounting;
+  interruptions?: H1PublicResultEnvelopeAggregateAccounting;
+  withdrawals?: H1PublicResultEnvelopeAggregateAccounting;
+  failures?: H1PublicResultEnvelopeAggregateAccounting;
+  exclusions?: H1PublicResultEnvelopeAggregateAccounting;
+  missingness?: H1PublicResultEnvelopeAggregateAccounting;
+  instrument_version?: string;
+  response_accounting?: H1PublicResultEnvelopeAggregateAccounting;
+  correction_accounting?: H1PublicResultEnvelopeAggregateAccounting;
+  immediate_windows?: H1PublicResultEnvelopeAggregateAccounting;
+  later_windows?: H1PublicResultEnvelopeAggregateAccounting;
+  analysis_outputs?: Array<H1PublicResultEnvelopeNumericSummary>;
+  safety_accounting?: H1PublicResultEnvelopeAggregateAccounting;
+  mismatches?: H1PublicResultEnvelopeAggregateAccounting;
+  unwanted_intensity?: H1PublicResultEnvelopeAggregateAccounting;
+  burden?: H1PublicResultEnvelopeAggregateAccounting;
+  harm?: H1PublicResultEnvelopeAggregateAccounting;
+  stops?: H1PublicResultEnvelopeAggregateAccounting;
+  adverse_events?: H1PublicResultEnvelopeAggregateAccounting;
+  review_dispositions?: H1PublicResultEnvelopeAggregateAccounting;
+  package_references?: Array<string>;
+  cross_package_reconciliation?: H1PublicResultEnvelopeAggregateAccounting;
+  provenance_linkability?: H1PublicResultEnvelopeAggregateAccounting;
+  deviations?: H1PublicResultEnvelopeAggregateAccounting;
+  progression_criteria?: H1PublicResultEnvelopeAggregateAccounting;
+  progression_disposition?: H1PublicResultEnvelopeProgressionDisposition;
+  protocol_amendment?: H1PublicResultEnvelopeAmendmentStatus;
+  consent_scope?: H1PublicResultEnvelopeAggregateAccounting;
+  device_manifest?: H1PublicResultEnvelopeAggregateAccounting;
+  clock_sync?: H1PublicResultEnvelopeAggregateAccounting;
+  signal_quality?: H1PublicResultEnvelopeAggregateAccounting;
+  artifact_accounting?: H1PublicResultEnvelopeAggregateAccounting;
+  dropout?: H1PublicResultEnvelopeAggregateAccounting;
+}
+
+export interface H1PublicResultEnvelopeAggregateAccounting {
+  status: H1PublicResultEnvelopeAggregateAccountingStatus;
+  denominator: number;
+  categories: Array<H1PublicResultEnvelopeCategoryCount>;
+}
+
+export interface H1PublicResultEnvelopeAmendmentStatus {
+  status: H1PublicResultEnvelopeAmendmentStatusStatus;
+  amendment_id: string | null;
+  sha256: string | null;
+}
+
+export interface H1PublicResultEnvelopeAnalysisPlan {
+  id: "ANT-REPORT-RESULTS-001";
+  version: string;
+  sha256: string;
+  deviation_log_sha256: string;
+}
+
+export interface H1PublicResultEnvelopeAssignmentCommitment {
+  status: H1PublicResultEnvelopeAssignmentCommitmentStatus;
+  schedule_count: number;
+  commitment_sha256: string | null;
+}
+
+export interface H1PublicResultEnvelopeCategoryCount {
+  category: string;
+  count: number;
+}
+
+export interface H1PublicResultEnvelopeEvidenceSet {
+  evidence_set_id: string;
+  commitment_profile: "antidote-evidence-set-commitment/v1";
+  evidence_set_sha256: string;
+  record_count: number;
+}
+
+export interface H1PublicResultEnvelopeNumericSummary {
+  metric_id: string;
+  analysis_id: string;
+  status: H1PublicResultEnvelopeNumericSummaryStatus;
+  denominator: number;
+  estimate: number | null;
+  lower: number | null;
+  upper: number | null;
+  unit: H1PublicResultEnvelopeNumericSummaryUnit;
+}
+
+export interface H1PublicResultEnvelopePassedPrivacyReview {
+  status: "passed";
+  scope: "aggregate-only-public-envelope";
+}
+
+export interface H1PublicResultEnvelopePhysiologyEvidenceSet {
+  evidence_set_id: string;
+  commitment_profile: "antidote-evidence-set-commitment/v1";
+  evidence_set_sha256: string;
+  record_count: number;
+}
+
+export interface H1PublicResultEnvelopePrivacyReview {
+  status: H1PublicResultEnvelopePrivacyReviewStatus;
+  scope: "aggregate-only-public-envelope";
+}
+
+export interface H1PublicResultEnvelopePromotion {
+  disposition: H1PublicResultEnvelopePromotionDisposition;
+  claim_ids: Array<string>;
+}
+
+export interface H1PublicResultEnvelopePublicArtifact {
+  artifact_id: string;
+  kind: H1PublicResultEnvelopePublicArtifactKind;
+  media_type: H1PublicResultEnvelopePublicArtifactMediaType;
+  sha256: string;
+}
+
+export interface H1PublicResultEnvelopeReviewEligiblePromotion {
+  disposition: "eligible-for-review";
+  claim_ids: Array<string>;
+}
+
+export interface H1PublicResultEnvelopeSharedH1EvidenceSet {
+  evidence_set_id: "ANT-ESET-H1-001";
+  commitment_profile: "antidote-evidence-set-commitment/v1";
+  evidence_set_sha256: string;
+  record_count: number;
+}
+
+export interface H1PublicResultEnvelopeVersionedArtifact {
+  id: "ANT-PROT-FEAS-001";
+  version: string;
+  sha256: string;
 }
 
 export interface JourneyPlan {
@@ -239,6 +465,30 @@ export interface MomentContextState {
   confidence?: number | null;
 }
 
+export interface PrivateEvidenceIndex {
+  schema_version: "1.0.0";
+  evidence_set_id: string;
+  commitment_profile: "antidote-evidence-set-commitment/v1";
+  evidence_set_sha256: string;
+  record_count: number;
+  storage_class: "private-outside-git";
+  domain_separator: "ANTIDOTE-H1-EVIDENCE-SET-COMMITMENT-V1";
+  canonicalization_profile: "RFC8785";
+  record_order: "package_scope_then_opaque_ref_utf8_ascending";
+  private_nonce: string;
+  records: Array<PrivateEvidenceIndexPrivateRecord>;
+  retention_disposition: PrivateEvidenceIndexRetentionDisposition;
+}
+
+export interface PrivateEvidenceIndexPrivateRecord {
+  opaque_ref: string;
+  package_scope: PrivateEvidenceIndexPrivateRecordPackageScope;
+  payload_schema_id: string;
+  payload_sha256: string;
+  accounting_status: PrivateEvidenceIndexPrivateRecordAccountingStatus;
+  reason: PrivateEvidenceIndexPrivateRecordReason | null;
+}
+
 export interface ResponseObservation {
   schema_version: "1.0.0";
   id: string;
@@ -279,6 +529,48 @@ export interface ResponseObservationPerceivedExpression {
   intensity?: number | null;
 }
 
+export interface ResponseObservationV2 {
+  schema_version: "2.0.0";
+  id: string;
+  session_id: string;
+  exposure_id: string;
+  observed_at: string;
+  window: ResponseObservationV2Window;
+  instrument_version: string;
+  revision: number;
+  supersedes_response_id: string | null;
+  correction_reason: string | null;
+  perceived_expression: ResponseObservationV2ResponseState;
+  felt_state: ResponseObservationV2ResponseState;
+  wanted_intensity: ResponseObservationV2WantedIntensity | null;
+  helpfulness: number | null;
+  resonance: number | null;
+  mismatch: number | null;
+  harm: number | null;
+  surprise: number | null;
+  interaction_burden: number | null;
+  session_burden: number | null;
+  ongoing_effect: ResponseObservationV2OngoingEffect | null;
+  aftereffect_meaning: string | null;
+  missingness: Array<ResponseObservationV2MissingnessEntry>;
+  stopped_early: boolean;
+  notes?: string;
+  later_aftereffect_requested: boolean;
+  allow_personal_model_update: false;
+}
+
+export interface ResponseObservationV2MissingnessEntry {
+  field: ResponseObservationV2MissingnessEntryField;
+  reason: ResponseObservationV2MissingnessEntryReason;
+}
+
+export interface ResponseObservationV2ResponseState {
+  description: string | null;
+  valence: number | null;
+  arousal: number | null;
+  intensity: number | null;
+}
+
 export interface WorkingContextProjection {
   schema_version: "1.0.0";
   id: string;
@@ -302,20 +594,28 @@ export interface WorkingContextProjectionSemanticItem {
 
 export interface ContractByName {
   "consent-grant": ConsentGrant;
+  "consent-grant-v2": ConsentGrantV2;
   "generation-result": GenerationResult;
   "generation-spec": GenerationSpec;
+  "h1-public-result-envelope": H1PublicResultEnvelope;
   "journey-plan": JourneyPlan;
   "moment-context": MomentContext;
+  "private-evidence-index": PrivateEvidenceIndex;
   "response-observation": ResponseObservation;
+  "response-observation-v2": ResponseObservationV2;
   "working-context-projection": WorkingContextProjection;
 }
 
 export const contractSchemaIds = {
   "consent-grant": "urn:egohygiene:antidote:schema:consent-grant:v1",
+  "consent-grant-v2": "urn:egohygiene:antidote:schema:consent-grant:v2",
   "generation-result": "urn:egohygiene:antidote:schema:generation-result:v1",
   "generation-spec": "urn:egohygiene:antidote:schema:generation-spec:v1",
+  "h1-public-result-envelope": "urn:egohygiene:antidote:schema:h1-public-result-envelope:v1",
   "journey-plan": "urn:egohygiene:antidote:schema:journey-plan:v1",
   "moment-context": "urn:egohygiene:antidote:schema:moment-context:v1",
+  "private-evidence-index": "urn:egohygiene:antidote:schema:private-evidence-index:v1",
   "response-observation": "urn:egohygiene:antidote:schema:response-observation:v1",
+  "response-observation-v2": "urn:egohygiene:antidote:schema:response-observation:v2",
   "working-context-projection": "urn:egohygiene:antidote:schema:working-context-projection:v1",
 } as const;
