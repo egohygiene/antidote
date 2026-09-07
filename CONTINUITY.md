@@ -19,11 +19,12 @@ state.
 
 - **Last merged baseline before this change:** `main` at
   `f9e23128a660066b3f64c73c4dd2d36554b6040a`, PR #90, completing issue #47.
-- **Current change:** issue #48 is implemented on branch
-  `codex/issue-48-reviewable-gate`; its pull request is not yet recorded in this
-  checkpoint. The change promotes the paper to a reviewable design/protocol
-  preprint, adds a durable review dossier and automated strong-stage gate, and
-  audits the live publication. Check GitHub before treating it as merged.
+- **Current change:** issue #48 is implemented by
+  [PR #91](https://github.com/egohygiene/antidote/pull/91) on branch
+  `codex/issue-48-reviewable-gate`. The change promotes the paper to a
+  reviewable design/protocol preprint, adds a durable review dossier and
+  automated strong-stage gate, and audits the live publication. Check GitHub
+  before treating it as merged.
 - **Completion condition for #48:** merge the reviewed candidate, allow Pages
   to deploy that exact merge revision, then pass the cache-busted route,
   revision, manifest, and artifact-hash verifier. The existing live baseline is
