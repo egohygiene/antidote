@@ -1,0 +1,87 @@
+{
+  "schema": "antidote.risk-register/v1",
+  "version": "1.0.0",
+  "status": "design-audit",
+  "reviewed": "2026-09-07",
+  "owned_by": "egohygiene/antidote#43",
+  "formal_collection_authorized": false,
+  "boundary": "This register audits design controls and unresolved gates. It does not establish construct validity, causal identification, privacy, meaningful consent, rights clearance, accessibility, hearing safety, clinical safety, or benefit.",
+  "status_definitions": {
+    "mixed": "Some named behavior is implemented only in the synthetic prototype; material target controls remain unimplemented or unqualified.",
+    "specified": "The manuscript or frozen protocol states a requirement, but no qualifying execution demonstrates that it works.",
+    "unresolved": "No adequate control or evidence is currently registered.",
+    "blocked": "The named activity cannot proceed until the gate is independently satisfied and recorded."
+  },
+  "risks": [
+    {
+      "id": "ANT-RISK-001",
+      "title": "Construct and inference",
+      "evidence_layer": "state, intent, response",
+      "status": "specified",
+      "current_control": "Keep intended, realized, perceived, felt, usefulness-or-harm, and later fields separate; retain correction and missingness.",
+      "residual_risk": "Measures remain unvalidated for this use, and optional passive signals can be ambiguous.",
+      "owner": "measurement review",
+      "blocking_gate": "Instrument and construct-validity review before H1"
+    },
+    {
+      "id": "ANT-RISK-002",
+      "title": "Internal and statistical validity",
+      "evidence_layer": "within-person comparison",
+      "status": "specified",
+      "current_control": "Freeze assignment, denominators, missingness, null and adverse retention, and the exact randomization analysis.",
+      "residual_risk": "An unblinded self-study, bundled conditions, expectancy, order, carryover, and a short series prevent causal or population inference.",
+      "owner": "methods and statistical review",
+      "blocking_gate": "H1 analysis review; new protocol for efficacy claims"
+    },
+    {
+      "id": "ANT-RISK-003",
+      "title": "External and ecological validity",
+      "evidence_layer": "transfer and generalization",
+      "status": "unresolved",
+      "current_control": "Bound every claim to the tested person, moment, revision, model, device, and listening setting.",
+      "residual_risk": "Transfer across people, cultures, languages, generators, devices, sensory needs, and care settings is unknown.",
+      "owner": "future study governance",
+      "blocking_gate": "Separate multi-participant protocol after feasibility"
+    },
+    {
+      "id": "ANT-RISK-004",
+      "title": "Model, timing, and continuity",
+      "evidence_layer": "technical realization",
+      "status": "mixed",
+      "current_control": "Synthetic consent, hashes, cancellation, stop, and recovery are tested; real-model buffering and rendering checks are specified.",
+      "residual_risk": "State estimates, adapters, analyzers, deadlines, transitions, and fallbacks are not qualified end to end.",
+      "owner": "MVP and T1 qualification",
+      "blocking_gate": "Real-model and complete-session gates before H1"
+    },
+    {
+      "id": "ANT-RISK-005",
+      "title": "Emotional and hearing safety",
+      "evidence_layer": "exposure and adverse response",
+      "status": "specified",
+      "current_control": "Preserve playback and stop authority; record mismatch, harm, discomfort, and aftereffect separately; begin at low device level.",
+      "residual_risk": "No control is shown to prevent overwhelm; at-ear level, cumulative dose, and crisis response remain unknown.",
+      "owner": "safety and device review",
+      "blocking_gate": "Safety plan, device/dose qualification, and independent review"
+    },
+    {
+      "id": "ANT-RISK-006",
+      "title": "Consent, privacy, and export",
+      "evidence_layer": "personal context and records",
+      "status": "mixed",
+      "current_control": "Scoped grants and reviewed projection execute for synthetic manual context; research export remains fail-closed by contract.",
+      "residual_risk": "Meaningful consent, encryption, keys, backup, retention, deletion, redaction, re-identification, and export are not privacy-qualified.",
+      "owner": "privacy and data governance",
+      "blocking_gate": "Protected data-management and privacy review before H1"
+    },
+    {
+      "id": "ANT-RISK-007",
+      "title": "Rights, bias, access, and review",
+      "evidence_layer": "model selection and study authority",
+      "status": "blocked",
+      "current_control": "Real-model selection, generated-audio release, and formal collection remain blocked pending documented review.",
+      "residual_risk": "Licenses, training provenance, output rights, cultural bias, accessibility, misuse, and the applicable ethics determination are unresolved.",
+      "owner": "maintainer and independent reviewers",
+      "blocking_gate": "Model, data, audio, accessibility, misuse, and ethics review"
+    }
+  ]
+}

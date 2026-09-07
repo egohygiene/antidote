@@ -400,6 +400,53 @@ class ManuscriptContractTests(unittest.TestCase):
         ):
             self.assertIn("Discussion", ledger_rows[claim_id][4], claim_id)
 
+    def test_limitations_and_ethics_preserve_residual_risk_and_authority(self) -> None:
+        """Issue #43 must audit controls without claiming mitigation or approval."""
+        limitations = (
+            ROOT / "paper" / "sections" / "07-limitations-and-ethics.tex"
+        ).read_text(encoding="utf-8")
+        appendix = (ROOT / "paper" / "sections" / "appendix.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized = re.sub(r"\s+", " ", limitations)
+        self.assertNotIn("\\AntidotePlaceholder", limitations)
+        self.assertNotIn("ANT-PH-APP-005", appendix)
+        for label in (
+            "sec:limitations-construct-validity",
+            "sec:limitations-internal-validity",
+            "sec:limitations-external-validity",
+            "sec:limitations-system-failures",
+            "sec:ethics-emotional-safety",
+            "sec:ethics-consent-privacy",
+            "sec:ethics-licensing-accessibility",
+            "sec:ethics-review-gate",
+        ):
+            self.assertIn(f"\\label{{{label}}}", limitations)
+        for citation in (
+            "silverman2020complicated",
+            "kleppmann2019localfirst",
+            "moreau2013prov",
+            "barnett2023ethical",
+            "whoitu2019safelistening",
+            "who2021ethics",
+        ):
+            self.assertIn(citation, limitations)
+        for boundary in (
+            "not as an effective mitigation",
+            "not perfect security",
+            "do not prove semantic correctness",
+            "does not demonstrate comprehension",
+            "None of those controls alone establish hearing safety",
+            "blocked-no-collection-authority",
+            "No formal participant study",
+            "Publication of this design and protocol cannot activate it",
+            "formal collection, recruitment, therapeutic use",
+        ):
+            self.assertIn(boundary, normalized)
+        self.assertEqual(
+            limitations.count("\\AntidoteTable{risk-mitigation-status}"), 1
+        )
+
 
 if __name__ == "__main__":
     unittest.main()
