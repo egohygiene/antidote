@@ -2,36 +2,121 @@
 \section{Data and code availability}
 \label{sec:data-and-code-availability}
 
-No formal study data or prototype code accompanies this draft. The manuscript,
-bibliography, migration inventory, and non-sensitive research records are
-versioned in the Antidote repository. Generated publication artifacts are
-reproducible through the repository-owned build kit derived from the Beacon
-research-paper profile pinned in \texttt{dependencies/beacon.lock.toml}.
-Human-subject or sensitive personal data must not be committed to the public
-repository.
+This article is a design/protocol manuscript. As of version 0.1.0, no formal
+participant dataset, qualifying T1 real-model
+package, or H1 within-person result package exists. The public repository does,
+however, contain the manuscript and an executable synthetic prototype. The
+prototype implements a rule-guided local session with a deterministic mock
+worker; it is not a real generative-audio model, a human-outcome dataset, or
+evidence of usefulness, safety, efficacy, or mechanism.
+
+The canonical source is the
+\href{https://github.com/egohygiene/antidote}{Antidote repository}. The
+repository records the versioned manuscript, bibliography, literature atlas,
+source assessments, claim ledger, architecture decisions, protocol and
+reporting contracts, application code, JSON Schemas, synthetic fixtures,
+tests, and project-owned publication scripts. The source revision printed on
+the title page identifies the exact Git state from which each paper projection
+was built.
 
 \subsection{Public artifacts and reproducibility boundary}
 \label{sec:availability-public-artifacts}
 
-\AntidotePlaceholder{ANT-PH-AVL-001}{Public artifacts and reproducibility boundary}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere erat a ante venenatis dapibus posuere velit aliquet. Maecenas faucibus mollis interdum, curabitur blandit tempus porttitor.}
+The canonical review surface is
+\href{https://antidote.egohygiene.io/}{antidote.egohygiene.io}. It exposes the
+\href{https://antidote.egohygiene.io/paper/}{accessible web paper}, the
+\href{https://antidote.egohygiene.io/antidote.pdf}{PDF}, and a
+\href{https://antidote.egohygiene.io/downloads/}{download index}. The download
+index links the independently compilable, arXiv-oriented source archive; the
+publication manifest; the site catalog; build and site-suite provenance; and
+the complete SHA-256 inventory. The source archive is a packaging target, not
+an arXiv submission. No DOI, arXiv identifier, archival release, or
+peer-reviewed status is asserted for this draft.
+
+For each deployed revision, \texttt{publication.json} binds the web, PDF,
+provenance, and source-archive artifacts to their Git revision and SHA-256
+digests; \texttt{site.json} records the stable routes and their availability
+states; and \texttt{SHA256SUMS} covers the staged publication tree. These
+records can detect byte drift and trace an artifact to its declared build.
+They do not establish source correctness, scientific validity, authorship,
+consent, privacy, ownership, safety, or clinical efficacy.
+
+The project-owned Make and Task entry points invoke the same build scripts.
+\texttt{make check-all} and \texttt{task check-all} build and validate the
+neutral and Ego Hygiene projections. The reproducibility target performs two
+clean builds and byte-compares the PDF, accessible HTML, provenance JSON, and
+arXiv-oriented source archive. Continuous integration repeats the publication
+checks on Ubuntu~24.04; the Beacon research-paper source and Holon site-suite
+inputs are pinned to immutable commits, while language package graphs use
+committed lockfiles. The operating-system packages installed by the
+publication workflow are not frozen as a complete container image, and
+cross-platform or perpetual byte identity is therefore not claimed. The
+documented developer baseline records Rust~1.97.1, Node~24.19.x,
+pnpm~11.19.x, Python~3.12.13, uv~0.11.33, and Tauri~2 for the synthetic
+application workspace; these pins do not constitute end-user platform or
+real-model support.
 
 \subsection{Excluded and access-controlled material}
 \label{sec:availability-exclusions}
 
-\AntidotePlaceholder{ANT-PH-AVL-002}{Excluded and access-controlled material}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla vitae elit libero, a pharetra augue. Donec ullamcorper nulla non metus auctor fringilla, sed posuere consectetur est at lobortis.}
+No private journal, therapy-chat, health, credential, or other personal
+content is included. No formal participant record has been collected under
+protocol \texttt{ANT-PROT-FEAS-001}, whose H1 stage remains
+\texttt{blocked-no-collection-authority}. Any later qualifying H1 material
+would require separately reviewed consent, security, retention,
+de-identification, and release decisions. The public reporting contract permits
+only reviewed aggregate envelopes and audit metadata; it does not promise
+row-level records, raw text, direct identifiers, or protected provenance
+payloads.
+
+The repository does not distribute third-party article full text, training
+datasets, proprietary media, model weights, real-model packages, or generated
+audio. Source records provide citations, links, and project-authored
+assessments without transferring the rights of the underlying works. Future
+model code, weights, datasets, and audio outputs must retain their own verified
+licenses and output-rights records before use or release.
+
+Licensing follows the artifact boundary rather than the repository location.
+Repository software, automation, and non-manuscript documentation are provided
+under the root MIT license. The draft manuscript source and manuscript figures
+remain copyright Alan Szmyt, all rights reserved, under
+\texttt{paper/LICENSE.md} until a publication license is selected. Linked or
+quoted third-party works retain their original rights. The root MIT license
+does not relicense the manuscript, source literature, model assets, training
+data, or future generated audio.
 
 \section{Acknowledgements}
 \label{sec:acknowledgements}
 
-No external funding or institutional support is claimed in this draft.
+This work received no external funding and was not produced under institutional
+sponsorship. Ego Hygiene is the author's independent project affiliation; its
+appearance does not imply university, employer, clinical, or other
+institutional endorsement. No additional individual acknowledgement is
+declared for version 0.1.0.
 
-\AntidotePlaceholder{ANT-PH-ACK-001}{Acknowledgements and funding verification}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent commodo cursus magna, vel scelerisque nisl consectetur et. Etiam porta sem malesuada magna mollis euismod.}
+Generative AI tools, including OpenAI ChatGPT and Codex, assisted with
+literature discovery, code and document drafting, editing, test construction,
+and visual ideation. Alan Szmyt selected the research direction, reviewed and
+revised the claims and artifacts, approved the manuscript, and remains
+accountable for the work. AI systems are not authors or contributors under the
+CRediT taxonomy. Vendor-hosted model revisions and the complete interaction
+history are not frozen in the repository, so exact regeneration of AI-assisted
+intermediate drafts is not claimed.
 
 \section{Contributor statement}
 \label{sec:contributor-statement}
 
-Contributor roles are generated from the project metadata using the CRediT
-taxonomy. The current draft assigns conceptualization, methodology, original
-draft writing, and review and editing to Alan Szmyt.
+Alan Szmyt is the sole human author. Contributor roles were reviewed against
+the CRediT taxonomy and are recorded in \texttt{beacon-project.toml}.
+\textbf{Alan Szmyt:} Conceptualization; Data curation; Investigation;
+Methodology; Project administration; Software; Validation; Visualization;
+Writing---original draft; Writing---review and editing.
 
-\AntidotePlaceholder{ANT-PH-CRD-001}{Contributor roles and conflict verification}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean lacinia bibendum nulla sed consectetur. Vestibulum id ligula porta felis euismod semper, donec sed odio dui.}
+Alan Szmyt originated and maintains Antidote and Ego Hygiene and has a direct
+intellectual and project-role interest in the proposed system. The prospective
+H1 protocol is a self-study in which researcher, developer, participant,
+analyst, and author roles would overlap; no H1 collection is authorized, and
+independent review of that role conflict remains an entry gate. No external
+commercial sponsorship or other financial competing interest is declared for
+version 0.1.0. The author reviewed and approved the manuscript
+and accepts responsibility for its content.

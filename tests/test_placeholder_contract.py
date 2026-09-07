@@ -18,7 +18,7 @@ SPEC = importlib.util.spec_from_file_location("check_placeholders", MODULE_PATH)
 assert SPEC is not None and SPEC.loader is not None
 PLACEHOLDERS = importlib.util.module_from_spec(SPEC)
 SPEC.loader.exec_module(PLACEHOLDERS)
-EXPECTED_ACTIVE_PLACEHOLDERS = 7
+EXPECTED_ACTIVE_PLACEHOLDERS = 2
 
 
 class PlaceholderContractTests(unittest.TestCase):

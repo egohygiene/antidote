@@ -59,7 +59,51 @@ privacy, secure deletion, or current collection authority.
 \section{Provenance and reproducibility checklist}
 \label{app:provenance-reproducibility}
 
-\AntidotePlaceholder{ANT-PH-APP-006}{Provenance and reproducibility checklist}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec id elit non mi porta gravida at eget metus. Fusce dapibus, tellus ac cursus commodo, tortor mauris condimentum nibh.}
+The checklist below states the minimum record needed to reproduce or audit one
+reported Antidote artifact. A field marked unavailable remains unavailable; it
+must not be inferred from a neighboring record or replaced with a zero.
+
+\begin{description}
+  \item[Source and build identity.] Record the full Git revision, paper version
+    and stage, build theme, source-date epoch, operating system, build commands,
+    and the versions or immutable commits named by
+    \texttt{dependencies/beacon.lock.toml},
+    \texttt{publication/antidote-site-suite.lock.json}, language toolchain
+    files, and package lockfiles. Retain \texttt{provenance.json},
+    \texttt{publication.json}, \texttt{site.json}, and
+    \texttt{SHA256SUMS} with the generated PDF, HTML, and source archive.
+
+  \item[Protocol and reporting identity.] Name protocol
+    \texttt{ANT-PROT-FEAS-001}, its semantic version, content-lock digest,
+    freeze date, deviation log, collection-authority state, and the exact
+    \texttt{ANT-REPORT-RESULTS-001} version. Register every source package and
+    promotion decision; an empty registry is an unavailable result state, not
+    evidence of no effect.
+
+  \item[Model and artifact identity.] For a synthetic record, identify the
+    deterministic mock worker, fixture, schema version, seed, request, output
+    digest, warnings, interruption state, and test revision. A future T1 record
+    must additionally identify the real model, adapter, weights and licenses,
+    hardware profile, analyzers, generation parameters, mutation manifest,
+    seed policy, attempted outputs, failures, exclusions, and output-rights
+    review. Those T1 records are currently unavailable.
+
+  \item[Exposure and response identity.] A future H1 record must link the
+    approved plan and verified artifact to actual playback, stop or
+    interruption events, response windows, corrections, missingness reasons,
+    adverse observations, and the applicable consent, retention, and review
+    decisions. Raw personal content and row-level identifiers remain protected;
+    only a separately approved aggregate public envelope may enter a public
+    result package. No qualifying H1 exposure or response package exists at
+    this revision.
+
+  \item[Claim and exclusion audit.] Record which source, observation, or result
+    supports each reported statement; the claim-ledger disposition; unresolved
+    contradictions; and every omitted, failed, null, negative, mismatched,
+    missing, or adverse record. Confirm that synthetic fixtures are not labeled
+    human outcomes and that provenance or checksum agreement is not presented
+    as truth, consent, privacy, ownership, safety, or efficacy.
+\end{description}
 
 \AntidoteTable{protocol-evidence-audit}
 

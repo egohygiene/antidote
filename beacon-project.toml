@@ -29,7 +29,13 @@ name = "Alan Szmyt"
 affiliation = "Ego Hygiene"
 credit_roles = [
   "Conceptualization",
+  "Data curation",
+  "Investigation",
   "Methodology",
+  "Project administration",
+  "Software",
+  "Validation",
+  "Visualization",
   "Writing - original draft",
   "Writing - review and editing",
 ]
