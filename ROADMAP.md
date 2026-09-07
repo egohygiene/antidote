@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.12.0
+version: 0.13.0
 status: provisional
 owners:
   - egohygiene
@@ -48,10 +48,11 @@ issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
 section boundaries, visual governance, mathematical model, System Design,
 prospective feasibility method, governed empty-state Results reporting, the
 pre-collection correction, an evidence-proportional Discussion, the limitations
-and ethics audit, and verified availability, reproducibility, licensing,
-contributor, funding, AI-assistance, and conflict statements. Issue #46 is the
-next slice for core figure and evidence-table production, followed by synthesis
-and review through issue #48 and the launch sequence in issue #69.
+and ethics audit, verified availability and contributor statements, and 17
+publication-final figures and tables. The two evidence-contingent result-figure
+slots are retired until qualifying packages exist. Issue #47 is the next slice
+for title, abstract, conclusion, and whole-paper synthesis, followed by review
+through issue #48 and the launch sequence in issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -162,8 +163,9 @@ feasibility-revision gate when qualifying evidence exists.
   two-rate architecture, planning horizon, continuity, response, and provenance
   with centralized equation classes and implementation states.
 - [ ] Every canonical manuscript section completes its evidence-specific issue.
-- [ ] Figures and tables have governed source, captions, alt text, placement,
-  and placeholder/final status.
+- [x] Figures and tables have governed source, captions, alt text, placement,
+  and placeholder/final status; 17 active visuals are final and two
+  evidence-contingent slots are retired rather than fabricated.
 - [ ] Table of contents, cross-references, PDF, accessible HTML, provenance, and
   source packaging pass the native build.
 - [ ] The custom-domain web paper and PDF expose the reviewed source revision.

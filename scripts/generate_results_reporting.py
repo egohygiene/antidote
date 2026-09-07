@@ -993,8 +993,10 @@ def validate_reporting(project: Path = ROOT) -> list[str]:
         visual = manifest_visuals.get(visual_id)
         if visual is None or visual.get("kind") != "table":
             errors.append(f"table shell {visual_id} lacks a manifest table")
-        elif visual.get("state") != "draft":
-            errors.append(f"table shell {visual_id} must be a governed draft")
+        elif visual.get("state") != "final" or visual.get("status") != "active":
+            errors.append(
+                f"table shell {visual_id} must be an active final empty-state table"
+            )
         try:
             output = repository_path(project, output_path)
             if output.parent != (project / "paper" / "tables").resolve():
@@ -1019,8 +1021,10 @@ def validate_reporting(project: Path = ROOT) -> list[str]:
         visual = manifest_visuals.get(visual_id)
         if visual is None or visual.get("kind") != "figure":
             errors.append(f"figure shell {visual_id} lacks a manifest figure")
-        elif visual.get("state") != "placeholder":
-            errors.append(f"figure shell {visual_id} must remain a placeholder")
+        elif visual.get("state") != "placeholder" or visual.get("status") != "retired":
+            errors.append(
+                f"figure shell {visual_id} must remain a retired evidence-contingent slot"
+            )
         slot_ids = shell.get("slot_ids")
         if not isinstance(slot_ids, list) or not slot_ids:
             errors.append(f"figure shell {visual_id} requires result slots")

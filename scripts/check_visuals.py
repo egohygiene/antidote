@@ -49,6 +49,26 @@ if GENERATOR_SPEC is None or GENERATOR_SPEC.loader is None:
 SKELETON_VISUALS = importlib.util.module_from_spec(GENERATOR_SPEC)
 GENERATOR_SPEC.loader.exec_module(SKELETON_VISUALS)
 
+PUBLICATION_FIGURE_GENERATOR_PATH = Path(__file__).with_name(
+    "generate_publication_figures.py"
+)
+PUBLICATION_FIGURE_SPEC = importlib.util.spec_from_file_location(
+    "generate_publication_figures", PUBLICATION_FIGURE_GENERATOR_PATH
+)
+if PUBLICATION_FIGURE_SPEC is None or PUBLICATION_FIGURE_SPEC.loader is None:
+    raise RuntimeError("cannot load publication figure generator")
+PUBLICATION_FIGURES = importlib.util.module_from_spec(PUBLICATION_FIGURE_SPEC)
+PUBLICATION_FIGURE_SPEC.loader.exec_module(PUBLICATION_FIGURES)
+
+VISUAL_TABLE_GENERATOR_PATH = Path(__file__).with_name("generate_visual_tables.py")
+VISUAL_TABLE_SPEC = importlib.util.spec_from_file_location(
+    "generate_visual_tables", VISUAL_TABLE_GENERATOR_PATH
+)
+if VISUAL_TABLE_SPEC is None or VISUAL_TABLE_SPEC.loader is None:
+    raise RuntimeError("cannot load visual table generator")
+VISUAL_TABLES = importlib.util.module_from_spec(VISUAL_TABLE_SPEC)
+VISUAL_TABLE_SPEC.loader.exec_module(VISUAL_TABLES)
+
 
 class DuplicateKeyError(ValueError):
     """Raised when a JSON object repeats a key."""
@@ -242,8 +262,8 @@ def validate_visual_system(
 
     if manifest.get("schema") != "antidote.visual-manifest/v1":
         errors.append("visual manifest schema must be antidote.visual-manifest/v1")
-    if manifest.get("version") != "0.1.0":
-        errors.append("visual manifest version must be 0.1.0")
+    if manifest.get("version") != "0.2.0":
+        errors.append("visual manifest version must be 0.2.0")
     if manifest.get("production_issue") != "egohygiene/antidote#46":
         errors.append("visual manifest production issue must remain egohygiene/antidote#46")
     for policy in (
@@ -563,6 +583,22 @@ def validate_visual_system(
                 errors.append(f"generated skeleton visual is stale: {relative}")
     except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors.append(f"generated skeleton visuals cannot be validated: {error}")
+
+    try:
+        for relative, expected in PUBLICATION_FIGURES.expected_assets(project).items():
+            asset = project / relative
+            if not asset.is_file() or asset.read_text(encoding="utf-8") != expected:
+                errors.append(f"generated publication figure is stale: {relative}")
+    except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"generated publication figures cannot be validated: {error}")
+
+    try:
+        for relative, expected in VISUAL_TABLES.expected_assets(project).items():
+            asset = project / relative
+            if not asset.is_file() or asset.read_text(encoding="utf-8") != expected:
+                errors.append(f"generated visual table is stale: {relative}")
+    except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"generated visual tables cannot be validated: {error}")
 
     return {"errors": errors, "warnings": warnings, "active": active, "manifest": manifest}
 

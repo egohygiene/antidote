@@ -14,7 +14,9 @@ Governed by ANT-CLM-002, ANT-CLM-004, and ANT-NEG-003. Consent and local executi
 
 ## Source plan
 
-Author deterministic SVG against the consent-grant and working-context-projection schemas.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` against the consent-grant and
+working-context-projection schemas.
 
 ## Accessibility plan
 

@@ -1,63 +1,132 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL Moment, journey, and decision equation map</title>
-  <desc id="description">Visible layout placeholder for Moment, journey, and decision equation map. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1100" viewBox="0 0 1800 1100" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-009">
+  <title id="title">Moment, journey, and decision equation map</title>
+  <desc id="description">Six cards cover all 16 registered equations. They separate moment and authorized context; semantic mixing and model-specific adaptation; uncertain state belief and a negotiated planning horizon; buffer and independent semantic, acoustic, and waveform continuity; exposure-linked response; and a future within-person update. Each card states its epistemic class and implementation status. Dashed arrows show record dependencies rather than established causality, and the final warning rejects any reading of the equations as validated affect laws, optimal policies, or authorization for autonomous learning.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
     </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
+    </marker>
     <style>
-      .kicker { font: 700 25px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 50px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 30px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 19px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 18px sans-serif; fill: #172D31; }
-      .card-note { font: 400 14px sans-serif; fill: #536A68; }
-      .footer { font: 700 20px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <rect width="1800" height="1100" fill="url(#background)"/>
-  <circle cx="1638" cy="198" r="154" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1638" cy="198" r="99" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="144" y="132" class="kicker">ANT-FIG-009 · PROVISIONAL VISUAL FRAME</text>
-  <text x="144" y="187" class="title">
-    <tspan x="144" dy="60">Moment, journey, and decision equation map</tspan>
-  </text>
-  <text x="144" y="374" class="purpose">
-    <tspan x="144" dy="50">Connect the person-moment state, predicted response,</tspan>
-    <tspan x="144" dy="50">constrained journey selection, continuity, and longitudinal</tspan>
-    <tspan x="144" dy="50">update equations while labeling their conceptual or</tspan>
-    <tspan x="144" dy="50">operational status.</tspan>
-  </text>
-  <rect x="144" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="181" y="734" class="card-head">PLANNED STRUCTURE</text>
-  <text x="181" y="775" class="card-copy">
-    <tspan x="181" dy="24">Composition and</tspan>
-    <tspan x="181" dy="24">relationships</tspan>
-  </text>
-  <text x="181" y="840" class="card-note">
-    <tspan x="181" dy="21">Final geometry is owned by issue</tspan>
-    <tspan x="181" dy="21">#46.</tspan>
-  </text>
-  <rect x="666" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="703" y="734" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="703" y="775" class="card-copy">
-    <tspan x="703" dy="24">No results or mechanisms</tspan>
-    <tspan x="703" dy="24">asserted</tspan>
-  </text>
-  <text x="703" y="840" class="card-note">
-    <tspan x="703" dy="21">Caption and claim IDs remain</tspan>
-    <tspan x="703" dy="21">authoritative.</tspan>
-  </text>
-  <rect x="1188" y="671" width="459" height="242" rx="20" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1225" y="734" class="card-head">REPLACEMENT GATE</text>
-  <text x="1225" y="775" class="card-copy">
-    <tspan x="1225" dy="24">Deterministic, reviewable</tspan>
-    <tspan x="1225" dy="24">asset</tspan>
-  </text>
-  <text x="1225" y="840" class="card-note">
-    <tspan x="1225" dy="21">Must pass accessibility and print</tspan>
-    <tspan x="1225" dy="21">review.</tspan>
-  </text>
-  <text x="144" y="1023" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+  <rect width="1800" height="1100" fill="#fffaf6"/>
+  <text x="900" y="58" class="title" text-anchor="middle" >MOMENT → JOURNEY → REALIZATION → RESPONSE</text>
+  <text x="900" y="96" class="subtitle" text-anchor="middle" >A map of definitions and proposed models — arrows show record dependencies, not established causality</text>
+  <rect x="70" y="135" width="760" height="220" rx="20" class="card-gold" data-equations="ANT-EQ-001 ANT-EQ-002 ANT-EQ-003"/>
+  <text x="108" y="177" class="head" text-anchor="start" style="font-size:25px">MOMENT + AUTHORIZED CONTEXT</text>
+  <text x="790" y="174" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-001–003</text>
+  <text x="450" y="223" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="450" dy="0">zᵢ,ₜ = (oᵘˢʳᵢ,ₜ, oᵒᵖᵗᵢ,ₜ, cʷᵒʳᵏᵢ,ₜ, gᵢ,ₜ, kᵘˢʳᵢ,ₜ, ℋᵢ,&lt;ₜ)</tspan><tspan x="450" dy="38">cʷᵒʳᵏᵢ,ₜ = π(Sᶜᵗˣᵢ,ₜ ; Aᵢ,ₜ)</tspan></text>
+  <rect x="108" y="293" width="310" height="44" rx="22" class="pill-violet" />
+<text x="263.0" y="323" class="pill-text-violet" text-anchor="middle" style="font-size:16px">DEFINITION + OPERATION</text>
+  <rect x="442" y="293" width="350" height="44" rx="22" class="pill-gold" />
+<text x="617.0" y="323" class="pill-text-gold" text-anchor="middle" style="font-size:16px">implemented mock slice</text>
+  <rect x="970" y="135" width="760" height="220" rx="20" class="card-violet" data-equations="ANT-EQ-004 ANT-EQ-005 ANT-EQ-006 ANT-EQ-007"/>
+  <text x="1008" y="177" class="head" text-anchor="start" style="font-size:25px">SEMANTIC MIXER + ADAPTER</text>
+  <text x="1690" y="174" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-004–007</text>
+  <text x="1350" y="223" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="1350" dy="0">kᵉᶠᶠ → αⱼ,ₜ → qᵢ,ₙ</tspan><tspan x="1350" dy="38">Jᵢ,ₜ → Compileₐ(·, 𝒦ₐ) → γ⁽ᵃ⁾ᵢ,ₙ → φ⁽ᵃ⁾ᵢ,ₙ</tspan></text>
+  <rect x="1008" y="293" width="310" height="44" rx="22" class="pill-violet" />
+<text x="1163.0" y="323" class="pill-text-violet" text-anchor="middle" style="font-size:16px">DEFINITION + OPERATION</text>
+  <rect x="1342" y="293" width="350" height="44" rx="22" class="pill-plum" />
+<text x="1517.0" y="323" class="pill-text-plum" text-anchor="middle" style="font-size:16px">formalized / unavailable</text>
+  <rect x="70" y="420" width="760" height="220" rx="20" class="card-violet" data-equations="ANT-EQ-008 ANT-EQ-009"/>
+  <text x="108" y="462" class="head" text-anchor="start" style="font-size:25px">BELIEF + NEGOTIATED HORIZON</text>
+  <text x="790" y="459" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-008–009</text>
+  <text x="450" y="508" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="450" dy="0">bᵢ,ₜ(x) = Pr(Xᵢ,ₜ=x | oᵢ,₁:ₜ, uᵢ,₁:ₜ₋₁)</tspan><tspan x="450" dy="38">U* ∈ arg min [mismatch + change + risk + burden]</tspan></text>
+  <rect x="108" y="578" width="310" height="44" rx="22" class="pill-violet" />
+<text x="263.0" y="608" class="pill-text-violet" text-anchor="middle" style="font-size:16px">ESTIMATOR + CONCEPT</text>
+  <rect x="442" y="578" width="350" height="44" rx="22" class="pill-plum" />
+<text x="617.0" y="608" class="pill-text-plum" text-anchor="middle" style="font-size:16px">unavailable</text>
+  <rect x="970" y="420" width="760" height="220" rx="20" class="card-blue" data-equations="ANT-EQ-010 ANT-EQ-011 ANT-EQ-012 ANT-EQ-013"/>
+  <text x="1008" y="462" class="head" text-anchor="start" style="font-size:25px">BUFFER + CONTINUITY</text>
+  <text x="1690" y="459" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-010–013</text>
+  <text x="1350" y="508" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="1350" dy="0">Bᵢ,ₜ ≥ Σ ℓ + Mᵢ,ₜ</tspan><tspan x="1350" dy="38">Dˢᵉᵐₙ ; Dᵃᶜₙ ; y(s)=cos(πs/2)aₙ+sin(πs/2)aₙ₊₁</tspan></text>
+  <rect x="1008" y="578" width="310" height="44" rx="22" class="pill-violet" />
+<text x="1163.0" y="608" class="pill-text-violet" text-anchor="middle" style="font-size:16px">PROPOSED OPERATION</text>
+  <rect x="1342" y="578" width="350" height="44" rx="22" class="pill-plum" />
+<text x="1517.0" y="608" class="pill-text-plum" text-anchor="middle" style="font-size:16px">unavailable</text>
+  <rect x="70" y="705" width="760" height="220" rx="20" class="card-teal" data-equations="ANT-EQ-014"/>
+  <text x="108" y="747" class="head" text-anchor="start" style="font-size:25px">EXPOSURE-LINKED RESPONSE</text>
+  <text x="790" y="744" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-014</text>
+  <text x="450" y="793" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="450" dy="0">eᵢ,ₜ = what was actually heard</tspan><tspan x="450" dy="38">𝒀ᵢ,ₜ = (perceived, felt, intensity, helpfulness, harm, aftereffect)</tspan></text>
+  <rect x="108" y="863" width="310" height="44" rx="22" class="pill-violet" />
+<text x="263.0" y="893" class="pill-text-violet" text-anchor="middle" style="font-size:16px">DEFINITION</text>
+  <rect x="442" y="863" width="350" height="44" rx="22" class="pill-gold" />
+<text x="617.0" y="893" class="pill-text-gold" text-anchor="middle" style="font-size:16px">implemented mock subset</text>
+  <rect x="970" y="705" width="760" height="220" rx="20" class="card-plum" data-equations="ANT-EQ-015 ANT-EQ-016"/>
+  <text x="1008" y="747" class="head" text-anchor="start" style="font-size:25px">FUTURE WITHIN-PERSON UPDATE</text>
+  <text x="1690" y="744" class="small" text-anchor="end" style="font-size:17px">ANT-EQ-015–016</text>
+  <text x="1350" y="793" class="equation" text-anchor="middle" style="font-size:21px"><tspan x="1350" dy="0">pθᵢ(𝒀ᵢ,ₜ | eᵢ,ₜ, zᵢ,ₜ)</tspan><tspan x="1350" dy="38">p(θᵢ | 𝒟ᵢ,₁:ₜ) ∝ likelihood × prior</tspan></text>
+  <rect x="1008" y="863" width="310" height="44" rx="22" class="pill-violet" />
+<text x="1163.0" y="893" class="pill-text-violet" text-anchor="middle" style="font-size:16px">FUTURE EMPIRICAL MODEL</text>
+  <rect x="1342" y="863" width="350" height="44" rx="22" class="pill-plum" />
+<text x="1517.0" y="893" class="pill-text-plum" text-anchor="middle" style="font-size:16px">unavailable · approval required</text>
+  <path d="M830 258 H958" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="900" y="238" class="tiny" text-anchor="middle" style="font-size:14px">compile only after approval</text>
+  <path d="M450 365 V408" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="480" y="393" class="tiny" text-anchor="middle" style="font-size:14px">authorized observations</text>
+  <path d="M1350 365 V408" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="1380" y="393" class="tiny" text-anchor="middle" style="font-size:14px">accepted controls</text>
+  <path d="M450 650 V693" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="480" y="678" class="tiny" text-anchor="middle" style="font-size:14px">actual exposure</text>
+  <path d="M1350 650 V693" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="1380" y="678" class="tiny" text-anchor="middle" style="font-size:14px">qualifying records</text>
+  <path d="M830 828 H958" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="record-dependency"/>
+  <text x="900" y="808" class="tiny" text-anchor="middle" style="font-size:14px">human-reviewed proposal</text>
+  <rect x="480" y="990" width="260" height="44" rx="22" class="pill-gold" />
+<text x="610.0" y="1020" class="pill-text-gold" text-anchor="middle" >DEFINITION</text>
+  <rect x="770" y="990" width="260" height="44" rx="22" class="pill-violet" />
+<text x="900.0" y="1020" class="pill-text-violet" text-anchor="middle" >PROPOSED MODEL</text>
+  <rect x="1060" y="990" width="260" height="44" rx="22" class="pill-plum" />
+<text x="1190.0" y="1020" class="pill-text-plum" text-anchor="middle" >UNAVAILABLE</text>
+  <text x="900" y="1068" class="footer" text-anchor="middle" >NO EQUATION IS A VALIDATED LAW OF AFFECT, AN OPTIMAL POLICY, OR AN AUTHORIZATION FOR AUTONOMOUS LEARNING</text>
 </svg>

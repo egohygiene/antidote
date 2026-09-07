@@ -99,7 +99,7 @@ human-response findings require the later frozen protocol.
 - [x] [#42 — Write Discussion and bounded future directions](https://github.com/egohygiene/antidote/issues/42)
 - [x] [#43 — Write Limitations, ethics, safety, and privacy](https://github.com/egohygiene/antidote/issues/43) — [governed risk register](tables/risk-mitigation-status.json)
 - [x] [#44 — Write availability, reproducibility, and contributor statements](https://github.com/egohygiene/antidote/issues/44) — [verified availability and contributor statements](sections/08-availability-and-contributions.tex)
-- [#46 — Produce the core Antidote figures and evidence tables](https://github.com/egohygiene/antidote/issues/46) — next
+- [x] [#46 — Produce the core Antidote figures and evidence tables](https://github.com/egohygiene/antidote/issues/46) — 17 active visuals finalized; T0 interface and T1 benchmark slots retired pending qualifying evidence
 
 Interpretation follows evidence and methods. It does not set their boundaries
 retroactively.
@@ -150,8 +150,7 @@ the magazine and LinkedIn post cannot introduce claims absent from it.
 
 ## Initial visual inventory
 
-The exact count may change during issue #45, but the first governed inventory
-must consider:
+The governed issue #46 production inventory includes:
 
 1. literature landscape and comparator matrix;
 2. person–moment–journey response model;
@@ -162,7 +161,13 @@ must consider:
 7. semantic conditioning versus acoustic continuity/interpolation;
 8. provenance, hashing, privacy review, and fail-closed export;
 9. feasibility protocol timeline; and
-10. evidence and claim classification.
+10. evidence and claim classification;
+11. the measurement registry and protocol/evidence audit; and
+12. final empty-state Results and risk tables.
+
+Seventeen records are active and final. The MVP interface capture and technical
+benchmark remain governed, retired slots because their qualifying source
+packages do not exist; neither appears in the current manuscript.
 
 Information design takes precedence over decoration. Exact diagrams and data
 visuals must remain reproducible from governed source. Generated editorial

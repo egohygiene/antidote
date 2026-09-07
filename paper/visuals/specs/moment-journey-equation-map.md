@@ -24,8 +24,10 @@ or neural mechanism. Every symbol must resolve to the notation appendix.
 ## Source plan
 
 Issue #39 owns the mathematical source and issue #47 owns whole-paper
-reconciliation. Produce the final diagram as deterministic SVG from reviewed
-notation and equation text; issue #46 owns visual production.
+reconciliation. Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` from the reviewed notation and
+equation registry; the machine-readable card metadata must enumerate all 16
+equation IDs.
 
 ## Accessibility plan
 

@@ -3,99 +3,99 @@
 
 \AntidoteDeclareVisualText
   {semantic-acoustic-response-loop}
-  {Provisional person-and-moment loop separating semantic intent, acoustic realization, exposure-linked response, and any later advisory update.}
-  {A provisional loop moves from semantic intent to generated acoustic structure to individual response, then returns through a hypothesis-only longitudinal update.}
-  {Three bordered boxes run left to right: semantic intent, acoustic structure, and individual response. Arrows labeled test connect the first two transitions. A separate curved arrow returns from response to the next semantic and generation decision and is explicitly labeled as a longitudinal hypothesis, not an observed mechanism.}
-  {placeholder}
+  {Person-and-moment inspectability chain separating an approved semantic journey, measured acoustic realization, actual exposure, response, and any later advisory proposal.}
+  {Four ordered cards move from a person and moment through a semantic journey and acoustic realization to exposure-linked response, with a human-reviewed future proposal returning below.}
+  {Four numbered cards run left to right. Person and moment holds chosen context and desired direction; semantic journey holds intent, stages, constraints, and approval; acoustic realization holds the content-hashed artifact and measured features; exposure and response distinguishes what was heard from what was reported. A separate dashed return path is labeled future advisory proposal, human review required, and no automatic learning. Every forward transition is a proposed relationship to test rather than a causal or therapeutic mechanism.}
+  {final}
 
 \AntidoteDeclareVisualText
   {evidence-claim-classification}
   {Evidence classes used by Antidote and the promotion boundary between them.}
   {A five-row table defines source, hypothesis, observation, interpretation, and claim as separate evidence classes.}
   {Rows define what each evidence class means, what artifact may support it, and which promotion step requires review. The table emphasizes that generated explanations are not sources, observations are not automatically claims, and no layer silently promotes itself to the next.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {research-landscape-comparator}
   {Capability-level comparison of nine reviewed systems and the proposed Antidote profile. Tokens report only what each artifact describes, not evidence strength or benefit.}
   {Nine comparator rows and one proposed Antidote row mark semantic representation, journey structure, audio strategy, within-session adaptation, longitudinal learning, and provenance as reported, partial, not reported, not applicable, or proposed.}
   {MindMelody, Daly aBCMI, Ehrlich BCI, AffectMachine, the personalized affective music player, BEAMERS, LUCID, iHeartLift, and the Minimalist BCMI are projected from the governed comparator JSON. Columns cover semantic representation, journey representation, audio strategy, within-session adaptation, longitudinal learning, and provenance. Reported audio strategy may be generation, sonification, selection, sequencing, or playback as defined in the source cell. The final Antidote row says proposed in every capability family and is not evidence of implementation, novelty, safety, or benefit.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {holistic-two-rate-architecture}
   {Proposed two-rate Antidote architecture. Human-correctable deliberation authorizes one immutable generation specification; variable-latency generation fills a verified future-audio buffer that decouples model work from deterministic playback deadlines. Labels distinguish the executable synthetic slice from proposed components.}
   {Two stacked regions show human-correctable deliberation above and a generation-to-audio path below. One approved specification enters a bounded model worker, verified audio moves into a future buffer, and only rendering and playback operate to audio deadlines. Stop bypasses deliberation; response can create only a future human-reviewed proposal.}
   {The numbered path begins with consented context, a correctable state belief, semantic intent, a journey plan, and explicit human approval. Approval produces one immutable generation specification that crosses into a capability-scoped model adapter. Variable-latency generation and verification prepare future audio before the proposed deterministic renderer consumes small audio blocks and segment boundaries for a deliberate playback path. Exposure remains a separate record of what was actually heard, and a response remains a separate observation that can return only as a dashed future proposal requiring human review; no automatic learning path exists. Solid cards identify the executable synthetic slice, dashed cards identify proposed capabilities, and split cards distinguish current mock or schema support from target behavior. The listening/exposure and response cards are split because playback state and response schemas exist while no qualifying human exposure or response is observed. Separate cancel, approved-fallback, and immediate-stop paths bypass semantic deliberation. The provenance spine requires source, version, hash, and authority lineage while explicitly making no claim of truth, privacy, safety, benefit, hard-real-time generation, or human outcome.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {consent-scoped-context-projection}
   {Consent-scoped transformation from private context to the bounded projection available to planning and generation.}
   {Private context passes through an explicit consent gate into a minimized working projection; excluded fields never reach the model worker.}
   {A private context store sits outside the generation boundary. A consent grant selects purpose, fields, retention, and expiration, producing a reviewable working projection. Only that minimized projection can inform planning and the immutable generation specification. Excluded, revoked, or expired fields terminate at a blocked path rather than reaching the worker.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {semantic-intent-mixer}
   {Typed semantic mixins combine into a reviewable conditioning state under explicit human authority.}
   {User-controlled semantic mixin cards with bounds, neutral positions, exclusions, and priorities feed a reviewable conditioning state.}
   {Several semantic mixin cards expose a human-readable purpose, current value, neutral position, bounds, exclusions, priority, and adapter mapping. The cards combine into a versioned conditioning state that the person may inspect, correct, accept, or reject before generation. No arrow claims that a mixin directly causes an emotion.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {predictive-horizon-buffer}
   {Receding-horizon planning and buffer deadlines under an uncertain, person-correctable state belief.}
   {A timeline separates state estimation and short-horizon planning from queued generation segments and the playback deadline.}
   {A time axis shows the current playback cursor, verified buffered audio, generation in progress, and a future planning horizon. Above it, an uncertain state belief is corrected by the person before the next plan is accepted. Deadline and safety margins are marked independently from claims about subjective response or model quality.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {semantic-waveform-continuity}
   {Independent semantic-conditioning and waveform-continuity checks across adjacent generated segments.}
   {Two aligned lanes compare semantic control interpolation above with acoustic overlap and continuity measurements below.}
   {The upper lane shows two versioned conditioning states and a bounded semantic transition. The lower lane shows adjacent audio segments, overlap or crossfade regions, waveform and feature measurements, and acceptance or fallback decisions. Separate indicators make clear that semantic similarity does not guarantee smooth audio and smooth audio does not prove intended meaning.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {provenance-privacy-export}
   {Provenance-linked session records pass through consent, redaction, privacy review, and explicit export approval.}
   {Session events and artifact hashes enter an export gate that checks consent, redaction, privacy review, and human approval before release.}
   {Versioned session events, model identity, control records, exposure, response, and artifact hashes feed an export candidate. Four gates check purpose and consent scope, excluded or sensitive fields, privacy review, and explicit human approval. Any failed or unresolved gate stops export and records the reason; a successful path emits a manifest and checksums without asserting truth or safety.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {feasibility-protocol-timeline}
   {Prospective feasibility-session sequence with approval, exposure, response, aftereffect, and stopping boundaries.}
   {A session timeline runs from consent and baseline through plan approval, generation, verification, playback, response, aftereffect, and review.}
   {The timeline begins with protocol version and consent confirmation, then baseline and desired trajectory, plan review, generation and artifact verification, explicit playback approval, exposure with stop controls, immediate separated response measures, a declared aftereffect interval, and later review. Safety events may interrupt the sequence at every exposure-related stage.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {measurement-evidence-matrix}
   {Prospective measurement layers, instruments, timing, provenance, and permitted interpretation.}
   {A matrix separates intended controls, acoustic realization, exposure, perceived expression, felt response, usefulness or harm, and aftereffect.}
   {Each row names one non-interchangeable measurement layer. Columns identify the planned instrument, collection timing, provenance fields, missing-data treatment, and the strongest permitted interpretation. Clinical outcome is shown as outside the initial feasibility protocol rather than inferred from the other rows.}
-  {placeholder}
+  {final}
 
 \AntidoteDeclareVisualText
   {moment-journey-equation-map}
   {Conceptual map of the person-moment representation, journey decision, continuity, and cautious update equations.}
-  {A future formula map will connect the moment state, candidate audio journey, bounded decision rule, continuity measures, and later advisory update.}
-  {The planned diagram will distinguish definitions from conceptual hypotheses, operational quantities, estimators, and future empirical models. Arrows will show which variables feed candidate selection, realization checks, response measurement, and a later approved model update without presenting any equation as a validated law of affect.}
-  {placeholder}
+  {Six connected cards map moment context, semantic mixing, state belief, buffer continuity, exposure-linked response, and a future human-approved update.}
+  {Six cards cover all 16 registered equations. They separate moment and authorized context; semantic mixing and model-specific adaptation; uncertain state belief and a negotiated planning horizon; buffer and independent semantic, acoustic, and waveform continuity; exposure-linked response; and a future within-person update. Each card states its epistemic class and implementation status. Dashed arrows show record dependencies rather than established causality, and the final warning rejects any reading of the equations as validated affect laws, optimal policies, or authorization for autonomous learning.}
+  {final}
 
 \AntidoteDeclareVisualText
   {mvp-session-evidence-interface}
-  {Reserved interface evidence view; the current frame contains no implementation screenshot or runtime observation.}
-  {A provisional frame reserves space for a future reviewed MVP interface composite and contains no actual application screenshot.}
+  {Retired interface-evidence slot; no qualifying implementation capture is included in this manuscript revision.}
+  {A retired visual record preserves requirements for a future reviewed MVP interface composite without displaying a screenshot.}
   {If qualifying implementation evidence exists, the final composite may show consent scope, editable journey review, generation progress, deliberate playback, stop authority, and separate response fields. It must hide private context, use clearly identified synthetic or approved records, name the source revision, and avoid implying that interface presence establishes benefit.}
   {placeholder}
 
 \AntidoteDeclareVisualText
   {technical-benchmark-panels}
-  {Reserved technical benchmark panels; the current frame contains no measured values or results.}
-  {A provisional frame reserves space for future latency, continuity, control-adherence, interruption, and recovery plots and contains no data.}
+  {Retired technical-benchmark slot; no qualifying real-model measurements are included in this manuscript revision.}
+  {A retired visual record preserves requirements for future latency, continuity, adherence, interruption, and recovery panels without displaying data.}
   {The final figure may contain provenance-linked distributions or timelines for generation latency, verified buffer margin, measured acoustic adherence, boundary continuity, cancellation, recovery, and failure outcomes. Every panel must name denominators, hardware and model revisions, missing runs, and uncertainty; synthetic fixtures cannot be presented as observed performance.}
   {placeholder}
 
@@ -104,32 +104,32 @@
   {Governed T0 and T1 result slots with their required source records, protocol, analyses, and current unavailable states; no qualifying values are registered.}
   {Four rows identify the mock exit gate, real-model adherence, timing, and continuity slots, all without measured result values.}
   {The generated empty-state table maps each future technical result to a source package, protocol version, and analysis identifier. The mock exit-gate row awaits issue 18, while all real-model rows are blocked because no model qualification has run. The table reports no rates, latencies, adherence estimates, boundary distances, or subjective outcomes.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {exposure-response-completeness}
   {Governed H1 flow and response-completeness slots with required source records and analyses; collection is not authorized and no values are registered.}
   {Three blocked rows identify future exposure flow, immediate response completeness, and later response completeness without showing counts.}
   {The generated empty-state table maps assigned-attempt and exposure flow, immediate response completeness, and later aftereffect completeness to their planned source packages, protocol version, and analysis identifiers. Every row is blocked because H1 collection lacks authority. The blocked state is not a zero denominator or evidence that no response occurred.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {outcomes-accounting}
   {Governed slots for null, opposite-direction, mismatched, burdensome, harmful, missing, stopped, interrupted, and adverse observations; no H1 values exist.}
   {Six blocked rows preserve null response, mismatch, burden, harm, missingness, and interruption as separate future reporting categories.}
   {The generated empty-state table assigns source and analysis identities to null or opposite-direction response, mismatch or unwanted intensity, burden, harm or adverse response, missing or declined data, and stop or interruption. Every row is blocked because H1 has not begun. The table contains no fabricated zeroes and does not treat intense emotion as success.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {risk-mitigation-status}
   {Governed risk register pairing current controls with residual uncertainty and the gate that blocks stronger use. Mixed denotes only bounded synthetic implementation; specified controls remain unverified, and formal collection remains blocked.}
   {Seven risk families show mixed, specified, unresolved, or blocked status beside a current control and the next accountable gate.}
   {Seven rows cover construct and inference validity; internal and statistical validity; external and ecological validity; model, timing, and continuity failures; emotional and hearing safety; consent, privacy, and export; and rights, bias, accessibility, misuse, and independent review. Each row names the affected evidence layer, current control, residual risk, status word, owner, and blocking gate. Only some synthetic prototype behaviors are implemented. The table authorizes no collection and does not present provenance, local execution, consent records, or a planned safeguard as proof of truth, privacy, rights, accessibility, safety, or benefit.}
-  {draft}
+  {final}
 
 \AntidoteDeclareVisualText
   {protocol-evidence-audit}
-  {Protocol, artifact, evidence-class, exclusion, and claim-promotion audit for qualifying observations.}
-  {A future appendix table links protocol versions, artifacts, hashes, evidence classes, exclusions, and claim decisions for each qualifying record.}
-  {The audit table will identify the protocol version, source revision, model and analysis versions, artifact checksum, exposure record, response instruments, evidence class, exclusions, and claim-ledger disposition for each qualifying observation set. It will remain supporting evidence rather than a replacement for methods or results interpretation.}
-  {placeholder}
+  {Current protocol, reporting-contract, stage, source-package, evidence-class, and claim-promotion audit; no qualifying T0, T1, or H1 result package is registered.}
+  {An appendix table identifies the frozen protocol and reporting contract, then shows D0 available for design review, T0 unavailable, and T1 and H1 blocked.}
+  {The audit begins with the frozen ANT-PROT-FEAS-001 version 1.1.0 identity and the ANT-REPORT-RESULTS-001 version 1.1.0 governed empty state. Separate D0, T0, T1, and H1 rows show their current state, expected source, evidence class, and entry gate. A final row limits accepted promotion to protocol- and reporting-artifact claims while RQ2 and RQ3 remain unanswered. Digests support integrity inspection only; the table contains no private record, participant observation, result value, or claim of safety or benefit.}
+  {final}

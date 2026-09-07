@@ -1,62 +1,97 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="950" viewBox="0 0 1800 950" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL Semantic and waveform continuity renderer</title>
-  <desc id="description">Visible layout placeholder for Semantic and waveform continuity renderer. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="950" viewBox="0 0 1800 950" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-006">
+  <title id="title">Semantic and waveform continuity renderer</title>
+  <desc id="description">The upper lane shows two versioned conditioning states and a bounded semantic transition. The lower lane shows adjacent audio segments, overlap or crossfade regions, waveform and feature measurements, and acceptance or fallback decisions. Separate indicators make clear that semantic similarity does not guarantee smooth audio and smooth audio does not prove intended meaning.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
     </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
+    </marker>
     <style>
-      .kicker { font: 700 22px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 43px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 26px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 16px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 15px sans-serif; fill: #172D31; }
-      .card-note { font: 400 12px sans-serif; fill: #536A68; }
-      .footer { font: 700 17px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <rect width="1800" height="950" fill="url(#background)"/>
-  <circle cx="1638" cy="171" r="133" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1638" cy="171" r="86" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="144" y="114" class="kicker">ANT-FIG-006 · PROVISIONAL VISUAL FRAME</text>
-  <text x="144" y="162" class="title">
-    <tspan x="144" dy="52">Semantic and waveform continuity renderer</tspan>
-  </text>
-  <text x="144" y="323" class="purpose">
-    <tspan x="144" dy="43">Keep semantic conditioning continuity and measured waveform</tspan>
-    <tspan x="144" dy="43">continuity as independent checks rather than treating prompt</tspan>
-    <tspan x="144" dy="43">interpolation as proof of smooth audio.</tspan>
-  </text>
-  <rect x="144" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="181" y="634" class="card-head">PLANNED STRUCTURE</text>
-  <text x="181" y="669" class="card-copy">
-    <tspan x="181" dy="21">Composition and</tspan>
-    <tspan x="181" dy="21">relationships</tspan>
-  </text>
-  <text x="181" y="726" class="card-note">
-    <tspan x="181" dy="18">Final geometry is owned by issue</tspan>
-    <tspan x="181" dy="18">#46.</tspan>
-  </text>
-  <rect x="666" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="703" y="634" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="703" y="669" class="card-copy">
-    <tspan x="703" dy="21">No results or mechanisms</tspan>
-    <tspan x="703" dy="21">asserted</tspan>
-  </text>
-  <text x="703" y="726" class="card-note">
-    <tspan x="703" dy="18">Caption and claim IDs remain</tspan>
-    <tspan x="703" dy="18">authoritative.</tspan>
-  </text>
-  <rect x="1188" y="580" width="459" height="209" rx="17" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1225" y="634" class="card-head">REPLACEMENT GATE</text>
-  <text x="1225" y="669" class="card-copy">
-    <tspan x="1225" dy="21">Deterministic, reviewable</tspan>
-    <tspan x="1225" dy="21">asset</tspan>
-  </text>
-  <text x="1225" y="726" class="card-note">
-    <tspan x="1225" dy="18">Must pass accessibility and print</tspan>
-    <tspan x="1225" dy="18">review.</tspan>
-  </text>
-  <text x="144" y="884" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+  <rect width="1800" height="950" fill="#fffaf6"/>
+  <text x="900" y="58" class="title" text-anchor="middle" >THREE CONTINUITY CONTRACTS — CHECKED INDEPENDENTLY</text>
+  <text x="900" y="96" class="subtitle" text-anchor="middle" >Prompt motion, musical compatibility, and signal joining are not interchangeable</text>
+  <rect x="45" y="135" width="1710" height="195" rx="20" class="card-violet" />
+  <text x="95" y="184" class="section" text-anchor="start" >1  SEMANTIC PLAN</text>
+  <rect x="400" y="175" width="420" height="100" rx="14" class="card-violet" />
+  <text x="610" y="217" class="equation" text-anchor="middle" >qᵗᵃⁱˡᵢ,ₙ</text>
+  <text x="610" y="254" class="small" text-anchor="middle" >typed intent + stage role</text>
+  <rect x="980" y="175" width="420" height="100" rx="14" class="card-violet" />
+  <text x="1190" y="217" class="equation" text-anchor="middle" >qʰᵉᵃᵈᵢ,ₙ₊₁</text>
+  <text x="1190" y="254" class="small" text-anchor="middle" >next typed condition</text>
+  <path d="M820 225 H968" class="flow-violet" marker-end="url(#arrow-violet)" data-check="semantic"/>
+  <rect x="1440" y="190" width="260" height="44" rx="22" class="pill-violet" />
+<text x="1570.0" y="220" class="pill-text-violet" text-anchor="middle" >Dˢᵉᵐₙ ≤ τˢᵉᵐ</text>
+  <text x="1440" y="292" class="small" text-anchor="start" >versioned distance</text>
+  <rect x="45" y="360" width="1710" height="255" rx="20" class="card-blue" />
+  <text x="95" y="410" class="section-blue" text-anchor="start" >2  MUSICAL + ACOUSTIC BOUNDARY</text>
+  <text x="110" y="470" class="body" text-anchor="start" ><tspan x="110" dy="0">tempo + beat phase</tspan><tspan x="110" dy="42">key / chord compatibility</tspan><tspan x="110" dy="42">loudness + spectral balance</tspan></text>
+  <text x="650" y="470" class="body" text-anchor="start" ><tspan x="650" dy="0">timbre + density</tspan><tspan x="650" dy="42">phrase alignment</tspan><tspan x="650" dy="42">artifact + analyzer versions</tspan></text>
+  <rect x="1110" y="445" width="570" height="120" rx="14" class="card-teal" />
+  <text x="1395" y="490" class="equation" text-anchor="middle" style="font-size:24px">Dᵃᶜₙ = Σᵣ∈𝓕 wᵣ dᵣ(fᵣ(aᵗᵃⁱˡₙ), fᵣ(aʰᵉᵃᵈₙ₊₁))</text>
+  <text x="1395" y="535" class="small" text-anchor="middle" >normalized measured features · threshold requires evaluation</text>
+  <rect x="45" y="645" width="1710" height="230" rx="20" class="card-gold" />
+  <text x="95" y="695" class="section" text-anchor="start" >3  WAVEFORM JOIN</text>
+  <path d="M170.0,755.0 L176.3,760.8 L182.7,766.2 L189.0,770.8 L195.3,774.2 L201.7,776.0 L208.0,776.1 L214.3,774.5 L220.7,771.2 L227.0,766.5 L233.3,760.7 L239.7,754.4 L246.0,748.0 L252.3,742.1 L258.7,737.1 L265.0,733.6 L271.3,731.8 L277.7,731.9 L284.0,733.9 L290.3,737.7 L296.7,743.0 L303.0,749.3 L309.3,756.3 L315.7,763.2 L322.0,769.6 L328.3,774.8 L334.7,778.4 L341.0,780.2 L347.3,779.9 L353.7,777.5 L360.0,773.2 L366.3,767.3 L372.7,760.4 L379.0,753.0 L385.3,745.6 L391.7,738.9 L398.0,733.6 L404.3,729.9 L410.7,728.3 L417.0,728.9 L423.3,731.7 L429.7,736.4 L436.0,742.7 L442.3,750.0 L448.7,757.9 L455.0,765.5 L461.3,772.3 L467.7,777.7 L474.0,781.3 L480.3,782.7 L486.7,781.8 L493.0,778.7 L499.3,773.6 L505.7,767.0 L512.0,759.4 L518.3,751.4 L524.7,743.6 L531.0,736.8 L537.3,731.5 L543.7,728.2 L550.0,727.0 L556.3,728.2 L562.7,731.5 L569.0,736.8 L575.3,743.6 L581.7,751.4 L588.0,759.4 L594.3,767.0 L600.7,773.6 L607.0,778.7 L613.3,781.8 L619.7,782.7 L626.0,781.3 L632.3,777.7 L638.7,772.3 L645.0,765.5 L651.3,757.9 L657.7,750.0 L664.0,742.7 L670.3,736.4 L676.7,731.7 L683.0,728.9 L689.3,728.3 L695.7,729.9 L702.0,733.6 L708.3,738.9 L714.7,745.6 L721.0,753.0 L727.3,760.4 L733.7,767.3 L740.0,773.2 L746.3,777.5 L752.7,779.9 L759.0,780.2 L765.3,778.4 L771.7,774.8 L778.0,769.6 L784.3,763.2 L790.7,756.3 L797.0,749.3 L803.3,743.0 L809.7,737.7 L816.0,733.9 L822.3,731.9 L828.7,731.8 L835.0,733.6 L841.3,737.1 L847.7,742.1 L854.0,748.0 L860.3,754.4 L866.7,760.7 L873.0,766.5 L879.3,771.2 L885.7,774.5 L892.0,776.1 L898.3,776.0 L904.7,774.2 L911.0,770.8 L917.3,766.2 L923.7,760.8 L930.0,755.0" fill="none" stroke="#277bc0" stroke-width="6" opacity="0.95" data-signal="deterministic-illustration-a"/>
+  <path d="M870.0,773.4 L876.3,775.2 L882.7,775.3 L889.0,773.8 L895.3,770.6 L901.7,766.1 L908.0,760.6 L914.3,754.5 L920.7,748.3 L927.0,742.6 L933.3,737.8 L939.7,734.3 L946.0,732.5 L952.3,732.6 L958.7,734.5 L965.0,738.2 L971.3,743.3 L977.7,749.5 L984.0,756.2 L990.3,762.9 L996.7,769.1 L1003.0,774.2 L1009.3,777.8 L1015.7,779.5 L1022.0,779.2 L1028.3,776.9 L1034.7,772.8 L1041.0,767.1 L1047.3,760.3 L1053.7,753.0 L1060.0,745.8 L1066.3,739.3 L1072.7,734.0 L1079.0,730.4 L1085.3,728.8 L1091.7,729.3 L1098.0,732.0 L1104.3,736.6 L1110.7,742.8 L1117.0,750.1 L1123.3,757.8 L1129.7,765.3 L1136.0,772.0 L1142.3,777.4 L1148.7,781.0 L1155.0,782.4 L1161.3,781.6 L1167.7,778.5 L1174.0,773.5 L1180.3,767.0 L1186.7,759.4 L1193.0,751.4 L1199.3,743.7 L1205.7,736.9 L1212.0,731.6 L1218.3,728.2 L1224.7,727.0 L1231.0,728.2 L1237.3,731.5 L1243.7,736.8 L1250.0,743.6 L1256.3,751.3 L1262.7,759.3 L1269.0,767.0 L1275.3,773.7 L1281.7,778.8 L1288.0,781.9 L1294.3,782.9 L1300.7,781.5 L1307.0,777.9 L1313.3,772.5 L1319.7,765.6 L1326.0,757.9 L1332.3,750.0 L1338.7,742.6 L1345.0,736.2 L1351.3,731.4 L1357.7,728.5 L1364.0,727.9 L1370.3,729.5 L1376.7,733.2 L1383.0,738.6 L1389.3,745.4 L1395.7,752.9 L1402.0,760.5 L1408.3,767.5 L1414.7,773.5 L1421.0,777.9 L1427.3,780.4 L1433.7,780.8 L1440.0,779.0 L1446.3,775.3 L1452.7,770.0 L1459.0,763.5 L1465.3,756.4 L1471.7,749.2 L1478.0,742.7 L1484.3,737.2 L1490.7,733.3 L1497.0,731.2 L1503.3,731.0 L1509.7,732.9 L1516.0,736.5 L1522.3,741.6 L1528.7,747.7 L1535.0,754.3 L1541.3,760.9 L1547.7,766.9 L1554.0,771.8 L1560.3,775.2 L1566.7,776.9 L1573.0,776.8 L1579.3,774.9 L1585.7,771.4 L1592.0,766.7 L1598.3,761.1 L1604.7,755.0 L1611.0,749.1 L1617.3,743.8 L1623.7,739.5 L1630.0,736.6" fill="none" stroke="#98245f" stroke-width="6" opacity="0.95" data-signal="deterministic-illustration-b"/>
+  <rect x="830" y="700" width="170" height="112" rx="8" class="card-muted" fill="url(#hatch)"/>
+  <text x="915" y="736" class="body-strong" text-anchor="middle" >OVERLAP</text>
+  <text x="915" y="769" class="equation" text-anchor="middle" style="font-size:24px">s ∈ [0,1]</text>
+  <text x="915" y="798" class="tiny" text-anchor="middle" >accepted window</text>
+  <text x="1460" y="703" class="equation" text-anchor="middle" style="font-size:23px">y(s) = cos(πs/2)aₙ(s) + sin(πs/2)aₙ₊₁(s)</text>
+  <text x="1460" y="736" class="small" text-anchor="middle" >one equal-power candidate</text>
+  <rect x="1275" y="770" width="370" height="44" rx="22" class="pill-plum" />
+<text x="1460.0" y="800" class="pill-text-plum" text-anchor="middle" >ACCEPT OR FALL BACK</text>
+  <text x="900" y="920" class="footer" text-anchor="middle" >ILLUSTRATIVE SYNTHETIC SIGNAL · SMOOTH SAMPLES DO NOT PROVE MUSICAL COHERENCE, SEMANTIC FIT, SAFETY, OR BENEFIT</text>
 </svg>

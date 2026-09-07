@@ -329,7 +329,9 @@ class ManuscriptContractTests(unittest.TestCase):
         self.assertIn("vohra2015cent", results)
         self.assertIn("eldridge2016feasibility", results)
         self.assertEqual(results.count("\\AntidoteTable{"), 3)
-        self.assertEqual(results.count("\\AntidoteFigure{"), 2)
+        self.assertEqual(results.count("\\AntidoteFigure{"), 0)
+        self.assertEqual(normalized_results.count("governed visual slot"), 2)
+        self.assertIn("retired and absent from the manuscript", normalized_results)
 
     def test_discussion_is_complete_and_evidence_proportional(self) -> None:
         """Issue #42 must interpret the design without promoting unavailable evidence."""
