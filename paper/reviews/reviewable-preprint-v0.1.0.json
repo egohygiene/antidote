@@ -1,0 +1,300 @@
+{
+  "schema": "antidote.reviewable-preprint-review/v1",
+  "version": "0.1.0",
+  "gate_issue": "egohygiene/antidote#48",
+  "reviewed_on": "2026-09-07",
+  "decision": "reviewable-design-protocol-preprint",
+  "publication_stage": "submission-ready",
+  "decision_boundary": "The manuscript is suitable for public review as a design/protocol preprint. This decision does not establish peer review, venue acceptance, clinical validation, human feasibility, efficacy, safety, or neurological mechanism.",
+  "reviewed_baseline": {
+    "source_revision": "f9e23128a660066b3f64c73c4dd2d36554b6040a",
+    "canonical_url": "https://antidote.egohygiene.io/",
+    "verified_on": "2026-09-07",
+    "verification": "passed-exact-revision-and-hashes",
+    "html_sha256": "5b5ad3cd934d7ab6b05b86f6b45d1e482db338163c375194fed460583b70bb72",
+    "pdf_sha256": "76e5e79b28971e31a0d4d8a3870cbe6804bd0c7341874b3ad69f831c655c7a77",
+    "command": "python3 scripts/verify_live_publication.py --base-url=https://antidote.egohygiene.io/ --expected-revision=f9e23128a660066b3f64c73c4dd2d36554b6040a --attempts=1 --timeout=30"
+  },
+  "dependencies": [
+    {"issue": "egohygiene/antidote#32", "status": "closed", "evidence": "research/sources/catalog.json"},
+    {"issue": "egohygiene/antidote#33", "status": "closed", "evidence": "research/notes/ADAPTIVE_AUDIO_ARCHITECTURE.md"},
+    {"issue": "egohygiene/antidote#34", "status": "closed", "evidence": "research/notes/COMPARATOR_NOVELTY_MATRIX.md"},
+    {"issue": "egohygiene/antidote#35", "status": "closed", "evidence": "paper/manuscript-contract.json"},
+    {"issue": "egohygiene/antidote#36", "status": "closed", "evidence": "docs/paper-preview.md"},
+    {"issue": "egohygiene/antidote#37", "status": "closed", "evidence": "paper/sections/01-introduction.tex"},
+    {"issue": "egohygiene/antidote#38", "status": "closed", "evidence": "paper/sections/02-related-work.tex"},
+    {"issue": "egohygiene/antidote#39", "status": "closed", "evidence": "paper/sections/03-system-design.tex"},
+    {"issue": "egohygiene/antidote#40", "status": "closed", "evidence": "paper/sections/04-methods.tex"},
+    {"issue": "egohygiene/antidote#41", "status": "closed", "evidence": "paper/sections/05-results.tex"},
+    {"issue": "egohygiene/antidote#42", "status": "closed", "evidence": "paper/sections/06-discussion.tex"},
+    {"issue": "egohygiene/antidote#43", "status": "closed", "evidence": "paper/sections/07-limitations-and-ethics.tex"},
+    {"issue": "egohygiene/antidote#44", "status": "closed", "evidence": "paper/sections/08-availability-and-contributions.tex"},
+    {"issue": "egohygiene/antidote#45", "status": "closed", "evidence": "paper/visuals/manifest.json"},
+    {"issue": "egohygiene/antidote#46", "status": "closed", "evidence": "paper/figures/holistic-two-rate-architecture.svg"},
+    {"issue": "egohygiene/antidote#47", "status": "closed", "evidence": "paper/sections/09-conclusion.tex"},
+    {"issue": "egohygiene/antidote#77", "status": "closed", "evidence": "paper/skeleton.json"},
+    {"issue": "egohygiene/antidote#82", "status": "closed", "evidence": "experiments/reporting/results-reporting-v1.1.json"}
+  ],
+  "review_independence": {
+    "mode": "separate-pass-tool-assisted-review",
+    "external_peer_review": false,
+    "boundary": "The pass was performed after section authoring and synthesis, using reviewer lenses and deterministic checks separate from the section-by-section drafting order. It is not independent human peer review and does not substitute for scientific, ethics, security, accessibility, or venue review.",
+    "lenses": [
+      "human-computer interaction and reader comprehension",
+      "adaptive-audio and control-system integrity",
+      "research methods and evidence classification",
+      "safety, privacy, consent, and human authority",
+      "reproducibility, accessibility, metadata, and publication integrity"
+    ]
+  },
+  "audit_dispositions": [
+    {
+      "area": "conceptual-coherence",
+      "finding": "The title, thesis, RQ1 answer, RQ2 and RQ3 deferrals, five contributions, abstract, conclusion, and terminology describe the same bounded design/protocol paper.",
+      "disposition": "resolved",
+      "rationale": "The issue #47 synthesis and manuscript contract keep the design answer separate from unobserved feasibility and outcome questions.",
+      "evidence": ["paper/manuscript-contract.json", "beacon-project.toml", "paper/sections/01-introduction.tex", "paper/sections/09-conclusion.tex"]
+    },
+    {
+      "area": "literature-and-novelty",
+      "finding": "The comparator review establishes extensive precedent for the individual components and retains only a bounded inspectability contribution.",
+      "disposition": "resolved",
+      "rationale": "The source atlas, comparator matrix, and rejected first-system claim prevent component overlap from being presented as global novelty.",
+      "evidence": ["research/sources/catalog.json", "research/sources/comparator-novelty-matrix.json", "research/notes/COMPARATOR_NOVELTY_MATRIX.md", "paper/sections/02-related-work.tex"]
+    },
+    {
+      "area": "claim-and-citation-traceability",
+      "finding": "All 43 manuscript citation keys resolve to verified bibliography entries; cited evidence, additional reading, claims, hypotheses, observations, interpretations, candidates, and rejected claims remain distinct.",
+      "disposition": "resolved",
+      "rationale": "The offline source-governance check and claim index reject missing source records, duplicate identifiers, ungoverned citations, and silent evidence promotion.",
+      "evidence": ["paper/references.bib", "paper/research-shelf.tex", "research/notes/CLAIM_LEDGER.md", "scripts/check_sources.py"]
+    },
+    {
+      "area": "system-and-equation-integrity",
+      "finding": "The record chain, semantic mixer, two-rate architecture, planning horizon, continuity envelopes, exposure/response separation, and provenance model use centralized notation and explicit implementation states.",
+      "disposition": "accepted-limitation",
+      "rationale": "The architecture is a testable proposal with a partial synthetic implementation; it is not a validated affect controller, hard-real-time generator, or learned personal policy.",
+      "evidence": ["paper/sections/03-system-design.tex", "paper/equations/registry.json", "paper/figures/holistic-two-rate-architecture.svg", "ARCHITECTURE.md"]
+    },
+    {
+      "area": "methods-and-results-boundary",
+      "finding": "The prospective protocol is frozen, collection authority is false, Results preserve value-free unavailable states, and no synthetic fixture is presented as a human finding.",
+      "disposition": "resolved",
+      "rationale": "The protocol, reporting contract, generated tables, and claim ledger fail closed around absent T0, T1, and H1 evidence packages.",
+      "evidence": ["experiments/protocols/antidote-feasibility-v1.1.json", "experiments/reporting/results-reporting-v1.1.json", "paper/sections/04-methods.tex", "paper/sections/05-results.tex"]
+    },
+    {
+      "area": "ethics-safety-and-privacy",
+      "finding": "The manuscript addresses emotional harm, hearing exposure, privacy, role conflicts, stopping, adverse events, and independent pre-collection review without claiming those controls establish safety.",
+      "disposition": "accepted-limitation",
+      "rationale": "No human collection or medical use is authorized; all eight H1 activation gates and unresolved real-model risks remain blocking.",
+      "evidence": ["paper/sections/07-limitations-and-ethics.tex", "paper/tables/risk-mitigation-status.json", "AI_CONSTITUTION.md", "EPISTEMOLOGY.md"]
+    },
+    {
+      "area": "metadata-contributors-and-licensing",
+      "finding": "Title, subtitle, version, author, CRediT roles, funding, conflicts, AI assistance, citation metadata, repository license, and manuscript rights are explicit and mutually consistent.",
+      "disposition": "resolved",
+      "rationale": "The software remains MIT-licensed; manuscript source and figures remain copyright Alan Szmyt, all rights reserved, without inventing a venue, DOI, or reuse grant.",
+      "evidence": ["beacon-project.toml", "CITATION.cff", "LICENSE", "paper/LICENSE.md", "paper/sections/08-availability-and-contributions.tex"]
+    },
+    {
+      "area": "visual-and-accessibility",
+      "finding": "All 17 active figures and tables are final, captioned, described, source-governed, grayscale checked, and represented in PDF and accessible HTML; two evidence-contingent Results figures remain retired.",
+      "disposition": "resolved",
+      "rationale": "The visual validator enforces lifecycle, provenance, alt text, long description, labels, placements, and strong-stage finality.",
+      "evidence": ["paper/visuals/manifest.json", "paper/visuals/captions.tex", "scripts/check_visuals.py", "paper/skeleton.json"]
+    },
+    {
+      "area": "reproducibility-and-packaging",
+      "finding": "Native Make and Task paths build both themes into deterministic PDF, accessible HTML, provenance, and independently compiling arXiv-source artifacts.",
+      "disposition": "resolved",
+      "rationale": "Strong-stage entry points now require live link checks in addition to offline source, placeholder, visual, LaTeX, metadata, and package validation.",
+      "evidence": ["Makefile", "Taskfile.yml", "scripts/tasks.py", "scripts/check.py"]
+    },
+    {
+      "area": "live-publication",
+      "finding": "The merged issue #47 baseline is live at the canonical custom domain with matching route metadata and recomputed HTML and PDF hashes. The paper route is readable without horizontal overflow and all nine rendered figures expose alt text. The launch shell remains readable but logs a React hydration mismatch inherited from the pinned Holon renderer.",
+      "disposition": "accepted-limitation",
+      "rationale": "The mismatch does not affect the static paper HTML, PDF, stable routes, or integrity records, so it does not block review of the paper. It is recorded below and assigned to launch-polish issue #89 before the combined paper-and-magazine launch; every future deployment remains bound to github.sha and exact artifact hashes.",
+      "evidence": [".github/workflows/pages.yml", "scripts/verify_live_publication.py", "docs/paper-preview.md", "beacon-project.toml"]
+    },
+    {
+      "area": "independent-review-boundary",
+      "finding": "A separate post-authoring review pass was completed through five reviewer lenses, but no external human or peer review has occurred.",
+      "disposition": "accepted-limitation",
+      "rationale": "The review record names its actual method so repository review cannot be mistaken for scientific peer review, ethics approval, or venue endorsement.",
+      "evidence": ["paper/reviews/reviewable-preprint-v0.1.0.md", "paper/reviews/reviewable-preprint-v0.1.0.json", "paper/sections/07-limitations-and-ethics.tex"]
+    }
+  ],
+  "browser_audit": {
+    "checked_on": "2026-09-07",
+    "canonical_url": "https://antidote.egohygiene.io/",
+    "launch_surface": {
+      "status": "readable-with-deferred-hydration-defect",
+      "viewport_width_css_pixels": 1363,
+      "visible_content": true,
+      "console_error": "React production error #418: hydration mismatch; the server tree is regenerated on the client",
+      "cause": "The accepted Holon LaunchKit revision renders the server tree with renderToStaticMarkup and then calls hydrateRoot; React documents that renderToStaticMarkup output cannot be hydrated.",
+      "documentation": [
+        "https://react.dev/reference/react-dom/server/renderToStaticMarkup",
+        "https://react.dev/errors/418"
+      ],
+      "tracking_issue": "egohygiene/antidote#89",
+      "release_boundary": "Non-blocking for review of the standalone paper artifacts; must be resolved or explicitly dispositioned before the combined paper-and-magazine launch."
+    },
+    "paper_surface": {
+      "status": "passed",
+      "viewport_width_css_pixels": 1363,
+      "horizontal_overflow": false,
+      "rendered_figures": 9,
+      "figures_with_alt_text": 9,
+      "required_sections_visible": true
+    },
+    "candidate_static_surface": {
+      "status": "passed",
+      "checks": [
+        "complete stable-route catalog",
+        "local fragment resolution",
+        "heading and landmark validation",
+        "figure descriptions and alt text",
+        "byte-identical repeated staging",
+        "complete SHA-256 inventory"
+      ]
+    }
+  },
+  "primary_source_spot_checks": [
+    {
+      "id": "mindmelody-v2",
+      "source_record": "research/sources/mindmelody-2605.01235.md",
+      "primary_url": "https://arxiv.org/abs/2605.01235",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["v2 identity and dates", "EEG-to-semantic-plan-to-generation loop", "reported short-term evaluation remains a preprint claim"]
+    },
+    {
+      "id": "affectmachine-classical",
+      "source_record": "research/sources/affectmachine-classical-1158172.md",
+      "primary_url": "https://www.frontiersin.org/journals/psychology/articles/10.3389/fpsyg.2023.1158172/full",
+      "checked_on": "2026-09-07",
+      "disposition": "verified",
+      "verified_points": ["rule-based probabilistic generator", "real-time valence/arousal controls", "39 excerpts assessed for perceived expression rather than benefit"]
+    },
+    {
+      "id": "personalized-affective-player",
+      "source_record": "research/sources/personalized-affective-music-player-9107.md",
+      "primary_url": "https://link.springer.com/article/10.1007/s11257-011-9107-7",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["person-specific physiological response models", "current-to-goal song selection", "selection precedent does not validate generation or efficacy"]
+    },
+    {
+      "id": "binaural-systematic-review",
+      "source_record": "research/sources/ingendoh-binaural-review-0286023.md",
+      "primary_url": "https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0286023",
+      "checked_on": "2026-09-07",
+      "disposition": "verified",
+      "verified_points": ["14 included EEG studies", "five supportive, eight contradictory, one mixed result", "heterogeneity prevents a settled entrainment claim"]
+    },
+    {
+      "id": "jitai-design-framework",
+      "source_record": "research/sources/jitai-9830-8.md",
+      "primary_url": "https://academic.oup.com/abm/article/52/6/446/4733473",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["time-varying internal and contextual state", "decision points, options, tailoring variables, and rules", "framework does not validate an Antidote rule"]
+    },
+    {
+      "id": "model-predictive-control-survey",
+      "source_record": "research/sources/garcia-mpc-90002-2.md",
+      "primary_url": "https://www.sciencedirect.com/science/article/pii/0005109889900022",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["explicit-model predictive-control family", "constraint-handling precedent", "Antidote uses receding horizon only as a design analogy"]
+    },
+    {
+      "id": "consort-feasibility-extension",
+      "source_record": "research/sources/feasibility-consort-i5239.md",
+      "primary_url": "https://www.bmj.com/content/355/bmj.i5239",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["pilot and feasibility reporting scope", "progression decisions remain distinct from effectiveness", "Antidote H1 is not a pilot randomized trial"]
+    },
+    {
+      "id": "spent-n-of-1",
+      "source_record": "research/sources/spent-2019-m122.md",
+      "primary_url": "https://www.bmj.com/content/368/bmj.m122",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["prospective N-of-1 protocol checklist", "sequence, allocation, outcomes, adverse events, and amendments", "checklist use is not ethics approval or causal validation"]
+    },
+    {
+      "id": "w3c-prov-dm",
+      "source_record": "research/sources/w3c-prov-dm.md",
+      "primary_url": "https://www.w3.org/TR/prov-dm/",
+      "checked_on": "2026-09-07",
+      "disposition": "verified",
+      "verified_points": ["W3C Recommendation dated 2013-04-30", "entity, activity, agent, and derivation vocabulary", "provenance supports assessment but does not prove truth"]
+    },
+    {
+      "id": "who-ai-health-ethics",
+      "source_record": "research/sources/who-ai-health-2021.md",
+      "primary_url": "https://www.who.int/publications/i/item/9789240029200",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["2021 WHO guidance identity", "ethics and human rights at design, deployment, and use", "normative guidance is not project approval"]
+    },
+    {
+      "id": "who-itu-safe-listening",
+      "source_record": "research/sources/who-itu-safe-listening-2019.md",
+      "primary_url": "https://www.who.int/publications/i/item/9789241515276",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["level-and-duration dosimetry", "listening profiles, cues, and volume controls", "file-level metrics cannot establish at-ear safety"]
+    },
+    {
+      "id": "music-induced-harm",
+      "source_record": "research/sources/silverman-music-induced-harm-thaa008.md",
+      "primary_url": "https://academic.oup.com/jmt/article-abstract/57/3/251/5865041",
+      "checked_on": "2026-09-07",
+      "disposition": "verified-with-qualification",
+      "verified_points": ["theoretical music-induced-harm model", "context, deliverer, music, and recipient interaction", "model does not estimate incidence or validate safeguards"]
+    }
+  ],
+  "justified_deferrals": [
+    {
+      "issue": "egohygiene/antidote#84",
+      "title": "Harden H1 evidence admission before collection activation",
+      "disposition": "deferred-gated",
+      "collection_authority": false,
+      "rationale": "The current preprint reports no H1 package and authorizes no collection. Issue #84 must complete before any H1 evidence can be admitted, but it does not block review of a no-collection design/protocol manuscript."
+    }
+  ],
+  "open_limitations": [
+    "No qualifying real-model package or end-to-end continuous generator has passed the T1 gate.",
+    "No formal participant study, human feasibility result, or external peer review exists.",
+    "The proposed affect-state, semantic-distance, transition, and advisory models remain unvalidated.",
+    "No current control establishes hearing safety, emotional safety, privacy, consent quality, or clinical suitability.",
+    "The bounded comparator search is not an exhaustive systematic review or global novelty determination.",
+    "The pinned launch-shell renderer produces a React hydration mismatch; static content remains readable, and issue #89 owns resolution before the combined launch.",
+    "Human collection remains blocked until issue #84 and every protocol activation gate pass independent review."
+  ],
+  "claims_not_authorized": [
+    "peer reviewed",
+    "clinically validated",
+    "therapeutically effective",
+    "neurological mechanism established",
+    "human feasibility completed"
+  ],
+  "post_merge_verification": {
+    "status": "required-after-merge",
+    "enforced_by": ".github/workflows/pages.yml",
+    "expected_revision_source": "github.sha",
+    "canonical_url": "https://antidote.egohygiene.io/",
+    "required_checks": [
+      "all stable routes return HTTPS success",
+      "site, publication, provenance, and site-suite records identify one revision",
+      "paper HTML exposes the same full revision",
+      "advertised HTML, PDF, provenance, and arXiv-source hashes recompute exactly"
+    ]
+  }
+}

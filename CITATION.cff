@@ -1,5 +1,5 @@
 cff-version: 1.2.0
-message: "This repository contains draft research software and a design/protocol manuscript. Cite the exact version and Git revision; no DOI-backed release exists yet."
+message: "This repository contains research software and a reviewable design/protocol preprint. Cite the exact version and Git revision; no DOI-backed release or external peer review exists yet."
 title: "Antidote research software"
 type: software
 authors:

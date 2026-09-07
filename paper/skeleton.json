@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "status": "governed",
   "governed_by": "egohygiene/antidote#77",
-  "publication_policy": "The skeleton is a draft layout and navigation instrument. Active content or visual placeholders block submission-ready and published stages and never constitute evidence, implementation, results, or claims.",
+  "publication_policy": "The skeleton is the historical layout and navigation registry for the completed manuscript. Active content or visual placeholders block submission-ready and published stages and never constitute evidence, implementation, results, or claims.",
   "visual_manifest": "paper/visuals/manifest.json",
   "research_shelf": "paper/research-shelf.tex",
   "front_matter": [

@@ -51,7 +51,7 @@
       "title": "The instrument is transparent; the scientific claims remain bounded.",
       "description": "The repository contains an executable synthetic desktop session and deterministic mock worker. A real model, formal participant study, and therapeutic-efficacy evidence are not yet available.",
       "metrics": [
-        { "label": "Paper", "value": "writing draft" },
+        { "label": "Paper", "value": "reviewable preprint" },
         { "label": "Prototype", "value": "synthetic mock" },
         { "label": "Human results", "value": "not collected" }
       ]

@@ -17,6 +17,14 @@ every canonical LaTeX source. Before drafting a section, read its contract and
 the linked entries in
 [`CLAIM_LEDGER.md`](../research/notes/CLAIM_LEDGER.md).
 
+The repository currently classifies version 0.1.0 as a reviewable
+design/protocol preprint. Issue #48's
+[`review narrative`](reviews/reviewable-preprint-v0.1.0.md) and
+[`machine-readable record`](reviews/reviewable-preprint-v0.1.0.json) document
+the review method, primary-source spot checks, dispositions, limitations,
+justified H1 deferral, and post-merge live-verification requirement. This is
+not external peer review or clinical validation.
+
 The evidence corpus has three distinct layers:
 
 - the complete living atlas at

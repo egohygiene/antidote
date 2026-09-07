@@ -9,9 +9,9 @@ id = "antidote"
 title = "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys"
 subtitle = "System Design and Prospective Feasibility Protocol"
 version = "0.1.0"
-date = "2026-08-26"
+date = "2026-09-07"
 language = "en-US"
-stage = "draft"
+stage = "submission-ready"
 entrypoint = "paper/paper.tex"
 bibliography = "paper/references.bib"
 keywords = [
@@ -44,8 +44,8 @@ credit_roles = [
 source_repository = "https://github.com/egohygiene/antidote"
 source_path = "."
 source_revision = "ad699e9e5405bbc344cacac4347881e0af77ad56"
-license = "Draft manuscript: all rights reserved; repository tooling: MIT"
-source_date_epoch = 1787724808
+license = "Manuscript and figures: copyright Alan Szmyt, all rights reserved; repository tooling: MIT"
+source_date_epoch = 1788739200
 
 [provenance.migration]
 repository = "https://github.com/egohygiene/empathy"

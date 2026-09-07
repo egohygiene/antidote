@@ -87,7 +87,7 @@ without qualifying implementation or structured observations.
 - [x] [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40) — [preserved original protocol](../experiments/protocols/antidote-feasibility-v1.json), superseded before collection by the [corrected v1.1 protocol](../experiments/protocols/antidote-feasibility-v1.1.json) under #82
 - [x] [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41) — [preserved original reporting contract](../experiments/reporting/results-reporting-v1.json), superseded before collection by the [corrected v1.1 reporting contract](../experiments/reporting/results-reporting-v1.1.json) under #82
 - [x] [#82 — Correct pre-collection protocol and Results contract drift](https://github.com/egohygiene/antidote/issues/82) — [current protocol](../experiments/protocols/antidote-feasibility-v1.1.json) and [current reporting contract](../experiments/reporting/results-reporting-v1.1.json)
-- [#84 — Harden H1 evidence admission before collection activation](https://github.com/egohygiene/antidote/issues/84) — fail-closed validation and package reconciliation follow-up; no collection authority
+- [#84 — Harden H1 evidence admission before collection activation](https://github.com/egohygiene/antidote/issues/84) — explicitly deferred by the issue #48 review because no H1 package exists and collection authority is false; mandatory before H1 evidence admission
 
 The Results issue creates an honest reporting contract. It does not authorize
 invented values or promote synthetic fixtures into human evidence. Technical
@@ -113,10 +113,12 @@ completed body supports.
 
 ### Wave P6 — Reviewable-paper gate
 
-- [#48 — Pass the reviewable-paper and live-publication gate](https://github.com/egohygiene/antidote/issues/48)
+- [x] [#48 — Pass the reviewable-paper and live-publication gate](https://github.com/egohygiene/antidote/issues/48) — [review narrative and dispositions](reviews/reviewable-preprint-v0.1.0.md), [machine-readable gate record](reviews/reviewable-preprint-v0.1.0.json)
 
 This gate reconciles source records, bibliography, claim ledger, manuscript,
-figures, metadata, build outputs, Pages routes, checksums, and the roadmap.
+figures, metadata, licensing, build outputs, Pages routes, checksums, and the
+roadmap. It classifies version 0.1.0 as a reviewable design/protocol preprint,
+not an externally peer-reviewed, clinically validated, or DOI-bearing release.
 
 ### Wave P7 — Magazine, release, and public launch
 

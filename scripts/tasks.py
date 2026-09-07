@@ -58,6 +58,37 @@ def build(project: Path, output: Path, theme: str, python: str) -> None:
     )
 
 
+def publication_stage(project: Path) -> str:
+    """Return the project's declared paper stage."""
+    with (project / "beacon-project.toml").open("rb") as stream:
+        return str(tomllib.load(stream).get("paper", {}).get("stage", "draft"))
+
+
+def validation_command(
+    project: Path,
+    output: Path,
+    theme: str,
+    python: str,
+    *,
+    check_external_links: bool = False,
+) -> list[str]:
+    """Assemble validation arguments, including strong-stage link checks."""
+    command = [
+        python,
+        str(ROOT / "scripts" / "check.py"),
+        f"--project={project}",
+        f"--build-dir={output}",
+        f"--theme={theme}",
+        "--compile-arxiv",
+    ]
+    if check_external_links or publication_stage(project) in {
+        "submission-ready",
+        "published",
+    }:
+        command.append("--check-external-links")
+    return command
+
+
 def validate(
     project: Path,
     output: Path,
@@ -67,17 +98,15 @@ def validate(
     check_external_links: bool = False,
 ) -> None:
     """Validate source, rendered output, and the independent arXiv archive."""
-    command = [
-        python,
-        str(ROOT / "scripts" / "check.py"),
-        f"--project={project}",
-        f"--build-dir={output}",
-        f"--theme={theme}",
-        "--compile-arxiv",
-    ]
-    if check_external_links:
-        command.append("--check-external-links")
-    run(command)
+    run(
+        validation_command(
+            project,
+            output,
+            theme,
+            python,
+            check_external_links=check_external_links,
+        )
+    )
 
 
 def compare_file(first: Path, second: Path) -> None:
