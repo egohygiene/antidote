@@ -14,7 +14,9 @@ Governed by ANT-CLM-004 and ANT-NEG-003. Provenance cannot prove truth, ownershi
 
 ## Source plan
 
-Author deterministic SVG from the provenance ADR, schemas, and export policy after issue #43 reconciles privacy gates.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` from the provenance ADR, schemas,
+issue #43 privacy audit, and fail-closed export policy.
 
 ## Accessibility plan
 

@@ -14,7 +14,10 @@ Governed by ANT-HYP-002 and ANT-CLM-001. A semantic mixin is not a raw prompt fr
 
 ## Source plan
 
-Author deterministic SVG from frozen terminology and the accepted generation-specification boundary.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` from frozen terminology and the
+accepted generation-specification boundary. Knob positions are illustrative,
+not person observations or preferred settings.
 
 ## Accessibility plan
 

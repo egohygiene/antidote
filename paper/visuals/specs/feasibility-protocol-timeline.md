@@ -24,7 +24,8 @@ path is a participant observation or result.
 
 ## Source plan
 
-Author the deterministic SVG from
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` from
 `experiments/protocols/antidote-feasibility-v1.1.json` and its v1.1.0 SHA-256 lock
 `8d6848f148a627424c566f04381103779debd65b4563bd4712652e09cd715024`.
 The byte-preserved v1.0.0 predecessor was superseded before collection under

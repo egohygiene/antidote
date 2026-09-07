@@ -31,6 +31,8 @@ class VisualContractTests(unittest.TestCase):
         ledger = root / "research" / "notes"
         ledger.mkdir(parents=True)
         shutil.copy2(ROOT / "research" / "notes" / "CLAIM_LEDGER.md", ledger)
+        shutil.copy2(ROOT / "EPISTEMOLOGY.md", root / "EPISTEMOLOGY.md")
+        shutil.copytree(ROOT / "experiments", root / "experiments")
         return root
 
     def manifest(self, root: Path) -> dict:
@@ -59,17 +61,21 @@ class VisualContractTests(unittest.TestCase):
         self.assertEqual(len(manifest["visuals"]), 19)
         self.assertEqual(
             {visual["id"] for visual in result["active"]},
-            {visual["id"] for visual in manifest["visuals"]},
+            {
+                visual["id"]
+                for visual in manifest["visuals"]
+                if visual["status"] == "active"
+            },
         )
         states = {visual["id"]: visual["state"] for visual in result["active"]}
-        self.assertEqual(states["ANT-FIG-002"], "draft")
-        self.assertEqual(states["ANT-TBL-002"], "draft")
-        self.assertEqual(states["ANT-TBL-004"], "draft")
-        self.assertEqual(states["ANT-TBL-005"], "draft")
-        self.assertEqual(states["ANT-TBL-006"], "draft")
-        self.assertEqual(states["ANT-TBL-007"], "draft")
-        self.assertEqual(set(states.values()), {"placeholder", "draft"})
-        self.assertEqual(list(states.values()).count("placeholder"), 13)
+        self.assertEqual(len(states), 17)
+        self.assertEqual(set(states.values()), {"final"})
+        retired = {
+            visual["id"]
+            for visual in manifest["visuals"]
+            if visual["status"] == "retired"
+        }
+        self.assertEqual(retired, {"ANT-FIG-010", "ANT-FIG-011"})
         self.assertEqual(
             {visual["kind"] for visual in manifest["visuals"]},
             {"figure", "table"},
@@ -122,31 +128,73 @@ class VisualContractTests(unittest.TestCase):
             result = VISUALS.validate_visual_system(root)
             self.assertTrue(any("orphaned" in error for error in result["errors"]))
 
-    def test_generated_placeholder_drift_is_rejected(self) -> None:
-        """Generated layout frames cannot silently diverge from the manifest."""
+    def test_generated_publication_figure_drift_is_rejected(self) -> None:
+        """Generated final figures cannot silently diverge from their source."""
         with tempfile.TemporaryDirectory(prefix="antidote-visual-") as temporary:
             root = self.fixture(temporary)
             asset = root / "paper" / "figures" / "consent-scoped-context-projection.svg"
             asset.write_text(
                 asset.read_text(encoding="utf-8").replace(
-                    "LAYOUT ONLY", "UNTRACKED CHANGE", 1
+                    "CONSENT-SCOPED CONTEXT PROJECTION", "UNTRACKED CHANGE", 1
                 ),
                 encoding="utf-8",
             )
             result = VISUALS.validate_visual_system(root)
             self.assertIn(
-                "generated skeleton visual is stale: "
+                "generated publication figure is stale: "
                 "paper/figures/consent-scoped-context-projection.svg",
                 result["errors"],
             )
 
-    def test_placeholder_cannot_enter_submission_ready_output(self) -> None:
-        """Visible draft state must block stronger publication stages."""
+    def test_submission_ready_requires_every_active_visual_to_be_final(self) -> None:
+        """Canonical finals pass while a regressed active state fails closed."""
         result = VISUALS.validate_visual_system(ROOT, paper_stage="submission-ready")
-        self.assertTrue(
-            any("must be final" in error for error in result["errors"]),
-            result["errors"],
+        self.assertEqual(result["errors"], [])
+
+        with tempfile.TemporaryDirectory(prefix="antidote-visual-") as temporary:
+            root = self.fixture(temporary)
+            manifest = self.manifest(root)
+            active = next(
+                visual for visual in manifest["visuals"] if visual["status"] == "active"
+            )
+            active["state"] = "draft"
+            self.write_manifest(root, manifest)
+            result = VISUALS.validate_visual_system(
+                root, paper_stage="submission-ready"
+            )
+            self.assertTrue(
+                any("must be final" in error for error in result["errors"]),
+                result["errors"],
+            )
+
+    def test_equation_map_enumerates_the_complete_registry(self) -> None:
+        """Every governed equation ID must remain machine-visible in the map."""
+        asset = ROOT / "paper" / "figures" / "moment-journey-equation-map.svg"
+        root = ET.parse(asset).getroot()
+        observed = {
+            equation_id
+            for element in root.iter()
+            for equation_id in element.attrib.get("data-equations", "").split()
+        }
+        self.assertEqual(
+            observed,
+            {f"ANT-EQ-{number:03d}" for number in range(1, 17)},
         )
+
+    def test_protocol_timeline_preserves_order_and_authority_boundary(self) -> None:
+        """The visual must project all eight stages without implying collection."""
+        asset = ROOT / "paper" / "figures" / "feasibility-protocol-timeline.svg"
+        root = ET.parse(asset).getroot()
+        stage_orders = [
+            int(element.attrib["data-stage-order"])
+            for element in root.iter()
+            if "data-stage-order" in element.attrib
+        ]
+        self.assertEqual(stage_orders, list(range(1, 9)))
+        content = " ".join("".join(root.itertext()).split()).casefold()
+        self.assertIn("ant-prot-feas-001 v1.1.0", content)
+        self.assertIn("collection authority = false", content)
+        self.assertIn("next exposure ≥ 48 hours", content)
 
     def test_deterministic_svg_requires_accessible_closed_content(self) -> None:
         """Deterministic figures cannot depend on inaccessible or remote content."""

@@ -14,7 +14,9 @@ Governed by ANT-HYP-001, ANT-CLM-001, and ANT-CLM-003. Every transition is propo
 
 ## Source plan
 
-Maintain a deterministic SVG. Issue #46 may replace the current provisional structure while preserving the slug and label.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` while preserving the stable slug,
+label, ordered record chain, and separately styled future-advisory return path.
 
 ## Accessibility plan
 
@@ -22,4 +24,6 @@ Use ordered boxes, arrow labels, high contrast, grayscale-safe boundaries, canon
 
 ## Failure conditions
 
-Reject a final asset that hides exposure, merges intended and felt state, removes hypothesis labels, or retains the provisional marker.
+Reject a final asset that hides exposure, merges intended and felt state,
+removes the hypothesis boundary, implies automatic learning, or retains a
+provisional marker.

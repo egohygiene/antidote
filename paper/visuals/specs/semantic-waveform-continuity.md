@@ -14,7 +14,10 @@ Governed by ANT-HYP-002 and ANT-CLM-005. Smooth waveforms do not prove semantic 
 
 ## Source plan
 
-Author deterministic SVG; any waveform example must be generated from a checked-in synthetic signal and labeled as illustrative.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py`; its waveform paths are fixed
+mathematical illustrations checked into the generator and labeled as
+illustrative rather than measured.
 
 ## Accessibility plan
 

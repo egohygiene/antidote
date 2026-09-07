@@ -1,4 +1,4 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title description" data-antidote-state="draft" data-antidote-source="deterministic-svg">
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-source="deterministic-svg">
   <title id="title">Antidote holistic two-rate architecture</title>
   <desc id="description">A numbered architecture separates human-correctable deliberation, variable-latency generation, deterministic audio rendering, actual exposure, and response records. A single approved generation specification enters the bounded model adapter. Component labels distinguish the executable synthetic slice from proposed capabilities and unavailable human evidence. Stop bypasses deliberation, while any future learning remains a human-reviewed proposal.</desc>
   <defs>

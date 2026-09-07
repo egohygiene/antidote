@@ -1,62 +1,136 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="800" viewBox="0 0 1800 800" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL Feasibility protocol timeline</title>
-  <desc id="description">Visible layout placeholder for Feasibility protocol timeline. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="800" viewBox="0 0 1800 800" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-008">
+  <title id="title">Feasibility protocol timeline</title>
+  <desc id="description">The timeline begins with protocol version and consent confirmation, then baseline and desired trajectory, plan review, generation and artifact verification, explicit playback approval, exposure with stop controls, immediate separated response measures, a declared aftereffect interval, and later review. Safety events may interrupt the sequence at every exposure-related stage.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
     </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
+    </marker>
     <style>
-      .kicker { font: 700 18px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 36px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 22px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 14px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 13px sans-serif; fill: #172D31; }
-      .card-note { font: 400 10px sans-serif; fill: #536A68; }
-      .footer { font: 700 14px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <rect width="1800" height="800" fill="url(#background)"/>
-  <circle cx="1638" cy="144" r="112" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1638" cy="144" r="72" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="144" y="96" class="kicker">ANT-FIG-008 · PROVISIONAL VISUAL FRAME</text>
-  <text x="144" y="136" class="title">
-    <tspan x="144" dy="44">Feasibility protocol timeline</tspan>
-  </text>
-  <text x="144" y="272" class="purpose">
-    <tspan x="144" dy="36">Place consent, baseline, plan approval, generation,</tspan>
-    <tspan x="144" dy="36">verification, exposure, immediate response, later aftereffect,</tspan>
-    <tspan x="144" dy="36">and stopping rules in prospective order.</tspan>
-  </text>
-  <rect x="144" y="488" width="459" height="176" rx="14" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="181" y="534" class="card-head">PLANNED STRUCTURE</text>
-  <text x="181" y="564" class="card-copy">
-    <tspan x="181" dy="18">Composition and</tspan>
-    <tspan x="181" dy="18">relationships</tspan>
-  </text>
-  <text x="181" y="611" class="card-note">
-    <tspan x="181" dy="15">Final geometry is owned by issue</tspan>
-    <tspan x="181" dy="15">#46.</tspan>
-  </text>
-  <rect x="666" y="488" width="459" height="176" rx="14" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="703" y="534" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="703" y="564" class="card-copy">
-    <tspan x="703" dy="18">No results or mechanisms</tspan>
-    <tspan x="703" dy="18">asserted</tspan>
-  </text>
-  <text x="703" y="611" class="card-note">
-    <tspan x="703" dy="15">Caption and claim IDs remain</tspan>
-    <tspan x="703" dy="15">authoritative.</tspan>
-  </text>
-  <rect x="1188" y="488" width="459" height="176" rx="14" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1225" y="534" class="card-head">REPLACEMENT GATE</text>
-  <text x="1225" y="564" class="card-copy">
-    <tspan x="1225" dy="18">Deterministic, reviewable</tspan>
-    <tspan x="1225" dy="18">asset</tspan>
-  </text>
-  <text x="1225" y="611" class="card-note">
-    <tspan x="1225" dy="15">Must pass accessibility and print</tspan>
-    <tspan x="1225" dy="15">review.</tspan>
-  </text>
-  <text x="144" y="744" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+  <rect width="1800" height="800" fill="#fffaf6"/>
+  <text x="900" y="55" class="title" text-anchor="middle" >FROZEN FEASIBILITY SESSION SEQUENCE</text>
+  <text x="900" y="92" class="subtitle" text-anchor="middle" >ANT-PROT-FEAS-001 v1.1.0 · prospective design · collection authority = false</text>
+  <g data-stage-order="1" data-stage="authority">
+  <rect x="70" y="165" width="370" height="170" rx="18" class="card-gold" />
+  <circle cx="104" cy="199" r="24" fill="#17375e"/>
+  <text x="104" y="208" class="body-strong" text-anchor="middle" style="fill:#fffaf6">1</text>
+  <text x="255" y="227" class="head" text-anchor="middle" style="font-size:28px"><tspan x="255" dy="0">AUTHORITY +</tspan><tspan x="255" dy="35">READINESS</tspan></text>
+  <text x="255" y="307" class="small" text-anchor="middle" style="font-size:20px">consent · setting · choice</text>
+  </g>
+  <g data-stage-order="2" data-stage="baseline">
+  <rect x="500" y="165" width="370" height="170" rx="18" class="card-blue" />
+  <circle cx="534" cy="199" r="24" fill="#17375e"/>
+  <text x="534" y="208" class="body-strong" text-anchor="middle" style="fill:#fffaf6">2</text>
+  <text x="685" y="227" class="head" text-anchor="middle" style="font-size:28px"><tspan x="685" dy="0">BASELINE +</tspan><tspan x="685" dy="35">TARGET</tspan></text>
+  <text x="685" y="307" class="small" text-anchor="middle" style="font-size:20px">state · intensity · direction</text>
+  </g>
+  <g data-stage-order="3" data-stage="reveal">
+  <rect x="930" y="165" width="370" height="170" rx="18" class="card-gold" />
+  <circle cx="964" cy="199" r="24" fill="#17375e"/>
+  <text x="964" y="208" class="body-strong" text-anchor="middle" style="fill:#fffaf6">3</text>
+  <text x="1115" y="227" class="head" text-anchor="middle" style="font-size:28px"><tspan x="1115" dy="0">REVEAL +</tspan><tspan x="1115" dy="35">PLAN REVIEW</tspan></text>
+  <text x="1115" y="307" class="small" text-anchor="middle" style="font-size:20px">G / S / P · fields · approval</text>
+  </g>
+  <g data-stage-order="4" data-stage="generate">
+  <rect x="1360" y="165" width="370" height="170" rx="18" class="card-blue" />
+  <circle cx="1394" cy="199" r="24" fill="#17375e"/>
+  <text x="1394" y="208" class="body-strong" text-anchor="middle" style="fill:#fffaf6">4</text>
+  <text x="1545" y="227" class="head" text-anchor="middle" style="font-size:28px"><tspan x="1545" dy="0">GENERATE +</tspan><tspan x="1545" dy="35">VERIFY</tspan></text>
+  <text x="1545" y="307" class="small" text-anchor="middle" style="font-size:20px">model · seed · hash · features</text>
+  </g>
+  <g data-stage-order="5" data-stage="explicit">
+  <rect x="1360" y="440" width="370" height="170" rx="18" class="card-gold" />
+  <circle cx="1394" cy="474" r="24" fill="#17375e"/>
+  <text x="1394" y="483" class="body-strong" text-anchor="middle" style="fill:#fffaf6">5</text>
+  <text x="1545" y="502" class="head" text-anchor="middle" style="font-size:28px"><tspan x="1545" dy="0">EXPLICIT</tspan><tspan x="1545" dy="35">PLAYBACK</tspan></text>
+  <text x="1545" y="582" class="small" text-anchor="middle" style="font-size:20px">separate start · stop always</text>
+  </g>
+  <g data-stage-order="6" data-stage="immediate">
+  <rect x="930" y="440" width="370" height="170" rx="18" class="card-blue" />
+  <circle cx="964" cy="474" r="24" fill="#17375e"/>
+  <text x="964" y="483" class="body-strong" text-anchor="middle" style="fill:#fffaf6">6</text>
+  <text x="1115" y="502" class="head" text-anchor="middle" style="font-size:28px"><tspan x="1115" dy="0">IMMEDIATE</tspan><tspan x="1115" dy="35">RESPONSE</tspan></text>
+  <text x="1115" y="582" class="small" text-anchor="middle" style="font-size:20px">within 5 min · separated fields</text>
+  </g>
+  <g data-stage-order="7" data-stage="later">
+  <rect x="500" y="440" width="370" height="170" rx="18" class="card-blue" />
+  <circle cx="534" cy="474" r="24" fill="#17375e"/>
+  <text x="534" y="483" class="body-strong" text-anchor="middle" style="fill:#fffaf6">7</text>
+  <text x="685" y="502" class="head" text-anchor="middle" style="font-size:28px"><tspan x="685" dy="0">LATER</tspan><tspan x="685" dy="35">AFTEREFFECT</tspan></text>
+  <text x="685" y="582" class="small" text-anchor="middle" style="font-size:20px">18–30 h · target 24 h</text>
+  </g>
+  <g data-stage-order="8" data-stage="review">
+  <rect x="70" y="440" width="370" height="170" rx="18" class="card-gold" />
+  <circle cx="104" cy="474" r="24" fill="#17375e"/>
+  <text x="104" y="483" class="body-strong" text-anchor="middle" style="fill:#fffaf6">8</text>
+  <text x="255" y="502" class="head" text-anchor="middle" style="font-size:28px"><tspan x="255" dy="0">REVIEW +</tspan><tspan x="255" dy="35">CLOSE / PAUSE</tspan></text>
+  <text x="255" y="582" class="small" text-anchor="middle" style="font-size:20px">safety · corrections · no update</text>
+  </g>
+  <path d="M440 250 H488" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M870 250 H918" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M1300 250 H1348" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M1545 335 V428" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M1360 525 H1312" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M930 525 H882" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <path d="M500 525 H452" class="flow" marker-end="url(#arrow-navy)" data-flow="next-stage"/>
+  <rect x="70" y="666" width="1130" height="78" rx="16" class="card-plum" />
+  <text x="635" y="700" class="head" text-anchor="middle" style="font-size:27px">INTERRUPT AT ANY EXPOSURE-RELATED STAGE</text>
+  <text x="635" y="730" class="small" text-anchor="middle" >stop · revoke consent · technical failure · adverse response → silence, record minimum, review</text>
+  <path d="M1545 610 V705 H1212" class="flow-plum" marker-end="url(#arrow-plum)" data-flow="interrupt"/>
+  <rect x="1250" y="666" width="480" height="78" rx="16" class="card-violet" />
+  <text x="1490" y="700" class="head" text-anchor="middle" style="font-size:26px">NEXT EXPOSURE ≥ 48 HOURS</text>
+  <text x="1490" y="730" class="small" text-anchor="middle" >later window must close first</text>
+  <text x="900" y="790" class="footer" text-anchor="middle" >ORDERED DESIGN ≠ COMPLETED STUDY · NO PARTICIPANT FLOW OR OUTCOME IS SHOWN</text>
 </svg>

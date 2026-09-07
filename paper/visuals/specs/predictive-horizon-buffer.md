@@ -16,8 +16,10 @@ Governed by ANT-HYP-002 and ANT-CLM-005. Timing structure does not establish sta
 
 ## Source plan
 
-Author a scale-consistent SVG using the architecture dossier and the notation
-frozen by issue #39.
+Generate the deterministic SVG with
+`scripts/generate_publication_figures.py` using the architecture dossier and
+the notation frozen by issue #39. Geometry encodes order and containment; it
+does not encode measured latency or a validated optimal horizon.
 
 ## Accessibility plan
 
@@ -25,4 +27,6 @@ Label every interval directly, use pattern or border differences as well as colo
 
 ## Failure conditions
 
-Reject unscaled decorative timing, missing underrun/fallback behavior, or conflation of state uncertainty with buffer uncertainty.
+Reject unlabeled symbolic timing, invented numeric timing, missing
+underrun/fallback behavior, or conflation of state uncertainty with buffer
+uncertainty.

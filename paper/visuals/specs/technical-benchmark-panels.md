@@ -2,9 +2,13 @@
 
 ## Scientific purpose
 
-Reserve a data-backed technical view that reports timing, continuity,
+Preserve a governed slot for a data-backed technical view that reports timing, continuity,
 adherence, interruption, recovery, and failure evidence together rather than
 showing only favorable runs.
+
+The slot is retired from the current manuscript because the qualifying T1
+package and frozen analysis outputs do not exist. Retirement is an evidence
+decision, not a favorable or unfavorable result.
 
 ## Required content
 
@@ -28,6 +32,8 @@ results. Technical performance does not establish felt response or benefit.
 PDF only from the reserved `ANT-REC-T1-001` package and frozen analysis
 outputs after claim-ledger promotion; record environment, exclusions,
 checksums, and provenance. Issue #46 owns styling.
+Reactivate the manifest record and manuscript reference only in the same
+reviewed change that supplies those materials and a claim-ledger disposition.
 
 ## Accessibility plan
 

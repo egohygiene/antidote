@@ -1,63 +1,130 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL Semantic Intent Mixer and human control surface</title>
-  <desc id="description">Visible layout placeholder for Semantic Intent Mixer and human control surface. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1000" viewBox="0 0 1600 1000" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-004">
+  <title id="title">Semantic Intent Mixer and human control surface</title>
+  <desc id="description">Several semantic mixin cards expose a human-readable purpose, current value, neutral position, bounds, exclusions, priority, and adapter mapping. The cards combine into a versioned conditioning state that the person may inspect, correct, accept, or reject before generation. No arrow claims that a mixin directly causes an emotion.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
     </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
+    </marker>
     <style>
-      .kicker { font: 700 23px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 45px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 27px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 17px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 16px sans-serif; fill: #172D31; }
-      .card-note { font: 400 13px sans-serif; fill: #536A68; }
-      .footer { font: 700 18px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <rect width="1600" height="1000" fill="url(#background)"/>
-  <circle cx="1456" cy="180" r="140" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1456" cy="180" r="90" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="128" y="120" class="kicker">ANT-FIG-004 · PROVISIONAL VISUAL FRAME</text>
-  <text x="128" y="170" class="title">
-    <tspan x="128" dy="55">Semantic Intent Mixer and human control</tspan>
-    <tspan x="128" dy="55">surface</tspan>
-  </text>
-  <text x="128" y="340" class="purpose">
-    <tspan x="128" dy="45">Explain typed, reversible semantic mixins and their human-</tspan>
-    <tspan x="128" dy="45">readable bounds without implying direct or linear control of</tspan>
-    <tspan x="128" dy="45">felt emotion.</tspan>
-  </text>
-  <rect x="128" y="610" width="408" height="220" rx="18" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="161" y="667" class="card-head">PLANNED STRUCTURE</text>
-  <text x="161" y="705" class="card-copy">
-    <tspan x="161" dy="22">Composition and</tspan>
-    <tspan x="161" dy="22">relationships</tspan>
-  </text>
-  <text x="161" y="764" class="card-note">
-    <tspan x="161" dy="19">Final geometry is owned by issue</tspan>
-    <tspan x="161" dy="19">#46.</tspan>
-  </text>
-  <rect x="592" y="610" width="408" height="220" rx="18" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="625" y="667" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="625" y="705" class="card-copy">
-    <tspan x="625" dy="22">No results or mechanisms</tspan>
-    <tspan x="625" dy="22">asserted</tspan>
-  </text>
-  <text x="625" y="764" class="card-note">
-    <tspan x="625" dy="19">Caption and claim IDs remain</tspan>
-    <tspan x="625" dy="19">authoritative.</tspan>
-  </text>
-  <rect x="1056" y="610" width="408" height="220" rx="18" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1089" y="667" class="card-head">REPLACEMENT GATE</text>
-  <text x="1089" y="705" class="card-copy">
-    <tspan x="1089" dy="22">Deterministic, reviewable</tspan>
-    <tspan x="1089" dy="22">asset</tspan>
-  </text>
-  <text x="1089" y="764" class="card-note">
-    <tspan x="1089" dy="19">Must pass accessibility and print</tspan>
-    <tspan x="1089" dy="19">review.</tspan>
-  </text>
-  <text x="128" y="930" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+  <rect width="1600" height="1000" fill="#fffaf6"/>
+  <text x="800" y="62" class="title" text-anchor="middle" >SEMANTIC INTENT MIXER</text>
+  <text x="800" y="100" class="subtitle" text-anchor="middle" >Human-scale controls become typed, reversible conditioning — not hidden prompt concatenation</text>
+  <rect x="45" y="145" width="530" height="730" rx="20" class="card-gold" />
+  <text x="310" y="198" class="section" text-anchor="middle" style="font-size:26px">PERSON-AUTHORED CONTROLS</text>
+  <text x="310" y="232" class="small" text-anchor="middle" >illustrative positions · not response data</text>
+  <text x="92" y="292" class="body-strong" text-anchor="start" >GROUNDING</text>
+  <text x="520" y="292" class="small" text-anchor="end" >steady · embodied</text>
+  <line x1="96" y1="320" x2="510" y2="320" stroke="#a7b2bd" stroke-width="10" stroke-linecap="round"/>
+  <line x1="96" y1="320" x2="370" y2="320" stroke="#aa6c00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="370" cy="320" r="18" fill="#fffaf6" stroke="#17375e" stroke-width="4"/>
+  <text x="96" y="354" class="tiny" text-anchor="start" >0 bound</text>
+  <text x="303" y="354" class="tiny" text-anchor="middle" >neutral</text>
+  <text x="510" y="354" class="tiny" text-anchor="end" >1 bound</text>
+  <text x="92" y="397" class="body-strong" text-anchor="start" >RELEASE</text>
+  <text x="520" y="397" class="small" text-anchor="end" >space to move</text>
+  <line x1="96" y1="425" x2="510" y2="425" stroke="#a7b2bd" stroke-width="10" stroke-linecap="round"/>
+  <line x1="96" y1="425" x2="282" y2="425" stroke="#aa6c00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="282" cy="425" r="18" fill="#fffaf6" stroke="#17375e" stroke-width="4"/>
+  <text x="96" y="459" class="tiny" text-anchor="start" >0 bound</text>
+  <text x="303" y="459" class="tiny" text-anchor="middle" >neutral</text>
+  <text x="510" y="459" class="tiny" text-anchor="end" >1 bound</text>
+  <text x="92" y="502" class="body-strong" text-anchor="start" >BRIGHTNESS</text>
+  <text x="520" y="502" class="small" text-anchor="end" >soft · not dark</text>
+  <line x1="96" y1="530" x2="510" y2="530" stroke="#a7b2bd" stroke-width="10" stroke-linecap="round"/>
+  <line x1="96" y1="530" x2="230" y2="530" stroke="#aa6c00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="230" cy="530" r="18" fill="#fffaf6" stroke="#17375e" stroke-width="4"/>
+  <text x="96" y="564" class="tiny" text-anchor="start" >0 bound</text>
+  <text x="303" y="564" class="tiny" text-anchor="middle" >neutral</text>
+  <text x="510" y="564" class="tiny" text-anchor="end" >1 bound</text>
+  <text x="92" y="607" class="body-strong" text-anchor="start" >FAMILIARITY</text>
+  <text x="520" y="607" class="small" text-anchor="end" >known textures</text>
+  <line x1="96" y1="635" x2="510" y2="635" stroke="#a7b2bd" stroke-width="10" stroke-linecap="round"/>
+  <line x1="96" y1="635" x2="342" y2="635" stroke="#aa6c00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="342" cy="635" r="18" fill="#fffaf6" stroke="#17375e" stroke-width="4"/>
+  <text x="96" y="669" class="tiny" text-anchor="start" >0 bound</text>
+  <text x="303" y="669" class="tiny" text-anchor="middle" >neutral</text>
+  <text x="510" y="669" class="tiny" text-anchor="end" >1 bound</text>
+  <text x="92" y="712" class="body-strong" text-anchor="start" >SPACE</text>
+  <text x="520" y="712" class="small" text-anchor="end" >open · spacious</text>
+  <line x1="96" y1="740" x2="510" y2="740" stroke="#a7b2bd" stroke-width="10" stroke-linecap="round"/>
+  <line x1="96" y1="740" x2="391" y2="740" stroke="#aa6c00" stroke-width="10" stroke-linecap="round"/>
+  <circle cx="391" cy="740" r="18" fill="#fffaf6" stroke="#17375e" stroke-width="4"/>
+  <text x="96" y="774" class="tiny" text-anchor="start" >0 bound</text>
+  <text x="303" y="774" class="tiny" text-anchor="middle" >neutral</text>
+  <text x="510" y="774" class="tiny" text-anchor="end" >1 bound</text>
+  <rect x="625" y="145" width="410" height="730" rx="20" class="card-violet" />
+  <text x="830" y="198" class="section" text-anchor="middle" >TYPED COMPOSITION</text>
+  <rect x="685" y="240" width="290" height="44" rx="22" class="pill-violet" />
+<text x="830.0" y="270" class="pill-text-violet" text-anchor="middle" style="font-size:17px">VISIBLE AUTHORITY ORDER</text>
+  <text x="680" y="322" class="body" text-anchor="start" ><tspan x="680" dy="0">1  current user value</tspan><tspan x="680" dy="48">2  accepted suggestion</tspan><tspan x="680" dy="48">3  neutral default</tspan></text>
+  <text x="830" y="500" class="equation" text-anchor="middle" style="font-size:25px">αⱼ,ₜ = (1−ρⱼ)αⱼ,ₜ₋₁ + ρⱼkᵉᶠᶠⱼ,ₜ</text>
+  <text x="830" y="540" class="small" text-anchor="middle" >ordinary controls only</text>
+  <text x="680" y="614" class="body" text-anchor="start" ><tspan x="680" dy="0">Ξ  exclusions + safety</tspan><tspan x="680" dy="48">≺  conflict priority</tspan><tspan x="680" dy="48">mⱼ  versioned mixin</tspan><tspan x="680" dy="48">⊕  typed composition</tspan></text>
+  <rect x="690" y="797" width="280" height="44" rx="22" class="pill-plum" />
+<text x="830.0" y="827" class="pill-text-plum" text-anchor="middle" style="font-size:17px">INSPECT · EDIT · REJECT</text>
+  <rect x="1085" y="145" width="470" height="305" rx="20" class="card-blue" />
+  <text x="1320" y="198" class="section-blue" text-anchor="middle" >CONDITIONING STATE</text>
+  <text x="1135" y="266" class="body" text-anchor="start" ><tspan x="1135" dy="0">resolved semantic condition qᵢ,ₙ</tspan><tspan x="1135" dy="58">constraints + uncertainty</tspan><tspan x="1135" dy="58">provenance + adapter capabilities</tspan></text>
+  <rect x="1085" y="505" width="470" height="370" rx="20" class="card-teal" />
+  <text x="1320" y="558" class="section-blue" text-anchor="middle" >APPROVED COMPILATION</text>
+  <text x="1135" y="625" class="body" text-anchor="start" ><tspan x="1135" dy="0">journey plan Jᵢ,ₜ</tspan><tspan x="1135" dy="54">↓ capability-bounded Compileₐ</tspan><tspan x="1135" dy="54">conditioning γ⁽ᵃ⁾ᵢ,ₙ</tspan><tspan x="1135" dy="54">optional native prompt φ⁽ᵃ⁾ᵢ,ₙ</tspan></text>
+  <rect x="1178" y="799" width="284" height="44" rx="22" class="pill-gold" />
+<text x="1320.0" y="829" class="pill-text-gold" text-anchor="middle" style="font-size:17px">HUMAN APPROVAL GATE</text>
+  <path d="M575 510 H613" class="flow-gold" marker-end="url(#arrow-gold)" data-flow="controls-to-mixer"/>
+  <path d="M1035 330 H1073" class="flow" marker-end="url(#arrow-navy)" data-flow="mixer-to-conditioning"/>
+  <path d="M1320 450 V493" class="flow-gold" marker-end="url(#arrow-gold)" data-flow="approval-to-compilation"/>
+  <text x="800" y="945" class="footer" text-anchor="middle" >A MIXIN CAN GUIDE A MODEL ADAPTER; IT DOES NOT DIRECTLY CONTROL ACOUSTICS, EMOTION, OR BENEFIT</text>
 </svg>

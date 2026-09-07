@@ -1,39 +1,96 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description" data-antidote-state="placeholder">
-  <title id="title">Candidate semantic, acoustic, and response loop</title>
-  <desc id="description">Semantic intent flows to generated acoustic structure, then to measured individual response. A feedback arrow returns to the next decision. Every link is a hypothesis to test.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="440" viewBox="0 0 1200 440" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-001">
+  <title id="title">Person-moment-journey response model</title>
+  <desc id="description">Four numbered cards run left to right. Person and moment holds chosen context and desired direction; semantic journey holds intent, stages, constraints, and approval; acoustic realization holds the content-hashed artifact and measured features; exposure and response distinguishes what was heard from what was reported. A separate dashed return path is labeled future advisory proposal, human review required, and no automatic learning. Every forward transition is a proposed relationship to test rather than a causal or therapeutic mechanism.</desc>
   <defs>
-    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="9" markerHeight="9" orient="auto-start-reverse">
-      <path d="M 0 0 L 10 5 L 0 10 z" fill="#5b2c83"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
+    </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
     </marker>
     <style>
-      .box { fill: #f7f3fb; stroke: #5b2c83; stroke-width: 3; rx: 18; }
-      .heading { font: 700 25px sans-serif; fill: #241334; text-anchor: middle; }
-      .detail { font: 18px sans-serif; fill: #4f4458; text-anchor: middle; }
-      .arrow { fill: none; stroke: #5b2c83; stroke-width: 4; marker-end: url(#arrow); }
-      .label { font: 16px sans-serif; fill: #6d557d; text-anchor: middle; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <text class="label" x="600" y="34">PROVISIONAL STRUCTURE - NOT FINAL ARTWORK</text>
-  <rect class="box" x="50" y="80" width="300" height="150"/>
-  <text class="heading" x="200" y="135">Semantic intent</text>
-  <text class="detail" x="200" y="177">interpretable, personal,</text>
-  <text class="detail" x="200" y="204">versioned controls</text>
-
-  <rect class="box" x="450" y="80" width="300" height="150"/>
-  <text class="heading" x="600" y="135">Acoustic structure</text>
-  <text class="detail" x="600" y="177">generated output and</text>
-  <text class="detail" x="600" y="204">measured realization</text>
-
-  <rect class="box" x="850" y="80" width="300" height="150"/>
-  <text class="heading" x="1000" y="135">Individual response</text>
-  <text class="detail" x="1000" y="177">subjective, behavioral,</text>
-  <text class="detail" x="1000" y="204">physiological optional</text>
-
-  <path class="arrow" d="M 350 155 L 438 155"/>
-  <path class="arrow" d="M 750 155 L 838 155"/>
-  <text class="label" x="394" y="136">test</text>
-  <text class="label" x="794" y="136">test</text>
-
-  <path class="arrow" d="M 1000 245 C 1000 370, 200 370, 200 245"/>
-  <text class="label" x="600" y="385">longitudinal update: hypothesis to test</text>
+  <rect width="1200" height="440" fill="#fffaf6"/>
+  <text x="600" y="48" class="title" text-anchor="middle" style="font-size:38px">PERSON + MOMENT → JOURNEY → AUDIO → RESPONSE</text>
+  <text x="600" y="80" class="subtitle" text-anchor="middle" >A governed chain of records — not a causal or therapeutic mechanism</text>
+  <g data-node="step-1">
+  <rect x="55" y="110" width="235" height="170" rx="20" class="card-gold" />
+  <text x="81" y="146" class="body-strong" text-anchor="start" >1</text>
+  <text x="173" y="177" class="head" text-anchor="middle" style="font-size:18px">PERSON + MOMENT</text>
+  <text x="173" y="218" class="body" text-anchor="middle" style="font-size:21px"><tspan x="173" dy="0">chosen context</tspan><tspan x="173" dy="31">desired direction</tspan></text>
+  </g>
+  <g data-node="step-2">
+  <rect x="340" y="110" width="235" height="170" rx="20" class="card-violet" />
+  <text x="366" y="146" class="body-strong" text-anchor="start" >2</text>
+  <text x="458" y="177" class="head" text-anchor="middle" style="font-size:18px">SEMANTIC JOURNEY</text>
+  <text x="458" y="218" class="body" text-anchor="middle" style="font-size:21px"><tspan x="458" dy="0">intent + stages</tspan><tspan x="458" dy="31">constraints + approval</tspan></text>
+  </g>
+  <g data-node="step-3">
+  <rect x="625" y="110" width="235" height="170" rx="20" class="card-blue" />
+  <text x="651" y="146" class="body-strong" text-anchor="start" >3</text>
+  <text x="743" y="177" class="head" text-anchor="middle" style="font-size:18px">ACOUSTIC REALIZATION</text>
+  <text x="743" y="218" class="body" text-anchor="middle" style="font-size:21px"><tspan x="743" dy="0">artifact + hash</tspan><tspan x="743" dy="31">measured features</tspan></text>
+  </g>
+  <g data-node="step-4">
+  <rect x="910" y="110" width="235" height="170" rx="20" class="card-teal" />
+  <text x="936" y="146" class="body-strong" text-anchor="start" >4</text>
+  <text x="1028" y="177" class="head" text-anchor="middle" style="font-size:18px">EXPOSURE + RESPONSE</text>
+  <text x="1028" y="218" class="body" text-anchor="middle" style="font-size:21px"><tspan x="1028" dy="0">what was heard</tspan><tspan x="1028" dy="31">what was reported</tspan></text>
+  </g>
+  <path d="M290 195 H328" class="flow" marker-end="url(#arrow-navy)" data-relation="proposed-test"/>
+  <path d="M575 195 H613" class="flow" marker-end="url(#arrow-navy)" data-relation="proposed-test"/>
+  <path d="M860 195 H898" class="flow" marker-end="url(#arrow-navy)" data-relation="proposed-test"/>
+  <path d="M1025 286 V326 H180 V286" class="flow-violet" marker-end="url(#arrow-violet)" data-relation="future-advisory-proposal"/>
+  <rect x="380" y="316" width="440" height="44" rx="22" class="pill-violet" />
+<text x="600.0" y="346" class="pill-text-violet" text-anchor="middle" >FUTURE ADVISORY PROPOSAL</text>
+  <text x="600" y="392" class="footer" text-anchor="middle" style="font-size:18px">Human review required · no automatic learning · every transition remains a hypothesis to test</text>
 </svg>

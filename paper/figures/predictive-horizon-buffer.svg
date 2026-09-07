@@ -1,62 +1,115 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="850" viewBox="0 0 1800 850" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL State estimation, predictive horizon, and generate-ahead buffer</title>
-  <desc id="description">Visible layout placeholder for State estimation, predictive horizon, and generate-ahead buffer. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="850" viewBox="0 0 1800 850" role="img" aria-labelledby="title description" data-antidote-state="final" data-antidote-generator="scripts/generate_publication_figures.py" data-visual-id="ANT-FIG-005">
+  <title id="title">State estimation, predictive horizon, and generate-ahead buffer</title>
+  <desc id="description">A time axis shows the current playback cursor, verified buffered audio, generation in progress, and a future planning horizon. Above it, an uncertain state belief is corrected by the person before the next plan is accepted. Deadline and safety margins are marked independently from claims about subjective response or model quality.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#7650d8"/>
+      <stop offset="0.45" stop-color="#277bc0"/>
+      <stop offset="0.75" stop-color="#1b9f9a"/>
+      <stop offset="1" stop-color="#c88018"/>
     </linearGradient>
+    <pattern id="hatch" width="14" height="14" patternUnits="userSpaceOnUse" patternTransform="rotate(45)">
+      <line x1="0" y1="0" x2="0" y2="14" stroke="#8a78d5" stroke-width="4" opacity="0.28"/>
+    </pattern>
+    <marker id="arrow-navy" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#aa6c00"/>
+    </marker>
     <style>
-      .kicker { font: 700 20px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 38px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 23px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 14px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 14px sans-serif; fill: #172D31; }
-      .card-note { font: 400 11px sans-serif; fill: #536A68; }
-      .footer { font: 700 15px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .title { font-size: 48px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #465970; }
+      .section { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #291542; }
+      .section-blue { font-size: 31px; font-weight: 800; letter-spacing: 0.018em; fill: #15375e; }
+      .card { fill: #fffdfa; stroke: #17375e; stroke-width: 4; }
+      .card-violet { fill: #f8f5ff; stroke: #5742cf; stroke-width: 4; }
+      .card-gold { fill: #fff5dc; stroke: #aa6c00; stroke-width: 4; }
+      .card-plum { fill: #fff4f8; stroke: #98245f; stroke-width: 4; }
+      .card-blue { fill: #eef8fd; stroke: #277bc0; stroke-width: 4; }
+      .card-teal { fill: #effaf7; stroke: #167f78; stroke-width: 4; }
+      .card-muted { fill: #f4f1ed; stroke: #68798c; stroke-width: 4; stroke-dasharray: 12 8; }
+      .head { font-size: 31px; font-weight: 800; fill: #142b4b; }
+      .body { font-size: 25px; font-weight: 500; fill: #354b64; }
+      .body-strong { font-size: 25px; font-weight: 750; fill: #17375e; }
+      .small { font-size: 21px; font-weight: 550; fill: #52667c; }
+      .tiny { font-size: 18px; font-weight: 600; fill: #52667c; }
+      .equation { font-size: 29px; font-weight: 650; fill: #291542; }
+      .flow { fill: none; stroke: #17375e; stroke-width: 5; stroke-linejoin: round; }
+      .flow-violet { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; stroke-linejoin: round; }
+      .flow-plum { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; }
+      .flow-gold { fill: none; stroke: #aa6c00; stroke-width: 6; stroke-linejoin: round; }
+      .boundary { fill: none; stroke: #64768a; stroke-width: 3; stroke-dasharray: 12 9; }
+      .pill { fill: #e6eef7; stroke: #17375e; stroke-width: 2; }
+      .pill-violet { fill: #eeeaff; stroke: #5742cf; stroke-width: 2; }
+      .pill-gold { fill: #ffedbd; stroke: #aa6c00; stroke-width: 2; }
+      .pill-plum { fill: #ffe8f1; stroke: #98245f; stroke-width: 2; }
+      .pill-teal { fill: #e2f5ef; stroke: #167f78; stroke-width: 2; }
+      .pill-text { font-size: 21px; font-weight: 800; fill: #17375e; letter-spacing: 0.015em; }
+      .pill-text-violet { font-size: 21px; font-weight: 800; fill: #4b37bb; letter-spacing: 0.015em; }
+      .pill-text-gold { font-size: 21px; font-weight: 800; fill: #795000; letter-spacing: 0.015em; }
+      .pill-text-plum { font-size: 21px; font-weight: 800; fill: #8d1f58; letter-spacing: 0.015em; }
+      .footer { font-size: 22px; font-weight: 800; fill: #52667c; letter-spacing: 0.02em; }
     </style>
   </defs>
-  <rect width="1800" height="850" fill="url(#background)"/>
-  <circle cx="1638" cy="153" r="119" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1638" cy="153" r="76" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="144" y="102" class="kicker">ANT-FIG-005 · PROVISIONAL VISUAL FRAME</text>
-  <text x="144" y="144" class="title">
-    <tspan x="144" dy="47">State estimation, predictive horizon, and</tspan>
-    <tspan x="144" dy="47">generate-ahead buffer</tspan>
-  </text>
-  <text x="144" y="289" class="purpose">
-    <tspan x="144" dy="38">Show how an uncertain state belief and short planning horizon</tspan>
-    <tspan x="144" dy="38">can remain outside deterministic playback deadlines.</tspan>
-  </text>
-  <rect x="144" y="518" width="459" height="187" rx="15" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="181" y="567" class="card-head">PLANNED STRUCTURE</text>
-  <text x="181" y="599" class="card-copy">
-    <tspan x="181" dy="19">Composition and</tspan>
-    <tspan x="181" dy="19">relationships</tspan>
-  </text>
-  <text x="181" y="649" class="card-note">
-    <tspan x="181" dy="16">Final geometry is owned by issue</tspan>
-    <tspan x="181" dy="16">#46.</tspan>
-  </text>
-  <rect x="666" y="518" width="459" height="187" rx="15" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="703" y="567" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="703" y="599" class="card-copy">
-    <tspan x="703" dy="19">No results or mechanisms</tspan>
-    <tspan x="703" dy="19">asserted</tspan>
-  </text>
-  <text x="703" y="649" class="card-note">
-    <tspan x="703" dy="16">Caption and claim IDs remain</tspan>
-    <tspan x="703" dy="16">authoritative.</tspan>
-  </text>
-  <rect x="1188" y="518" width="459" height="187" rx="15" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1225" y="567" class="card-head">REPLACEMENT GATE</text>
-  <text x="1225" y="599" class="card-copy">
-    <tspan x="1225" dy="19">Deterministic, reviewable</tspan>
-    <tspan x="1225" dy="19">asset</tspan>
-  </text>
-  <text x="1225" y="649" class="card-note">
-    <tspan x="1225" dy="16">Must pass accessibility and print</tspan>
-    <tspan x="1225" dy="16">review.</tspan>
-  </text>
-  <text x="144" y="790" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+  <rect width="1800" height="850" fill="#fffaf6"/>
+  <text x="900" y="58" class="title" text-anchor="middle" >BELIEF → NEGOTIATED HORIZON → VERIFIED FUTURE AUDIO</text>
+  <text x="900" y="96" class="subtitle" text-anchor="middle" >Slow uncertain planning stays outside deterministic playback deadlines</text>
+  <rect x="45" y="140" width="430" height="255" rx="20" class="card-violet" />
+  <text x="260" y="188" class="section" text-anchor="middle" >STATE BELIEF bᵢ,ₜ(x)</text>
+  <text x="88" y="245" class="body" text-anchor="start" ><tspan x="88" dy="0">possible represented states</tspan><tspan x="88" dy="43">confidence + alternatives</tspan><tspan x="88" dy="43">missingness widens uncertainty</tspan></text>
+  <rect x="105" y="333" width="310" height="44" rx="22" class="pill-gold" />
+<text x="260.0" y="363" class="pill-text-gold" text-anchor="middle" >PERSON CAN CORRECT</text>
+  <rect x="540" y="140" width="1215" height="255" rx="20" class="card-gold" />
+  <text x="1148" y="188" class="section" text-anchor="middle" >SHORT RECEDING HORIZON Hₚ</text>
+  <rect x="590" y="228" width="220" height="120" rx="16" class="card-gold" />
+  <text x="700" y="264" class="small" text-anchor="middle" >NOW</text>
+  <text x="700" y="306" class="equation" text-anchor="middle" >uₜ</text>
+  <text x="700" y="336" class="tiny" text-anchor="middle" >approval required</text>
+  <rect x="860" y="228" width="220" height="120" rx="16" class="card-violet" />
+  <text x="970" y="264" class="small" text-anchor="middle" >NEXT</text>
+  <text x="970" y="306" class="equation" text-anchor="middle" >uₜ₊₁</text>
+  <text x="970" y="336" class="tiny" text-anchor="middle" >proposal only</text>
+  <rect x="1130" y="228" width="220" height="120" rx="16" class="card-violet" />
+  <text x="1240" y="264" class="small" text-anchor="middle" >LATER</text>
+  <text x="1240" y="306" class="equation" text-anchor="middle" >uₜ₊₂</text>
+  <text x="1240" y="336" class="tiny" text-anchor="middle" >proposal only</text>
+  <rect x="1400" y="228" width="220" height="120" rx="16" class="card-muted" />
+  <text x="1510" y="264" class="small" text-anchor="middle" >HORIZON</text>
+  <text x="1510" y="306" class="equation" text-anchor="middle" >uₜ₊Hₚ</text>
+  <text x="1510" y="336" class="tiny" text-anchor="middle" >replan later</text>
+  <path d="M475 268 H528" class="flow-gold" marker-end="url(#arrow-gold)" data-flow="correction-to-horizon"/>
+  <text x="900" y="438" class="section-blue" text-anchor="middle" >PLAYBACK CURSOR</text>
+  <line x1="90" y1="650" x2="1710" y2="650" stroke="#17375e" stroke-width="7"/>
+  <line x1="405" y1="480" x2="405" y2="714" stroke="#98245f" stroke-width="7"/>
+  <text x="405" y="740" class="equation" text-anchor="middle" >t</text>
+  <rect x="90" y="515" width="315" height="110" rx="12" class="card-teal" />
+  <text x="248" y="558" class="head" text-anchor="middle" style="font-size:27px">ALREADY PLAYING</text>
+  <text x="248" y="596" class="small" text-anchor="middle" >verified artifact</text>
+  <rect x="405" y="515" width="470" height="110" rx="12" class="card-blue" />
+  <text x="640" y="558" class="head" text-anchor="middle" style="font-size:27px">VERIFIED BUFFER Bᵢ,ₜ</text>
+  <text x="640" y="596" class="small" text-anchor="middle" >safe to schedule</text>
+  <rect x="875" y="515" width="365" height="110" rx="12" class="card-violet" />
+  <text x="1058" y="558" class="head" text-anchor="middle" style="font-size:27px">GENERATING</text>
+  <text x="1058" y="596" class="small" text-anchor="middle" >not yet playable</text>
+  <rect x="1240" y="515" width="225" height="110" rx="12" class="card-muted" />
+  <text x="1352" y="558" class="head" text-anchor="middle" style="font-size:24px">MARGIN Mᵢ,ₜ</text>
+  <text x="1352" y="596" class="small" text-anchor="middle" >uncertainty</text>
+  <rect x="1465" y="515" width="245" height="110" rx="12" class="card-plum" />
+  <text x="1588" y="558" class="head" text-anchor="middle" style="font-size:27px">DEADLINE</text>
+  <text x="1588" y="596" class="small" text-anchor="middle" >audio needs bytes</text>
+  <text x="900" y="686" class="footer" text-anchor="middle" >ORDER IS STRUCTURAL · WIDTHS DO NOT REPORT MEASURED LATENCY</text>
+  <rect x="358" y="758" width="1085" height="44" rx="22" class="pill-violet" />
+<text x="900.5" y="788" class="pill-text-violet" text-anchor="middle" >Bᵢ,ₜ ≥ ℓₒᵦₛₑᵣᵥₑ + ℓₚₗₐₙ + ℓgₑₙₑᵣₐₜₑ + ℓᵥₑᵣᵢfᵧ + ℓₛcₕₑdᵤₗₑ + Mᵢ,ₜ</text>
+  <text x="1710" y="474" class="body-strong" text-anchor="end" >IF MARGIN FAILS</text>
+  <text x="1710" y="505" class="small" text-anchor="end" >approved loop · bed · continuation · ending</text>
+  <path d="M1588 625 V754 H1460" class="flow-plum" marker-end="url(#arrow-plum)" data-flow="deadline-to-fallback"/>
+  <text x="900" y="836" class="footer" text-anchor="middle" >THE BELIEF IS NOT A VERDICT · THE HORIZON IS NOT AN OPTIMAL POLICY · THE BUFFER DOES NOT PROVE MUSICAL FIT</text>
 </svg>
