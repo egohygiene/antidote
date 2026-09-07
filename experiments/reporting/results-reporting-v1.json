@@ -1,0 +1,514 @@
+{
+  "schema": "antidote.results-reporting/v1",
+  "reporting_id": "ANT-REPORT-RESULTS-001",
+  "version": "1.0.0",
+  "status": "governed-empty-reporting-contract",
+  "governed_by": "egohygiene/antidote#41",
+  "purpose": "Define auditable result slots and evidence-promotion gates without representing absent observations as zeroes or creating example findings.",
+  "protocol": {
+    "protocol_id": "ANT-PROT-FEAS-001",
+    "protocol_version": "1.0.0",
+    "protocol_path": "experiments/protocols/antidote-feasibility-v1.json",
+    "lock_path": "experiments/protocols/antidote-feasibility-v1.lock.json",
+    "sha256": "dbedbcbb74303373a7e00e95ad063b025d8cf6033864f4ad5a390d15703ba403"
+  },
+  "current_manuscript_state": {
+    "formal_study_run": false,
+    "formal_human_results_collected": false,
+    "t0_exit_gate_promoted": false,
+    "t1_qualification_run": false,
+    "h1_collection_started": false,
+    "physiology_enabled": false
+  },
+  "evidence_policy": {
+    "empty_state": "Use unavailable, blocked, not run, not collected, or not applicable. Never encode an absent result as zero.",
+    "synthetic_state": "Synthetic fixtures may verify schemas and failure handling but cannot become human observations, affective findings, or evidence of benefit.",
+    "technical_state": "Technical conformance or performance remains technical evidence and cannot establish subjective fit, therapeutic efficacy, clinical safety, or neurological mechanism.",
+    "human_state": "Human-response values require separately authorized H1 collection, protocol-qualified records, audited deviations, and the frozen analysis plan.",
+    "nonpositive_state": "Null, opposite-direction, mismatched, burdensome, harmful, missing, declined, stopped, interrupted, failed, and adverse records retain first-class reporting positions."
+  },
+  "analysis_reporting": {
+    "effect_estimates": {
+      "status": "not-run",
+      "protocol_pointers": ["#/analysis_plan/secondary_within_person_estimands"],
+      "reporting_rule": "Report every prespecified within-person estimand with its condition, block, denominator, and evidence class; do not select a preferred contrast after observation."
+    },
+    "uncertainty": {
+      "status": "not-run",
+      "protocol_pointers": ["#/analysis_plan/uncertainty"],
+      "reporting_rule": "Show all session points, exact denominators, descriptive spread, and the exact within-block permutation distribution only when its frozen conditions are met."
+    },
+    "visualizations": {
+      "status": "not-run",
+      "protocol_pointers": ["#/analysis_plan/primary_technical_summaries", "#/analysis_plan/primary_human_feasibility_summaries", "#/analysis_plan/uncertainty"],
+      "visual_ids": ["ANT-FIG-010", "ANT-FIG-011", "ANT-TBL-004", "ANT-TBL-005", "ANT-TBL-006"],
+      "reporting_rule": "Populate a governed visual only from its qualifying source package and analysis output; display denominators, missingness, failures, uncertainty, and evidence stage."
+    },
+    "missingness": {
+      "status": "not-run",
+      "protocol_pointers": ["#/analysis_plan/missingness"],
+      "reporting_rule": "Preserve missing, declined, missed-window, interrupted, technically unavailable, and not-applicable states without primary imputation."
+    },
+    "sensitivity_analyses": {
+      "status": "not-run",
+      "protocol_pointers": ["#/analysis_plan/sensitivity_analyses"],
+      "reporting_rule": "Report every prespecified sensitivity view beside the primary descriptive result; do not use sensitivity analyses to replace an unfavorable primary view."
+    }
+  },
+  "promotion_gates": [
+    {
+      "stage": "D0",
+      "current_state": "design-record-available",
+      "gate": "Repository artifacts pass deterministic validation and are described only as design records.",
+      "required_review": "Confirm artifact identity, byte lock, source revision, and claim-ledger wording.",
+      "never_supports": "Runtime performance, user response, benefit, safety, or efficacy."
+    },
+    {
+      "stage": "T0",
+      "current_state": "awaiting-ant-q03-exit-gate",
+      "gate": "Issue #18 completes one bounded synthetic vertical-slice package with every planned success, rejection, failure, recovery, and denominator.",
+      "required_review": "Review source revision, environment, commands, manifests, structured outputs, failures, exclusions, hashes, and claim-ledger disposition before promotion.",
+      "never_supports": "Human exposure, affective response, subjective fit, benefit, safety, or efficacy."
+    },
+    {
+      "stage": "T1",
+      "current_state": "blocked-no-real-model",
+      "gate": "A real model, adapter, analyzer, hardware profile, thresholds, seeds, and attempt matrix are frozen before qualifying execution.",
+      "required_review": "Verify complete technical denominators, unsupported controls, missing runs, failures, uncertainty, and source hashes before promotion.",
+      "never_supports": "Affective correctness, user need, benefit, safety, or efficacy."
+    },
+    {
+      "stage": "H1",
+      "current_state": "blocked-no-collection-authority",
+      "gate": "Every human-collection activation gate is independently cleared before the first qualifying record.",
+      "required_review": "Audit collection authority, assignment, consent, provenance, deviations, eligibility, missingness, analysis outputs, and claim-ledger disposition.",
+      "never_supports": "Population generalization, clinical efficacy, clinical safety, diagnosis, treatment, or neurological mechanism."
+    }
+  ],
+  "source_records": [
+    {
+      "id": "ANT-REC-D0-001",
+      "stage": "D0",
+      "path": "experiments/protocols/antidote-feasibility-v1.json",
+      "state": "available-design-artifact",
+      "required_package_fields": ["protocol_id", "version", "status", "collection_authority"]
+    },
+    {
+      "id": "ANT-REC-T0-001",
+      "stage": "T0",
+      "path": "experiments/results/antidote-t0-exit-gate-v1.json",
+      "state": "not-created",
+      "required_package_fields": ["package_id", "source_revision", "environment", "commands", "planned_denominators", "terminal_states", "failures", "recoveries", "artifacts", "hashes", "promotion"]
+    },
+    {
+      "id": "ANT-REC-T1-001",
+      "stage": "T1",
+      "path": "experiments/results/antidote-t1-qualification-v1.json",
+      "state": "not-created",
+      "required_package_fields": ["package_id", "source_revision", "model_manifest", "adapter_manifest", "analyzer_manifest", "hardware_profile", "attempts", "denominators", "measurements", "uncertainty", "failures", "exclusions", "hashes", "promotion"]
+    },
+    {
+      "id": "ANT-REC-H1-FLOW-001",
+      "stage": "H1",
+      "path": "experiments/results/antidote-h1-flow-v1.json",
+      "state": "not-created",
+      "required_package_fields": ["package_id", "collection_authority", "assignment_commitment", "attempts", "artifacts", "exposures", "interruptions", "withdrawals", "missingness", "provenance", "promotion"]
+    },
+    {
+      "id": "ANT-REC-H1-RESPONSE-001",
+      "stage": "H1",
+      "path": "experiments/results/antidote-h1-responses-v1.json",
+      "state": "not-created",
+      "required_package_fields": ["package_id", "instrument_version", "response_records", "corrections", "immediate_windows", "later_windows", "missingness", "analysis_outputs", "provenance", "promotion"]
+    },
+    {
+      "id": "ANT-REC-H1-SAFETY-001",
+      "stage": "H1",
+      "path": "experiments/results/antidote-h1-safety-v1.json",
+      "state": "not-created",
+      "required_package_fields": ["package_id", "mismatches", "unwanted_intensity", "burden", "harm", "stops", "interruptions", "adverse_events", "missingness", "review_disposition", "provenance", "promotion"]
+    },
+    {
+      "id": "ANT-REC-H1-PHYS-001",
+      "stage": "H1",
+      "path": "experiments/results/antidote-h1-physiology-v1.json",
+      "state": "disabled-requires-amendment",
+      "required_package_fields": ["package_id", "protocol_amendment", "consent_scope", "device_manifest", "clock_sync", "signal_quality", "artifacts", "dropout", "missingness", "analysis_outputs", "provenance", "promotion"]
+    }
+  ],
+  "analyses": [
+    {
+      "id": "ANT-AN-D0-TRACE-001",
+      "source_record_id": "ANT-REC-D0-001",
+      "protocol_pointers": ["#/research_questions/0"],
+      "status": "design-review-only"
+    },
+    {
+      "id": "ANT-AN-T0-STATE-001",
+      "source_record_id": "ANT-REC-T0-001",
+      "protocol_pointers": ["#/analysis_plan/primary_technical_summaries/0", "#/analysis_plan/primary_technical_summaries/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-T1-ADHERENCE-001",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_pointers": ["#/analysis_plan/primary_technical_summaries/3"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-T1-TIMING-001",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_pointers": ["#/analysis_plan/primary_technical_summaries/2"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-T1-CONTINUITY-001",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_pointers": ["#/analysis_plan/primary_technical_summaries/0", "#/analysis_plan/primary_technical_summaries/4"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-FLOW-001",
+      "source_record_id": "ANT-REC-H1-FLOW-001",
+      "protocol_pointers": ["#/analysis_plan/primary_human_feasibility_summaries/0"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-IMMEDIATE-COMP-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/primary_human_feasibility_summaries/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-LATER-COMP-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/primary_human_feasibility_summaries/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-EXPRESSION-FELT-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/secondary_within_person_estimands/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-APPRAISAL-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/secondary_within_person_estimands/0"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-AFTEREFFECT-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/primary_human_feasibility_summaries/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-NONPOSITIVE-RESPONSE-001",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_pointers": ["#/analysis_plan/null_and_negative_rule", "#/analysis_plan/primary_human_feasibility_summaries/1"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-NONPOSITIVE-SAFETY-001",
+      "source_record_id": "ANT-REC-H1-SAFETY-001",
+      "protocol_pointers": ["#/analysis_plan/null_and_negative_rule", "#/analysis_plan/primary_human_feasibility_summaries/2", "#/analysis_plan/primary_human_feasibility_summaries/3"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-NONPOSITIVE-FLOW-001",
+      "source_record_id": "ANT-REC-H1-FLOW-001",
+      "protocol_pointers": ["#/analysis_plan/null_and_negative_rule", "#/analysis_plan/primary_human_feasibility_summaries/0"],
+      "status": "not-run"
+    },
+    {
+      "id": "ANT-AN-H1-PHYS-001",
+      "source_record_id": "ANT-REC-H1-PHYS-001",
+      "protocol_pointers": ["#/optional_physiology"],
+      "status": "disabled-requires-amendment"
+    }
+  ],
+  "result_slots": [
+    {
+      "id": "ANT-RES-D0-TRACE",
+      "display_name": "Design traceability",
+      "section_label": "sec:results-technical-verification",
+      "stage": "D0",
+      "evidence_class": "decided",
+      "current_state": "design-record-available",
+      "source_record_id": "ANT-REC-D0-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-D0-TRACE-001",
+      "visual_ids": [],
+      "reporting_rule": "Report artifact identity and traceability only, never performance.",
+      "prohibited_inference": "A complete design record does not prove implementation, feasibility, safety, or benefit."
+    },
+    {
+      "id": "ANT-RES-T0-SLICE",
+      "display_name": "Mock exit-gate conformance",
+      "section_label": "sec:results-technical-verification",
+      "stage": "T0",
+      "evidence_class": "technical-synthetic",
+      "current_state": "awaiting-ant-q03-exit-gate",
+      "source_record_id": "ANT-REC-T0-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-T0-STATE-001",
+      "visual_ids": ["ANT-FIG-010", "ANT-TBL-004"],
+      "reporting_rule": "After issue #18 and ledger review, report every planned success, rejection, failure, recovery, and denominator as synthetic technical evidence.",
+      "prohibited_inference": "Mock conformance is not human exposure, affective response, benefit, or safety."
+    },
+    {
+      "id": "ANT-RES-T1-ADHERENCE",
+      "display_name": "Real-model control adherence",
+      "section_label": "sec:results-control-adherence",
+      "stage": "T1",
+      "evidence_class": "technical",
+      "current_state": "blocked-no-real-model",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-T1-ADHERENCE-001",
+      "visual_ids": ["ANT-TBL-004", "ANT-FIG-011"],
+      "reporting_rule": "Report paired requested-versus-measured differences by factor and seed with uncertainty and unsupported controls.",
+      "prohibited_inference": "Acoustic adherence is not perceived expression, felt response, or benefit."
+    },
+    {
+      "id": "ANT-RES-T1-TIMING",
+      "display_name": "Generation timing and buffer margin",
+      "section_label": "sec:results-control-adherence",
+      "stage": "T1",
+      "evidence_class": "technical",
+      "current_state": "blocked-no-real-model",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-T1-TIMING-001",
+      "visual_ids": ["ANT-TBL-004", "ANT-FIG-011"],
+      "reporting_rule": "Report component latency and verified buffer margin with complete denominators and hardware context.",
+      "prohibited_inference": "Meeting a generation deadline does not prove seamless perception or benefit."
+    },
+    {
+      "id": "ANT-RES-T1-CONTINUITY",
+      "display_name": "Continuity, interruption, and recovery",
+      "section_label": "sec:results-control-adherence",
+      "stage": "T1",
+      "evidence_class": "technical",
+      "current_state": "blocked-no-real-model",
+      "source_record_id": "ANT-REC-T1-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-T1-CONTINUITY-001",
+      "visual_ids": ["ANT-TBL-004", "ANT-FIG-011"],
+      "reporting_rule": "Report semantic and waveform boundary components separately alongside cancellations, partial outputs, failures, and recoveries.",
+      "prohibited_inference": "A low boundary score does not establish perceived smoothness, emotional fit, or safety."
+    },
+    {
+      "id": "ANT-RES-H1-FLOW",
+      "display_name": "Assigned attempt and exposure flow",
+      "section_label": "sec:results-exposure-completeness",
+      "stage": "H1",
+      "evidence_class": "observed",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-FLOW-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-FLOW-001",
+      "visual_ids": ["ANT-TBL-005"],
+      "reporting_rule": "Report assigned, attempted, verified, played, completed, interrupted, postponed, and withdrawn records by condition with exact denominators.",
+      "prohibited_inference": "Generation, verification, or assignment is not exposure or completion."
+    },
+    {
+      "id": "ANT-RES-H1-IMMEDIATE-COMP",
+      "display_name": "Immediate response completeness",
+      "section_label": "sec:results-exposure-completeness",
+      "stage": "H1",
+      "evidence_class": "observed-or-self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-IMMEDIATE-COMP-001",
+      "visual_ids": ["ANT-TBL-005"],
+      "reporting_rule": "Report every immediate field as present, declined, missed-window, interrupted, technically unavailable, or not applicable.",
+      "prohibited_inference": "Missing or declined response is not neutral response or zero."
+    },
+    {
+      "id": "ANT-RES-H1-LATER-COMP",
+      "display_name": "Later aftereffect completeness",
+      "section_label": "sec:results-exposure-completeness",
+      "stage": "H1",
+      "evidence_class": "observed-or-self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-LATER-COMP-001",
+      "visual_ids": ["ANT-TBL-005"],
+      "reporting_rule": "Report in-window, late, declined, missed, interrupted, and unavailable later records separately.",
+      "prohibited_inference": "An absent later record cannot be interpreted as no aftereffect."
+    },
+    {
+      "id": "ANT-RES-H1-EXPRESSION-FELT",
+      "display_name": "Perceived expression and felt state",
+      "section_label": "sec:results-subjective-response",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-EXPRESSION-FELT-001",
+      "visual_ids": [],
+      "reporting_rule": "Show session-level perceived-expression and felt-state values separately, including their within-session difference without declaring either correct.",
+      "prohibited_inference": "Musical expression is not the listener's state, and neither is an objective need label."
+    },
+    {
+      "id": "ANT-RES-H1-APPRAISAL",
+      "display_name": "Immediate appraisal by condition",
+      "section_label": "sec:results-subjective-response",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-APPRAISAL-001",
+      "visual_ids": [],
+      "reporting_rule": "Show every session point and blockwise P-minus-S, P-minus-G, and S-minus-G contrasts for helpfulness, resonance, mismatch, harm, and burden.",
+      "prohibited_inference": "A within-person contrast is not a population effect, clinical outcome, or proof of causality."
+    },
+    {
+      "id": "ANT-RES-H1-AFTEREFFECT",
+      "display_name": "Immediate-to-later aftereffect",
+      "section_label": "sec:results-subjective-response",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-AFTEREFFECT-001",
+      "visual_ids": [],
+      "reporting_rule": "Preserve immediate and later helpfulness, harm, and person-authored meaning as separate timestamped records.",
+      "prohibited_inference": "Later meaning does not retroactively convert intensity into benefit or harm."
+    },
+    {
+      "id": "ANT-RES-H1-NULL",
+      "display_name": "Null or opposite-direction response",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-RESPONSE-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Retain zero movement, null contrasts, and opposite-direction movement with the same visibility as favorable direction.",
+      "prohibited_inference": "Null does not mean missing, and opposite-direction movement is not automatically harm."
+    },
+    {
+      "id": "ANT-RES-H1-MISMATCH",
+      "display_name": "Mismatch or unwanted intensity",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-SAFETY-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-SAFETY-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Report mismatch and whether intensity was unwanted without collapsing them into harm.",
+      "prohibited_inference": "Intensity, crying, or engagement is not automatic success or failure."
+    },
+    {
+      "id": "ANT-RES-H1-BURDEN",
+      "display_name": "Interaction or session burden",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-SAFETY-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-SAFETY-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Report interaction and total-session burden separately with their declared anchors.",
+      "prohibited_inference": "Low burden does not establish benefit, safety, or meaningful consent."
+    },
+    {
+      "id": "ANT-RES-H1-HARM",
+      "display_name": "Harm or adverse response",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "self-reported-or-observed",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-SAFETY-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-SAFETY-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Report harm, distress, hearing discomfort, consent or privacy failure, technical safety failure, and participant-described adverse responses separately.",
+      "prohibited_inference": "No observed adverse event would prove clinical safety."
+    },
+    {
+      "id": "ANT-RES-H1-MISSING",
+      "display_name": "Missing, declined, or unavailable",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "observed-or-self-reported",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-RESPONSE-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-RESPONSE-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Preserve field-level missingness and the prespecified reason without imputation in the primary analysis.",
+      "prohibited_inference": "Missing, declined, and unavailable are distinct and none equals zero."
+    },
+    {
+      "id": "ANT-RES-H1-INTERRUPTION",
+      "display_name": "Stop, interruption, or technical failure",
+      "section_label": "sec:results-nonpositive-observations",
+      "stage": "H1",
+      "evidence_class": "observed",
+      "current_state": "blocked-no-collection-authority",
+      "source_record_id": "ANT-REC-H1-FLOW-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-NONPOSITIVE-FLOW-001",
+      "visual_ids": ["ANT-TBL-006"],
+      "reporting_rule": "Keep stops, interruptions, technical failures, partial exposure, and withdrawals in the attempt ledger and denominators.",
+      "prohibited_inference": "A stopped session cannot be silently replaced, excluded, or classified as a completed exposure."
+    },
+    {
+      "id": "ANT-RES-H1-PHYSIOLOGY",
+      "display_name": "Optional physiological observations",
+      "section_label": "sec:results-optional-physiology",
+      "stage": "H1",
+      "evidence_class": "unavailable",
+      "current_state": "disabled-requires-amendment",
+      "source_record_id": "ANT-REC-H1-PHYS-001",
+      "protocol_version": "1.0.0",
+      "analysis_id": "ANT-AN-H1-PHYS-001",
+      "visual_ids": [],
+      "reporting_rule": "Do not create a physiology panel or result row under protocol version 1.0.0.",
+      "prohibited_inference": "Physiology cannot diagnose emotion or need, overwrite self-report, prove entrainment, or imply benefit."
+    }
+  ],
+  "table_shells": [
+    {
+      "visual_id": "ANT-TBL-004",
+      "output_path": "paper/tables/control-adherence-results.tex",
+      "slot_ids": ["ANT-RES-T0-SLICE", "ANT-RES-T1-ADHERENCE", "ANT-RES-T1-TIMING", "ANT-RES-T1-CONTINUITY"]
+    },
+    {
+      "visual_id": "ANT-TBL-005",
+      "output_path": "paper/tables/exposure-response-completeness.tex",
+      "slot_ids": ["ANT-RES-H1-FLOW", "ANT-RES-H1-IMMEDIATE-COMP", "ANT-RES-H1-LATER-COMP"]
+    },
+    {
+      "visual_id": "ANT-TBL-006",
+      "output_path": "paper/tables/outcomes-accounting.tex",
+      "slot_ids": ["ANT-RES-H1-NULL", "ANT-RES-H1-MISMATCH", "ANT-RES-H1-BURDEN", "ANT-RES-H1-HARM", "ANT-RES-H1-MISSING", "ANT-RES-H1-INTERRUPTION"]
+    }
+  ],
+  "figure_shells": [
+    {
+      "visual_id": "ANT-FIG-010",
+      "slot_ids": ["ANT-RES-T0-SLICE"],
+      "current_state": "placeholder-no-promoted-package"
+    },
+    {
+      "visual_id": "ANT-FIG-011",
+      "slot_ids": ["ANT-RES-T1-ADHERENCE", "ANT-RES-T1-TIMING", "ANT-RES-T1-CONTINUITY"],
+      "current_state": "placeholder-no-qualifying-run"
+    }
+  ]
+}

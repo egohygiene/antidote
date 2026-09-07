@@ -6,6 +6,12 @@ rendering script beside the fragment. Table identity, placement, caption,
 accessibility text, state, provenance, and claims remain governed by
 [`paper/visuals/manifest.json`](../visuals/manifest.json).
 
-Planned table filenames are reserved by the manifest but are not created until
-their owning evidence and manuscript issues authorize content. This prevents an
-empty layout or synthetic fixture from being mistaken for a result.
+Most planned table filenames remain visibly provisional until their owning
+evidence and manuscript issues authorize content. The three Results tables are
+a deliberate exception: `scripts/generate_results_reporting.py` projects a
+governed empty state from
+`experiments/reporting/results-reporting-v1.json`. Those drafts identify future
+source records, protocol versions, analyses, and blocked states while containing
+no result values. A value-bearing revision must be generated from a qualifying
+result package and reviewed through the claim ledger; values are never entered
+directly in LaTeX.

@@ -28,6 +28,10 @@ from generate_protocol_appendix import (
     expected_outputs as expected_protocol_outputs,
     validate_protocol,
 )
+from generate_results_reporting import (
+    expected_outputs as expected_results_outputs,
+    validate_reporting,
+)
 from generate_research_shelf import render_shelf
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -391,6 +395,18 @@ def main() -> int:
                 errors.append(f"generated protocol appendix is stale: {protocol_path}")
     except (OSError, TypeError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors.append(f"feasibility protocol cannot be validated: {error}")
+
+    try:
+        errors.extend(validate_reporting(project))
+        for results_path, expected_results_text in expected_results_outputs(
+            project
+        ).items():
+            if not results_path.is_file():
+                errors.append(f"generated Results table is missing: {results_path}")
+            elif results_path.read_text(encoding="utf-8") != expected_results_text:
+                errors.append(f"generated Results table is stale: {results_path}")
+    except (OSError, TypeError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"Results reporting contract cannot be validated: {error}")
 
     for section in REQUIRED_SECTIONS:
         if not re.search(

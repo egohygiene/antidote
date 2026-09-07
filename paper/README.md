@@ -56,6 +56,24 @@ python3 scripts/generate_equation_appendix.py
 Update the System Design source, registry, generated appendix projections, and
 affected visual specification together whenever a formula changes.
 
+## Results reporting
+
+[`experiments/reporting/results-reporting-v1.json`](../experiments/reporting/results-reporting-v1.json)
+governs the current empty Results state. Every future result slot names its
+reserved source package, frozen protocol version, analysis pointer, evidence
+class, and promotion boundary. The three Results tables are deterministic,
+value-free projections of that contract:
+
+```sh
+python3 scripts/generate_results_reporting.py --write
+python3 scripts/generate_results_reporting.py
+```
+
+No qualifying package currently exists under `experiments/results/`. Never
+copy synthetic fixtures into that directory or enter values directly in the
+generated LaTeX. Evidence from MVP issue #18 remains synthetic technical
+evidence and requires an explicit claim-ledger review before manuscript use.
+
 ## Scientific visuals
 
 [`visuals/manifest.json`](visuals/manifest.json) governs the complete figure
@@ -87,7 +105,7 @@ python3 scripts/check_visuals.py
 | `02-related-work.tex` | Primary-source synthesis and comparison | Governed source and comparator records |
 | `03-system-design.tex` | Person--moment model, semantic mixer, two-rate architecture, timing, continuity, response, and provenance | Distinguish definitions, proposals, estimates, future models, and implemented behavior |
 | `04-methods.tex` | Feasibility protocol and analysis plan | Freeze before formal collection |
-| `05-results.tex` | Auditable observations and analyses | No results until the frozen protocol runs |
+| `05-results.tex` | Auditable reporting slots and analyses | Preserve unavailable states until qualifying source packages pass promotion review |
 | `06-discussion.tex` | Evidence-proportional interpretation | Separate feasibility, efficacy, and mechanism |
 | `07-limitations-and-ethics.tex` | Validity threats, safety, privacy, and review | Resolve ethics requirements before collection |
 | `08-availability-and-contributions.tex` | Reproducibility, access, funding, and roles | Verify identifiers and contributor approvals |
@@ -140,6 +158,7 @@ Run the full source and artifact checks before opening a pull request:
 python3 scripts/check_sources.py
 python3 scripts/check_placeholders.py
 python3 scripts/generate_equation_appendix.py
+python3 scripts/generate_results_reporting.py
 python3 scripts/generate_research_shelf.py
 python3 scripts/generate_skeleton_visuals.py
 python3 scripts/check_visuals.py

@@ -62,8 +62,11 @@ class VisualContractTests(unittest.TestCase):
         )
         states = {visual["id"]: visual["state"] for visual in result["active"]}
         self.assertEqual(states["ANT-TBL-002"], "draft")
+        self.assertEqual(states["ANT-TBL-004"], "draft")
+        self.assertEqual(states["ANT-TBL-005"], "draft")
+        self.assertEqual(states["ANT-TBL-006"], "draft")
         self.assertEqual(set(states.values()), {"placeholder", "draft"})
-        self.assertEqual(list(states.values()).count("placeholder"), 18)
+        self.assertEqual(list(states.values()).count("placeholder"), 15)
         self.assertEqual(
             {visual["kind"] for visual in manifest["visuals"]},
             {"figure", "table"},
