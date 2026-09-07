@@ -19,9 +19,11 @@ state.
 
 - **Last merged baseline before this change:** `main` at
   `f4dc9326e07ad99d08557d0695e2bee8918657ec`, PR #88, completing issue #46.
-- **Current change:** issue #47 on branch `codex/issue-47-synthesis` completes
-  the title, abstract, conclusion, appendix claim index, and whole-paper
-  coherence pass. Check GitHub before treating this change as merged.
+- **Current change:** issue #47 is implemented by
+  [PR #90](https://github.com/egohygiene/antidote/pull/90) on branch
+  `codex/issue-47-synthesis`. It completes the title, abstract, conclusion,
+  appendix claim index, and whole-paper coherence pass. Check GitHub before
+  treating this change as merged.
 - **Next issue after merge:** #48, the reviewable-paper and live-publication
   gate.
 - **New scheduled follow-up:** #89, publication-first launch-site polish after
