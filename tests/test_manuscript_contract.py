@@ -81,7 +81,7 @@ class ManuscriptContractTests(unittest.TestCase):
         )
         identity = contract["identity"]
         self.assertEqual(contract["schema"], "antidote.manuscript-contract/v1")
-        self.assertEqual(contract["version"], "0.2.0")
+        self.assertEqual(contract["version"], "0.3.0")
         self.assertEqual(contract["status"], "frozen")
         self.assertEqual(identity["working_title"], metadata["paper"]["title"])
         self.assertEqual(identity["subtitle"], metadata["paper"]["subtitle"])
@@ -298,6 +298,38 @@ class ManuscriptContractTests(unittest.TestCase):
             self.assertIn(marker, methods)
         self.assertIn("no formal human study has begun", normalized_methods)
         self.assertIn("technical controllability cannot", normalized_methods)
+
+    def test_results_is_complete_without_invented_evidence(self) -> None:
+        """Issue #41 must expose reportability without fabricating findings."""
+        results = (ROOT / "paper" / "sections" / "05-results.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized_results = re.sub(r"\s+", " ", results)
+        self.assertNotIn("\\AntidotePlaceholder", results)
+        for label in (
+            "sec:results-technical-verification",
+            "sec:results-control-adherence",
+            "sec:results-exposure-completeness",
+            "sec:results-subjective-response",
+            "sec:results-nonpositive-observations",
+            "sec:results-optional-physiology",
+            "sec:results-promotion-rule",
+        ):
+            self.assertIn(f"\\label{{{label}}}", results)
+        for marker in (
+            "ANT-REPORT-RESULTS-001",
+            "ANT-PROT-FEAS-001",
+            "ANT-REC-T0-001",
+            "ANT-REC-T1-001",
+            "blocked-no-collection-authority",
+            "no formal human results",
+            "never entered as a zero",
+        ):
+            self.assertIn(marker, normalized_results)
+        self.assertIn("vohra2015cent", results)
+        self.assertIn("eldridge2016feasibility", results)
+        self.assertEqual(results.count("\\AntidoteTable{"), 3)
+        self.assertEqual(results.count("\\AntidoteFigure{"), 2)
 
 
 if __name__ == "__main__":

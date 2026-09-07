@@ -23,9 +23,11 @@ safety, personalization quality, clinical efficacy, or actual private use.
 
 ## Source plan
 
-Capture only a reproducible reviewed build from issue #18 or its successor.
-Use synthetic fixtures unless separate approval exists. Retain capture steps,
-revision, operating-system context, redaction review, and image checksum.
+`ANT-REPORT-RESULTS-001` maps this figure to `ANT-RES-T0-SLICE` and the
+reserved `ANT-REC-T0-001` package. Capture only a reproducible reviewed build
+from issue #18 or its successor after claim-ledger promotion. Use synthetic
+fixtures unless separate approval exists. Retain capture steps, revision,
+operating-system context, redaction review, and image checksum.
 
 ## Accessibility plan
 

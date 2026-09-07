@@ -6,15 +6,24 @@ Make non-positive and unavailable observations impossible to hide through select
 
 ## Required content
 
-Eventually include prespecified categories, definitions, counts, denominators, provenance, and reporting disposition.
+The current generated projection must reserve separate rows for null or
+opposite-direction response, mismatch or unwanted intensity, burden, harm or
+adverse response, missingness, and interruption. Each row names its source,
+protocol, analysis, and blocked state without a count. A future promoted
+version must add definitions, counts, denominators, provenance, and reporting
+disposition.
 
 ## Evidence and claim boundary
 
-Governed by ANT-HYP-003, ANT-CLM-003, and ANT-NEG-004. Intensity is not automatic success and no current outcomes exist.
+Governed by ANT-HYP-003, ANT-OBS-003, ANT-CLM-003, ANT-CLM-007, and
+ANT-NEG-004. Intensity is not automatic success and no current outcomes exist.
 
 ## Source plan
 
-Generate deterministic LaTeX from qualifying protocol records; keep the table inactive until evidence exists.
+Generate the empty state from `ANT-REPORT-RESULTS-001` through
+`scripts/generate_results_reporting.py`. A future value-bearing version must
+derive from the reserved H1 flow, response, and safety packages after H1
+authority and claim-ledger promotion; never enter values directly in LaTeX.
 
 ## Accessibility plan
 

@@ -1,10 +1,10 @@
 {
   "schema": "antidote.manuscript-contract/v1",
-  "version": "0.2.0",
+  "version": "0.3.0",
   "status": "frozen",
   "frozen_by": "egohygiene/antidote#35",
   "last_reviewed": "2026-09-07",
-  "last_revised_by": "egohygiene/antidote#40",
+  "last_revised_by": "egohygiene/antidote#41",
   "revision_policy": "Changes require a version bump, claim-ledger reconciliation, and review through the owning section issue. Issue #47 may supersede the working title and abstract only after the complete body is coherent.",
   "identity": {
     "working_title": "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys",
@@ -571,9 +571,10 @@
         40
       ],
       "required_evidence": [
-        "Frozen protocol version",
-        "Source record and provenance for every promoted result",
-        "Claim-ledger approval for technical evidence from MVP issue #18"
+        "Frozen protocol and governed Results reporting versions",
+        "Named source record, protocol version, analysis pointer, and evidence class for every result slot",
+        "Explicit unavailable state until a qualifying package exists",
+        "Claim-ledger approval before any evidence from MVP issue #18 or a later execution enters the manuscript"
       ],
       "planned_visuals": [
         "control-adherence results",

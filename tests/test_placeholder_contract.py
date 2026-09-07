@@ -33,7 +33,7 @@ class PlaceholderContractTests(unittest.TestCase):
         """Every active content gap must have one stable governed identity."""
         result = PLACEHOLDERS.validate_placeholder_system(ROOT)
         self.assertEqual(result["errors"], [])
-        self.assertEqual(len(result["active"]), 25)
+        self.assertEqual(len(result["active"]), 20)
         identifiers = [record["id"] for record in result["active"]]
         self.assertEqual(len(identifiers), len(set(identifiers)))
 
@@ -44,7 +44,7 @@ class PlaceholderContractTests(unittest.TestCase):
         )
         self.assertEqual(
             len([error for error in result["errors"] if "blocks submission-ready" in error]),
-            25,
+            20,
         )
 
     def test_unregistered_placeholder_is_rejected(self) -> None:

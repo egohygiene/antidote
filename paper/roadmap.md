@@ -85,7 +85,7 @@ without qualifying implementation or structured observations.
 - [x] [#38 — Write Related Work and the evidence synthesis](https://github.com/egohygiene/antidote/issues/38)
 - [x] [#39 — Formalize the mathematical model and write System Design](https://github.com/egohygiene/antidote/issues/39) — [equation registry](equations/registry.json)
 - [x] [#40 — Write the feasibility method and frozen evaluation protocol](https://github.com/egohygiene/antidote/issues/40) — [frozen design protocol](../experiments/protocols/antidote-feasibility-v1.json)
-- [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41) — next
+- [x] [#41 — Define Results and analysis reporting without inventing evidence](https://github.com/egohygiene/antidote/issues/41) — [governed reporting contract](../experiments/reporting/results-reporting-v1.json)
 
 The Results issue creates an honest reporting contract. It does not authorize
 invented values or promote synthetic fixtures into human evidence. Technical
@@ -94,7 +94,7 @@ human-response findings require the later frozen protocol.
 
 ### Wave P4 — Interpretation, accountability, and figures
 
-- [#42 — Write Discussion and bounded future directions](https://github.com/egohygiene/antidote/issues/42)
+- [#42 — Write Discussion and bounded future directions](https://github.com/egohygiene/antidote/issues/42) — next
 - [#43 — Write Limitations, ethics, safety, and privacy](https://github.com/egohygiene/antidote/issues/43)
 - [#44 — Write availability, reproducibility, and contributor statements](https://github.com/egohygiene/antidote/issues/44)
 - [#46 — Produce the core Antidote figures and evidence tables](https://github.com/egohygiene/antidote/issues/46)

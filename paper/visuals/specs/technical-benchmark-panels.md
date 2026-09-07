@@ -23,9 +23,11 @@ results. Technical performance does not establish felt response or benefit.
 
 ## Source plan
 
-Issue #41 freezes the reporting and promotion rule. Generate the final SVG or
-PDF deterministically from versioned structured data and analysis code; record
-environment, exclusions, checksums, and provenance. Issue #46 owns styling.
+`ANT-REPORT-RESULTS-001` maps the panels to `ANT-RES-T1-ADHERENCE`,
+`ANT-RES-T1-TIMING`, and `ANT-RES-T1-CONTINUITY`. Generate the final SVG or
+PDF only from the reserved `ANT-REC-T1-001` package and frozen analysis
+outputs after claim-ledger promotion; record environment, exclusions,
+checksums, and provenance. Issue #46 owns styling.
 
 ## Accessibility plan
 
