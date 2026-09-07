@@ -30,6 +30,10 @@ JourneyPlanStatus = Literal["draft", "approved", "superseded"]
 
 MomentContextDesiredTransitionDirection = Literal["stay_with", "soften", "regulate", "uplift", "focus", "release", "explore", "other"]
 
+ResponseObservationMissingField = Literal["perceived_expression", "felt_state", "wanted_intensity", "helpfulness", "resonance", "mismatch", "harm", "surprise", "interaction_burden", "session_burden"]
+
+ResponseObservationMissingnessReason = Literal["not_prompted", "declined", "missed_window", "technical_failure", "interrupted", "not_applicable"]
+
 ResponseObservationWindow = Literal["during", "immediate", "later"]
 
 WorkingContextProjectionSemanticItemKind = Literal["state", "meaning", "metaphor", "memory", "preference", "inclusion", "exclusion", "constraint", "uncertainty"]
@@ -223,18 +227,31 @@ class ResponseObservation(TypedDict):
     exposure_id: str
     observed_at: str
     window: ResponseObservationWindow
-    felt_state: ResponseObservationFeltState
+    instrument_version: NotRequired[str]
+    perceived_expression: NotRequired[ResponseObservationPerceivedExpression | None]
+    felt_state: ResponseObservationFeltState | None
     wanted_intensity: bool | None
     helpfulness: float | None
     resonance: float | None
     mismatch: float | None
     harm: float | None
+    surprise: NotRequired[float | None]
+    interaction_burden: NotRequired[float | None]
+    session_burden: NotRequired[float | None]
+    missing_fields: NotRequired[list[ResponseObservationMissingField]]
+    missingness_reason: NotRequired[ResponseObservationMissingnessReason]
     stopped_early: NotRequired[bool]
     notes: NotRequired[str]
     later_aftereffect_requested: NotRequired[bool]
     allow_personal_model_update: NotRequired[bool]
 
 class ResponseObservationFeltState(TypedDict):
+    description: str
+    valence: NotRequired[float | None]
+    arousal: NotRequired[float | None]
+    intensity: NotRequired[float | None]
+
+class ResponseObservationPerceivedExpression(TypedDict):
     description: str
     valence: NotRequired[float | None]
     arousal: NotRequired[float | None]

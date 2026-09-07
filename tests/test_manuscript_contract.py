@@ -81,7 +81,7 @@ class ManuscriptContractTests(unittest.TestCase):
         )
         identity = contract["identity"]
         self.assertEqual(contract["schema"], "antidote.manuscript-contract/v1")
-        self.assertEqual(contract["version"], "0.1.0")
+        self.assertEqual(contract["version"], "0.2.0")
         self.assertEqual(contract["status"], "frozen")
         self.assertEqual(identity["working_title"], metadata["paper"]["title"])
         self.assertEqual(identity["subtitle"], metadata["paper"]["subtitle"])
@@ -259,6 +259,45 @@ class ManuscriptContractTests(unittest.TestCase):
         self.assertIn("not implemented", system_design)
         self.assertIn("repository evidence, not human-outcome evidence", system_design)
         self.assertEqual(system_design.count("\\AntidoteFigure{"), 7)
+
+    def test_methods_is_complete_and_bound_to_the_frozen_protocol(self) -> None:
+        """Issue #40 must preserve one prospective non-collecting protocol."""
+        methods = (ROOT / "paper" / "sections" / "04-methods.tex").read_text(
+            encoding="utf-8"
+        )
+        normalized_methods = re.sub(r"\s+", " ", methods)
+        self.assertNotIn("\\AntidotePlaceholder", methods)
+        for label in (
+            "sec:methods-feasibility-stages",
+            "sec:methods-session-structure",
+            "sec:methods-technical-verification",
+            "sec:methods-within-person-measures",
+            "sec:methods-assignment-missingness",
+            "sec:methods-analysis-plan",
+            "sec:methods-protocol-freeze",
+        ):
+            self.assertIn(f"\\label{{{label}}}", methods)
+        for citation in (
+            "porcino2020spent",
+            "eldridge2016feasibility",
+            "konigorski2022studyu",
+            "shiffman2008ema",
+            "betella2016slider",
+        ):
+            self.assertIn(citation, methods)
+        for marker in (
+            "ANT-PROT-FEAS-001",
+            "frozen-design-protocol",
+            "collection authority",
+            "blocked-no-real-model",
+            "blocked-no-collection-authority",
+            "ANT-EQ-014",
+            "ANT-EQ-015",
+            "ANT-EQ-016",
+        ):
+            self.assertIn(marker, methods)
+        self.assertIn("no formal human study has begun", normalized_methods)
+        self.assertIn("technical controllability cannot", normalized_methods)
 
 
 if __name__ == "__main__":

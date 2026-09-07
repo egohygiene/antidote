@@ -26,6 +26,10 @@ export type JourneyPlanStatus = "draft" | "approved" | "superseded";
 
 export type MomentContextDesiredTransitionDirection = "stay_with" | "soften" | "regulate" | "uplift" | "focus" | "release" | "explore" | "other";
 
+export type ResponseObservationMissingField = "perceived_expression" | "felt_state" | "wanted_intensity" | "helpfulness" | "resonance" | "mismatch" | "harm" | "surprise" | "interaction_burden" | "session_burden";
+
+export type ResponseObservationMissingnessReason = "not_prompted" | "declined" | "missed_window" | "technical_failure" | "interrupted" | "not_applicable";
+
 export type ResponseObservationWindow = "during" | "immediate" | "later";
 
 export type WorkingContextProjectionSemanticItemKind = "state" | "meaning" | "metaphor" | "memory" | "preference" | "inclusion" | "exclusion" | "constraint" | "uncertainty";
@@ -242,12 +246,19 @@ export interface ResponseObservation {
   exposure_id: string;
   observed_at: string;
   window: ResponseObservationWindow;
-  felt_state: ResponseObservationFeltState;
+  instrument_version?: string;
+  perceived_expression?: ResponseObservationPerceivedExpression | null;
+  felt_state: ResponseObservationFeltState | null;
   wanted_intensity: boolean | null;
   helpfulness: number | null;
   resonance: number | null;
   mismatch: number | null;
   harm: number | null;
+  surprise?: number | null;
+  interaction_burden?: number | null;
+  session_burden?: number | null;
+  missing_fields?: Array<ResponseObservationMissingField>;
+  missingness_reason?: ResponseObservationMissingnessReason;
   stopped_early?: boolean;
   notes?: string;
   later_aftereffect_requested?: boolean;
@@ -255,6 +266,13 @@ export interface ResponseObservation {
 }
 
 export interface ResponseObservationFeltState {
+  description: string;
+  valence?: number | null;
+  arousal?: number | null;
+  intensity?: number | null;
+}
+
+export interface ResponseObservationPerceivedExpression {
   description: string;
   valence?: number | null;
   arousal?: number | null;

@@ -992,7 +992,10 @@ function CompleteScreen({
         aria-labelledby="response-summary-title"
       >
         <h3 id="response-summary-title">Your recorded interpretation</h3>
-        <p>{response?.felt_state.description}</p>
+        <p>
+          {response?.felt_state?.description ??
+            "No felt-state response supplied."}
+        </p>
         <dl className="metadata-grid">
           <div>
             <dt>Helpfulness</dt>

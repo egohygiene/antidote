@@ -28,8 +28,20 @@
       "type": "string",
       "enum": ["during", "immediate", "later"]
     },
+    "instrument_version": { "type": "string", "minLength": 1, "maxLength": 100 },
+    "perceived_expression": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["description"],
+      "properties": {
+        "description": { "type": "string", "minLength": 1, "maxLength": 4000 },
+        "valence": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "arousal": { "type": ["number", "null"], "minimum": -1, "maximum": 1 },
+        "intensity": { "type": ["number", "null"], "minimum": 0, "maximum": 1 }
+      }
+    },
     "felt_state": {
-      "type": "object",
+      "type": ["object", "null"],
       "additionalProperties": false,
       "required": ["description"],
       "properties": {
@@ -44,6 +56,39 @@
     "resonance": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
     "mismatch": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
     "harm": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "surprise": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "interaction_burden": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "session_burden": { "type": ["number", "null"], "minimum": 0, "maximum": 1 },
+    "missing_fields": {
+      "type": "array",
+      "uniqueItems": true,
+      "items": {
+        "type": "string",
+        "enum": [
+          "perceived_expression",
+          "felt_state",
+          "wanted_intensity",
+          "helpfulness",
+          "resonance",
+          "mismatch",
+          "harm",
+          "surprise",
+          "interaction_burden",
+          "session_burden"
+        ]
+      }
+    },
+    "missingness_reason": {
+      "type": "string",
+      "enum": [
+        "not_prompted",
+        "declined",
+        "missed_window",
+        "technical_failure",
+        "interrupted",
+        "not_applicable"
+      ]
+    },
     "stopped_early": { "type": "boolean", "default": false },
     "notes": { "type": "string", "maxLength": 8000 },
     "later_aftereffect_requested": { "type": "boolean", "default": false },

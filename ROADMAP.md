@@ -3,12 +3,12 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.7.0
+version: 0.8.0
 status: provisional
 owners:
   - egohygiene
 created: 2026-08-26
-updated: 2026-09-05
+updated: 2026-09-07
 governed_by:
   - architecture-roadmap
 depends_on:
@@ -32,10 +32,10 @@ repository: egohygiene/antidote
 visibility: public
 publication: central
 route: /roadmap/antidote/
-updated: 2026-09-05
+updated: 2026-09-07
 -->
 
-## 2026-09-05 execution snapshot
+## 2026-09-07 execution snapshot
 
 > This evidence-reconciled snapshot is the issue-generation and visual-roadmap
 > handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
@@ -45,11 +45,10 @@ updated: 2026-09-05
 
 **Current gate:** The MVP implementation sequence is deliberately paused after
 issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
-section boundaries, and visual governance through issue #45. Issue #77
-materialized the complete paper-shaped skeleton, and issue #39 now formalizes
-the mathematical model and System Design. Issue #40 is the next writing slice,
-followed by the design/protocol manuscript sequence through issue #48 and the
-launch sequence in issue #69.
+section boundaries, visual governance, mathematical model, System Design, and
+prospective feasibility method through issue #40. Issue #41 is the next writing
+slice, followed by the design/protocol manuscript sequence through issue #48
+and the launch sequence in issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -260,22 +259,26 @@ response, and exports provenance.
 id: ANT-Q05
 status: planned
 depends_on: [ANT-Q02, ANT-Q04]
-issues: []
+issues: ["egohygiene/antidote#40"]
 -->
 
 #### ANT-Q05 — Freeze the N-of-1 feasibility protocol
 
 **State:** `planned`
 
+**Current evidence:** Issue #40 freezes version 1.0.0 as a design-protocol
+artifact with collection authority set to false. The protocol cannot activate
+until ANT-Q04 and every independent human-collection gate are complete.
+
 **Outcome:** Variables, conditions, measures, assignments, analysis, safety,
 consent, retention, and provenance are explicit before formal collection.
 
 **Exit criteria:**
 
-- [ ] Protocol and analysis plan are versioned.
-- [ ] Conditions compare generic prompting, structured non-personalized
+- [x] Protocol and analysis plan are versioned as a non-collecting design artifact.
+- [x] Conditions compare generic prompting, structured non-personalized
   journeys, and personal semantic journeys where feasible.
-- [ ] Data schemas separate subjective, acoustic, behavioral, and optional
+- [x] Data schemas separate subjective, acoustic, behavioral, and optional
   physiological measures.
 - [ ] Ethics, privacy, exclusion, and stop requirements are resolved.
 - [ ] A pilot stop/go decision is recorded.

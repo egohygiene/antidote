@@ -1,9 +1,10 @@
 {
   "schema": "antidote.manuscript-contract/v1",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "status": "frozen",
   "frozen_by": "egohygiene/antidote#35",
-  "last_reviewed": "2026-08-29",
+  "last_reviewed": "2026-09-07",
+  "last_revised_by": "egohygiene/antidote#40",
   "revision_policy": "Changes require a version bump, claim-ledger reconciliation, and review through the owning section issue. Issue #47 may supersede the working title and abstract only after the complete body is coherent.",
   "identity": {
     "working_title": "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys",
@@ -135,14 +136,16 @@
       "title": "Evidence-disciplined feasibility protocol",
       "statement": "A prospective evaluation and reporting contract that keeps intended control, acoustic adherence, perceived expression, felt response, immediate usefulness or harm, aftereffect, and clinical outcome distinct while retaining null, negative, missing, interrupted, and adverse observations.",
       "claim_ids": [
+        "ANT-SRC-006",
         "ANT-HYP-001",
         "ANT-HYP-003",
-        "ANT-CLM-003"
+        "ANT-CLM-003",
+        "ANT-CLM-006"
       ],
-      "status": "protocol contribution pending issue #40 freeze",
+      "status": "frozen prospective protocol; human collection blocked",
       "permitted_verbs": [
         "specifies",
-        "pre-registers",
+        "freezes",
         "distinguishes"
       ],
       "prohibited_inferences": [
@@ -539,8 +542,8 @@
       "required_evidence": [
         "Final construct definitions",
         "Versioned protocol and analysis plan",
-        "Ethics, privacy, consent, exclusion, and stop decisions",
-        "Verified instrument and implementation capabilities"
+        "Explicit unresolved ethics, privacy, consent, exclusion, and stop gates",
+        "Verified instrument and implementation capabilities or an explicit blocked state"
       ],
       "planned_visuals": [
         "feasibility protocol timeline",

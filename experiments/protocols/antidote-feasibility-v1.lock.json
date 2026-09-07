@@ -1,0 +1,10 @@
+{
+  "schema": "antidote.protocol-lock/v1",
+  "protocol_id": "ANT-PROT-FEAS-001",
+  "protocol_version": "1.0.0",
+  "protocol_path": "experiments/protocols/antidote-feasibility-v1.json",
+  "sha256": "dbedbcbb74303373a7e00e95ad063b025d8cf6033864f4ad5a390d15703ba403",
+  "frozen_on": "2026-09-07",
+  "governed_by": "egohygiene/antidote#40",
+  "collection_authority": false
+}
