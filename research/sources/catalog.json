@@ -1,6 +1,6 @@
 {
   "schema": "antidote.source-catalog/v1",
-  "updated": "2026-08-30",
+  "updated": "2026-09-07",
   "owners": {
     "evidence": "egohygiene",
     "architecture": "egohygiene",
@@ -745,6 +745,71 @@
       "source_record": "research/sources/jitai-9830-8.md"
     },
     {
+      "id": "spent-2019-m122",
+      "working_title": "SPIRIT extension and elaboration for N-of-1 trials: SPENT 2019 checklist",
+      "domains": ["measurement", "protocol", "n-of-1"],
+      "source_class": "guidance",
+      "status": "cited",
+      "owner": "evidence",
+      "priority": 5,
+      "persistent_id": "doi:10.1136/bmj.m122",
+      "canonical_url": "https://doi.org/10.1136/bmj.m122",
+      "bibliography_key": "porcino2020spent",
+      "source_record": "research/sources/spent-2019-m122.md"
+    },
+    {
+      "id": "cent-2015-h1738",
+      "working_title": "CONSORT extension for reporting N-of-1 trials: CENT 2015 statement",
+      "domains": ["measurement", "reporting", "n-of-1"],
+      "source_class": "guidance",
+      "status": "full-text-reviewed",
+      "owner": "evidence",
+      "priority": 8,
+      "persistent_id": "doi:10.1136/bmj.h1738",
+      "canonical_url": "https://doi.org/10.1136/bmj.h1738",
+      "bibliography_key": "vohra2015cent",
+      "source_record": "research/sources/cent-2015-h1738.md"
+    },
+    {
+      "id": "feasibility-consort-i5239",
+      "working_title": "CONSORT extension to randomised pilot and feasibility trials",
+      "domains": ["measurement", "feasibility", "reporting"],
+      "source_class": "guidance",
+      "status": "cited",
+      "owner": "evidence",
+      "priority": 7,
+      "persistent_id": "doi:10.1136/bmj.i5239",
+      "canonical_url": "https://doi.org/10.1136/bmj.i5239",
+      "bibliography_key": "eldridge2016feasibility",
+      "source_record": "research/sources/feasibility-consort-i5239.md"
+    },
+    {
+      "id": "ema-091415",
+      "working_title": "Ecological momentary assessment",
+      "domains": ["measurement", "context-memory", "longitudinal-learning"],
+      "source_class": "synthesis",
+      "status": "cited",
+      "owner": "evidence",
+      "priority": 8,
+      "persistent_id": "doi:10.1146/annurev.clinpsy.3.022806.091415",
+      "canonical_url": "https://doi.org/10.1146/annurev.clinpsy.3.022806.091415",
+      "bibliography_key": "shiffman2008ema",
+      "source_record": "research/sources/ema-091415.md"
+    },
+    {
+      "id": "affective-slider-0148037",
+      "working_title": "The Affective Slider: a digital self-assessment scale for the measurement of human emotions",
+      "domains": ["measurement", "music-psychology", "human-authority"],
+      "source_class": "primary",
+      "status": "cited",
+      "owner": "evidence",
+      "priority": 8,
+      "persistent_id": "doi:10.1371/journal.pone.0148037",
+      "canonical_url": "https://doi.org/10.1371/journal.pone.0148037",
+      "bibliography_key": "betella2016slider",
+      "source_record": "research/sources/affective-slider-0148037.md"
+    },
+    {
       "id": "micro-randomized-trial-2107.03544",
       "working_title": "The micro-randomized trial for developing digital interventions",
       "domains": ["adaptive-control", "measurement"],
@@ -771,11 +836,13 @@
       "working_title": "StudyU: a platform for digital N-of-1 trials",
       "domains": ["measurement", "architecture"],
       "source_class": "system",
-      "status": "metadata-verified",
+      "status": "cited",
       "owner": "evidence",
       "priority": 20,
       "persistent_id": "doi:10.2196/35884",
-      "canonical_url": "https://doi.org/10.2196/35884"
+      "canonical_url": "https://doi.org/10.2196/35884",
+      "bibliography_key": "konigorski2022studyu",
+      "source_record": "research/sources/studyu-35884.md"
     },
     {
       "id": "ace-step-1.5-2602.00744",

@@ -596,6 +596,13 @@
         "exposure_id": "exposure-synthetic-1",
         "observed_at": "2026-08-27T12:06:00Z",
         "window": "immediate",
+        "instrument_version": "antidote-response-v1-synthetic",
+        "perceived_expression": {
+          "description": "synthetic restrained expression",
+          "valence": 0.0,
+          "arousal": 0.25,
+          "intensity": 0.2
+        },
         "felt_state": {
           "description": "synthetic neutral response",
           "valence": 0.1,
@@ -607,8 +614,44 @@
         "resonance": 0.4,
         "mismatch": 0.1,
         "harm": 0.0,
+        "surprise": 0.2,
+        "interaction_burden": 0.1,
+        "session_burden": 0.15,
+        "missing_fields": [],
         "stopped_early": false,
         "notes": "synthetic fixture only",
+        "allow_personal_model_update": false
+      }
+    },
+    {
+      "name": "response-observation-declined-valid",
+      "contract": "response-observation",
+      "valid": true,
+      "category": "valid-missingness",
+      "data": {
+        "schema_version": "1.0.0",
+        "id": "response-synthetic-declined",
+        "session_id": "session-synthetic-2",
+        "exposure_id": "exposure-synthetic-2",
+        "observed_at": "2026-08-28T12:06:00Z",
+        "window": "immediate",
+        "instrument_version": "antidote-response-v1-synthetic",
+        "felt_state": null,
+        "wanted_intensity": null,
+        "helpfulness": null,
+        "resonance": null,
+        "mismatch": null,
+        "harm": null,
+        "missing_fields": [
+          "felt_state",
+          "wanted_intensity",
+          "helpfulness",
+          "resonance",
+          "mismatch",
+          "harm"
+        ],
+        "missingness_reason": "declined",
+        "stopped_early": false,
         "allow_personal_model_update": false
       }
     },

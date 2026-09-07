@@ -179,6 +179,46 @@ pub enum MomentContextDesiredTransitionDirection {
 }
 
 #[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationMissingField {
+    #[serde(rename = "perceived_expression")]
+    PerceivedExpression,
+    #[serde(rename = "felt_state")]
+    FeltState,
+    #[serde(rename = "wanted_intensity")]
+    WantedIntensity,
+    #[serde(rename = "helpfulness")]
+    Helpfulness,
+    #[serde(rename = "resonance")]
+    Resonance,
+    #[serde(rename = "mismatch")]
+    Mismatch,
+    #[serde(rename = "harm")]
+    Harm,
+    #[serde(rename = "surprise")]
+    Surprise,
+    #[serde(rename = "interaction_burden")]
+    InteractionBurden,
+    #[serde(rename = "session_burden")]
+    SessionBurden,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
+pub enum ResponseObservationMissingnessReason {
+    #[serde(rename = "not_prompted")]
+    NotPrompted,
+    #[serde(rename = "declined")]
+    Declined,
+    #[serde(rename = "missed_window")]
+    MissedWindow,
+    #[serde(rename = "technical_failure")]
+    TechnicalFailure,
+    #[serde(rename = "interrupted")]
+    Interrupted,
+    #[serde(rename = "not_applicable")]
+    NotApplicable,
+}
+
+#[derive(Debug, Clone, PartialEq, Eq, Serialize, Deserialize)]
 pub enum ResponseObservationWindow {
     #[serde(rename = "during")]
     During,
@@ -522,12 +562,26 @@ pub struct ResponseObservation {
     pub exposure_id: String,
     pub observed_at: String,
     pub window: ResponseObservationWindow,
-    pub felt_state: ResponseObservationFeltState,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub instrument_version: Option<String>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub perceived_expression: Option<ResponseObservationPerceivedExpression>,
+    pub felt_state: Option<ResponseObservationFeltState>,
     pub wanted_intensity: Option<bool>,
     pub helpfulness: Option<f64>,
     pub resonance: Option<f64>,
     pub mismatch: Option<f64>,
     pub harm: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub surprise: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub interaction_burden: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub session_burden: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub missing_fields: Option<Vec<ResponseObservationMissingField>>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub missingness_reason: Option<ResponseObservationMissingnessReason>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub stopped_early: Option<bool>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
@@ -541,6 +595,18 @@ pub struct ResponseObservation {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 #[serde(deny_unknown_fields)]
 pub struct ResponseObservationFeltState {
+    pub description: String,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub valence: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub arousal: Option<f64>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub intensity: Option<f64>,
+}
+
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+#[serde(deny_unknown_fields)]
+pub struct ResponseObservationPerceivedExpression {
     pub description: String,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub valence: Option<f64>,

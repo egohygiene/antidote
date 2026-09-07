@@ -1,0 +1,8 @@
+{
+  "schema": "antidote.protocol-deviation-log/v1",
+  "protocol_id": "ANT-PROT-FEAS-001",
+  "protocol_version": "1.0.0",
+  "status": "empty-no-collection",
+  "collection_started": false,
+  "entries": []
+}

@@ -24,6 +24,10 @@ import tomllib
 from check_placeholders import validate_placeholder_system
 from check_visuals import validate_visual_system
 from generate_equation_appendix import expected_outputs, validate_registry
+from generate_protocol_appendix import (
+    expected_outputs as expected_protocol_outputs,
+    validate_protocol,
+)
 from generate_research_shelf import render_shelf
 
 ROOT = Path(__file__).resolve().parents[1]
@@ -375,6 +379,18 @@ def main() -> int:
                 errors.append(f"generated equation appendix is stale: {equation_path}")
     except (OSError, ValueError, json.JSONDecodeError, KeyError) as error:
         errors.append(f"equation registry cannot be validated: {error}")
+
+    try:
+        errors.extend(validate_protocol(project))
+        for protocol_path, expected_protocol_text in expected_protocol_outputs(
+            project
+        ).items():
+            if not protocol_path.is_file():
+                errors.append(f"generated protocol appendix is missing: {protocol_path}")
+            elif protocol_path.read_text(encoding="utf-8") != expected_protocol_text:
+                errors.append(f"generated protocol appendix is stale: {protocol_path}")
+    except (OSError, TypeError, ValueError, json.JSONDecodeError, KeyError) as error:
+        errors.append(f"feasibility protocol cannot be validated: {error}")
 
     for section in REQUIRED_SECTIONS:
         if not re.search(
