@@ -1,62 +1,280 @@
-<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title description" data-antidote-state="placeholder" data-antidote-generator="scripts/generate_skeleton_visuals.py">
-  <title id="title">PROVISIONAL Holistic two-rate closed-loop architecture</title>
-  <desc id="description">Visible layout placeholder for Holistic two-rate closed-loop architecture. It contains no results and asserts no mechanism.</desc>
+<svg xmlns="http://www.w3.org/2000/svg" width="1800" height="1200" viewBox="0 0 1800 1200" role="img" aria-labelledby="title description" data-antidote-state="draft" data-antidote-source="deterministic-svg">
+  <title id="title">Antidote holistic two-rate architecture</title>
+  <desc id="description">A numbered architecture separates human-correctable deliberation, variable-latency generation, deterministic audio rendering, actual exposure, and response records. A single approved generation specification enters the bounded model adapter. Component labels distinguish the executable synthetic slice from proposed capabilities and unavailable human evidence. Stop bypasses deliberation, while any future learning remains a human-reviewed proposal.</desc>
   <defs>
-    <linearGradient id="background" x1="0" y1="0" x2="1" y2="1">
-      <stop offset="0" stop-color="#102C33"/>
-      <stop offset="1" stop-color="#1D4A45"/>
+    <linearGradient id="wave" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#9a4dff"/>
+      <stop offset="0.42" stop-color="#377dff"/>
+      <stop offset="0.72" stop-color="#22cad4"/>
+      <stop offset="1" stop-color="#e39a16"/>
     </linearGradient>
+    <marker id="arrow-navy" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L16 8 L0 16 Z" fill="#17375e"/>
+    </marker>
+    <marker id="arrow-plum" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L16 8 L0 16 Z" fill="#98245f"/>
+    </marker>
+    <marker id="arrow-violet" markerWidth="16" markerHeight="16" refX="14" refY="8" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L16 8 L0 16 Z" fill="#5742cf"/>
+    </marker>
+    <marker id="arrow-gold" markerWidth="18" markerHeight="18" refX="16" refY="9" orient="auto" markerUnits="userSpaceOnUse">
+      <path d="M0 0 L18 9 L0 18 Z" fill="#b87500"/>
+    </marker>
     <style>
-      .kicker { font: 700 28px sans-serif; letter-spacing: 0.14em; fill: #F2B780; }
-      .title { font: 700 54px sans-serif; fill: #FFFFFF; }
-      .purpose { font: 400 32px sans-serif; fill: #D9E7E1; }
-      .card-head { font: 700 20px sans-serif; letter-spacing: 0.05em; fill: #27564D; }
-      .card-copy { font: 600 19px sans-serif; fill: #172D31; }
-      .card-note { font: 400 16px sans-serif; fill: #536A68; }
-      .footer { font: 700 22px sans-serif; letter-spacing: 0.08em; fill: #F2B780; }
+      text { font-family: "DejaVu Sans Condensed", "DejaVu Sans", Arial, sans-serif; }
+      .figure-title { font-size: 49px; font-weight: 800; letter-spacing: 0.015em; fill: #142b4b; text-anchor: middle; }
+      .subtitle { font-size: 27px; font-weight: 500; fill: #40536c; text-anchor: middle; }
+      .authority-title { font-size: 26px; font-weight: 800; letter-spacing: 0.035em; fill: #142b4b; }
+      .authority-copy { font-size: 23px; font-weight: 700; fill: #8f1f59; }
+      .lane-title { font-size: 38px; font-weight: 800; letter-spacing: 0.015em; fill: #291542; }
+      .lane-title.audio { fill: #15375e; }
+      .lane-copy { font-size: 23px; font-weight: 500; fill: #47566d; }
+      .zone-title { font-size: 28px; font-weight: 800; letter-spacing: 0.025em; fill: #15375e; text-anchor: middle; }
+      .zone-note { font-size: 22px; font-weight: 600; fill: #53677c; text-anchor: middle; }
+      .card { fill: #fffdfa; stroke-width: 4; }
+      .implemented { stroke: #17375e; }
+      .proposed { stroke: #5742cf; stroke-dasharray: 13 9; }
+      .hybrid { stroke: #17375e; }
+      .card-label { font-size: 32px; font-weight: 800; letter-spacing: 0.003em; fill: #142b4b; text-anchor: middle; }
+      .card-note { font-size: 24px; font-weight: 700; fill: #53677c; text-anchor: middle; }
+      .status { font-size: 23px; font-weight: 800; letter-spacing: 0.025em; text-anchor: middle; }
+      .status.small { font-size: 22px; letter-spacing: 0; }
+      .status.hybrid-status { font-size: 22px; letter-spacing: 0; }
+      .step { font-size: 22px; font-weight: 800; fill: #fffdfa; text-anchor: middle; dominant-baseline: central; }
+      .flow-solid { fill: none; stroke: #17375e; stroke-width: 5; marker-end: url(#arrow-navy); }
+      .flow-proposed { fill: none; stroke: #5742cf; stroke-width: 5; stroke-dasharray: 13 9; marker-end: url(#arrow-violet); }
+      .flow-gold { fill: none; stroke: #b87500; stroke-width: 7; stroke-linejoin: round; marker-end: url(#arrow-gold); }
+      .flow-stop { fill: none; stroke: #98245f; stroke-width: 5; stroke-linejoin: round; marker-end: url(#arrow-plum); }
+      .flow-fallback { fill: none; stroke: #98245f; stroke-width: 5; stroke-dasharray: 12 8; stroke-linejoin: round; marker-end: url(#arrow-plum); }
+      .handoff-label { font-size: 24px; font-weight: 800; letter-spacing: 0.015em; fill: #925c00; }
+      .safety-label { font-size: 22px; font-weight: 800; letter-spacing: 0.005em; fill: #8f1f59; text-anchor: middle; }
+      .future-label { font-size: 24px; font-weight: 800; letter-spacing: 0.025em; fill: #4c36c0; text-anchor: end; }
+      .boundary-note { font-size: 24px; font-weight: 800; fill: #354c66; text-anchor: middle; }
+      .worker-note { font-size: 23px; font-weight: 800; letter-spacing: 0.015em; fill: #354c66; text-anchor: middle; }
+      .wave-note { font-size: 22px; font-weight: 700; letter-spacing: 0.03em; fill: #52687a; text-anchor: middle; }
+      .provenance-title { font-size: 25px; font-weight: 800; letter-spacing: 0.045em; fill: #fffdfa; text-anchor: middle; }
+      .provenance-note { font-size: 22px; font-weight: 600; letter-spacing: 0.01em; fill: #d2e4eb; text-anchor: middle; }
+      .legend { font-size: 23px; font-weight: 700; fill: #30445e; }
+      .disclaimer { font-size: 23px; font-weight: 800; letter-spacing: 0.025em; fill: #516078; text-anchor: end; }
     </style>
   </defs>
-  <rect width="1800" height="1200" fill="url(#background)"/>
-  <circle cx="1638" cy="216" r="168" fill="none" stroke="#5C9A8B" stroke-width="3" opacity="0.45"/>
-  <circle cx="1638" cy="216" r="108" fill="none" stroke="#F2B780" stroke-width="3" opacity="0.55"/>
-  <text x="144" y="144" class="kicker">ANT-FIG-002 · PROVISIONAL VISUAL FRAME</text>
-  <text x="144" y="204" class="title">
-    <tspan x="144" dy="66">Holistic two-rate closed-loop architecture</tspan>
-  </text>
-  <text x="144" y="408" class="purpose">
-    <tspan x="144" dy="54">Separate uncertain, human-correctable deliberation from</tspan>
-    <tspan x="144" dy="54">deterministic generate-ahead rendering and expose authority,</tspan>
-    <tspan x="144" dy="54">timing, and failure boundaries.</tspan>
-  </text>
-  <rect x="144" y="732" width="459" height="264" rx="22" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="181" y="801" class="card-head">PLANNED STRUCTURE</text>
-  <text x="181" y="846" class="card-copy">
-    <tspan x="181" dy="26">Composition and</tspan>
-    <tspan x="181" dy="26">relationships</tspan>
-  </text>
-  <text x="181" y="917" class="card-note">
-    <tspan x="181" dy="23">Final geometry is owned by issue</tspan>
-    <tspan x="181" dy="23">#46.</tspan>
-  </text>
-  <rect x="666" y="732" width="459" height="264" rx="22" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="703" y="801" class="card-head">EVIDENCE BOUNDARY</text>
-  <text x="703" y="846" class="card-copy">
-    <tspan x="703" dy="26">No results or mechanisms</tspan>
-    <tspan x="703" dy="26">asserted</tspan>
-  </text>
-  <text x="703" y="917" class="card-note">
-    <tspan x="703" dy="23">Caption and claim IDs remain</tspan>
-    <tspan x="703" dy="23">authoritative.</tspan>
-  </text>
-  <rect x="1188" y="732" width="459" height="264" rx="22" fill="#F5F1E8" stroke="#668A7A" stroke-width="3"/>
-  <text x="1225" y="801" class="card-head">REPLACEMENT GATE</text>
-  <text x="1225" y="846" class="card-copy">
-    <tspan x="1225" dy="26">Deterministic, reviewable</tspan>
-    <tspan x="1225" dy="26">asset</tspan>
-  </text>
-  <text x="1225" y="917" class="card-note">
-    <tspan x="1225" dy="23">Must pass accessibility and print</tspan>
-    <tspan x="1225" dy="23">review.</tspan>
-  </text>
-  <text x="144" y="1116" class="footer">LAYOUT ONLY · NOT EVIDENCE · NOT RESULTS · REPLACE THROUGH ISSUE #46</text>
+
+  <rect width="1800" height="1200" fill="#fffaf6"/>
+
+  <text x="900" y="58" class="figure-title">ANTIDOTE - HOLISTIC TWO-RATE ARCHITECTURE</text>
+  <text x="900" y="98" class="subtitle">Verified future audio decouples variable model work from deterministic playback deadlines.</text>
+
+  <g id="person-authority" data-boundary="human-authority">
+    <rect x="500" y="116" width="800" height="70" rx="35" fill="#fff3dc" stroke="#d99822" stroke-width="3"/>
+    <circle cx="545" cy="151" r="25" fill="#f1b58c" stroke="#17375e" stroke-width="3"/>
+    <circle cx="545" cy="143" r="9" fill="#17375e"/>
+    <path d="M528 165 Q545 148 562 165" fill="#17375e"/>
+    <text x="585" y="145" class="authority-title">PERSON AUTHORITY</text>
+    <text x="585" y="173" class="authority-copy">CHOOSE · CORRECT · APPROVE · PLAY · STOP</text>
+  </g>
+
+  <rect x="30" y="205" width="1740" height="265" rx="22" fill="#fff2f8" stroke="#e4a9c7" stroke-width="3"/>
+  <text x="58" y="244" class="lane-title">SLOW LOOP - SECONDS TO MINUTES</text>
+  <text x="58" y="275" class="lane-copy">Uncertain deliberation remains visible, editable, and human-authorized.</text>
+
+  <rect x="30" y="610" width="1740" height="380" rx="22" fill="#edf8fd" stroke="#79bfe7" stroke-width="3"/>
+  <text x="58" y="650" class="lane-title audio">GENERATION + AUDIO PATH</text>
+
+  <path id="future-proposal-only" data-flow="response-to-future-proposal" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M1730 822 H1766 V196 H1265 V292"/>
+  <text x="1735" y="190" class="future-label">FUTURE PROPOSAL ONLY</text>
+
+  <path id="approved-generation-spec" data-flow="approval-to-model-adapter" data-status="implemented" class="flow-gold" marker-end="url(#arrow-gold)" d="M1265 450 V508 H45 V730 H180 V751"/>
+
+  <g id="safety-paths" data-boundary="safety-paths">
+    <path data-flow="cancel-to-generation" data-status="implemented" class="flow-stop" marker-end="url(#arrow-plum)" d="M725 585 V724 H550 V746"/>
+    <path data-flow="fallback-to-renderer" data-status="proposed" class="flow-fallback" marker-end="url(#arrow-plum)" d="M1015 585 V602 H880 V735 H1130 V746"/>
+    <path data-flow="stop-to-exposure" data-status="implemented" class="flow-stop" marker-end="url(#arrow-plum)" d="M1285 585 V602 H1455 V735 H1400 V746"/>
+  </g>
+
+  <g data-boundary="variable-latency-generation">
+    <path d="M58 722 V674 H852 V722" fill="none" stroke="#5742cf" stroke-width="4" stroke-dasharray="12 8"/>
+    <text x="455" y="691" class="zone-title">VARIABLE-LATENCY GENERATION</text>
+    <text x="455" y="716" class="zone-note">not the audio callback</text>
+  </g>
+  <g data-boundary="fast-audio-loop">
+    <path d="M902 722 V674 H1442 V722" fill="none" stroke="#168fc9" stroke-width="4"/>
+    <text x="1172" y="691" class="zone-title">FAST LOOP - AUDIO DEADLINES</text>
+    <text x="1172" y="716" class="zone-note">small audio blocks + scheduled boundaries</text>
+  </g>
+  <g data-boundary="response-record-zone">
+    <path d="M1470 722 V674 H1745 V722" fill="none" stroke="#7b8da0" stroke-width="3"/>
+    <text x="1608" y="691" class="zone-title">AFTER EXPOSURE</text>
+    <text x="1608" y="716" class="zone-note">response record</text>
+  </g>
+
+  <path data-flow="context-to-belief" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M300 375 H322"/>
+  <path data-flow="belief-to-intent" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M570 375 H592"/>
+  <path data-flow="intent-to-plan" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M840 375 H862"/>
+  <path data-flow="plan-to-approval" data-status="implemented" class="flow-solid" marker-end="url(#arrow-navy)" d="M1110 375 H1132"/>
+
+  <path data-flow="adapter-to-generate" data-status="implemented" class="flow-solid" marker-end="url(#arrow-navy)" d="M300 822 H322"/>
+  <path data-flow="generate-to-buffer" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M570 822 H592"/>
+  <path data-flow="buffer-to-renderer" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M840 822 H902"/>
+  <path data-flow="renderer-to-exposure" data-status="proposed" class="flow-proposed" marker-end="url(#arrow-violet)" d="M1150 822 H1172"/>
+  <path data-flow="exposure-to-response" data-status="gated" class="flow-proposed" marker-end="url(#arrow-violet)" d="M1430 822 H1482"/>
+
+  <g data-node="consented-context" data-step="1" data-status="implemented">
+    <rect x="60" y="300" width="240" height="150" rx="18" class="card implemented"/>
+    <circle cx="83" cy="300" r="16" fill="#17375e"/><text x="83" y="300" class="step">1</text>
+    <text x="180" y="352" class="card-label"><tspan x="180">CONSENTED</tspan><tspan x="180" dy="35">CONTEXT</tspan></text>
+    <rect x="62" y="414" width="236" height="34" fill="#e5eff6"/>
+    <text x="180" y="438" class="status" fill="#17375e">SYNTHETIC NOW</text>
+  </g>
+
+  <g data-node="state-belief" data-step="2" data-status="proposed">
+    <rect x="330" y="300" width="240" height="150" rx="18" class="card proposed"/>
+    <circle cx="353" cy="300" r="16" fill="#5742cf"/><text x="353" y="300" class="step">2</text>
+    <text x="450" y="352" class="card-label"><tspan x="450">STATE</tspan><tspan x="450" dy="35">BELIEF</tspan></text>
+    <rect x="332" y="414" width="236" height="34" fill="#eeeaff"/>
+    <text x="450" y="438" class="status" fill="#5742cf">NOT A VERDICT</text>
+  </g>
+
+  <g data-node="semantic-intent" data-step="3" data-status="proposed">
+    <rect x="600" y="300" width="240" height="150" rx="18" class="card proposed"/>
+    <circle cx="623" cy="300" r="16" fill="#5742cf"/><text x="623" y="300" class="step">3</text>
+    <text x="720" y="352" class="card-label"><tspan x="720">SEMANTIC</tspan><tspan x="720" dy="35">INTENT</tspan></text>
+    <rect x="602" y="414" width="236" height="34" fill="#eeeaff"/>
+    <text x="720" y="438" class="status" fill="#5742cf">PROPOSED</text>
+  </g>
+
+  <g data-node="journey-plan" data-step="4" data-status="implemented">
+    <rect x="870" y="300" width="240" height="150" rx="18" class="card implemented"/>
+    <circle cx="893" cy="300" r="16" fill="#17375e"/><text x="893" y="300" class="step">4</text>
+    <text x="990" y="352" class="card-label"><tspan x="990">JOURNEY</tspan><tspan x="990" dy="35">PLAN</tspan></text>
+    <rect x="872" y="414" width="236" height="34" fill="#e5eff6"/>
+    <text x="990" y="438" class="status" fill="#17375e">LEVEL-1 NOW</text>
+  </g>
+
+  <g data-node="human-approval" data-step="5" data-status="implemented">
+    <rect x="1140" y="300" width="250" height="150" rx="18" fill="#fff7e2" stroke="#b87500" stroke-width="4"/>
+    <circle cx="1163" cy="300" r="16" fill="#b87500"/><text x="1163" y="300" class="step">5</text>
+    <text x="1265" y="352" class="card-label"><tspan x="1265">HUMAN</tspan><tspan x="1265" dy="35">APPROVAL</tspan></text>
+    <rect x="1142" y="414" width="246" height="34" fill="#fae7b5"/>
+    <text x="1265" y="438" class="status" fill="#835300">HUMAN GATE</text>
+  </g>
+
+  <g data-boundary="no-automatic-learning" data-status="implemented">
+    <rect x="1490" y="307" width="250" height="136" rx="18" fill="#edf3fb" stroke="#17375e" stroke-width="4"/>
+    <text x="1615" y="350" class="card-label" style="font-size:26px"><tspan x="1615">NO AUTOMATIC</tspan><tspan x="1615" dy="35">LEARNING</tspan></text>
+    <rect x="1492" y="407" width="246" height="34" fill="#dce8f5"/>
+    <text x="1615" y="431" class="status" fill="#17375e">V0 BOUNDARY</text>
+  </g>
+
+  <g data-node="approved-generation-spec" data-step="6" data-status="implemented">
+    <rect x="950" y="483" width="530" height="50" rx="25" fill="#fff3d6" stroke="#b87500" stroke-width="4"/>
+    <circle cx="977" cy="508" r="16" fill="#b87500"/><text x="977" y="508" class="step">6</text>
+    <text x="1005" y="516" class="handoff-label">APPROVED GENERATION SPEC</text>
+  </g>
+
+  <g data-boundary="cancel-generation">
+    <rect x="590" y="545" width="270" height="40" rx="20" fill="#fff7fb" stroke="#98245f" stroke-width="3"/>
+    <text x="725" y="571" class="safety-label">CANCEL GENERATION</text>
+  </g>
+  <g data-boundary="approved-fallback">
+    <rect x="865" y="545" width="300" height="40" rx="20" fill="#fff7fb" stroke="#98245f" stroke-width="3" stroke-dasharray="10 7"/>
+    <text x="1015" y="571" class="safety-label">APPROVED FALLBACK</text>
+  </g>
+  <g data-boundary="stop-now">
+    <rect x="1180" y="545" width="210" height="40" rx="20" fill="#fff7fb" stroke="#98245f" stroke-width="3"/>
+    <text x="1285" y="571" class="safety-label">STOP NOW</text>
+  </g>
+
+  <g data-node="model-adapter" data-step="7" data-status="hybrid">
+    <rect x="60" y="750" width="240" height="150" rx="18" class="card hybrid"/>
+    <circle cx="83" cy="750" r="16" fill="#17375e"/><text x="83" y="750" class="step">7</text>
+    <text x="180" y="798" class="card-label"><tspan x="180">MODEL</tspan><tspan x="180" dy="34">ADAPTER</tspan></text>
+    <rect x="62" y="842" width="236" height="28" fill="#e5eff6"/>
+    <rect x="62" y="870" width="236" height="28" fill="#eeeaff"/>
+    <path data-role="hybrid-divider" d="M 62 870 H 298" fill="none" stroke="#5742cf" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="180" y="863" class="status hybrid-status" fill="#17375e">MOCK NOW</text>
+    <text x="180" y="893" class="status hybrid-status" fill="#5742cf" textLength="214" lengthAdjust="spacingAndGlyphs">MODEL PROPOSED</text>
+  </g>
+
+  <g data-node="generate-verify" data-step="8" data-status="hybrid">
+    <rect x="330" y="750" width="240" height="150" rx="18" class="card hybrid"/>
+    <circle cx="353" cy="750" r="16" fill="#17375e"/><text x="353" y="750" class="step">8</text>
+    <text x="450" y="798" class="card-label"><tspan x="450">GENERATE</tspan><tspan x="450" dy="34">+ VERIFY</tspan></text>
+    <rect x="332" y="842" width="236" height="28" fill="#e5eff6"/>
+    <rect x="332" y="870" width="236" height="28" fill="#eeeaff"/>
+    <path data-role="hybrid-divider" d="M 332 870 H 568" fill="none" stroke="#5742cf" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="450" y="863" class="status hybrid-status" fill="#17375e">MOCK WAV NOW</text>
+    <text x="450" y="893" class="status hybrid-status" fill="#5742cf" textLength="214" lengthAdjust="spacingAndGlyphs">MODEL PROPOSED</text>
+  </g>
+
+  <g data-node="future-audio-buffer" data-step="9" data-status="proposed">
+    <rect x="600" y="750" width="240" height="150" rx="18" class="card proposed"/>
+    <circle cx="623" cy="750" r="16" fill="#5742cf"/><text x="623" y="750" class="step">9</text>
+    <text x="720" y="798" class="card-label"><tspan x="720">FUTURE</tspan><tspan x="720" dy="34">BUFFER</tspan></text>
+    <rect x="602" y="850" width="236" height="48" fill="#eeeaff"/>
+    <text x="720" y="881" class="status" fill="#5742cf">PROPOSED</text>
+  </g>
+
+  <g data-node="deterministic-renderer" data-step="10" data-status="proposed">
+    <rect x="910" y="750" width="240" height="150" rx="18" class="card proposed"/>
+    <circle cx="933" cy="750" r="16" fill="#5742cf"/><text x="933" y="750" class="step">10</text>
+    <text x="1030" y="798" class="card-label"><tspan x="1030">AUDIO</tspan><tspan x="1030" dy="34">RENDERER</tspan></text>
+    <rect x="912" y="850" width="236" height="48" fill="#eeeaff"/>
+    <text x="1030" y="881" class="status" fill="#5742cf">PROPOSED</text>
+  </g>
+
+  <g data-node="listening-exposure" data-step="11" data-status="hybrid">
+    <rect x="1180" y="750" width="250" height="150" rx="18" class="card hybrid"/>
+    <circle cx="1203" cy="750" r="16" fill="#17375e"/><text x="1203" y="750" class="step">11</text>
+    <text x="1305" y="798" class="card-label"><tspan x="1305">LISTENING</tspan><tspan x="1305" dy="34">EXPOSURE</tspan></text>
+    <rect x="1182" y="844" width="246" height="27" fill="#e5eff6"/>
+    <rect x="1182" y="871" width="246" height="27" fill="#eeeaff"/>
+    <path data-role="hybrid-divider" d="M 1182 871 H 1428" fill="none" stroke="#5742cf" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="1305" y="863" class="status small" fill="#17375e">PLAYBACK STATE</text>
+    <text x="1305" y="893" class="status small" fill="#5742cf">NO EXPOSURE DATA</text>
+  </g>
+
+  <g data-node="response-record" data-step="12" data-status="hybrid">
+    <rect x="1490" y="750" width="240" height="150" rx="18" class="card hybrid"/>
+    <circle cx="1513" cy="750" r="16" fill="#17375e"/><text x="1513" y="750" class="step">12</text>
+    <text x="1610" y="798" class="card-label"><tspan x="1610">RESPONSE</tspan><tspan x="1610" dy="34">RECORD</tspan></text>
+    <rect x="1492" y="844" width="236" height="27" fill="#e5eff6"/>
+    <rect x="1492" y="871" width="236" height="27" fill="#eeeaff"/>
+    <path data-role="hybrid-divider" d="M 1492 871 H 1728" fill="none" stroke="#5742cf" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="1610" y="863" class="status small" fill="#17375e">SCHEMA NOW</text>
+    <text x="1610" y="893" class="status small" fill="#5742cf">NO HUMAN DATA</text>
+  </g>
+
+  <g data-boundary="worker-capability">
+    <rect x="60" y="910" width="510" height="36" rx="12" fill="#fffdfa" stroke="#17375e" stroke-width="3" stroke-dasharray="8 6"/>
+    <text x="315" y="935" class="worker-note">WORKER: APPROVED SPEC ONLY</text>
+  </g>
+  <g data-boundary="evidence-separation">
+    <rect x="600" y="910" width="1130" height="36" rx="12" fill="#fffdfa" stroke="#7b8da0" stroke-width="2"/>
+    <text x="1165" y="935" class="boundary-note">ARTIFACT ≠ EXPOSURE · EXPOSURE ≠ RESPONSE</text>
+  </g>
+
+  <path d="M620 970 C650 950 680 990 710 970 S770 950 800 970 S860 990 890 970 S950 950 980 970 S1040 990 1070 970 S1130 950 1160 970 S1220 990 1250 970 S1310 950 1340 970 S1400 990 1430 970 S1490 950 1520 970 S1580 990 1610 970 S1670 950 1720 970" fill="none" stroke="url(#wave)" stroke-width="9" stroke-linecap="round"/>
+  <text x="1170" y="980" class="wave-note" paint-order="stroke" stroke="#edf8fd" stroke-width="8">ILLUSTRATIVE AUDIO FLOW · NOT A MEASUREMENT</text>
+
+  <g id="provenance-spine" data-boundary="provenance">
+    <rect x="30" y="1005" width="1740" height="76" rx="21" fill="#28205d" stroke="#6855c7" stroke-width="3"/>
+    <circle cx="92" cy="1043" r="6" fill="#74dcec"/>
+    <circle cx="1708" cy="1043" r="6" fill="#74dcec"/>
+    <line x1="102" y1="1043" x2="365" y2="1043" stroke="#74dcec" stroke-width="3"/>
+    <line x1="1435" y1="1043" x2="1698" y2="1043" stroke="#74dcec" stroke-width="3"/>
+    <text x="900" y="1038" class="provenance-title">PROVENANCE REQUIRED · SOURCE · VERSION · HASH · AUTHORITY</text>
+    <text x="900" y="1067" class="provenance-note">Lineage supports inspection; it does not prove truth, privacy, safety, or benefit.</text>
+  </g>
+
+  <g id="status-legend">
+    <rect x="55" y="1102" width="43" height="28" rx="6" fill="#fffdfa" stroke="#17375e" stroke-width="4"/>
+    <text x="112" y="1124" class="legend">SOLID = SYNTHETIC NOW</text>
+    <rect x="455" y="1102" width="43" height="28" rx="6" fill="#fffdfa" stroke="#5742cf" stroke-width="4" stroke-dasharray="9 6"/>
+    <text x="512" y="1124" class="legend">DASHED = PROPOSED</text>
+    <rect x="815" y="1102" width="43" height="28" rx="6" fill="#fffdfa" stroke="#17375e" stroke-width="4"/>
+    <path d="M817 1116 H856" stroke="#5742cf" stroke-width="4" stroke-dasharray="8 5"/>
+    <text x="872" y="1124" class="legend">SPLIT = CURRENT SUPPORT + PROPOSED TARGET / UNAVAILABLE DATA</text>
+  </g>
+
+  <text x="1740" y="1177" class="disclaimer">PROPOSED ARCHITECTURE · NOT A VALIDATED CONTROLLER · NO HUMAN OUTCOME CLAIM</text>
 </svg>

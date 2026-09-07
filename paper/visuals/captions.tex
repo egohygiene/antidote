@@ -24,10 +24,10 @@
 
 \AntidoteDeclareVisualText
   {holistic-two-rate-architecture}
-  {Proposed separation of the uncertainty-aware deliberative loop from the deterministic generate-ahead audio loop.}
-  {A two-lane architecture separates slow human-correctable planning from fast deterministic audio generation, buffering, playback, and safety controls.}
-  {The upper lane contains consented context, a correctable state belief, semantic intent, receding-horizon planning, and explicit human approval. The lower lane contains immutable generation specifications, the model adapter, verification, a generate-ahead buffer, renderer, exposure, and stop controls. Provenance links cross the lanes without granting the worker adaptation authority.}
-  {placeholder}
+  {Proposed two-rate Antidote architecture. Human-correctable deliberation authorizes one immutable generation specification; variable-latency generation fills a verified future-audio buffer that decouples model work from deterministic playback deadlines. Labels distinguish the executable synthetic slice from proposed components.}
+  {Two stacked regions show human-correctable deliberation above and a generation-to-audio path below. One approved specification enters a bounded model worker, verified audio moves into a future buffer, and only rendering and playback operate to audio deadlines. Stop bypasses deliberation; response can create only a future human-reviewed proposal.}
+  {The numbered path begins with consented context, a correctable state belief, semantic intent, a journey plan, and explicit human approval. Approval produces one immutable generation specification that crosses into a capability-scoped model adapter. Variable-latency generation and verification prepare future audio before the proposed deterministic renderer consumes small audio blocks and segment boundaries for a deliberate playback path. Exposure remains a separate record of what was actually heard, and a response remains a separate observation that can return only as a dashed future proposal requiring human review; no automatic learning path exists. Solid cards identify the executable synthetic slice, dashed cards identify proposed capabilities, and split cards distinguish current mock or schema support from target behavior. The listening/exposure and response cards are split because playback state and response schemas exist while no qualifying human exposure or response is observed. Separate cancel, approved-fallback, and immediate-stop paths bypass semantic deliberation. The provenance spine requires source, version, hash, and authority lineage while explicitly making no claim of truth, privacy, safety, benefit, hard-real-time generation, or human outcome.}
+  {draft}
 
 \AntidoteDeclareVisualText
   {consent-scoped-context-projection}
