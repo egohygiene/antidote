@@ -1,4 +1,10 @@
-# GitHub Pages and DNS activation
+# GitHub Pages and DNS operation
+
+The custom-domain publication is active. On 2026-09-07, issue #48 verified
+merged revision `f9e23128a660066b3f64c73c4dd2d36554b6040a` over HTTPS together
+with the advertised paper HTML and PDF hashes. The steps below remain the
+authoritative activation/recovery checklist; the current state does not remove
+the post-deployment exact-revision gate.
 
 The repository workflow is intentionally safe before activation:
 
@@ -9,7 +15,7 @@ The repository workflow is intentionally safe before activation:
 Local preview, PR artifact review, revision canaries, and live hash verification
 are documented in [`paper-preview.md`](paper-preview.md).
 
-## Activate the custom-domain publication hub
+## Activate or recover the custom-domain publication hub
 
 1. Merge the Antidote publishing setup after its checks pass.
 2. Verify `egohygiene.io` for the GitHub organization under its Pages settings

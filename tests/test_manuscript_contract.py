@@ -81,7 +81,7 @@ class ManuscriptContractTests(unittest.TestCase):
         )
         identity = contract["identity"]
         self.assertEqual(contract["schema"], "antidote.manuscript-contract/v1")
-        self.assertEqual(contract["version"], "0.5.0")
+        self.assertEqual(contract["version"], "0.6.0")
         self.assertEqual(contract["status"], "frozen")
         self.assertEqual(identity["working_title"], metadata["paper"]["title"])
         self.assertEqual(identity["subtitle"], metadata["paper"]["subtitle"])

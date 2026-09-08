@@ -3,18 +3,20 @@
 [![Research paper](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/research-paper.yml?branch=main&style=for-the-badge&label=Research%20paper)](https://github.com/egohygiene/antidote/actions/workflows/research-paper.yml)
 [![GitHub Pages](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/pages.yml?branch=main&style=for-the-badge&label=GitHub%20Pages)](https://github.com/egohygiene/antidote/actions/workflows/pages.yml)
 [![MVP foundation](https://img.shields.io/github/actions/workflow/status/egohygiene/antidote/mvp.yml?branch=main&style=for-the-badge&label=MVP%20foundation)](https://github.com/egohygiene/antidote/actions/workflows/mvp.yml)
-[![Status](https://img.shields.io/badge/status-writing%20draft-FFD48A?style=for-the-badge)](./ROADMAP.md)
+[![Status](https://img.shields.io/badge/status-reviewable%20preprint-8BE9C1?style=for-the-badge)](./ROADMAP.md)
 
 Antidote is a provisional research program about personalized, adaptive
 generative audio. Its central question is:
 
-> Can an adaptive system learn an individual mapping from interpretable sonic
-> language to generated acoustic structure to affective response, and use that
-> mapping to better target future state transitions?
+> How can a local research instrument represent, generate, and evaluate a
+> person-and-moment audio journey while keeping consented context, semantic
+> intent, planned controls, realized acoustics, exposure, response, and
+> longitudinal updates inspectable and non-interchangeable?
 
-The first paper is intentionally scoped as a methods, system, and N-of-1
-feasibility study. The originating experience is a hypothesis generator, not
-evidence of clinical efficacy or a neurological mechanism.
+The first paper is a reviewable system-design and prospective N-of-1
+feasibility-protocol preprint. The originating experience is a hypothesis
+generator, not evidence of clinical efficacy or a neurological mechanism. No
+formal participant study has been run.
 
 ## Architecture and prototype status
 
@@ -45,8 +47,9 @@ Start with:
 
 The manuscript, bibliography, figures, research notes, source records, and
 native publication build are owned here. Start with
-[`paper/README.md`](./paper/README.md), then replace the visibly marked draft
-blocks under `paper/sections/` as the evidence work advances.
+[`paper/README.md`](./paper/README.md), the issue #48
+[`review dossier`](./paper/reviews/reviewable-preprint-v0.1.0.md), and the
+canonical files under `paper/sections/`.
 Scientific figures and tables are allocated through the
 [`paper/visuals/manifest.json`](./paper/visuals/manifest.json) contract before
 assets become active.
@@ -137,9 +140,9 @@ MIT-licensed profile, not a copy of those provisional templates.
 
 The workflow materializes Holon's exact-pinned LaunchKit/Zensical site suite,
 composes Antidote's byte-preserved publication artifacts, and always uploads a
-reviewable Pages artifact. It deploys only when
-the repository variable `PAGES_ENABLED` is exactly `true`. This keeps merges
-green until the repository's Pages source, DNS, and TLS are configured.
+reviewable Pages artifact. It deploys only when the repository variable
+`PAGES_ENABLED` is exactly `true`; the custom-domain deployment, DNS, and TLS
+path is active and verified, while pull requests remain build-only.
 
 The canonical route is <https://antidote.egohygiene.io/>. GitHub's
 <https://egohygiene.github.io/antidote/> route remains a technical fallback,
@@ -167,10 +170,11 @@ Actual magazine authoring is tracked separately in
 ## Status and boundaries
 
 - Project codename: provisional.
-- Manuscript stage: draft.
+- Manuscript stage: reviewable design/protocol preprint (`submission-ready` in
+  the build contract); not externally peer reviewed or venue submitted.
 - Formal study results: none collected.
-- Public site: custom-domain GitHub Pages hub implemented; deployment
-  activation and TLS verification remain maintainer-controlled.
+- Public site: custom-domain GitHub Pages hub active over HTTPS with
+  exact-revision and artifact-hash verification after each deployment.
 - Agent package: not selected.
 - Empathy runtime dependency: none.
 - Local prototype: an accessible Tauri/React synthetic session composes the
@@ -180,5 +184,5 @@ Actual magazine authoring is tracked separately in
 - Formal study data: none collected.
 
 Repository automation and non-manuscript documentation are MIT-licensed. The
-draft manuscript remains all rights reserved until a publication license is
-explicitly selected; see `paper/LICENSE.md`.
+publicly reviewable manuscript and figures remain copyright Alan Szmyt, all
+rights reserved; see `paper/LICENSE.md`.

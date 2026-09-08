@@ -1,11 +1,11 @@
 {
   "schema": "antidote.manuscript-contract/v1",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "status": "frozen",
   "frozen_by": "egohygiene/antidote#35",
   "last_reviewed": "2026-09-07",
-  "last_revised_by": "egohygiene/antidote#47",
-  "revision_policy": "The reviewable design/protocol title, subtitle, abstract, and conclusion were reconciled under issue #47. Later material changes require a version bump, claim-ledger reconciliation, and review through the owning section or release issue.",
+  "last_revised_by": "egohygiene/antidote#48",
+  "revision_policy": "The reviewable design/protocol title, subtitle, abstract, and conclusion were reconciled under issue #47; issue #48 added the review record and advanced the build to submission-ready. Later material changes require a version bump, claim-ledger reconciliation, and review through the owning section or release issue.",
   "identity": {
     "working_title": "Antidote: A Governed Framework for Inspectable Person-and-Moment Generative Audio Journeys",
     "title_status": "final-for-reviewable-design-protocol",

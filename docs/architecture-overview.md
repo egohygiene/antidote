@@ -15,10 +15,10 @@ structural rules, [SYSTEM.md](../SYSTEM.md) owns logical responsibilities, and
 | `apps/desktop/` | Tauri desktop host and React interface | Executable synthetic session; packaging remains target |
 | `crates/` | Framework-independent Rust core and adapters | Session core and persistence implemented; other adapters target |
 | `workers/generation/` | Replaceable local Python model process | Deterministic mock implemented; real adapters target |
-| `experiments/protocols/` | Frozen study definitions and analysis plans | Target |
+| `experiments/protocols/` | Frozen study definitions and analysis plans | Prospective protocol implemented; collection blocked |
 | `research/` | Source verification, claim ledger, and working research records | Implemented |
 | `data/` | Public schemas, synthetic fixtures, and approved derived study data only | Boundary implemented; no study data |
-| `paper/` | Canonical LaTeX manuscript and bibliography | Implemented draft |
+| `paper/` | Canonical LaTeX manuscript, bibliography, and review record | Reviewable design/protocol preprint |
 | `scripts/`, `latex/`, `themes/`, `web/` | Native publication implementation | Implemented |
 | `docs/` and workflows | Public hub source, staging, checks, and gated deployment | Implemented |
 

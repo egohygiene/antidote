@@ -7,6 +7,7 @@
 from __future__ import annotations
 
 import argparse
+import concurrent.futures
 import html as html_module
 import json
 import re
@@ -22,6 +23,7 @@ from urllib.parse import urlparse
 import tomllib
 
 from check_placeholders import validate_placeholder_system
+from check_reviewable_preprint import validate_reviewable_preprint
 from check_visuals import validate_visual_system
 from generate_equation_appendix import expected_outputs, validate_registry
 from generate_protocol_appendix import (
@@ -266,22 +268,48 @@ def archive_checks(path: Path, errors: list[str], compile_archive: bool) -> None
                     )
 
 
-def live_link_checks(urls: set[str], errors: list[str]) -> None:
-    for url in sorted(urls):
+def probe_live_link(url: str) -> str | None:
+    """Return a validation error for one URL, with a GET fallback for weak HEAD support."""
+    head_error: urllib.error.URLError | TimeoutError | None = None
+    for method in ("HEAD", "GET"):
+        headers = {"User-Agent": "Beacon-research-paper/0.1"}
+        if method == "GET":
+            headers["Range"] = "bytes=0-0"
         request = urllib.request.Request(
-            url, headers={"User-Agent": "Beacon-research-paper/0.1"}, method="HEAD"
+            url,
+            headers=headers,
+            method=method,
         )
         try:
             with urllib.request.urlopen(request, timeout=15) as response:
                 if response.status >= 400:
-                    errors.append(
-                        f"external link returned HTTP {response.status}: {url}"
-                    )
+                    return f"external link returned HTTP {response.status}: {url}"
+                return None
         except urllib.error.HTTPError as error:
-            if error.code not in {403, 405}:
-                errors.append(f"external link returned HTTP {error.code}: {url}")
+            if error.code == 403:
+                # The host exists but declines automated clients.
+                return None
+            if method == "HEAD" and error.code == 405:
+                continue
+            return f"external link returned HTTP {error.code}: {url}"
         except (urllib.error.URLError, TimeoutError) as error:
-            errors.append(f"external link failed: {url} ({error})")
+            if method == "HEAD":
+                head_error = error
+                continue
+            detail = f"HEAD: {head_error}; GET: {error}" if head_error else str(error)
+            return f"external link failed: {url} ({detail})"
+    return f"external link could not be checked: {url}"
+
+
+def live_link_checks(urls: set[str], errors: list[str]) -> None:
+    """Probe independent links concurrently and report failures deterministically."""
+    if not urls:
+        return
+    with concurrent.futures.ThreadPoolExecutor(
+        max_workers=min(8, len(urls)), thread_name_prefix="link-check"
+    ) as executor:
+        results = executor.map(probe_live_link, sorted(urls))
+    errors.extend(result for result in results if result is not None)
 
 
 def main() -> int:
@@ -316,6 +344,7 @@ def main() -> int:
         errors.append(f"unsupported theme: {theme}")
     if paper.get("stage") not in ALLOWED_STAGES:
         errors.append("paper stage must be draft, submission-ready, or published")
+    errors.extend(validate_reviewable_preprint(project))
     for field in (
         "id",
         "title",

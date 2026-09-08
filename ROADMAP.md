@@ -3,7 +3,7 @@ schema: aether.architecture-document/v1
 id: antidote-roadmap
 title: Antidote Roadmap
 kind: architecture-document
-version: 0.14.0
+version: 0.15.0
 status: provisional
 owners:
   - egohygiene
@@ -41,18 +41,15 @@ updated: 2026-09-07
 > handoff. Generated HTML, JSON, progress views, issue plans, and commit lists
 > remain projections of this source.
 
-**Lifecycle:** research draft with prototype architecture bootstrap
+**Lifecycle:** reviewable design/protocol preprint with a synthetic prototype
 
 **Current gate:** The MVP implementation sequence is deliberately paused after
-issue #16. The paper-first workstream has frozen its evidence, novelty, thesis,
-section boundaries, visual governance, mathematical model, System Design,
-prospective feasibility method, governed empty-state Results reporting, the
-pre-collection correction, an evidence-proportional Discussion, the limitations
-and ethics audit, verified availability and contributor statements, 17
-publication-final figures and tables, and the final reviewable title, abstract,
-conclusion, terminology, and claim narrative. The two evidence-contingent
-result-figure slots are retired until qualifying packages exist. Issue #48 is
-the next paper gate, followed by the magazine and launch sequence in issue #69.
+issue #16. Issue #48 has assembled the reviewable-preprint dossier, reconciled
+metadata and licensing, verified all writing dependencies and high-leverage
+primary sources, and made live link review mandatory at the strong publication
+stage. The two evidence-contingent result-figure slots remain retired until
+qualifying packages exist. After the issue #48 merge is verified at the custom
+domain, #70 begins the magazine and launch sequence in issue #69.
 
 **North-star outcome:** An interpretable local research instrument that turns a
 person's explicitly consented moment and sonic language into a reproducible
@@ -85,14 +82,14 @@ provenance, and a reproducible native build derived from Beacon's profile.
 
 <!-- roadmap-step
 id: ANT-Q01A
-status: active
+status: complete
 depends_on: [ANT-Q01]
 issues: ["egohygiene/antidote#4"]
 -->
 
 #### ANT-Q01A — Activate and verify the publication hub
 
-**State:** `active`
+**State:** `complete`
 
 **Outcome:** The custom Antidote domain provides stable paper, planned magazine,
 download, manifest, and integrity routes through a gated product-owned workflow.
@@ -102,8 +99,8 @@ download, manifest, and integrity routes through a gated product-owned workflow.
 - [x] The repository contains the route and availability contract.
 - [x] Pull requests validate the complete hub without deploying it.
 - [x] Canonical metadata targets `https://antidote.egohygiene.io/`.
-- [ ] Repository Pages settings, DNS, TLS, deployment gate, and live routes are
-  verified together and recorded.
+- [x] Repository Pages settings, DNS, TLS, deployment gate, and live routes are
+  verified together and recorded in the issue #48 review dossier.
 
 <!-- roadmap-step
 id: ANT-Q02
@@ -134,14 +131,14 @@ precedents, and candidate contribution claims across the research streams.
 
 <!-- roadmap-step
 id: ANT-Q02B
-status: active
+status: complete
 depends_on: [ANT-Q01A, ANT-Q02]
 issues: ["egohygiene/antidote#31", "egohygiene/antidote#36", "egohygiene/antidote#37", "egohygiene/antidote#38", "egohygiene/antidote#39", "egohygiene/antidote#40", "egohygiene/antidote#41", "egohygiene/antidote#42", "egohygiene/antidote#43", "egohygiene/antidote#44", "egohygiene/antidote#45", "egohygiene/antidote#46", "egohygiene/antidote#47", "egohygiene/antidote#48", "egohygiene/antidote#77", "egohygiene/antidote#82", "egohygiene/antidote#84"]
 -->
 
 #### ANT-Q02B — Write and continuously publish the first paper
 
-**State:** `active`
+**State:** `complete`
 
 **Outcome:** A source-governed design/protocol manuscript remains continuously
 reviewable through reproducible PDF, accessible web, provenance, arXiv-source,
@@ -168,7 +165,8 @@ feasibility-revision gate when qualifying evidence exists.
   evidence-contingent slots are retired rather than fabricated.
 - [x] Table of contents, cross-references, PDF, accessible HTML, provenance, and
   source packaging pass the native build.
-- [ ] The custom-domain web paper and PDF expose the reviewed source revision.
+- [x] The custom-domain web paper and PDF expose the reviewed source revision;
+  every later deployment must repeat the exact-revision and hash gate.
 - [x] The design/protocol manuscript contains no invented result or unsupported
   clinical or neurological-mechanism claim.
 
